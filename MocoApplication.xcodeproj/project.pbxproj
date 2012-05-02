@@ -1,0 +1,285 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3EDA32C515513A7900787007 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EDA32C415513A7900787007 /* Cocoa.framework */; };
+		3EDA32CF15513A7900787007 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA32CD15513A7900787007 /* InfoPlist.strings */; };
+		3EDA32D215513A7900787007 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA32D115513A7900787007 /* main.m */; };
+		3EDA32D515513A7900787007 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA32D315513A7900787007 /* Credits.rtf */; };
+		3EDA32D815513A7900787007 /* MocoApplicationAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA32D715513A7900787007 /* MocoApplicationAppDelegate.m */; };
+		3EDA32DB15513A7900787007 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA32D915513A7900787007 /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3EDA32C015513A7900787007 /* MocoApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MocoApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EDA32C415513A7900787007 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		3EDA32C715513A7900787007 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		3EDA32C815513A7900787007 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		3EDA32C915513A7900787007 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3EDA32CC15513A7900787007 /* MocoApplication-Info.plist */ = {isa = PBXFileReference; path = "MocoApplication-Info.plist"; sourceTree = "<group>"; };
+		3EDA32CE15513A7900787007 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3EDA32D015513A7900787007 /* MocoApplication-Prefix.pch */ = {isa = PBXFileReference; path = "MocoApplication-Prefix.pch"; sourceTree = "<group>"; };
+		3EDA32D115513A7900787007 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3EDA32D415513A7900787007 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		3EDA32D615513A7900787007 /* MocoApplicationAppDelegate.h */ = {isa = PBXFileReference; path = MocoApplicationAppDelegate.h; sourceTree = "<group>"; };
+		3EDA32D715513A7900787007 /* MocoApplicationAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MocoApplicationAppDelegate.m; sourceTree = "<group>"; };
+		3EDA32DA15513A7900787007 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3EDA32BD15513A7900787007 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EDA32C515513A7900787007 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3EDA32B515513A7900787007 = {
+			isa = PBXGroup;
+			children = (
+				3EDA32CA15513A7900787007 /* MocoApplication */,
+				3EDA32C315513A7900787007 /* Frameworks */,
+				3EDA32C115513A7900787007 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3EDA32C115513A7900787007 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3EDA32C015513A7900787007 /* MocoApplication.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3EDA32C315513A7900787007 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3EDA32C415513A7900787007 /* Cocoa.framework */,
+				3EDA32C615513A7900787007 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3EDA32C615513A7900787007 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3EDA32C715513A7900787007 /* AppKit.framework */,
+				3EDA32C815513A7900787007 /* CoreData.framework */,
+				3EDA32C915513A7900787007 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		3EDA32CA15513A7900787007 /* MocoApplication */ = {
+			isa = PBXGroup;
+			children = (
+				3EDA32D615513A7900787007 /* MocoApplicationAppDelegate.h */,
+				3EDA32D715513A7900787007 /* MocoApplicationAppDelegate.m */,
+				3EDA32D915513A7900787007 /* MainMenu.xib */,
+				3EDA32CB15513A7900787007 /* Supporting Files */,
+			);
+			path = MocoApplication;
+			sourceTree = "<group>";
+		};
+		3EDA32CB15513A7900787007 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3EDA32CC15513A7900787007 /* MocoApplication-Info.plist */,
+				3EDA32CD15513A7900787007 /* InfoPlist.strings */,
+				3EDA32D015513A7900787007 /* MocoApplication-Prefix.pch */,
+				3EDA32D115513A7900787007 /* main.m */,
+				3EDA32D315513A7900787007 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3EDA32BF15513A7900787007 /* MocoApplication */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3EDA32DE15513A7900787007 /* Build configuration list for PBXNativeTarget "MocoApplication" */;
+			buildPhases = (
+				3EDA32BC15513A7900787007 /* Sources */,
+				3EDA32BD15513A7900787007 /* Frameworks */,
+				3EDA32BE15513A7900787007 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MocoApplication;
+			productName = MocoApplication;
+			productReference = 3EDA32C015513A7900787007 /* MocoApplication.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3EDA32B715513A7900787007 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 3EDA32BA15513A7900787007 /* Build configuration list for PBXProject "MocoApplication" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3EDA32B515513A7900787007;
+			productRefGroup = 3EDA32C115513A7900787007 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3EDA32BF15513A7900787007 /* MocoApplication */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3EDA32BE15513A7900787007 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EDA32CF15513A7900787007 /* InfoPlist.strings in Resources */,
+				3EDA32D515513A7900787007 /* Credits.rtf in Resources */,
+				3EDA32DB15513A7900787007 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3EDA32BC15513A7900787007 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EDA32D215513A7900787007 /* main.m in Sources */,
+				3EDA32D815513A7900787007 /* MocoApplicationAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3EDA32CD15513A7900787007 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3EDA32CE15513A7900787007 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3EDA32D315513A7900787007 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3EDA32D415513A7900787007 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		3EDA32D915513A7900787007 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3EDA32DA15513A7900787007 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3EDA32DC15513A7900787007 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		3EDA32DD15513A7900787007 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		3EDA32DF15513A7900787007 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MocoApplication/MocoApplication-Prefix.pch";
+				INFOPLIST_FILE = "MocoApplication/MocoApplication-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3EDA32E015513A7900787007 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MocoApplication/MocoApplication-Prefix.pch";
+				INFOPLIST_FILE = "MocoApplication/MocoApplication-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3EDA32BA15513A7900787007 /* Build configuration list for PBXProject "MocoApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3EDA32DC15513A7900787007 /* Debug */,
+				3EDA32DD15513A7900787007 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3EDA32DE15513A7900787007 /* Build configuration list for PBXNativeTarget "MocoApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3EDA32DF15513A7900787007 /* Debug */,
+				3EDA32E015513A7900787007 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3EDA32B715513A7900787007 /* Project object */;
+}
