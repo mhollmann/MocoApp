@@ -7,12 +7,24 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <stdio.h>
+#include <time.h>
+#include <math.h>
+
+
+#import "MocoRegistration.h"
+#import "MocoDrawViewController.h"
 
 @interface MocoApplicationAppDelegate : NSObject <NSApplicationDelegate> {
 @private
     NSWindow *window;
+    MocoDrawViewController* mMocoDrawViewController;
 }
 
 @property (assign) IBOutlet NSWindow *window;
+
+- (IBAction)startRegistrationMI:(id)sender;
+
+-(double)getTimeDifference:(timeval) startTime endTime:(timeval) endTime;
 
 @end
