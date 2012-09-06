@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E3B07A715ED2EDC00198665 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4682A915E4ED7900813C98 /* SenTestingKit.framework */; };
+		3E3B07A815ED2EDC00198665 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EDA32C415513A7900787007 /* Cocoa.framework */; };
+		3E3B07AE15ED2EDC00198665 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E3B07AC15ED2EDC00198665 /* InfoPlist.strings */; };
+		3E3B07B115ED2EDC00198665 /* MocoApplicationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B07B015ED2EDC00198665 /* MocoApplicationTest.m */; };
+		3E3B080415EE410700198665 /* MocoRegistrationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B080315EE410700198665 /* MocoRegistrationTest.m */; };
+		3E3B080715EE468D00198665 /* MocoApplicationViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B080615EE468D00198665 /* MocoApplicationViewController.mm */; };
 		3E41C05815D50A17001FDFCB /* MocoRegistration.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05515D50A17001FDFCB /* MocoRegistration.mm */; };
 		3E41C05915D50A17001FDFCB /* MocoRegistrationProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05715D50A17001FDFCB /* MocoRegistrationProperty.m */; };
 		3E41C05C15D50D65001FDFCB /* MocoTextIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05B15D50D65001FDFCB /* MocoTextIO.cpp */; };
@@ -63,6 +69,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3E3B080015EE3D4700198665 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EDA32B715513A7900787007 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3EDA32BF15513A7900787007;
+			remoteInfo = MocoApplication;
+		};
 		3EEE66C31553E74600AA0F7F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3EEE66BA1553E74600AA0F7F /* CorePlot.xcodeproj */;
@@ -100,12 +113,24 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3E3B07A615ED2EDC00198665 /* MocoApplicationTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MocoApplicationTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E3B07AB15ED2EDC00198665 /* MocoApplicationTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MocoApplicationTest-Info.plist"; sourceTree = "<group>"; };
+		3E3B07AD15ED2EDC00198665 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3E3B07AF15ED2EDC00198665 /* MocoApplicationTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MocoApplicationTest.h; sourceTree = "<group>"; };
+		3E3B07B015ED2EDC00198665 /* MocoApplicationTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MocoApplicationTest.m; sourceTree = "<group>"; };
+		3E3B07B215ED2EDC00198665 /* MocoApplicationTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MocoApplicationTest-Prefix.pch"; sourceTree = "<group>"; };
+		3E3B07E815EE358D00198665 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3E3B080215EE410700198665 /* MocoRegistrationTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoRegistrationTest.h; sourceTree = "<group>"; };
+		3E3B080315EE410700198665 /* MocoRegistrationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MocoRegistrationTest.m; sourceTree = "<group>"; };
+		3E3B080515EE468D00198665 /* MocoApplicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoApplicationViewController.h; sourceTree = "<group>"; };
+		3E3B080615EE468D00198665 /* MocoApplicationViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MocoApplicationViewController.mm; sourceTree = "<group>"; };
 		3E41C05415D50A17001FDFCB /* MocoRegistration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoRegistration.h; sourceTree = "<group>"; };
 		3E41C05515D50A17001FDFCB /* MocoRegistration.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MocoRegistration.mm; sourceTree = "<group>"; };
 		3E41C05615D50A17001FDFCB /* MocoRegistrationProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoRegistrationProperty.h; sourceTree = "<group>"; };
 		3E41C05715D50A17001FDFCB /* MocoRegistrationProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MocoRegistrationProperty.m; sourceTree = "<group>"; };
 		3E41C05A15D50D48001FDFCB /* MocoTextIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoTextIO.h; sourceTree = "<group>"; };
 		3E41C05B15D50D65001FDFCB /* MocoTextIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MocoTextIO.cpp; sourceTree = "<group>"; };
+		3E4682A915E4ED7900813C98 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		3E56B30715C7C12700493310 /* MocoDrawView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MocoDrawView.xib; sourceTree = "<group>"; };
 		3E56B30915C7C3C600493310 /* MocoDrawTranslationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoDrawTranslationView.h; sourceTree = "<group>"; };
 		3E56B30A15C7C47C00493310 /* MocoDrawRotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoDrawRotationView.h; sourceTree = "<group>"; };
@@ -169,6 +194,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3E3B07A215ED2EDC00198665 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E3B07A715ED2EDC00198665 /* SenTestingKit.framework in Frameworks */,
+				3E3B07A815ED2EDC00198665 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3EDA32BD15513A7900787007 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -218,6 +252,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E3B07A915ED2EDC00198665 /* MocoApplicationTest */ = {
+			isa = PBXGroup;
+			children = (
+				3E3B07AF15ED2EDC00198665 /* MocoApplicationTest.h */,
+				3E3B07B015ED2EDC00198665 /* MocoApplicationTest.m */,
+				3E3B080215EE410700198665 /* MocoRegistrationTest.h */,
+				3E3B080315EE410700198665 /* MocoRegistrationTest.m */,
+				3E3B07AA15ED2EDC00198665 /* Supporting Files */,
+			);
+			path = MocoApplicationTest;
+			sourceTree = "<group>";
+		};
+		3E3B07AA15ED2EDC00198665 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3E3B07AB15ED2EDC00198665 /* MocoApplicationTest-Info.plist */,
+				3E3B07AC15ED2EDC00198665 /* InfoPlist.strings */,
+				3E3B07B215ED2EDC00198665 /* MocoApplicationTest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		3E7DB62915A45324002966AE /* libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +323,7 @@
 			children = (
 				3E7DB62915A45324002966AE /* libs */,
 				3EDA32CA15513A7900787007 /* MocoApplication */,
+				3E3B07A915ED2EDC00198665 /* MocoApplicationTest */,
 				3EDA32C315513A7900787007 /* Frameworks */,
 				3EDA32C115513A7900787007 /* Products */,
 				3EEE66BA1553E74600AA0F7F /* CorePlot.xcodeproj */,
@@ -277,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				3EDA32C015513A7900787007 /* MocoApplication.app */,
+				3E3B07A615ED2EDC00198665 /* MocoApplicationTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -286,6 +344,8 @@
 			children = (
 				3EEE66CD1553E97300AA0F7F /* CorePlot.framework */,
 				3EDA32C415513A7900787007 /* Cocoa.framework */,
+				3E4682A915E4ED7900813C98 /* SenTestingKit.framework */,
+				3E3B07E815EE358D00198665 /* Foundation.framework */,
 				3EDA32C615513A7900787007 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -306,10 +366,8 @@
 			children = (
 				3EDA32D615513A7900787007 /* MocoApplicationAppDelegate.h */,
 				3EDA32D715513A7900787007 /* MocoApplicationAppDelegate.mm */,
-				3E41C05415D50A17001FDFCB /* MocoRegistration.h */,
-				3E41C05515D50A17001FDFCB /* MocoRegistration.mm */,
-				3E41C05615D50A17001FDFCB /* MocoRegistrationProperty.h */,
-				3E41C05715D50A17001FDFCB /* MocoRegistrationProperty.m */,
+				3E3B080515EE468D00198665 /* MocoApplicationViewController.h */,
+				3E3B080615EE468D00198665 /* MocoApplicationViewController.mm */,
 				3E56B30915C7C3C600493310 /* MocoDrawTranslationView.h */,
 				3EDA32EA15513BFE00787007 /* MocoDrawTranslationView.m */,
 				3E56B30A15C7C47C00493310 /* MocoDrawRotationView.h */,
@@ -318,6 +376,10 @@
 				3EEE66D215566DCB00AA0F7F /* MocoDrawViewController.m */,
 				3E41C05A15D50D48001FDFCB /* MocoTextIO.h */,
 				3E41C05B15D50D65001FDFCB /* MocoTextIO.cpp */,
+				3E41C05615D50A17001FDFCB /* MocoRegistrationProperty.h */,
+				3E41C05715D50A17001FDFCB /* MocoRegistrationProperty.m */,
+				3E41C05415D50A17001FDFCB /* MocoRegistration.h */,
+				3E41C05515D50A17001FDFCB /* MocoRegistration.mm */,
 				3E56B30715C7C12700493310 /* MocoDrawView.xib */,
 				3EDA32D915513A7900787007 /* MainMenu.xib */,
 				3EDA32CB15513A7900787007 /* Supporting Files */,
@@ -350,6 +412,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3E3B07A515ED2EDC00198665 /* MocoApplicationTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E3B07B315ED2EDC00198665 /* Build configuration list for PBXNativeTarget "MocoApplicationTest" */;
+			buildPhases = (
+				3E3B07A115ED2EDC00198665 /* Sources */,
+				3E3B07A215ED2EDC00198665 /* Frameworks */,
+				3E3B07A315ED2EDC00198665 /* Resources */,
+				3E3B07A415ED2EDC00198665 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3E3B080115EE3D4700198665 /* PBXTargetDependency */,
+			);
+			name = MocoApplicationTest;
+			productName = MocoApplicationTest;
+			productReference = 3E3B07A615ED2EDC00198665 /* MocoApplicationTest.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		3EDA32BF15513A7900787007 /* MocoApplication */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3EDA32DE15513A7900787007 /* Build configuration list for PBXNativeTarget "MocoApplication" */;
@@ -375,7 +456,7 @@
 		3EDA32B715513A7900787007 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = 3EDA32BA15513A7900787007 /* Build configuration list for PBXProject "MocoApplication" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -396,6 +477,7 @@
 			projectRoot = "";
 			targets = (
 				3EDA32BF15513A7900787007 /* MocoApplication */,
+				3E3B07A515ED2EDC00198665 /* MocoApplicationTest */,
 			);
 		};
 /* End PBXProject section */
@@ -418,6 +500,14 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3E3B07A315ED2EDC00198665 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E3B07AE15ED2EDC00198665 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3EDA32BE15513A7900787007 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -432,13 +522,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3E3B07A415ED2EDC00198665 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		3E3B07A115ED2EDC00198665 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E3B07B115ED2EDC00198665 /* MocoApplicationTest.m in Sources */,
+				3E3B080415EE410700198665 /* MocoRegistrationTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3EDA32BC15513A7900787007 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				3EDA32D215513A7900787007 /* main.m in Sources */,
 				3EDA32D815513A7900787007 /* MocoApplicationAppDelegate.mm in Sources */,
+				3E3B080715EE468D00198665 /* MocoApplicationViewController.mm in Sources */,
 				3EDA32EB15513BFE00787007 /* MocoDrawTranslationView.m in Sources */,
 				3EEE66D415566DCB00AA0F7F /* MocoDrawViewController.m in Sources */,
 				3E56B30C15C7C47D00493310 /* MocoDrawRotationView.m in Sources */,
@@ -451,6 +567,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3E3B080115EE3D4700198665 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3EDA32BF15513A7900787007 /* MocoApplication */;
+			targetProxy = 3E3B080015EE3D4700198665 /* PBXContainerItemProxy */;
+		};
 		3EEE66D01553E9C500AA0F7F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CorePlot;
@@ -459,6 +580,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3E3B07AC15ED2EDC00198665 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3E3B07AD15ED2EDC00198665 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		3EDA32CD15513A7900787007 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -486,10 +615,59 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3E3B07B415ED2EDC00198665 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MocoApplicationTest/MocoApplicationTest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "MocoApplicationTest/MocoApplicationTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		3E3B07B515ED2EDC00198665 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MocoApplicationTest/MocoApplicationTest-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "MocoApplicationTest/MocoApplicationTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		3EDA32DC15513A7900787007 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -499,12 +677,11 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
-				PREBINDING = YES;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -512,21 +689,20 @@
 		3EDA32DD15513A7900787007 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"_ENABLE_DEBUG=0",
 					"_ENABLE_LOG=1",
 					"_GLIBCXX_FULLY_DYNAMIC_STRING=1",
 				);
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
-				PREBINDING = YES;
 				SDKROOT = macosx;
 				"VALID_ARCHS[sdk=*]" = "i386 x86_64";
 			};
@@ -536,6 +712,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -599,6 +776,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -688,6 +866,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3E3B07B315ED2EDC00198665 /* Build configuration list for PBXNativeTarget "MocoApplicationTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E3B07B415ED2EDC00198665 /* Debug */,
+				3E3B07B515ED2EDC00198665 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3EDA32BA15513A7900787007 /* Build configuration list for PBXProject "MocoApplication" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

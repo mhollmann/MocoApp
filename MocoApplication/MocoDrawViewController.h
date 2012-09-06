@@ -44,6 +44,7 @@
 @property (assign) IBOutlet MocoDrawRotationView *mMocoDrawRotationView;
 
 
+
 @property (retain) CPTXYGraph *transGraph;
 @property (retain) CPTXYGraph *rotGraph;
 

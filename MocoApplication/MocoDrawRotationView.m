@@ -15,9 +15,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code here.
-        // Initialization code here.
-        NSLog(@"MocoDrawRotationView initWithFrame ...");
-
     }
     
     return self;

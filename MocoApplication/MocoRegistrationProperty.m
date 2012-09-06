@@ -12,38 +12,46 @@
 
 @implementation MocoRegistrationProperty
 
-@synthesize ParameterOutputFileOffset;
+@synthesize ParameterOutputFileOffset;//MHFIXME: not used
+@synthesize FinalMovementParameters;  //MHFIXME: not used
 
 @synthesize RegistrationParameters;
-@synthesize FinalMovementParameters;
-
 @synthesize RegistrationInterpolationMode;
 @synthesize ResamplingInterpolationMode;
 @synthesize Smoothing;                
 @synthesize SmoothingSigma;          
 @synthesize SmoothingKernelWidth;     
-@synthesize NumberOfThreads;          
+@synthesize NumberOfThreads;
+@synthesize MaskImagesForRegistration;
 @synthesize UseBestFoundParameters;   
 @synthesize Threshold;                
-
-@synthesize logging;               
+@synthesize LoggingLevel;
+              
 
 - (id) init {
  
     if ( (self = [super init]) ) {
-        RegistrationParameters  = (double *) malloc( 4 * sizeof(double) ); 
+        RegistrationParameters  = (double *) malloc( 4 * sizeof(double) );
+        RegistrationParameters[0] = 1.0/50.0;
+        RegistrationParameters[1] = 0.019;
+        RegistrationParameters[2] = 0.00001;
+        RegistrationParameters[3] = 5;      //numIterations
+        
+        
         FinalMovementParameters = (double *) malloc( 6 * sizeof(double) );
         
         RegistrationInterpolationMode = LINEAR;
-        ResamplingInterpolationMode   = LINEAR;
+        ResamplingInterpolationMode   = BSPLINE4;
 
-        NumberOfThreads         = 1;
-        Smoothing               = YES;
-        SmoothingSigma          = 1;
-        SmoothingKernelWidth    = 8;
+        NumberOfThreads           = 1;
+        Smoothing                 = YES;
+        SmoothingSigma            = 8; //== FWHM / 2.35482
+        SmoothingKernelWidth      = 64;
+        MaskImagesForRegistration = YES;
+        
         UseBestFoundParameters  = NO;
         Threshold               = 0;
-        logging                 = NO;
+        LoggingLevel            = 0;
     }
                                          
     

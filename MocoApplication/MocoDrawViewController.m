@@ -28,11 +28,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     
-    NSLog(@"MocoDrawViewController ... initWithNibName called!");
-    
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    
-    
+     
     if (self) {   
         
         //initialize scan counter
@@ -105,7 +102,6 @@
     x.gridLinesRange              = glxRange;
     x.labelExclusionRanges        = [NSArray arrayWithObjects: [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(-30.0f) length:CPTDecimalFromFloat(30.0f)], nil];
 	x.orthogonalCoordinateDecimal = CPTDecimalFromDouble(-4.0); //describes where the y axis is crossing
-    // x.majorIntervalLength		  = CPTDecimalFromDouble(10.0);//CPTDecimalFromString(@"10.0");
     x.majorTickLength			  = 3.0; //describes the length (in y direction) of the tick marks
 	x.majorTickLineStyle		  = axisLineStyle;
 	x.majorGridLineStyle		  = nil;//majorGridLineStyle;
@@ -203,7 +199,9 @@
 	CGFloat length = xRange.lengthDouble;
 	self.plotSpaceXShift = length - 3.0;
 	length		= yRange.lengthDouble;
-	self.plotSpaceYShift = length - 2.0;*/
+	self.plotSpaceYShift = length - 2.0;
+     
+     */
 
     
     
@@ -393,8 +391,6 @@
     [self.rotArrayZ addObject:[NSNumber numberWithDouble:rotationZ]];
     
     self.scanCounter++; 
-    
-    
      
 }
 

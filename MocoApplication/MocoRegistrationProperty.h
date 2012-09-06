@@ -8,7 +8,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-//#import "itkRegistration.h"
 
 #define BSPLINE2 1
 #define BSPLINE3 2
@@ -31,10 +30,12 @@
 
 @private 
     
-    NSString *ParameterOutputFileOffset;
+    NSString *ParameterOutputFileOffset;//MHFIXME: not used
+    short Threshold;                    //MHFIXME: not used
+    double *FinalMovementParameters;    //MHFIXME: not used
     
+    /* array with: translationScale, maxStepLength, minStepLength, numIterations*/
     double *RegistrationParameters; 
-    double *FinalMovementParameters;
     
     /* interpolation type used for registration*/
     int RegistrationInterpolationMode;
@@ -54,18 +55,19 @@
     /* number of threads used for all processing */
     int NumberOfThreads;
     
+    /* use the transformation with the best metric value the observer sees during iteration*/
     bool UseBestFoundParameters;
     
-    short Threshold;
+    /* mask the images before registration, this improves performance of the algorithms*/
+    bool MaskImagesForRegistration;
     
-    /*do logging; YES / NO; default=NO */
-    bool logging;
+    
+    /*logging level: 0 no logging, 1, low logging ... 3, all logging messages */
+    int LoggingLevel;
 
 }
 
-
 @property(copy) NSString *ParameterOutputFileOffset;
-
 
 @property(readonly) double *RegistrationParameters;
 @property(readonly) double *FinalMovementParameters;
@@ -76,9 +78,10 @@
 @property int   SmoothingSigma;
 @property int   SmoothingKernelWidth;
 @property int   NumberOfThreads;
+@property bool  MaskImagesForRegistration;
 @property bool  UseBestFoundParameters;
 @property short Threshold;
-@property bool  logging;
+@property int   LoggingLevel;
 
 - (id) init;
 - (void) setRegistrationParameters:(double)translationScale 

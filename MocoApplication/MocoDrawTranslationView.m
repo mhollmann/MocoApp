@@ -17,8 +17,6 @@
     if (self) {
         
         // Initialization code here.
-        NSLog(@"MocoDrawTranslationView initWithFrame ...");
-                
     }
     
     return self;

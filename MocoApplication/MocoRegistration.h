@@ -5,6 +5,9 @@
 //  Created by Maurice Hollmann on 04/24/12.
 //  Copyright (c) 2012 MPI Cognitive and Human Brain Sciences Leipzig. All rights reserved.
 //
+//
+//
+
 
 #import <Foundation/Foundation.h>
 
@@ -28,12 +31,17 @@
 #include "itkVersorRigid3DTransformOptimizer.h"
 
 #include "itkResampleImageFilter.h"
+#include "itkImageMaskSpatialObject.h"
+
 
 const unsigned int Dimension3D = 3;
-
 typedef float InPixelType;
+typedef unsigned char MaskPixelType;
+
 typedef itk::Image< InPixelType,  Dimension3D >   FixedImageType3D;
 typedef itk::Image< InPixelType,  Dimension3D >   MovingImageType3D;
+typedef itk::Image< MaskPixelType,  Dimension3D >   MaskImageType3D;
+typedef itk::ImageMaskSpatialObject< 3 > MaskType3D;
 
 typedef itk::DiscreteGaussianImageFilter< FixedImageType3D, MovingImageType3D > DiscreteGaussianImageFilterType;
 typedef itk::InterpolateImageFunction< FixedImageType3D, double > InterpolatorType;
@@ -115,8 +123,8 @@ protected:
  * MocoRegistration provides functionality for the Motion-Correction of 
  * 3D and 4D fMRI images. The interface works with image data encapsulated 
  * by EDDataElement. 
- * Initialization sets default registration properties.
  *
+ * Initialization sets default registration properties.
  *
  */
 @interface MocoRegistration : NSObject {
@@ -139,6 +147,11 @@ protected:
     
     ITKImage::Pointer m_referenceImgITK3D;
     ITKImage::Pointer m_referenceImgITK3DSmoothed;
+    
+    MaskImageType3D::Pointer m_referenceImgMask;
+    MaskType3D::Pointer m_referenceMask;
+    MaskType3D::Pointer m_movingMask;
+    
 }
 
 
@@ -150,17 +163,6 @@ protected:
  *
  */
 -(id)initWithRegistrationProperty:(MocoRegistrationProperty*)regProperty;
-
-
-/**
- * Set the MocoRegistrationProperty. Following members are 
- * initialized:
- *  registrationInterpolator
- *
- * \param regProperty  The MocoRegistrationProperty object.
- *
- */
--(void)setRegistrationProperty:(MocoRegistrationProperty*)regProperty;
 
 
 
@@ -217,6 +219,24 @@ protected:
  *
  */
 -(EDDataElement*)getEDDataElementFromFile:(NSString*)filePath;
+
+
+-(void)dealloc;
+
+
+/**
+ * Set the MocoRegistrationProperty. Following members are
+ * initialized:
+ *  registrationInterpolator
+ *
+ * \param regProperty  The MocoRegistrationProperty object.
+ *
+ */
+-(void)initRegistrationWithRegistrationProperty:(MocoRegistrationProperty*)regProperty;
+
+-(MaskImageType3D::Pointer)getMaskImageWithITKImage:(ITKImage::Pointer)itkImage;
+
+
 
 
 @end

@@ -14,7 +14,7 @@ void MocoTextIO::appendLineToFile(string fileName, string lineToWrite)
     
     ofstream txtFile;
     txtFile.open(fileName.c_str(), ios::out | ios::app);
-    if (txtFile.is_open())
+    if(txtFile.is_open())
     {
         txtFile << lineToWrite << "\n";
         txtFile.close();

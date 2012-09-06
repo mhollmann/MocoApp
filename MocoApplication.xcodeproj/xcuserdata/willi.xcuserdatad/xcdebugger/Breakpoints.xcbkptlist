@@ -37,11 +37,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "MocoApplication/MOCORegistration.mm"
-         timestampString = "366110347.827269"
+         timestampString = "368530783.260922"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "330"
-         endingLineNumber = "330"
+         startingLineNumber = "345"
+         endingLineNumber = "345"
          landmarkName = "-setReferenceEDDataElement:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -51,11 +51,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "MocoApplication/MOCORegistration.mm"
-         timestampString = "366110347.827269"
+         timestampString = "368530783.260922"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "331"
-         endingLineNumber = "331"
+         startingLineNumber = "346"
+         endingLineNumber = "346"
          landmarkName = "-setReferenceEDDataElement:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -65,11 +65,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "MocoApplication/MOCORegistration.mm"
-         timestampString = "366109584.235415"
+         timestampString = "368529374.918309"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "95"
-         endingLineNumber = "95"
+         startingLineNumber = "93"
+         endingLineNumber = "93"
          landmarkName = "-setRegistrationProperty:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -79,11 +79,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "MocoApplication/MocoDrawViewController.m"
-         timestampString = "366546306.67255"
+         timestampString = "367324353.004341"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "326"
-         endingLineNumber = "326"
+         startingLineNumber = "324"
+         endingLineNumber = "324"
          landmarkName = "-awakeFromNib"
          landmarkType = "5">
       </FileBreakpoint>
@@ -93,11 +93,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "MocoApplication/MocoDrawViewController.m"
-         timestampString = "366546306.67255"
+         timestampString = "367324353.004341"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "183"
-         endingLineNumber = "183"
+         startingLineNumber = "179"
+         endingLineNumber = "179"
          landmarkName = "-awakeFromNib"
          landmarkType = "5">
       </FileBreakpoint>
@@ -128,6 +128,144 @@
          endingLineNumber = "19"
          landmarkName = "MocoTextIO::appendLineToFile(string fileName, string lineToWrite)"
          landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MocoRegistrationTest/MocoRegistrationTest.h"
+         timestampString = "367933388.105963"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "9"
+         endingLineNumber = "9">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MocoApplication/MocoRegistration.mm"
+         timestampString = "368530783.260922"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "208"
+         endingLineNumber = "208"
+         landmarkName = "-setRegistrationProperty:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MocoApplication/MocoRegistration.mm"
+         timestampString = "368541176.674864"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "494"
+         endingLineNumber = "494"
+         landmarkName = "-alignEDDataElementToReference:"
+         landmarkType = "5">
+         <Locations>
+            <Location
+               shouldBeEnabled = "Yes"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[MocoRegistration alignEDDataElementToReference:]"
+               urlString = "file://localhost/MocoRegistration.mm"
+               timestampString = "368536144.585039"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "578"
+               endingLineNumber = "578">
+            </Location>
+            <Location
+               shouldBeEnabled = "Yes"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "itk::BoundingBox&lt;unsigned long, 3, double, itk::VectorContainer&lt;unsigned long, itk::Point&lt;double, 3u&gt; &gt; &gt;::ConsiderPoint(itk::Point&lt;double, 3u&gt; const&amp;)"
+               urlString = "file://localhost/MocoRegistration.mm"
+               timestampString = "368536144.585399"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "578"
+               endingLineNumber = "578">
+            </Location>
+            <Location
+               shouldBeEnabled = "Yes"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "vnl_matrix&lt;long&gt;::operator[](unsigned int) const"
+               urlString = "file://localhost/MocoRegistration.mm"
+               timestampString = "368536144.585671"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "578"
+               endingLineNumber = "578">
+            </Location>
+         </Locations>
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MocoApplication/MocoRegistration.mm"
+         timestampString = "368541176.674864"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "450"
+         endingLineNumber = "450"
+         landmarkName = "-alignEDDataElementToReference:"
+         landmarkType = "5">
+         <Locations>
+            <Location
+               shouldBeEnabled = "Yes"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[MocoRegistration alignEDDataElementToReference:]"
+               urlString = "file://localhost/MocoRegistration.mm"
+               timestampString = "368536144.603378"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "441"
+               endingLineNumber = "441">
+            </Location>
+            <Location
+               shouldBeEnabled = "Yes"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "itk::SmartPointer&lt;itk::ScalableAffineTransform&lt;double, 3u&gt; &gt;::operator-&gt;() const"
+               urlString = "file://localhost/MocoRegistration.mm"
+               timestampString = "368536144.603975"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "441"
+               endingLineNumber = "441">
+            </Location>
+            <Location
+               shouldBeEnabled = "Yes"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "itk::LinearInterpolateImageFunction&lt;itk::Image&lt;float, 3u&gt;, double&gt;::EvaluateOptimized(itk::LinearInterpolateImageFunction&lt;itk::Image&lt;float, 3u&gt;, double&gt;::Dispatch&lt;3u&gt; const&amp;, itk::ContinuousIndex&lt;double, 3u&gt; const&amp;) const"
+               urlString = "file://localhost/MocoRegistration.mm"
+               timestampString = "368536144.604263"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "441"
+               endingLineNumber = "441">
+            </Location>
+            <Location
+               shouldBeEnabled = "Yes"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "vnl_matrix&lt;double&gt;::operator[](unsigned int)"
+               urlString = "file://localhost/MocoRegistration.mm"
+               timestampString = "368536144.604525"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "441"
+               endingLineNumber = "441">
+            </Location>
+         </Locations>
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

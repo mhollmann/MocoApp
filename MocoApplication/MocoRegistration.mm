@@ -13,6 +13,7 @@
 //metric include
 #include "itkMeanSquaresImageToImageMetric.h"
 
+
 //interpolator includes
 #include "itkLinearInterpolateImageFunction.h"
 #include "itkNearestNeighborInterpolateImageFunction.h"
@@ -20,6 +21,8 @@
 #include "itkWindowedSincInterpolateImageFunction.h"
 
 #include "itkCastImageFilter.h"
+#include "itkImageRegionConstIterator.h"
+#include "itkImageRegionIterator.h"
 
 
 //MHFIXME just for testing
@@ -39,7 +42,7 @@
         MocoRegistrationProperty *rProperty = [[MocoRegistrationProperty alloc] init];
         
         //will set properties and initialize member vars
-        [self setRegistrationProperty: rProperty];
+        [self initRegistrationWithRegistrationProperty: rProperty];
         
     }
     
@@ -54,7 +57,7 @@
     if (self) {
         
         //will set properties and initialize member vars
-        [self setRegistrationProperty: regProperty];
+        [self initRegistrationWithRegistrationProperty: regProperty];
     
     }
     
@@ -62,8 +65,7 @@
 }
 
 
-
-- (void) setRegistrationProperty:(MocoRegistrationProperty *)regProperty
+- (void) initRegistrationWithRegistrationProperty:(MocoRegistrationProperty *)regProperty
 {
     
     //set the registration method
@@ -80,16 +82,8 @@
     //set global threadnum
     self->m_metric->GetThreader()->SetGlobalMaximumNumberOfThreads(regProperty.NumberOfThreads);
     self->m_metric->GetThreader()->SetGlobalDefaultNumberOfThreads(regProperty.NumberOfThreads);
-
-    //interpolator->SetNumberOfThreads(2);
-    //interpolator->SetSplineOrder(5);
-    //interpolator-SetNumberOfThreads(2);
-    //metric->SetNumberOfThreads(1);
+   
     
-    //MHFIXME This call produces nan out of reg params ->  ITK 3.21 problem?
-    //short thresh = 100;
-    //m_metric->SetFixedImageSamplesIntensityThreshold(thresh);
-       
     self->m_registration->SetMetric( self->m_metric );
     self->m_registration->SetOptimizer( self->m_optimizer );
     self->m_registration->SetTransform( self->m_transform );
@@ -186,6 +180,10 @@
             break;
         }
     }// end switch
+    
+    //MHFIXME: multithreading for interpolator?
+    //interpolator->SetNumberOfThreads(2);
+
     self->m_registration->SetInterpolator( self->m_registrationInterpolator );
         
      
@@ -193,9 +191,10 @@
     //*** Initialize optimizer ***
     typedef MocoOptimizerType::ScalesType MocoOptimizerScalesType;
     MocoOptimizerScalesType optimizerScales( m_transform->GetNumberOfParameters() );
-    optimizerScales[0] = 1.0;
-    optimizerScales[1] = 1.0;
-    optimizerScales[2] = 1.0;
+    
+    optimizerScales[0] = 1.0;//rotationScale
+    optimizerScales[1] = 1.0;//rotationScale
+    optimizerScales[2] = 1.0;//rotationScale
     optimizerScales[3] = regProperty.RegistrationParameters[0]; //translationScale
     optimizerScales[4] = regProperty.RegistrationParameters[0]; //translationScale
     optimizerScales[5] = regProperty.RegistrationParameters[0]; //translationScale
@@ -203,12 +202,28 @@
     self->m_optimizer->SetMaximumStepLength( regProperty.RegistrationParameters[1] );  //maxStepLength Default AFNI: 0.7 * voxel size
     self->m_optimizer->SetMinimumStepLength( regProperty.RegistrationParameters[2] );  //minStepLength
     self->m_optimizer->SetNumberOfIterations( regProperty.RegistrationParameters[3] ); //numIterations Default AFNI: 19
+
+    
+    
+    //MHFIXME these 2 calls may be done in
+    //*** Initialize transform ***
+    //self->m_transformInitializer = MocoTransformInitializerType::New();
+    //self->m_transformInitializer->SetTransform( self->m_transform );
     
     
     //*** Create the Command observer and register it with the optimizer ***
     self->m_observer = CommandIterationUpdate::New();
     self->m_observer->bestValue = std::numeric_limits<double>::max();
-    self->m_observer->logging = regProperty.logging;
+    
+    if( regProperty.LoggingLevel > 2 )
+    {
+      self->m_observer->logging = true;
+    }
+    else
+    {
+      self->m_observer->logging = false;
+    }
+    
     self->m_optimizer->AddObserver( itk::IterationEvent(), m_observer );
     
     
@@ -331,14 +346,14 @@
     self->m_referenceImgITK3D = [dataElement asITKImage];
     
     
-    if( self->m_registrationProperty.logging ){
+    if( self->m_registrationProperty.LoggingLevel > 1 ){
         
         ITKImage::SizeType iSize = self->m_referenceImgITK3D->GetLargestPossibleRegion().GetSize();
         std::cout << " Loaded image with size:    = " << iSize << std::endl;
         
     }
     
-    //*** Smoothing *** 
+    //++++ Smoothing ++++ 
     if( self->m_registrationProperty.Smoothing ){        
         
         DiscreteGaussianImageFilterType::Pointer dgImageFilter = DiscreteGaussianImageFilterType::New();
@@ -355,6 +370,66 @@
         
      }
     
+    //MH FIXME: Check if metric exists in this call before mask is set
+    //++++ Masking if needed ++++
+    if( self->m_registrationProperty.MaskImagesForRegistration ){   
+        self->m_referenceImgMask = [self getMaskImageWithITKImage:self->m_referenceImgITK3D];
+    
+        self->m_referenceMask = MaskType3D::New();
+        self->m_movingMask    = MaskType3D::New();
+    
+        self->m_referenceMask->SetImage(self->m_referenceImgMask);
+        self->m_movingMask->SetImage(self->m_referenceImgMask);
+    
+        self->m_metric->SetFixedImageMask(self->m_referenceMask);
+        self->m_metric->SetMovingImageMask(self->m_movingMask);
+    }
+    
+    
+    /*
+    
+    MaskImageType3D::IndexType pIndex2;
+    pIndex2[0] = 1;
+    pIndex2[1] = 1;
+    pIndex2[2] = 1;
+    //update needs to be called to get access to data
+    self->m_referenceImgMask->DataObject::Update();
+    MaskImageType3D::PixelType pixelValue2 = self->m_referenceImgMask->GetPixel( pIndex2 );
+    NSLog(@"Pixel value at 1,1,1 is: %d", pixelValue2);
+
+    
+    MaskImageType3D::IndexType pIndex;
+    pIndex[0] = 20;
+    pIndex[1] = 20;
+    pIndex[2] = 20;
+    //update needs to be called to get access to data
+    self->m_referenceImgMask->DataObject::Update();
+    MaskImageType3D::PixelType pixelValue = self->m_referenceImgMask->GetPixel( pIndex );
+    NSLog(@"Pixel value  at 20,20,20 is: %d", pixelValue);
+    
+    
+    
+    
+    MaskType3D::Pointer fixedMask; 
+    fixedMask = [self getMaskWithITKImage:self->m_referenceImgITK3D];
+    
+    MaskType3D::Pointer movingMask = MaskType3D::New();
+    
+    self->m_referenceImgMask->DataObject::Update();
+    fixedMask->SetImage(self->m_referenceImgMask);
+    
+    
+    MaskType3D::PointType p1;
+    p1.Fill(0);
+    std::cout << "Point " << p1 << " is inside mask: "
+    << fixedMask->IsInside(p1) << std::endl;
+    MaskType3D::PointType p2;
+    p2.Fill(20);
+    std::cout << "Point " << p2 << " is inside mask: "
+    << fixedMask->IsInside(p2) << std::endl;
+*/
+    
+    
     
 }// end setReferenceEDDataElement 
 
@@ -368,98 +443,55 @@
     //The observer values have to be set back fo each new call of align
     self->m_observer->bestValue = std::numeric_limits<double>::max();
     
-    
+    //MH FIXME: this can possibly be done in initialization?
+    self->m_transform = MocoTransformType::New();
+    self->m_transformInitializer = MocoTransformInitializerType::New();
+    self->m_transformInitializer->SetTransform( self->m_transform );
     
     //moving image is 3D
     ITKImage::Pointer movingImgITK3D = [movingDataElement asITKImage];
     
-    //*** Smoothing *** 
+    //+++ Smoothing +++ 
    if( self->m_registrationProperty.Smoothing ){        
         
-        DiscreteGaussianImageFilterType::Pointer dgImageFilter = DiscreteGaussianImageFilterType::New();
-        
-        dgImageFilter->SetInput( movingImgITK3D );
-        dgImageFilter->SetVariance( self->m_registrationProperty.SmoothingSigma );
-        dgImageFilter->SetMaximumKernelWidth( self->m_registrationProperty.SmoothingKernelWidth );
-        dgImageFilter->SetUseImageSpacing(true);
-        dgImageFilter->SetMaximumError(0.05);
-        
-        dgImageFilter->Update();
-        movingImgITK3D = dgImageFilter->GetOutput();
+       //Smooth the moving image and set it for registration and transform initializer
+       DiscreteGaussianImageFilterType::Pointer dgImageFilter = DiscreteGaussianImageFilterType::New();
+       dgImageFilter->SetInput( movingImgITK3D );
+       dgImageFilter->SetVariance( self->m_registrationProperty.SmoothingSigma );
+       dgImageFilter->SetMaximumKernelWidth( self->m_registrationProperty.SmoothingKernelWidth );
+       dgImageFilter->SetUseImageSpacing(true);
+       dgImageFilter->SetMaximumError(0.05);
+       dgImageFilter->Update();
+       movingImgITK3D = dgImageFilter->GetOutput();
+       self->m_registration->SetMovingImage( movingImgITK3D );
+       self->m_transformInitializer->SetMovingImage( movingImgITK3D );
+       
+       //set the smoothed fixed image for registration and transform initializer
+       self->m_referenceImgITK3DSmoothed->DataObject::Update();
+       self->m_registration->SetFixedImage( self->m_referenceImgITK3DSmoothed );
+       self->m_registration->SetFixedImageRegion( self->m_referenceImgITK3DSmoothed->GetBufferedRegion() );
+       self->m_transformInitializer->SetFixedImage(  self->m_referenceImgITK3DSmoothed );
                 
-    }
-     
-    
-    //MHFIXME these 2 calls may be done in 
-    //*** Initialize transform ***
-    self->m_transformInitializer = MocoTransformInitializerType::New();
-    self->m_transformInitializer->SetTransform( self->m_transform );
-
-    
-    
-    /* MHFIXME: will get faster by masking images */
-    
-    
-    if( self->m_registrationProperty.Smoothing ){ 
-        
-        self->m_referenceImgITK3DSmoothed->DataObject::Update();
-        self->m_registration->SetFixedImage( self->m_referenceImgITK3DSmoothed );
-        self->m_registration->SetFixedImageRegion( self->m_referenceImgITK3DSmoothed->GetBufferedRegion() );
-        self->m_transformInitializer->SetFixedImage(  self->m_referenceImgITK3DSmoothed );
-        
     }
     else{
         
+        //set the smoothed fixed image for registration and transform initializer
         self->m_referenceImgITK3D->DataObject::Update();
         self->m_registration->SetFixedImage( self->m_referenceImgITK3D );
         self->m_registration->SetFixedImageRegion( self->m_referenceImgITK3D->GetBufferedRegion() );
+        self->m_registration->SetMovingImage( movingImgITK3D );
+
         self->m_transformInitializer->SetFixedImage(  self->m_referenceImgITK3D );
-        
+        movingImgITK3D->DataObject::Update();
+        self->m_transformInitializer->SetMovingImage( movingImgITK3D );
+      
     }
     
-    self->m_registration->SetMovingImage( movingImgITK3D );
+  
     
-    
-/*
-    FixedImageType3D::IndexType start;
-    start[0] = 5;
-    start[1] = 5;
-    start[2] = 2;
-    
-    FixedImageType3D::SizeType size;
-    size[0] = 55;
-    size[1] = 55;
-    size[2] = 25;
-
-    
-    FixedImageType3D::Pointer image = self->m_referenceImgITK3D;
-    FixedImageType3D::IndexType pIndex;
-    pIndex[0] = 20;
-    pIndex[1] = 20;
-    pIndex[2] = 20;
-    //update needs to be called to get access to data
-    image->DataObject::Update();   
-    FixedImageType3D::SizeType iSize = image->GetLargestPossibleRegion().GetSize();
-    std::cout << " Image Size:    = " << iSize << std::endl;
-    FixedImageType3D::PixelType pixelValue = image->GetPixel( pIndex );
-    std::cout << " PIXEL VALUE:    = " << pixelValue << std::endl;
-    
-     
-    
-    //update needs to be called to get access to data
-    movingImgITK3D->DataObject::Update();   
-    iSize = movingImgITK3D->GetLargestPossibleRegion().GetSize();
-    std::cout << " Image Size:    = " << iSize << std::endl;
-    pixelValue = movingImgITK3D->GetPixel( pIndex );
-    std::cout << " PIXEL VALUE:    = " << pixelValue << std::endl;
-    */
-    
-    
-    
-    
-    self->m_transformInitializer->SetMovingImage( movingImgITK3D );  
+    //+++ Initialize transform +++
     self->m_transformInitializer->MomentsOn(); //center of mass is used as center of transform
-    //  initializer->GeometryOn();
+    //self->m_transformInitializer->GeometryOn();
     self->m_transformInitializer->InitializeTransform();//this just sets the initial transform parameters
     
     
@@ -469,7 +501,7 @@
     //and not to find new ones by transform initializer?????
     self->m_registration->SetInitialTransformParameters( self->m_transform->GetParameters() );
     
-    if( self->m_registrationProperty.logging ) {
+    if( self->m_registrationProperty.LoggingLevel > 1 ) {
         MocoOptimizerType::ParametersType initialParameters;
         initialParameters = self->m_registration->GetInitialTransformParameters();
         
@@ -486,10 +518,10 @@
     
   	try { 
         
-        //*** Start registration ***
+        //+++ Start registration +++
         self->m_registration->StartRegistration(); 
         
-        if (self->m_registrationProperty.logging) {
+        if (self->m_registrationProperty.LoggingLevel > 1) {
             std::cout << "Optimizer stop condition: "
             << self->m_registration->GetOptimizer()->GetStopConditionDescription()
             << std::endl;
@@ -515,7 +547,7 @@
     }
     
     
-    if( self->m_registrationProperty.logging ) {
+    if( self->m_registrationProperty.LoggingLevel > 1 ) {
  
         double versorX              = finalParameters[0];
         double versorY              = finalParameters[1];
@@ -550,8 +582,6 @@
     
     //MHFIXME optional: return just parameters 
     //finally set the transform parameters
-    
-    
     self->m_transform->SetParameters( finalParameters );
     return self->m_transform;
     
@@ -611,7 +641,7 @@
     //    
     //    std::cout << "Parameters = " << finalMovementParameters[0] << " , " 
     //                                 << finalMovementParameters[1] << " , " 
-    //                                 << finalMovementParameters[2] << " , " 
+    //                                 << finalMovementParameters[2] << " , "
     //                                 << finalMovementParameters[3] << " , " 
     //                                 << finalMovementParameters[4] << " , " 
     //                                 << finalMovementParameters[5] << std::endl;*/
@@ -764,7 +794,7 @@
 {
     
     //check whether file exist
-    if(self->m_registrationProperty.logging){        
+    if(self->m_registrationProperty.LoggingLevel > 1){        
         NSLog(@"Loading Image: %@",filePath);
     }
     
@@ -785,9 +815,117 @@
 
 
 
+- (MaskImageType3D::Pointer)getMaskImageWithITKImage:(ITKImage::Pointer)itkImage
+{
+    
+ 
+    //write mask image
+  	typedef itk::CastImageFilter< FixedImageType3D, MaskImageType3D > CastFilterType;
+  	typedef itk::ImageFileWriter< MaskImageType3D >  WriterType;
+    
+	WriterType::Pointer      writer =  WriterType::New();
+    CastFilterType::Pointer  caster =  CastFilterType::New();
+    
+    
+    
+    // ImageType::Pointer image, MaskImageType::Pointer mask, short threshold
+    MaskImageType3D::RegionType region = itkImage->GetLargestPossibleRegion();
+    MaskImageType3D::Pointer mask = MaskImageType3D::New();
+    
+    mask->SetRegions(region);
+    mask->SetSpacing(itkImage->GetSpacing());
+    mask->SetOrigin(itkImage->GetOrigin());
+    mask->SetDirection(itkImage->GetDirection());
+    mask->Allocate();
+    
+    
+    MaskImageType3D::SizeType regionSize = region.GetSize();
+  
+    typedef itk::ImageRegionIterator<MaskImageType3D> IteratorType;
+    
+    
+    itk::ImageRegionIterator<FixedImageType3D> imageIterator(itkImage, region);
+    itk::ImageRegionIterator<MaskImageType3D> maskIterator(mask, region);
+
+        
+    while(!imageIterator.IsAtEnd())
+    {
+        if(imageIterator.Get() < 500)
+        {
+            maskIterator.Set(0);
+        }
+        else
+        {
+            maskIterator.Set(1);
+        }
+        ++imageIterator;
+        ++maskIterator;
+    }
+    
+    
+    
+    //MH FIXME: Remove...
+    NSLog(@"Writing mask image:");
+    writer->SetFileName( [@"/Users/mhollmann/Projekte/Project_MOCOApplication/data/test3D_mask.nii" UTF8String] );
+    //caster->SetInput( mask );
+    //caster->Update();
+    
+    //writer->SetInput( caster->GetOutput()   );
+    writer->SetInput( mask );
+    writer->Update();
+    
+    NSLog(@"Done!");
+    
+    /*
+    MaskImageType3D::IndexType pIndex;
+    pIndex[0] = 20;
+    pIndex[1] = 20;
+    pIndex[2] = 20;
+    //update needs to be called to get access to data
+    mask->DataObject::Update();
+    MaskImageType3D::SizeType iSize = mask->GetLargestPossibleRegion().GetSize();
+    std::cout << " MASKING: Image Size :    = " << iSize << std::endl;
+    MaskImageType3D::PixelType pixelValue = mask->GetPixel( pIndex );
+     std::cout << " MASKING: Pixel Value:   = " << pixelValue << std::endl; //cout gives ascii for char values!
+    NSLog(@"MASKING: Pixel Value: %d", pixelValue);
+    */
+    
+    return mask;
+    
+}
+
+
+
 - (void)dealloc
 {
-    [super dealloc];
+    
+    NSLog(@"MocoRegistration Dealloc called!");
+    
+    //   free(m_registrationProperty);
+//    free(m_registration);
+//    free(m_metric);
+//    free(m_optimizer);
+//    free(m_transform);
+//    free(m_transformInitializer);
+//    free(m_observer);
+//    free(m_resampleInterpolator);
+//    free(m_referenceImgITK3D);
+//    free(m_referenceImgITK3DSmoothed);
+
+
+    
+//    [m_registrationProperty release];
+//    [m_registration release];
+//    [m_metric release];
+//    [m_optimizer release];
+//    [m_transform release];
+//    [m_transformInitializer release];
+//    [m_observer release];
+//    [m_resampleInterpolator release];
+//    [m_referenceImgITK3D release];
+//    [m_referenceImgITK3DSmoothed release];
+
+    //    [super dealloc];
 }
 
 
