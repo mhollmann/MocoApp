@@ -30,18 +30,21 @@
 
 @private 
     
-    NSString *ParameterOutputFileOffset;//MHFIXME: not used
-    short Threshold;                    //MHFIXME: not used
-    double *FinalMovementParameters;    //MHFIXME: not used
+    NSString *ParameterOutputFileOffset;//MH FIXME: not used
+    short Threshold;                    //MH FIXME: not used
+    double *FinalMovementParameters;    //MH FIXME: not used
     
     /* array with: translationScale, maxStepLength, minStepLength, numIterations*/
-    double *RegistrationParameters; 
+    double *RegistrationParameters;     //MH FIXME: remove fourth parameter (numIterations)
     
     /* interpolation type used for registration*/
     int RegistrationInterpolationMode;
     
     /* interpolation type used for resampling*/
     int ResamplingInterpolationMode;
+    
+    /* number of iterations used in finding transform*/
+    int NumberOfIterations;
     
     /* do smoothing for registration */
     bool Smoothing;
@@ -74,6 +77,7 @@
 
 @property int   RegistrationInterpolationMode;
 @property int   ResamplingInterpolationMode;
+@property int   NumberOfIterations;
 @property bool  Smoothing;
 @property int   SmoothingSigma;
 @property int   SmoothingKernelWidth;
@@ -85,10 +89,11 @@
 
 - (id) init;
 - (void) setRegistrationParameters:(double)translationScale 
-               MaxStep:(double)maxSteplength 
-               MinStep:(double)minSteplength
-               NumIterations:(int)numIterations;
-//- (NSString *)description;                       
+                           MaxStep:(double)maxSteplength 
+                           MinStep:(double)minSteplength;
+
+- (double *) getRegistrationParameters;
+                      
 - (void) dealloc; 
 
 @end

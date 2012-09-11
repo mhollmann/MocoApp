@@ -18,6 +18,7 @@
 @synthesize RegistrationParameters;
 @synthesize RegistrationInterpolationMode;
 @synthesize ResamplingInterpolationMode;
+@synthesize NumberOfIterations;
 @synthesize Smoothing;                
 @synthesize SmoothingSigma;          
 @synthesize SmoothingKernelWidth;     
@@ -31,18 +32,18 @@
 - (id) init {
  
     if ( (self = [super init]) ) {
-        RegistrationParameters  = (double *) malloc( 4 * sizeof(double) );
+        RegistrationParameters  = (double *) malloc( 3 * sizeof(double) );
         RegistrationParameters[0] = 1.0/50.0;
         RegistrationParameters[1] = 0.019;
         RegistrationParameters[2] = 0.00001;
-        RegistrationParameters[3] = 5;      //numIterations
         
         
         FinalMovementParameters = (double *) malloc( 6 * sizeof(double) );
         
         RegistrationInterpolationMode = LINEAR;
         ResamplingInterpolationMode   = BSPLINE4;
-
+        NumberOfIterations            = 6;
+        
         NumberOfThreads           = 1;
         Smoothing                 = YES;
         SmoothingSigma            = 8; //== FWHM / 2.35482
@@ -60,13 +61,17 @@
 
 - (void) setRegistrationParameters:(double)translationScale 
                MaxStep:(double)maxSteplength 
-               MinStep:(double)minSteplength
-               NumIterations:(int)numIterations {
+               MinStep:(double)minSteplength {
                
 	RegistrationParameters[0] = translationScale;
 	RegistrationParameters[1] = maxSteplength;
 	RegistrationParameters[2] = minSteplength;
-	RegistrationParameters[3] = numIterations;
+    
+}
+
+- (double *) getRegistrationParameters {
+    
+	return RegistrationParameters;
     
 }
 
