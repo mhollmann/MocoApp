@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>LoggingLevel</key>
-	<integer>1</integer>
+	<integer>3</integer>
 	<key>NumberOfThreads</key>
 	<integer>2</integer>
 	<key>Smoothing</key>
@@ -15,6 +15,6 @@
 	<key>UseBestFoundParameters</key>
 	<false/>
 	<key>NumberOfIterations</key>
-	<integer>16</integer>
+	<integer>8</integer>
 </dict>
 </plist>

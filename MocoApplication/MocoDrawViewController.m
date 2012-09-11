@@ -186,28 +186,6 @@
     plotSpace.yRange = yRange;    
     
     
-	// Restrict y range to a global range
-	//CPTPlotRange *globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(-2.0f) length:CPTDecimalFromFloat(4.0f)];
-	//plotSpace.globalYRange = globalYRange;
-    
-    /*  USE IF NEEDED
-      
-    // Auto scale the plot space to fit the plot data
-    //[plotSpace scaleToFitPlots:[NSArray arrayWithObjects:movXPlot, nil, nil]];
-      
-	// set the x and y shift to match the new ranges
-	CGFloat length = xRange.lengthDouble;
-	self.plotSpaceXShift = length - 3.0;
-	length		= yRange.lengthDouble;
-	self.plotSpaceYShift = length - 2.0;
-     
-     */
-
-    
-    
-    
-    
-    
     
     //*************************************************
     //******* Initialize Rotation Graph Stuff *********
@@ -336,8 +314,6 @@
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum  
 			   recordIndex:(NSUInteger)index
 {
-    
-    //NSLog(@"Plot Identifier: %@", plot.identifier);
     
     //return the index for the X component of the data point
 	if(fieldEnum == CPTScatterPlotFieldX)
