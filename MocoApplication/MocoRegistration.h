@@ -11,7 +11,7 @@
 
 #import <Foundation/Foundation.h>
 
-//internal properties
+//moco properties
 #import "MocoRegistrationProperty.h"
 
 //isis data
@@ -35,11 +35,14 @@
 
 
 const unsigned int Dimension3D = 3;
+const unsigned int Dimension4D = 4;
 typedef float InPixelType;
 typedef unsigned char MaskPixelType;
 
 typedef itk::Image< InPixelType,  Dimension3D >   FixedImageType3D;
 typedef itk::Image< InPixelType,  Dimension3D >   MovingImageType3D;
+typedef itk::Image< InPixelType,  Dimension4D >   ImageType4D;
+
 typedef itk::Image< MaskPixelType,  Dimension3D >   MaskImageType3D;
 typedef itk::ImageMaskSpatialObject< 3 > MaskType3D;
 
@@ -202,41 +205,62 @@ protected:
 -(MocoTransformType::Pointer)alignEDDataElementToReference:(EDDataElement*)movingDataElement;
 
 
+
 /**
- * 
+ * Resamples the given EDDataElement according to the settings of the global registrationProperty.
+ * The transformation given here is expected to be the result of "alignEDDataElementToReference".
+ * Important: Input is 3D output is 4D!
  *
+ * \param movingDataElement  EDDataElement (3D) that is resampled using transform
+ * \param transform          Transformation that is used for resampling
  *
- *
+ * \return                   EDDataElement (4D) holding the transformed data (size: [sizeInput[0], [sizeInput[1], [sizeInput[2], 1])
  */
 -(EDDataElement*)resampleMovingEDDataElement:(EDDataElement*)movingDataElement 
                                withTransform:(MocoTransformType::Pointer)transform;
 
 
-/**
- * 
- *
- *
- *
- */
--(EDDataElement*)getEDDataElementFromFile:(NSString*)filePath;
-
-
--(void)dealloc;
-
 
 /**
- * Set the MocoRegistrationProperty. Following members are
+ * Iitialize the registration with a givenRegistrationProperty. Following members are
  * initialized:
- *  registrationInterpolator
+ *  m_metric
+ *  m_optimizer
+ *  m_transform
+ *  m_registrationInterpolator
+ *  m_observer
+ *  m_registration
+ *  m_resampler
  *
  * \param regProperty  The MocoRegistrationProperty object.
  *
  */
 -(void)initRegistrationWithRegistrationProperty:(MocoRegistrationProperty*)regProperty;
 
--(MaskImageType3D::Pointer)getMaskImageWithITKImage:(ITKImage::Pointer)itkImage;
+
+/**
+ * Mask the given itk image file according to a segmentation of background and image contentent, i.e. brain.
+ * Here the itk::OtsuThresholdImageFilter is used, which does a histogram based search for the threshold.
+ *
+ * \param itkImage  FixedImageType3D::Pointer that should be masked.
+ *
+ * \return          MaskImageType3D::Pointer that holds the mask image. 
+ *                  This is an itk::image with zeros for outside mask voxels 
+ *                  and ones for inside mask voxels.
+ *
+ */
+-(MaskImageType3D::Pointer)getMaskImageWithITKImage:(FixedImageType3D::Pointer)itkImage;
 
 
+
+/**
+ * Class method that retrieves a EDDataElement from a given image data file.
+ *
+ */
++(EDDataElement*)getEDDataElementFromFile:(NSString*)filePath;
+
+
+-(void)dealloc;
 
 
 @end

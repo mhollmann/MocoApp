@@ -8,11 +8,14 @@
 
 #import "MocoRegistration.h"
 
+//itk registration
 #include "itkImageRegistrationMethod.h"
 
 //metric include
 #include "itkMeanSquaresImageToImageMetric.h"
 
+//threshold filter include for masking
+#include "itkOtsuThresholdImageFilter.h"
 
 //interpolator includes
 #include "itkLinearInterpolateImageFunction.h"
@@ -24,11 +27,14 @@
 #include "itkImageRegionConstIterator.h"
 #include "itkImageRegionIterator.h"
 
+//for 3D to 4D conversion of itk images
+#include "itkTileImageFilter.h"
 
-//MHFIXME just for testing
+//io
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
-#include "itkCastImageFilter.h"
+
+
 
 
 @implementation MocoRegistration
@@ -201,15 +207,8 @@
     self->m_optimizer->SetScales( optimizerScales );
     self->m_optimizer->SetMaximumStepLength( regProperty.RegistrationParameters[1] );  //maxStepLength Default AFNI: 0.7 * voxel size
     self->m_optimizer->SetMinimumStepLength( regProperty.RegistrationParameters[2] );  //minStepLength
-    self->m_optimizer->SetNumberOfIterations( regProperty.RegistrationParameters[3] ); //numIterations Default AFNI: 19
+    self->m_optimizer->SetNumberOfIterations( regProperty.NumberOfIterations ); //numIterations Default AFNI: 19
 
-    
-    
-    //MHFIXME these 2 calls may be done in
-    //*** Initialize transform ***
-    //self->m_transformInitializer = MocoTransformInitializerType::New();
-    //self->m_transformInitializer->SetTransform( self->m_transform );
-    
     
     //*** Create the Command observer and register it with the optimizer ***
     self->m_observer = CommandIterationUpdate::New();
@@ -227,9 +226,7 @@
     self->m_optimizer->AddObserver( itk::IterationEvent(), m_observer );
     
     
-    
-    
-    // *** Resampling parameters ***
+    //+++ Resampling parameters +++
     self->m_resampler = MocoResampleFilterType::New();
     
     
@@ -314,7 +311,6 @@
         }
     }// end switch
         
-       
     
     //if everything worked out set the property
     self->m_registrationProperty = regProperty;
@@ -327,7 +323,7 @@
 
 - (void)setReferenceEDDataElementWithFile:(NSString *)filePath
 {
-    EDDataElement *refImg = [self getEDDataElementFromFile: filePath];
+    EDDataElement *refImg = [MocoRegistration getEDDataElementFromFile: filePath];
     
     [self setReferenceEDDataElement: refImg];
     
@@ -535,7 +531,6 @@
     
     
 
-    
     //Use best parameters?
 	MocoOptimizerType::ParametersType finalParameters;
     
@@ -660,12 +655,8 @@
     ITKImage::Pointer movingImgITK3D = [movingDataElement asITKImage];
 
     
-    //********************
-    //**** Resampling ****
-    //********************
+    //++++ Resampling ++++
     MocoTransformType::Pointer finalTransform = MocoTransformType::New();
-    
-    
     finalTransform->SetCenter( transform->GetCenter() );
     
     //original: finalTransform->SetParameters( finalParameters );
@@ -674,7 +665,6 @@
     
     self->m_resampler->SetTransform( finalTransform );
     self->m_resampler->SetInput( movingImgITK3D );
-    
 
     if( self->m_registrationProperty.Smoothing ){ 
         
@@ -695,114 +685,39 @@
     
     self->m_resampler->SetDefaultPixelValue( 0 );
     
-    
-    //MHFixme : Check debug error and return correct DataElement
-    //ITKImage::Pointer resImg = self->m_resampler->GetOutput();
-    //Dunno
-    
-    
-    //EDDataElement *retElement = [movingDataElement convertFromITKImage: caster->GetOutput()];
-    //[retElement WriteDataElementToFile:@"/tmp/test_moco_output_lh.nii"];
-    //return nil;//[movingDataElement autorelease];
-    
-    //return retElement;
-    //return nil;
-    
-    
-    //return movingDataElement;
-    
-    //this gives the result ITKImage
-    //self->m_resampler->GetOutput();
-    
-    
-    ITKImage::Pointer resImage = self->m_resampler->GetOutput();
-    
-    const unsigned int Dimension = 3;
-    typedef  float  InputPixelType;
-  	typedef  short  OutputPixelType;
-  	typedef itk::Image< InputPixelType, Dimension > InputImageType;
-    typedef itk::Image< OutputPixelType, Dimension > OutputImageType;
-  	typedef itk::CastImageFilter< InputImageType, OutputImageType > CastFilterType;
-    
-    CastFilterType::Pointer  caster =  CastFilterType::New();
-        
-    
-    
-    caster->SetInput( self->m_resampler->GetOutput() );
-	
-    caster->Update();
-    
-    OutputImageType::Pointer resImagePtr = caster->GetOutput();
-    
-    
-    
-    std::cout << "Info EDDataElement moving: " << std::endl;
-    
-    BARTImageSize *imgSize  = [movingDataElement getImageSize]; 
-    
-    std::cout << "Size: " << imgSize.rows << " " << imgSize.columns << " " << imgSize.slices <<std::endl;    
-    std::cout << "Datatype: " << [movingDataElement getImageDataType ]  << std::endl;
-    
-    
-    
-    EDDataElement *retElement = [movingDataElement convertFromITKImage: self->m_resampler->GetOutput()];
-    
-    
-    
-    
-    //ITKImage::Pointer *resImage = caster->GetOutput();
-    
-    
-    
-    
-    
-    //**********************
-    //**** Write result ****
-    //**********************
-   /* 
-    const unsigned int Dimension = 3;
-  	typedef  short  OutputPixelType;
-    typedef itk::Image< OutputPixelType, Dimension > OutputImageType;
-  	typedef itk::CastImageFilter< FixedImageType3D, OutputImageType > CastFilterType;
-  	typedef itk::ImageFileWriter< OutputImageType >  WriterType;
-    
-	WriterType::Pointer      writer =  WriterType::New();
-    CastFilterType::Pointer  caster =  CastFilterType::New();
-    
-    NSLog(@"Writing result image!");
-    writer->SetFileName( [@"/Users/mhollmann/Programming/MOCO_REGISTRATION_BART/data/outImageReg.nii" UTF8String] );
-    
-    caster->SetInput( self->m_resampler->GetOutput() );
-	
-    caster->Update();
-    
-    
-    
-    writer->SetInput( caster->GetOutput()   );
-    writer->Update();
-    */
-    
-    return retElement;
 
+    
+    //MH FIXME: the orientation parameters are not set correctly!!
+    ImageType4D::Pointer retImage4D= ImageType4D::New();
+    
+    typedef itk::TileImageFilter< MovingImageType3D, ImageType4D > TilerType;
+    TilerType::Pointer tiler = TilerType::New();
+    itk::FixedArray< unsigned int, Dimension4D > layout;
+    layout[0] = 1;
+    layout[1] = 1;
+    layout[2] = 1;
+    layout[3] = 0;
+    tiler->SetLayout( layout );
+    tiler->SetInput( self->m_resampler->GetOutput() );
+    tiler->Update();
+    retImage4D = tiler->GetOutput();
+    
+    EDDataElement *retElement = [movingDataElement convertFromITKImage4D:retImage4D ];
+    return retElement;
 
 }
 
 
 
 
--(EDDataElement*)getEDDataElementFromFile:(NSString*)filePath
++(EDDataElement*)getEDDataElementFromFile:(NSString*)filePath
 {
     
     //check whether file exist
-    if(self->m_registrationProperty.LoggingLevel > 1){        
-        NSLog(@"Loading Image: %@",filePath);
-    }
-    
     if( ![[NSFileManager defaultManager] fileExistsAtPath:filePath] ){
         
         NSLog(@"Did not find image file: %@", filePath);
         return nil;
-        
     }
     
     EDDataElement *retEDDataEl =
@@ -815,22 +730,36 @@
 
 
 
-- (MaskImageType3D::Pointer)getMaskImageWithITKImage:(ITKImage::Pointer)itkImage
+- (MaskImageType3D::Pointer)getMaskImageWithITKImage:(FixedImageType3D::Pointer)itkImage
 {
     
  
-    //write mask image
-  	typedef itk::CastImageFilter< FixedImageType3D, MaskImageType3D > CastFilterType;
-  	typedef itk::ImageFileWriter< MaskImageType3D >  WriterType;
+    //define the threshold using otsu
+    typedef itk::OtsuThresholdImageFilter<FixedImageType3D, MaskImageType3D > OtsuThresholdFilterType;
+    OtsuThresholdFilterType::Pointer otsuFilter = OtsuThresholdFilterType::New();
     
-	WriterType::Pointer      writer =  WriterType::New();
-    CastFilterType::Pointer  caster =  CastFilterType::New();
+    otsuFilter->SetInput( itkImage );
+    otsuFilter->SetOutsideValue( 1 );
+    otsuFilter->SetInsideValue( 0 );
+    otsuFilter->SetNumberOfHistogramBins( 200 );
+    
+    MaskImageType3D::Pointer mask = MaskImageType3D::New();
+    
+    mask = otsuFilter->GetOutput();
     
     
+    
+   
+	
+    
+  /*  
     
     // ImageType::Pointer image, MaskImageType::Pointer mask, short threshold
     MaskImageType3D::RegionType region = itkImage->GetLargestPossibleRegion();
     MaskImageType3D::Pointer mask = MaskImageType3D::New();
+    
+    mask = 
+    
     
     mask->SetRegions(region);
     mask->SetSpacing(itkImage->GetSpacing());
@@ -861,34 +790,19 @@
         ++imageIterator;
         ++maskIterator;
     }
-    
+    */
     
     
     //MH FIXME: Remove...
-    NSLog(@"Writing mask image:");
-    writer->SetFileName( [@"/Users/mhollmann/Projekte/Project_MOCOApplication/data/test3D_mask.nii" UTF8String] );
-    //caster->SetInput( mask );
-    //caster->Update();
-    
-    //writer->SetInput( caster->GetOutput()   );
-    writer->SetInput( mask );
-    writer->Update();
-    
-    NSLog(@"Done!");
-    
-    /*
-    MaskImageType3D::IndexType pIndex;
-    pIndex[0] = 20;
-    pIndex[1] = 20;
-    pIndex[2] = 20;
-    //update needs to be called to get access to data
-    mask->DataObject::Update();
-    MaskImageType3D::SizeType iSize = mask->GetLargestPossibleRegion().GetSize();
-    std::cout << " MASKING: Image Size :    = " << iSize << std::endl;
-    MaskImageType3D::PixelType pixelValue = mask->GetPixel( pIndex );
-     std::cout << " MASKING: Pixel Value:   = " << pixelValue << std::endl; //cout gives ascii for char values!
-    NSLog(@"MASKING: Pixel Value: %d", pixelValue);
-    */
+    //Write mask image
+    if (self->m_registrationProperty.LoggingLevel>2){
+        typedef itk::ImageFileWriter< MaskImageType3D >  WriterType;
+        WriterType::Pointer  writer =  WriterType::New();
+        writer->SetFileName( [@"/Users/mhollmann/Projekte/Project_MOCOApplication/data/test3D_mask.nii" UTF8String] );
+        writer->SetInput( mask );
+        writer->Update();
+        NSLog(@"Mask image written to: %@", @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/test3D_mask.nii");
+    }
     
     return mask;
     
@@ -901,7 +815,7 @@
     
     NSLog(@"MocoRegistration Dealloc called!");
     
-    //   free(m_registrationProperty);
+    //    free(m_registrationProperty);
 //    free(m_registration);
 //    free(m_metric);
 //    free(m_optimizer);
