@@ -15,8 +15,10 @@
 
 EDIsisImage::EDIsisImage(const isis::data::Image &src) : isis::data::Image(src)
 {
-	//clear the set table to make clear it's not an usual image
-    set.clear();
+	
+    //MH FIXME: Prevented clearing to enable itk-image etxtraction
+    //clear the set table to make clear it's not an usual image
+    //set.clear();
     
     std::vector<boost::shared_ptr<isis::data::Chunk> >::iterator itVector;
     for (itVector = lookup.begin(); itVector != lookup.end(); itVector++) {

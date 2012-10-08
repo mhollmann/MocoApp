@@ -38,14 +38,22 @@
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
     BARTImageSize *sz = [[BARTImageSize alloc] init];
-	mDataElementInterest = [[EDDataElementIsisRealTime alloc] initEmptyWithSize:sz ofImageType:IMAGE_MOCO];
-	mDataElementRest = [[EDDataElementIsisRealTime alloc] initEmptyWithSize:sz ofImageType:IMAGE_FCTDATA];
+    
+    //MH FIXME: changed to process non-moco data
+	//mDataElementInterest = [[EDDataElementIsisRealTime alloc] initEmptyWithSize:sz ofImageType:IMAGE_MOCO];
+	//mDataElementRest     = [[EDDataElementIsisRealTime alloc] initEmptyWithSize:sz ofImageType:IMAGE_FCTDATA];
+    mDataElementInterest = [[EDDataElementIsisRealTime alloc] initEmptyWithSize:sz ofImageType:IMAGE_FCTDATA];
+	mDataElementRest     = [[EDDataElementIsisRealTime alloc] initEmptyWithSize:sz ofImageType:IMAGE_MOCO];
+    
     [sz release];
 	
 	[[NSThread currentThread] setThreadPriority:1.0];
 	while (![[NSThread currentThread] isCancelled]) {
-		[self loadNextVolumeOfImageType:IMAGE_MOCO];
-	}
+		
+        //MH FIXME: changed to process non-moco data
+        //[self loadNextVolumeOfImageType:IMAGE_MOCO];
+	    [self loadNextVolumeOfImageType:IMAGE_FCTDATA];
+    }
 	NSLog(@"startRealTimeInputOfImageType END");
 
 	[pool drain];
@@ -100,6 +108,8 @@
     }
 	
 }
+
+
 
 
 -(BOOL)isImage:(isis::data::Image)img ofImageType:(enum ImageType)imgType

@@ -20,7 +20,6 @@
     CPTXYGraph *graph;
     CPTXYGraph *rotGraph;
     
-    
     //a counter showing the actual number of plotted scans
     uint16 scanCounter;
     
@@ -42,8 +41,6 @@
 //the views holding the graph plots
 @property (assign) IBOutlet MocoDrawTranslationView *mMocoDrawTranslationView;
 @property (assign) IBOutlet MocoDrawRotationView *mMocoDrawRotationView;
-
-
 
 @property (retain) CPTXYGraph *transGraph;
 @property (retain) CPTXYGraph *rotGraph;
@@ -81,9 +78,16 @@
 
 /**
  * Update the graphs controlled by this class. This one must be called each time after values are added that should be shown.
- * Calling should be done in the MAIN LOOP of an application, because this refreshs also the connected views.
- *
+ * This should be called in the MAIN LOOP of the application, because this refreshs also the connected views.
  */
 - (void) updateGraphs;
+
+
+/**
+ * Clear the graph plots and remove the stored values for the transformation. Sets the counter for stored scans to zero. 
+ */
+- (void) clearDataAndGraphs;
+
+
 
 @end

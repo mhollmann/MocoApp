@@ -13,7 +13,10 @@
 
 #import "MocoDrawViewController.h"
 #import "MocoRegistrationProperty.h"
+#import "MocoRegistration.h"
 
+#import "EDDataElementIsis.h"
+#import "EDDataElementRealTimeLoader.h"
 
 @interface MocoApplicationAppDelegate : NSObject <NSApplicationDelegate> {
 @private
@@ -21,7 +24,13 @@
     
     MocoDrawViewController* mMocoDrawViewController;
     MocoRegistrationProperty* mRegistrationProperty;
+    MocoRegistration* mRegistrator;
+    
+    EDDataElementRealTimeLoader* mRTDataLoader;
+    NSThread *mRealTimeTCPIPReadingThread;
+    
     bool mMocoIsRunning;
+    bool mRealTimeTCPIPMode;
     
 }
 
@@ -36,12 +45,8 @@
 - (IBAction)setNumIterationsByPullDown:(NSPopUpButton *)sender;
 - (IBAction)setSmoothKernelByPullDown:(NSPopUpButton *)sender;
 - (IBAction)setMaskImagesByPullDown:(NSPopUpButton *)sender;
-
 - (IBAction)startStopButtonPressed:(NSButton *)sender;
 
-- (IBAction)startRegistrationMI:(NSMenuItem *)sender;
-
--(double)getTimeDifference:(timeval) startTime endTime:(timeval) endTime;
 
 
 @end

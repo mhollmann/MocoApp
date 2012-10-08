@@ -36,6 +36,23 @@
 
 
 
+@interface MocoRegistration (PrivateMethods)
+
+/**
+ * Mask the given itk image file according to a segmentation of background and image contentent, i.e. brain.
+ * Here the itk::OtsuThresholdImageFilter is used, which does a histogram based search for the threshold.
+ *
+ * \param itkImage  FixedImageType3D::Pointer that should be masked.
+ *
+ * \return          MaskImageType3D::Pointer that holds the mask image.
+ *                  This is an itk::image with zeros for outside mask voxels
+ *                  and ones for inside mask voxels.
+ *
+ */
+-(MaskImageType3D::Pointer)getMaskImageWithITKImage:(FixedImageType3D::Pointer)itkImage;
+
+@end
+
 
 @implementation MocoRegistration
 
@@ -210,6 +227,8 @@
     self->m_optimizer->SetNumberOfIterations( regProperty.NumberOfIterations ); //numIterations Default AFNI: 19
 
     
+    NSLog(@"Number of Iterations %d", regProperty.NumberOfIterations);
+    
     //*** Create the Command observer and register it with the optimizer ***
     self->m_observer = CommandIterationUpdate::New();
     self->m_observer->bestValue = std::numeric_limits<double>::max();
@@ -340,7 +359,6 @@
     //reference is always 3D
     
     self->m_referenceImgITK3D = [dataElement asITKImage];
-    
     
     if( self->m_registrationProperty.LoggingLevel > 1 ){
         
@@ -534,7 +552,7 @@
     //Use best parameters?
 	MocoOptimizerType::ParametersType finalParameters;
     
-    //TODO statt "< 2" sollte "< 1" 
+    //TODO statt "< 2" sollte "< 1"
 	if ( m_optimizer->GetCurrentIteration() < 2  || !self->m_registrationProperty.UseBestFoundParameters ) {
 		finalParameters = self->m_registration->GetLastTransformParameters();        
     } else {
@@ -573,74 +591,13 @@
         
     }
     
-    
-    
+        
     //MHFIXME optional: return just parameters 
     //finally set the transform parameters
     self->m_transform->SetParameters( finalParameters );
     return self->m_transform;
     
     //return nil;
-    
-    
-    /*
-    
-    MetricType::TransformParametersType displacement( 6 );
-    
-    displacement[0] = 0;
-    displacement[1] = 0;
-    displacement[2] = 0;
-    displacement[3] = 0;
-    displacement[4] = 0;
-    displacement[5] = 0;
-    
-    
-    //  std::cout << " Metric pixels : " << metric->GetNumberOfPixelsCounted() << std::endl << std::endl;
-    
-    
-    
-    
-    
-    transform->SetParameters( finalParameters );
-    
-    TransformType::MatrixType matrix = transform->GetRotationMatrix();
-    TransformType::OffsetType offset = transform->GetOffset();
-    
-    //  std::cout << "Matrix = " << std::endl << matrix << std::endl;
-    //  std::cout << "Offset = " << std::endl << offset << std::endl << std::endl;
-    
-    
-    VectorType versor_axis = transform->GetVersor().GetAxis();
-    double versor_angle = transform->GetVersor().GetAngle();
-    //    
-    //    std::cout << "Axis = " << transform->GetVersor().GetAxis() << std::endl;
-    //    std::cout << "Angle = " << transform->GetVersor().GetAngle() << std::endl << std::endl;
-    //    
-    //    std::cout << "AngleX_rad = " << versor_axis[0] * versor_angle << std::endl;
-    //    std::cout << "AngleY_rad = " << versor_axis[1] * versor_angle << std::endl;
-    //    std::cout << "AngleZ_rad = " << versor_axis[2] * versor_angle << std::endl << std::endl;    
-    //
-    
-    //    std::cout << "AngleX = " << 180/M_PI * versor_axis[0] * versor_angle << std::endl;
-    //    std::cout << "AngleX = " << 180/M_PI * versor_axis[1] * versor_angle << std::endl;
-    //    std::cout << "AngleX = " << 180/M_PI * versor_axis[2] * versor_angle << std::endl;    
-    
-    //---------------------------------------------
-    
-    finalMovementParameters[0] = -1.0 * ( 180/M_PI * versor_axis[0] * versor_angle );
-    finalMovementParameters[1] = -1.0 * ( 180/M_PI * versor_axis[1] * versor_angle );
-    finalMovementParameters[2] = -1.0 * ( 180/M_PI * versor_axis[2] * versor_angle );
-    finalMovementParameters[3] = -1.0 * ( offset[0] );
-    finalMovementParameters[4] = -1.0 * ( offset[1] );
-    finalMovementParameters[5] = -1.0 * ( offset[2] );
-    //    
-    //    std::cout << "Parameters = " << finalMovementParameters[0] << " , " 
-    //                                 << finalMovementParameters[1] << " , " 
-    //                                 << finalMovementParameters[2] << " , "
-    //                                 << finalMovementParameters[3] << " , " 
-    //                                 << finalMovementParameters[4] << " , " 
-    //                                 << finalMovementParameters[5] << std::endl;*/
-    
     
     
 }// end alignEDDataElementToReference 
@@ -664,7 +621,7 @@
     finalTransform->SetFixedParameters( transform->GetFixedParameters() );
     
     self->m_resampler->SetTransform( finalTransform );
-    self->m_resampler->SetInput( movingImgITK3D );
+    self->m_resampler->SetInput( [movingDataElement asITKImage] );
 
     if( self->m_registrationProperty.Smoothing ){ 
         
@@ -702,9 +659,8 @@
     tiler->Update();
     retImage4D = tiler->GetOutput();
     
-    EDDataElement *retElement = [movingDataElement convertFromITKImage4D:retImage4D ];
-    return retElement;
-
+    return [movingDataElement convertFromITKImage4D:retImage4D ];
+ 
 }
 
 
@@ -826,20 +782,7 @@
 //    free(m_referenceImgITK3D);
 //    free(m_referenceImgITK3DSmoothed);
 
-
-    
-//    [m_registrationProperty release];
-//    [m_registration release];
-//    [m_metric release];
-//    [m_optimizer release];
-//    [m_transform release];
-//    [m_transformInitializer release];
-//    [m_observer release];
-//    [m_resampleInterpolator release];
-//    [m_referenceImgITK3D release];
-//    [m_referenceImgITK3DSmoothed release];
-
-    //    [super dealloc];
+    //[super dealloc];
 }
 
 

@@ -238,19 +238,6 @@ protected:
 -(void)initRegistrationWithRegistrationProperty:(MocoRegistrationProperty*)regProperty;
 
 
-/**
- * Mask the given itk image file according to a segmentation of background and image contentent, i.e. brain.
- * Here the itk::OtsuThresholdImageFilter is used, which does a histogram based search for the threshold.
- *
- * \param itkImage  FixedImageType3D::Pointer that should be masked.
- *
- * \return          MaskImageType3D::Pointer that holds the mask image. 
- *                  This is an itk::image with zeros for outside mask voxels 
- *                  and ones for inside mask voxels.
- *
- */
--(MaskImageType3D::Pointer)getMaskImageWithITKImage:(FixedImageType3D::Pointer)itkImage;
-
 
 
 /**

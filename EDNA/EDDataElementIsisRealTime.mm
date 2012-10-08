@@ -7,6 +7,7 @@
 //
 
 #import "EDDataElementIsisRealTime.h"
+#import "EDDataElementIsis.h"
 #import "DataStorage/io_factory.hpp"
 #import <algorithm>
 #include <vector>
@@ -75,8 +76,10 @@
 {
     if (nil != mIsisImage){
         delete mIsisImage;}
+
     [mImageSize release];
-	[super dealloc];
+	
+    [super dealloc];
 }
 
 -(short)getShortVoxelValueAtRow: (int)r col:(int)c slice:(int)sl timestep:(int)t
@@ -437,6 +440,43 @@
 	return NO;
     
 }
+
+//MH FIXME: added
+-(ITKImage::Pointer)asITKImage
+{
+    if (self->mITKAdapter != NULL)  {
+        delete self->mITKAdapter;
+    }
+    
+    self->mITKAdapter = new isis::adapter::itkAdapter;
+    
+    ITKImage::Pointer itkImage = self->mITKAdapter->makeItkImageObject<ITKImage>(*mIsisImage);
+    return itkImage;
+}
+
+
+//MH FIXME: added, Important: this returns a EDDataElementIsis!!!!
+-(EDDataElement*)getDataAtTimeStep:(size_t)tstep
+{
+    std::list<isis::data::Chunk> chList;
+    BARTImageSize *s = [[BARTImageSize alloc] initWithRows:mImageSize.rows andCols:mImageSize.columns andSlices:mImageSize.slices andTimesteps:1];
+    
+    EDDataElementIsis* retElement = nil;
+    if ([self sizeCheckRows:1 Cols:1 Slices:1 Timesteps:tstep]){
+        for (size_t i = 0; i < mImageSize.slices; i++){
+            chList.push_back(mIsisImage->getChunk(0,0,i,tstep));
+        }
+        
+        isis::data::Image retImg(chList);
+        retElement = [[[EDDataElementIsis alloc] initFromImage:retImg ofImageType:IMAGE_FCTDATA] autorelease];
+    }
+    
+    [s release];
+    return retElement;
+}
+
+
+
 
 -(NSArray*)getMinMaxOfDataElement
 {

@@ -39,9 +39,6 @@
         
         // Initialization code here.
         NSLog(@"MocoApplicationViewController initialized with window....");
-        
-
-        
     }
     
     return self;

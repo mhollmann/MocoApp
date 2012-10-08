@@ -57,7 +57,6 @@
     //*************************************************
     //****** Initialize Translation Graph Stuff *******
     //*************************************************    
-    //*** Create the graph holding translations *** 
 	self.transGraph = [ (CPTXYGraph *)[CPTXYGraph alloc] initWithFrame:NSRectToCGRect([mMocoDrawTranslationView bounds]) ];
     mMocoDrawTranslationView.hostedGraph = transGraph;
     
@@ -68,8 +67,8 @@
 	textStyle.fontName			   = @"Helvetica-Bold";
 	textStyle.fontSize			   = 14.0;
 	textStyle.textAlignment		   = CPTTextAlignmentCenter;
-	transGraph.titleTextStyle		   = textStyle;
-	transGraph.titleDisplacement		   = CGPointMake(0.0, 6.0);
+	transGraph.titleTextStyle      = textStyle;
+	transGraph.titleDisplacement   = CGPointMake(0.0, 6.0);
 	transGraph.titlePlotAreaFrameAnchor = CPTRectAnchorTop;
     
 	// Graph padding
@@ -104,16 +103,15 @@
 	x.orthogonalCoordinateDecimal = CPTDecimalFromDouble(-4.0); //describes where the y axis is crossing
     x.majorTickLength			  = 3.0; //describes the length (in y direction) of the tick marks
 	x.majorTickLineStyle		  = axisLineStyle;
-	x.majorGridLineStyle		  = nil;//majorGridLineStyle;
+	x.majorGridLineStyle		  = nil;
 	x.minorTicksPerInterval		  = 3;
 	x.tickDirection				  = CPTSignNone;
 	x.axisLineStyle				  = axisLineStyle;
 	x.minorTickLength			  = 1.0;
-	x.minorGridLineStyle		  = nil;//minorGridLineStyle;
-    x.title						  = @"Scans";
+	x.minorGridLineStyle		  = nil;
+    x.title						  = nil;
 	x.titleTextStyle			  = textStyle;
 	x.titleOffset				  = 25.0;
-	//x.alternatingBandFills		  = [NSArray arrayWithObjects:[[CPTColor redColor] colorWithAlphaComponent:0.1], //[[CPTColor greenColor] colorWithAlphaComponent:0.1], nil];
 	x.labelingPolicy			  = CPTAxisLabelingPolicyAutomatic;
     
     
@@ -129,18 +127,15 @@
 	y.tickDirection			= CPTSignNone;
 	y.axisLineStyle			= axisLineStyle;
 	y.majorTickLength		= 3.0;
-	y.majorTickLineStyle	= axisLineStyle;//majorGridLineStyle;
-	y.majorGridLineStyle	= nil;//majorGridLineStyle;
+	y.majorTickLineStyle	= axisLineStyle;
+	y.majorGridLineStyle	= nil;
 	y.minorTickLength		= 1.0;
-	y.minorGridLineStyle	= nil;//minorGridLineStyle;
+	y.minorGridLineStyle	= nil;
 	y.title					= @"Movement in mm";
 	y.titleTextStyle		= textStyle;
 	y.titleOffset			= 25.0;
-	//y.alternatingBandFills	= [NSArray arrayWithObjects:[[CPTColor blueColor] colorWithAlphaComponent:0.1], [NSNull null], nil];
 	y.labelingPolicy		= CPTAxisLabelingPolicyAutomatic;
-    // Set axes
 	transGraph.axisSet.axes = [NSArray arrayWithObjects:x, y, nil, nil];
-    
     
         
     //********************
@@ -186,6 +181,54 @@
     plotSpace.yRange = yRange;    
     
     
+    //++++ Add legend +++++
+    CPTMutableTextStyle *legendTextStyle = [CPTMutableTextStyle textStyle];
+	legendTextStyle.color				   = [CPTColor blackColor];
+	legendTextStyle.fontName			   = @"Helvetica";
+	legendTextStyle.fontSize			   = 10.0;
+	legendTextStyle.textAlignment		   = CPTTextAlignmentLeft;
+
+    //fake plots for legend
+    CPTScatterPlot *XPlotLegend = [[[CPTScatterPlot alloc] initWithFrame:[mMocoDrawTranslationView bounds]] autorelease];
+	XPlotLegend.identifier = @"X";
+    lineStyle = [[XPlotLegend.dataLineStyle mutableCopy] autorelease];
+    lineStyle.lineColor =  [CPTColor blueColor];
+    XPlotLegend.dataLineStyle = lineStyle;
+
+    CPTScatterPlot *YPlotLegend = [[[CPTScatterPlot alloc] initWithFrame:[mMocoDrawTranslationView bounds]] autorelease];
+	YPlotLegend.identifier = @"Y";
+    lineStyle = [[YPlotLegend.dataLineStyle mutableCopy] autorelease];
+    lineStyle.lineColor =  [CPTColor greenColor];
+    YPlotLegend.dataLineStyle = lineStyle;
+    
+	CPTScatterPlot *ZPlotLegend = [[[CPTScatterPlot alloc] initWithFrame:[mMocoDrawTranslationView bounds]] autorelease];
+	ZPlotLegend.identifier = @"Z";
+    lineStyle = [[ZPlotLegend.dataLineStyle mutableCopy] autorelease];
+    lineStyle.lineColor =  [CPTColor redColor];
+    ZPlotLegend.dataLineStyle = lineStyle;
+    
+    transGraph.legend = [CPTLegend legendWithGraph:transGraph];
+    transGraph.legend.textStyle = legendTextStyle;
+    transGraph.legend.fill = nil;
+    transGraph.legend.borderLineStyle = majorGridLineStyle;
+    transGraph.legend.cornerRadius = 2.0;
+    transGraph.legend.swatchSize = CGSizeMake(20.0, 15.0);
+    transGraph.legendAnchor = CPTRectAnchorTopRight;
+    transGraph.legendDisplacement = CGPointMake(-30.0, -10.0);
+    transGraph.legend.numberOfColumns = 3;
+    transGraph.legend.numberOfRows    = 1;
+    
+    [transGraph.legend removePlot:movXPlot];
+    [transGraph.legend removePlot:movYPlot];
+    [transGraph.legend removePlot:movZPlot];
+
+    [transGraph.legend addPlot:XPlotLegend];
+    [transGraph.legend addPlot:YPlotLegend];
+    [transGraph.legend addPlot:ZPlotLegend];
+    
+    
+    
+    
     
     //*************************************************
     //******* Initialize Rotation Graph Stuff *********
@@ -226,7 +269,7 @@
 	rx.axisLineStyle			  = axisLineStyle;
 	rx.minorTickLength			  = 1.0;
 	rx.minorGridLineStyle		  = nil;//minorGridLineStyle;
-    rx.title					  = @"Scans";
+    rx.title					  = nil;
 	rx.titleTextStyle			  = textStyle;
 	rx.titleOffset				  = 25.0;
 	rx.labelingPolicy			  = CPTAxisLabelingPolicyAutomatic;
@@ -300,6 +343,27 @@
     rplotSpace.yRange = ryRange;
     
     
+    rotGraph.legend = [CPTLegend legendWithGraph:rotGraph];
+    rotGraph.legend.textStyle = legendTextStyle;
+    rotGraph.legend.fill = nil;
+    rotGraph.legend.borderLineStyle = majorGridLineStyle;
+    rotGraph.legend.cornerRadius = 2.0;
+    rotGraph.legend.swatchSize = CGSizeMake(20.0, 15.0);
+    rotGraph.legendAnchor = CPTRectAnchorTopRight;
+    rotGraph.legendDisplacement = CGPointMake(-30.0, -10.0);
+    rotGraph.legend.numberOfColumns = 3;
+    rotGraph.legend.numberOfRows    = 1;
+    
+    [rotGraph.legend removePlot:rotXPlot];
+    [rotGraph.legend removePlot:rotYPlot];
+    [rotGraph.legend removePlot:rotZPlot];
+    
+    [rotGraph.legend addPlot:XPlotLegend];
+    [rotGraph.legend addPlot:YPlotLegend];
+    [rotGraph.legend addPlot:ZPlotLegend];
+    
+    
+    
 }
 
 
@@ -366,8 +430,8 @@
     [self.rotArrayY addObject:[NSNumber numberWithDouble:rotationY]];
     [self.rotArrayZ addObject:[NSNumber numberWithDouble:rotationZ]];
     
-    self.scanCounter++; 
-     
+    self.scanCounter++;
+    
 }
 
 
@@ -390,25 +454,29 @@
         
         CPTXYPlotSpace *rplotSpace		  = (CPTXYPlotSpace *)rotGraph.defaultPlotSpace;
         rplotSpace.xRange = newRange;
-        
     }
+}
+
+
+-(void)clearDataAndGraphs
+{
+
+    self.transArrayX = [NSMutableArray arrayWithCapacity:MOCO_MAX_NUMBER_SCANS];
+    self.transArrayY = [NSMutableArray arrayWithCapacity:MOCO_MAX_NUMBER_SCANS];
+    self.transArrayZ = [NSMutableArray arrayWithCapacity:MOCO_MAX_NUMBER_SCANS];
+    self.rotArrayX   = [NSMutableArray arrayWithCapacity:MOCO_MAX_NUMBER_SCANS];
+    self.rotArrayY   = [NSMutableArray arrayWithCapacity:MOCO_MAX_NUMBER_SCANS];
+    self.rotArrayZ   = [NSMutableArray arrayWithCapacity:MOCO_MAX_NUMBER_SCANS];
+
+    self.scanCounter = 0;
+    
+    [self updateGraphs];
 
 }
 
 
-
 - (void)dealloc
 {
-    [transGraph release];
-    [rotGraph release];
-    
-    [transArrayX release];
-    [transArrayY release];
-    [transArrayZ release];
-    [rotArrayX release];
-    [rotArrayY release];
-    [rotArrayZ release];
-    
     
     [super dealloc];
 }
