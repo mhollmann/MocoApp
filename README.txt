@@ -15,7 +15,7 @@ INSTALLATION
 
 - The provided code compiles with the following software installed:
   
-  1. InsightToolkit-3.20.1 (buildt multithreaded and review code)
+  1. InsightToolkit-3.20.1 (built multithreaded and review code)
   2. boost 1.47
   3. via (www.cs.ubc.ca/labs/lci/vista/vista/html)
   4. CorePlot 1.0
