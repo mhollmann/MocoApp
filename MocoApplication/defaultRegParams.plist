@@ -9,12 +9,12 @@
 	<key>Smoothing</key>
 	<true/>
 	<key>SmoothingSigma</key>
-	<integer>8</integer>
+	<integer>5</integer>
 	<key>MaskImagesForRegistration</key>
-	<true/>
+	<false/>
 	<key>UseBestFoundParameters</key>
 	<false/>
 	<key>NumberOfIterations</key>
-	<integer>8</integer>
+	<integer>10</integer>
 </dict>
 </plist>

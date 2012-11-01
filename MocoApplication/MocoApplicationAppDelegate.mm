@@ -16,6 +16,9 @@
 #import "BARTNotifications.h"
 
 
+//MH FIXME: just for testing
+#include "itkImageFileReader.h"
+
 
 @interface MocoApplicationAppDelegate (PrivateMethods)
 
@@ -117,12 +120,23 @@
     
     //maxStepLength Default AFNI: 0.7 * voxel size
     //numIterations Default AFNI: 19
-    [mRegistrationProperty setRegistrationParameters:1.0/50.0 MaxStep:0.019 MinStep:0.00001];
-    mRegistrationProperty.RegistrationInterpolationMode = LINEAR;
+    //scale factor: scales the translation parameters because one unit step in translation influences the metric much less than
+    //              one unit step in rotation (a point 100 mm away from rot center is moved about 1.7 mm when rotation
+    //              is 1 deg (0.0175 rad) - factor ca 1/100)
+    
+    //parameters orig
+    //[mRegistrationProperty setRegistrationParameters:1.0/50.0 MaxStep:0.019 MinStep:0.00001];
+    
+    //parameters software guide ITK
+    //[mRegistrationProperty setRegistrationParameters:1.0/1000.0 MaxStep:0.20000 MinStep:0.0001];
+    
+    //test
+    [mRegistrationProperty setRegistrationParameters:1000.0 MaxStep:0.019 MinStep:0.00001];
+    
+    mRegistrationProperty.RegistrationInterpolationMode = LINEAR;//BSPLINE2;//
     mRegistrationProperty.ResamplingInterpolationMode   = BSPLINE4;
-    mRegistrationProperty.SmoothingKernelWidth  = 64;
-    
-    
+    mRegistrationProperty.SmoothingKernelWidth  = 32;
+        
     
     //+++++++++++++++++++++++++++++++++++++++++
     //+++++++++ Prepare GUI components ++++++++
@@ -131,7 +145,7 @@
     //prepare iterations pull down
     [mNumIterationsPullDown removeAllItems];
     int i;
-    for (i=1; i<=10; i++)
+    for (i=1; i<=20; i++)
     {
         [mNumIterationsPullDown addItemWithTitle: [NSString stringWithFormat:@"%i", i*2]];
     }
@@ -438,10 +452,10 @@
     
     
     //Original Karsten's data01
-    //    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/data04_vol_dset1.nii";
-    //    int numImages = 542;
-    //    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/data04_mocoParams_mocoApp";
-    //    NSString *mocoResultImagesNameBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/realignedImages/mocoApp_data04/data04_img_";
+//    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/data04_vol_dset1.nii";
+//    int numImages = 542;
+//    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/data04_mocoParams_mocoApp";
+//    NSString *mocoResultImagesNameBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/realignedImages/mocoApp_data04/data04_img_";
     
     
     //4D zoomedInEPI
@@ -471,10 +485,17 @@
 //    NSString *mocoResultImagesNameBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/realignedImages/mocoApp_data10/data10_img_";
     
     //Kid4 Brauer medium motion
-    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/data11_kid_mediumMotion_SP3K.nii";
-    int numImages = 494;
-    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/data11_mocoParams_mocoApp";
-    NSString *mocoResultImagesNameBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/realignedImages/mocoApp_data11/data11_img_";
+//    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/data11_kid_mediumMotion_SP3K.nii";
+//    int numImages = 494;
+//    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/data11_mocoParams_mocoApp";
+//    NSString *mocoResultImagesNameBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/realignedImages/mocoApp_data11/data11_img_";
+    
+    
+    //amynf test - strong trend over time
+    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/data12_RP1T_amyNF.nii";
+    int numImages = 259;
+    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/data12_mocoParams_mocoApp";
+    NSString *mocoResultImagesNameBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/realignedImages/mocoApp_data12/data12_img_";
     
     
     //++++++++++++++++++++++++++++++++++++
@@ -516,6 +537,10 @@
         MocoDataLogger *mocoLogger = new MocoDataLogger(mocoMovParamsOutFileString, mocoMovParamsOutFileString);
         
         
+        
+        //MH FIXME: Todo ITK image reader etc...
+        
+        
         EDDataElement *dataEl4D = [MocoRegistration getEDDataElementFromFile:file4D];
         EDDataElement *refDataEl3D = [dataEl4D getDataAtTimeStep:0];
         
@@ -523,7 +548,7 @@
         EDDataElement *movingDataEl;
         
         //set reference
-        [mRegistrator setReferenceEDDataElement:refDataEl3D];
+        [mRegistrator setReferenceImageWithEDDataElement:refDataEl3D];
         
         int i;
         for (i = 1; i<=numImages; i++) {
@@ -569,7 +594,9 @@
                 }
             });
             
-             
+            
+            
+            
             //++++ Resampling ++++
             gettimeofday(&startTimeResample, 0);
             resultDataEl = [mRegistrator resampleMovingEDDataElement:movingDataEl withTransform:transform];
@@ -621,11 +648,7 @@
         delete mocoLogger;
          
     });//end dispatch async
-}
-
-
-
-
+} // end runOfflineMotionCorrection
 
 
 

@@ -8,16 +8,16 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MocoApplication/MocoApplicationAppDelegate.mm"
-         timestampString = "371395580.930854"
+         timestampString = "373386864.29464"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "581"
-         endingLineNumber = "581"
+         startingLineNumber = "608"
+         endingLineNumber = "608"
          landmarkName = "-runOfflineMotionCorrection"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MocoApplication/MocoDataLogger.cpp"
@@ -28,6 +28,57 @@
          endingLineNumber = "21"
          landmarkName = "MocoDataLogger::MocoDataLogger(string mocoParamsLogfile, string appLogfile)"
          landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MocoApplication/MocoRegistration.mm"
+         timestampString = "373385113.84484"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "351"
+         endingLineNumber = "351"
+         landmarkName = "-setReferenceImageWithITKImage:"
+         landmarkType = "5">
+         <Locations>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "itk::FixedArray&lt;double, 3u&gt;::operator[](int)"
+               urlString = "file://localhost/MocoRegistration.mm"
+               timestampString = "373218488.566864"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "370"
+               endingLineNumber = "370">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[MocoRegistration setReferenceImageWithITKImage:]"
+               urlString = "file://localhost/MocoRegistration.mm"
+               timestampString = "373218488.567387"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "370"
+               endingLineNumber = "370">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "std::_Bit_iterator::_Bit_iterator(unsigned long*, unsigned int)"
+               urlString = "file://localhost/MocoRegistration.mm"
+               timestampString = "373218488.567681"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "370"
+               endingLineNumber = "370">
+            </Location>
+         </Locations>
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

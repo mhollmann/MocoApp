@@ -81,7 +81,6 @@
         
         //will set properties and initialize member vars
         [self initRegistrationWithRegistrationProperty: regProperty];
-    
     }
     
     return self;
@@ -90,9 +89,6 @@
 
 - (void) initRegistrationWithRegistrationProperty:(MocoRegistrationProperty *)regProperty
 {
-    
-    //set the registration method
-    self->m_registration = MocoRegistrationType::New();
     
     //create metric, optimizer, and transform 
     self->m_metric    = MocoMetricType::New();
@@ -106,12 +102,6 @@
     self->m_metric->GetThreader()->SetGlobalMaximumNumberOfThreads(regProperty.NumberOfThreads);
     self->m_metric->GetThreader()->SetGlobalDefaultNumberOfThreads(regProperty.NumberOfThreads);
    
-    
-    self->m_registration->SetMetric( self->m_metric );
-    self->m_registration->SetOptimizer( self->m_optimizer );
-    self->m_registration->SetTransform( self->m_transform );
-   
-    
     //Define available interpolators
     typedef itk::LinearInterpolateImageFunction< MovingImageType3D, double > InterpolatorType_Linear;
     typedef itk::BSplineInterpolateImageFunction< MovingImageType3D, double > InterpolatorType_BSpline;
@@ -207,9 +197,6 @@
     //MHFIXME: multithreading for interpolator?
     //interpolator->SetNumberOfThreads(2);
 
-    self->m_registration->SetInterpolator( self->m_registrationInterpolator );
-        
-     
     
     //*** Initialize optimizer ***
     typedef MocoOptimizerType::ScalesType MocoOptimizerScalesType;
@@ -226,8 +213,6 @@
     self->m_optimizer->SetMinimumStepLength( regProperty.RegistrationParameters[2] );  //minStepLength
     self->m_optimizer->SetNumberOfIterations( regProperty.NumberOfIterations ); //numIterations Default AFNI: 19
 
-    
-    NSLog(@"Number of Iterations %d", regProperty.NumberOfIterations);
     
     //*** Create the Command observer and register it with the optimizer ***
     self->m_observer = CommandIterationUpdate::New();
@@ -330,21 +315,20 @@
         }
     }// end switch
         
-    
+
     //if everything worked out set the property
     self->m_registrationProperty = regProperty;
-    
     
 }// end setRegistrationProperty
 
 
 
 
-- (void)setReferenceEDDataElementWithFile:(NSString *)filePath
+- (void)setReferenceImageWithFile:(NSString *)filePath
 {
     EDDataElement *refImg = [MocoRegistration getEDDataElementFromFile: filePath];
     
-    [self setReferenceEDDataElement: refImg];
+    [self setReferenceImageWithEDDataElement: refImg];
     
     
 }// end setReferenceEDDataElementWithFile
@@ -352,13 +336,20 @@
 
 
 
-- (void)setReferenceEDDataElement:(EDDataElement *)dataElement
+- (void)setReferenceImageWithEDDataElement:(EDDataElement *)dataElement
+{
+    [self setReferenceImageWithITKImage: [dataElement asITKImage]];
+    
+}// end setReferenceImageWithEDDataElement 
+
+
+
+- (void)setReferenceImageWithITKImage:(FixedImageType3D::Pointer)itkImage
 {
     
-    
     //reference is always 3D
-    
-    self->m_referenceImgITK3D = [dataElement asITKImage];
+    self->m_referenceImgITK3D = itkImage;
+
     
     if( self->m_registrationProperty.LoggingLevel > 1 ){
         
@@ -367,8 +358,8 @@
         
     }
     
-    //++++ Smoothing ++++ 
-    if( self->m_registrationProperty.Smoothing ){        
+    //++++ Smoothing ++++
+    if( self->m_registrationProperty.Smoothing ){
         
         DiscreteGaussianImageFilterType::Pointer dgImageFilter = DiscreteGaussianImageFilterType::New();
         
@@ -382,186 +373,120 @@
         
         self->m_referenceImgITK3DSmoothed = dgImageFilter->GetOutput();
         
-     }
+    }
     
     //MH FIXME: Check if metric exists in this call before mask is set
     //++++ Masking if needed ++++
-    if( self->m_registrationProperty.MaskImagesForRegistration ){   
+    if( self->m_registrationProperty.MaskImagesForRegistration ){
         self->m_referenceImgMask = [self getMaskImageWithITKImage:self->m_referenceImgITK3D];
-    
+        
         self->m_referenceMask = MaskType3D::New();
         self->m_movingMask    = MaskType3D::New();
-    
+        
         self->m_referenceMask->SetImage(self->m_referenceImgMask);
         self->m_movingMask->SetImage(self->m_referenceImgMask);
-    
+        
         self->m_metric->SetFixedImageMask(self->m_referenceMask);
         self->m_metric->SetMovingImageMask(self->m_movingMask);
     }
     
     
-    /*
-    
-    MaskImageType3D::IndexType pIndex2;
-    pIndex2[0] = 1;
-    pIndex2[1] = 1;
-    pIndex2[2] = 1;
-    //update needs to be called to get access to data
-    self->m_referenceImgMask->DataObject::Update();
-    MaskImageType3D::PixelType pixelValue2 = self->m_referenceImgMask->GetPixel( pIndex2 );
-    NSLog(@"Pixel value at 1,1,1 is: %d", pixelValue2);
-
-    
-    MaskImageType3D::IndexType pIndex;
-    pIndex[0] = 20;
-    pIndex[1] = 20;
-    pIndex[2] = 20;
-    //update needs to be called to get access to data
-    self->m_referenceImgMask->DataObject::Update();
-    MaskImageType3D::PixelType pixelValue = self->m_referenceImgMask->GetPixel( pIndex );
-    NSLog(@"Pixel value  at 20,20,20 is: %d", pixelValue);
-    
-    
-    
-    
-    MaskType3D::Pointer fixedMask; 
-    fixedMask = [self getMaskWithITKImage:self->m_referenceImgITK3D];
-    
-    MaskType3D::Pointer movingMask = MaskType3D::New();
-    
-    self->m_referenceImgMask->DataObject::Update();
-    fixedMask->SetImage(self->m_referenceImgMask);
-    
-    
-    MaskType3D::PointType p1;
-    p1.Fill(0);
-    std::cout << "Point " << p1 << " is inside mask: "
-    << fixedMask->IsInside(p1) << std::endl;
-    MaskType3D::PointType p2;
-    p2.Fill(20);
-    std::cout << "Point " << p2 << " is inside mask: "
-    << fixedMask->IsInside(p2) << std::endl;
-*/
-    
-    
-    
-}// end setReferenceEDDataElement 
-
-
-
+}// end setReferenceImageWithITKImage
 
 
 -(MocoTransformType::Pointer)alignEDDataElementToReference:(EDDataElement*)movingDataElement
 {
+    
+    return [self alignITKImageToReference: [movingDataElement asITKImage]];
+    
+}// end alignEDDataElementToReference 
 
-    //The observer values have to be set back fo each new call of align
-    self->m_observer->bestValue = std::numeric_limits<double>::max();
+
+
+
+-(MocoTransformType::Pointer)alignITKImageToReference:(MovingImageType3D::Pointer)movingITKImage
+{
+
+    MocoRegistrationType::Pointer   registration  = MocoRegistrationType::New();
+
+    registration->SetMetric(    self->m_metric );
+    registration->SetOptimizer( self->m_optimizer );
     
-    //MH FIXME: this can possibly be done in initialization?
-    self->m_transform = MocoTransformType::New();
-    self->m_transformInitializer = MocoTransformInitializerType::New();
-    self->m_transformInitializer->SetTransform( self->m_transform );
+    registration->SetInterpolator(  self->m_registrationInterpolator  );
     
-    //moving image is 3D
-    ITKImage::Pointer movingImgITK3D = [movingDataElement asITKImage];
+    MocoTransformType::Pointer  transform = MocoTransformType::New();
+    registration->SetTransform( transform );
     
-    //+++ Smoothing +++ 
-   if( self->m_registrationProperty.Smoothing ){        
+    
+    MocoTransformInitializerType::Pointer initializer = MocoTransformInitializerType::New();
+    initializer->SetTransform(   transform );
+    
+    
+    if (self->m_registrationProperty.Smoothing) {
         
-       //Smooth the moving image and set it for registration and transform initializer
-       DiscreteGaussianImageFilterType::Pointer dgImageFilter = DiscreteGaussianImageFilterType::New();
-       dgImageFilter->SetInput( movingImgITK3D );
-       dgImageFilter->SetVariance( self->m_registrationProperty.SmoothingSigma );
-       dgImageFilter->SetMaximumKernelWidth( self->m_registrationProperty.SmoothingKernelWidth );
-       dgImageFilter->SetUseImageSpacing(true);
-       dgImageFilter->SetMaximumError(0.05);
-       dgImageFilter->Update();
-       movingImgITK3D = dgImageFilter->GetOutput();
-       self->m_registration->SetMovingImage( movingImgITK3D );
-       self->m_transformInitializer->SetMovingImage( movingImgITK3D );
-       
-       //set the smoothed fixed image for registration and transform initializer
-       self->m_referenceImgITK3DSmoothed->DataObject::Update();
-       self->m_registration->SetFixedImage( self->m_referenceImgITK3DSmoothed );
-       self->m_registration->SetFixedImageRegion( self->m_referenceImgITK3DSmoothed->GetBufferedRegion() );
-       self->m_transformInitializer->SetFixedImage(  self->m_referenceImgITK3DSmoothed );
-                
-    }
-    else{
+        typedef itk::DiscreteGaussianImageFilter< FixedImageType3D, MovingImageType3D > FilterType;
+        FilterType::Pointer movingFilter = FilterType::New();
+        
+        movingFilter->SetInput( movingITKImage );
+        
+        movingFilter->SetVariance( self->m_registrationProperty.SmoothingSigma );
+        movingFilter->SetMaximumKernelWidth( self->m_registrationProperty.SmoothingKernelWidth );
+        movingFilter->SetMaximumError(0.01);
+        
         
         //set the smoothed fixed image for registration and transform initializer
-        self->m_referenceImgITK3D->DataObject::Update();
-        self->m_registration->SetFixedImage( self->m_referenceImgITK3D );
-        self->m_registration->SetFixedImageRegion( self->m_referenceImgITK3D->GetBufferedRegion() );
-        self->m_registration->SetMovingImage( movingImgITK3D );
-
-        self->m_transformInitializer->SetFixedImage(  self->m_referenceImgITK3D );
-        movingImgITK3D->DataObject::Update();
-        self->m_transformInitializer->SetMovingImage( movingImgITK3D );
-      
+        movingFilter->Update();
+        self->m_referenceImgITK3DSmoothed->DataObject::Update();
+        registration->SetFixedImage( self->m_referenceImgITK3DSmoothed );
+        registration->SetMovingImage(   movingFilter->GetOutput()   );
+        initializer->SetFixedImage(  self->m_referenceImgITK3DSmoothed );
+        initializer->SetMovingImage( movingFilter->GetOutput() );
+        
+        
+    } else {
+        
+        registration->SetFixedImage(    self->m_referenceImgITK3D    );
+        registration->SetMovingImage(   movingITKImage  );
+        initializer->SetMovingImage( movingITKImage );
     }
     
-  
+    registration->SetFixedImageRegion( self->m_referenceImgITK3D->GetBufferedRegion() );
     
-    //+++ Initialize transform +++
-    self->m_transformInitializer->MomentsOn(); //center of mass is used as center of transform
-    //self->m_transformInitializer->GeometryOn();
-    self->m_transformInitializer->InitializeTransform();//this just sets the initial transform parameters
+    //initialize the transformation
+    initializer->MomentsOn();
+    initializer->InitializeTransform();
+    registration->SetInitialTransformParameters( transform->GetParameters() );
     
+    //set back the best value to max
+    self->m_observer->bestValue = std::numeric_limits<double>::max();
     
-    
-    //MHFIXME:
-    //Doesnt it make sense to use the previous parameters as initial setting
-    //and not to find new ones by transform initializer?????
-    self->m_registration->SetInitialTransformParameters( self->m_transform->GetParameters() );
-    
-    if( self->m_registrationProperty.LoggingLevel > 1 ) {
-        MocoOptimizerType::ParametersType initialParameters;
-        initialParameters = self->m_registration->GetInitialTransformParameters();
-        
-        std::cout << "*** Initial Parameters *** "  << std::endl;
-        std::cout << " Initial versor X      = " << initialParameters[0]  << std::endl;
-        std::cout << " Initial versor Y      = " << initialParameters[1]  << std::endl;
-        std::cout << " Initial versor Z      = " << initialParameters[2]  << std::endl;
-        std::cout << " Initial Translation X = " << initialParameters[3]  << std::endl;
-        std::cout << " Initial Translation Y = " << initialParameters[4]  << std::endl;
-        std::cout << " Initial Translation Z = " << initialParameters[5]  << std::endl;
-    
-    }
-    
-    
-  	try { 
-        
-        //+++ Start registration +++
-        self->m_registration->StartRegistration(); 
-        
+  	try {
+        registration->StartRegistration();
         if (self->m_registrationProperty.LoggingLevel > 1) {
             std::cout << "Optimizer stop condition: "
-            << self->m_registration->GetOptimizer()->GetStopConditionDescription()
+            << registration->GetOptimizer()->GetStopConditionDescription()
             << std::endl;
         }
-    } 
+    }
   	catch( itk::ExceptionObject & err ) {
-        std::cerr << "ExceptionObject caught !" << std::endl; 
-        std::cerr << err << std::endl; 
-        // return EXIT_FAILURE;
-	} 
-    
-    
-
-    //Use best parameters?
+        std::cerr << "ExceptionObject caught !" << std::endl;
+        std::cerr << err << std::endl;
+        //return EXIT_FAILURE;
+	}
+ 
+    //Take best parameters saved from observer----------------------------
 	MocoOptimizerType::ParametersType finalParameters;
-    
     //TODO statt "< 2" sollte "< 1"
-	if ( m_optimizer->GetCurrentIteration() < 2  || !self->m_registrationProperty.UseBestFoundParameters ) {
-		finalParameters = self->m_registration->GetLastTransformParameters();        
+	if ( self->m_optimizer->GetCurrentIteration() < 2 || !self->m_registrationProperty.UseBestFoundParameters ) {
+		finalParameters = registration->GetLastTransformParameters();
     } else {
         finalParameters = self->m_observer->bestParameters;
     }
+   
     
     
     if( self->m_registrationProperty.LoggingLevel > 1 ) {
- 
+        
         double versorX              = finalParameters[0];
         double versorY              = finalParameters[1];
         double versorZ              = finalParameters[2];
@@ -572,8 +497,8 @@
         unsigned int numberOfIterations = m_optimizer->GetCurrentIteration();
         
         double bestValue = m_optimizer->GetValue();
-    
-    
+        
+        
         // Print out results
         std::cout << std::endl << std::endl;
         std::cout << "Result = " << std::endl;
@@ -588,19 +513,14 @@
         std::cout << " Metric value  = " << bestValue          << std::endl;
         std::cout << " Observer value  = " << m_observer->bestValue << " " << std::endl;
         
-        
     }
     
-        
-    //MHFIXME optional: return just parameters 
+  
     //finally set the transform parameters
-    self->m_transform->SetParameters( finalParameters );
-    return self->m_transform;
+    transform->SetParameters( finalParameters );
+    return transform;
     
-    //return nil;
-    
-    
-}// end alignEDDataElementToReference 
+}// end alignITKImageToReference
 
 
 
@@ -644,7 +564,7 @@
     
 
     
-    //MH FIXME: the orientation parameters are not set correctly!!
+    //MH FIXME: This may be avoided
     ImageType4D::Pointer retImage4D= ImageType4D::New();
     
     typedef itk::TileImageFilter< MovingImageType3D, ImageType4D > TilerType;
@@ -746,7 +666,7 @@
         ++imageIterator;
         ++maskIterator;
     }
-    */
+    
     
     
     //MH FIXME: Remove...
@@ -758,7 +678,7 @@
         writer->SetInput( mask );
         writer->Update();
         NSLog(@"Mask image written to: %@", @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/test3D_mask.nii");
-    }
+    }*/
     
     return mask;
     

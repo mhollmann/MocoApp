@@ -47,7 +47,7 @@ typedef itk::Image< MaskPixelType,  Dimension3D >   MaskImageType3D;
 typedef itk::ImageMaskSpatialObject< 3 > MaskType3D;
 
 typedef itk::DiscreteGaussianImageFilter< FixedImageType3D, MovingImageType3D > DiscreteGaussianImageFilterType;
-typedef itk::InterpolateImageFunction< FixedImageType3D, double > InterpolatorType;
+typedef itk::InterpolateImageFunction< MovingImageType3D, double > InterpolatorType;
 typedef itk::ImageRegistrationMethod< FixedImageType3D, MovingImageType3D > MocoRegistrationType;
 
 //metric: set fixed to meanSquares for now
@@ -133,23 +133,21 @@ protected:
 @interface MocoRegistration : NSObject {
 
 @protected
-    MocoRegistrationProperty* m_registrationProperty;
+    MocoRegistrationProperty*     m_registrationProperty;
     
-    MocoRegistrationType::Pointer m_registration;
     InterpolatorType::Pointer     m_registrationInterpolator;    
     MocoMetricType::Pointer       m_metric ;
     MocoOptimizerType::Pointer    m_optimizer;
     MocoTransformType::Pointer    m_transform;
-   
-    MocoTransformInitializerType::Pointer m_transformInitializer;
-    
+       
     CommandIterationUpdate::Pointer m_observer;
     
     MocoResampleFilterType::Pointer m_resampler;
     InterpolatorType::Pointer       m_resampleInterpolator;
     
-    ITKImage::Pointer m_referenceImgITK3D;
-    ITKImage::Pointer m_referenceImgITK3DSmoothed;
+    FixedImageType3D::Pointer m_referenceImgITK3D;
+    FixedImageType3D::Pointer m_referenceImgITK3DSmoothed;
+    
     
     MaskImageType3D::Pointer m_referenceImgMask;
     MaskType3D::Pointer m_referenceMask;
@@ -175,18 +173,26 @@ protected:
  * \param dataElement The referene image as EDDataElement.
  *
  */
--(void)setReferenceEDDataElement:(EDDataElement*)dataElement;
-
+-(void)setReferenceImageWithEDDataElement:(EDDataElement*)dataElement;
 
 
 /**
- * Set the EDDataElement for the reference (stationary image) by image filename.
+ * Set the image for the reference (stationary image) by given ITKImage.
+ *
+ * \param itkImage The referene image as EDDataElement.
+ *
+ */
+-(void)setReferenceImageWithITKImage:(FixedImageType3D::Pointer)itkImage;
+
+
+/**
+ * Set the image (EDDataElement) for the reference (stationary) by image filename.
  * Just working with .nii images at the moment. 
  *
  * \param filePath  Complete path to image file
  *
  */
--(void)setReferenceEDDataElementWithFile:(NSString*)filePath;
+-(void)setReferenceImageWithFile:(NSString*)filePath;
 
 
 
@@ -203,6 +209,21 @@ protected:
  *
  */
 -(MocoTransformType::Pointer)alignEDDataElementToReference:(EDDataElement*)movingDataElement;
+
+
+
+/**
+ * Align an itk-image to the reference image that was set for this registration.
+ * Be sure your registrationProperty and reference image are set before calling this function.
+ * The returned transformation can be used to resample an itk-image or an EDDataelement using resampleMovingEDDataElement.
+ *
+ * \param movingITKImage  EDDataElement that is registered to reference
+ *
+ * \return                   A MocoTransformType describing the transformation of input
+ *                           to reference image. transformation: [rotX rotY rotZ transX transY transZ]
+ *
+ */
+-(MocoTransformType::Pointer)alignITKImageToReference:(MovingImageType3D::Pointer)movingITKImage;
 
 
 

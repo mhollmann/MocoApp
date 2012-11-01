@@ -906,6 +906,7 @@
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/usr/local/include/isis,
+					/usr/local/include/InsightToolkit,
 					/usr/local/include/InsightToolkit/Common,
 					/usr/local/include/InsightToolkit/Utilities,
 					/usr/local/include/InsightToolkit/Utilities/vxl/vcl,
@@ -920,7 +921,6 @@
 					/usr/local/include/InsightToolkit/BasicFilters,
 					/usr/local/include/InsightToolkit/IO,
 					/usr/local/include/InsightToolkit/Review,
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/debug/",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
