@@ -55,7 +55,7 @@
     mImageSize.columns = anImage.getNrOfColumns();
     mImageSize.slices = anImage.getNrOfSlices();
     mImageSize.timesteps = anImage.getNrOfTimesteps();
-    mRepetitionTimeInMs = (anImage.getPropertyAs<isis::util::fvector4>("voxelSize"))[3];
+    mRepetitionTimeInMs = anImage.getPropertyAs<u_int16_t>("repetitionTime");
 	
 	return self;
 }
@@ -204,22 +204,22 @@
         case PROPID_BETA:
             break;
 		case PROPID_READVEC:
-			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("rowVec")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("rowVec")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("rowVec")[2]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("rowVec")[3]], nil ] autorelease];
+			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("rowVec")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("rowVec")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("rowVec")[2]], nil ] autorelease];
 			break;
 		case PROPID_PHASEVEC:
-			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("columnVec")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("columnVec")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("columnVec")[2]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("columnVec")[3]], nil ] autorelease];
+			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("columnVec")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("columnVec")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("columnVec")[2]], nil ] autorelease];
 			break;
 		case PROPID_SLICEVEC:
-			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("sliceVec")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("sliceVec")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("sliceVec")[2]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("sliceVec")[3]], nil ] autorelease];
+			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("sliceVec")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("sliceVec")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("sliceVec")[2]], nil ] autorelease];
 			break;
 		case PROPID_SEQNR:
 			ret = [NSNumber numberWithUnsignedShort:1];
 			break;
 		case PROPID_VOXELSIZE:
-			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("voxelSize")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("voxelSize")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("voxelSize")[2]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("voxelSize")[3]], nil ] autorelease];
+			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("voxelSize")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("voxelSize")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("voxelSize")[2]], nil ] autorelease];
 			break;
 		case PROPID_ORIGIN:
-			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("indexOrigin")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("indexOrigin")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("indexOrigin")[2]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("indexOrigin")[3]], nil ] autorelease];
+			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("indexOrigin")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("indexOrigin")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("indexOrigin")[2]], nil ] autorelease];
 			break;
         default:
             break;
@@ -239,7 +239,7 @@
     if ([self sizeCheckRows:1 Cols:1 Slices:sliceNr Timesteps:tstep]){
 		isis::data::MemChunkNonDel<float> chSlice(mImageSize.columns, mImageSize.rows);
 		mIsisImage->getChunk(0,0, sliceNr, tstep, false).copySlice(0, 0, chSlice, 0, 0);
-		return (( boost::shared_ptr<float> ) chSlice.getValuePtr<float>()).get();
+		return (( boost::shared_ptr<float> ) chSlice.getValueArray<float>()).get();
 	}
 	return NULL;	
 }
@@ -287,7 +287,7 @@
 	//std::vector<boost::shared_ptr<isis::data::Chunk> > vecSlices = mAllDataMap[0];
 	//boost::shared_ptr<isis::data::Chunk> ptrChunk = vecSlices[0];
 	NSMutableArray *propValues = [[NSMutableArray alloc] init];
-	for (NSString *str in propList) {				// type is fvector4
+	for (NSString *str in propList) {				// type is fvector3
 		if ( [[str lowercaseString] isEqualToString:@"indexorigin"]
 			or [[str lowercaseString] isEqualToString:@"rowvec"]
 			or [[str lowercaseString] isEqualToString:@"columnvec"]
@@ -297,8 +297,8 @@
 			or [[str lowercaseString] isEqualToString:@"voxelsize"]
 			or [[str lowercaseString] isEqualToString:@"voxelgap"])
 		{
-			isis::util::fvector4 prop = mIsisImage->getPropertyAs<isis::util::fvector4>([str  cStringUsingEncoding:NSISOLatin1StringEncoding]);
-			NSArray* ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:prop[0]], [NSNumber numberWithFloat:prop[1]], [NSNumber numberWithFloat:prop[2]], [NSNumber numberWithFloat:prop[3]], nil ] autorelease];
+			isis::util::fvector3 prop = mIsisImage->getPropertyAs<isis::util::fvector3>([str  cStringUsingEncoding:NSISOLatin1StringEncoding]);
+			NSArray* ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:prop[0]], [NSNumber numberWithFloat:prop[1]], [NSNumber numberWithFloat:prop[2]], nil ] autorelease];
 			[propValues addObject:ret];
 		}
 		else if( [[str lowercaseString] isEqualToString:@"acquisitionnumber"]) //type is u_int32_t
@@ -344,7 +344,7 @@
 	//TODO: arbeite mit DIctionary
 	//std::vector<boost::shared_ptr<isis::data::Chunk> > vecSlices = mAllDataMap[0];
 	//boost::shared_ptr<isis::data::Chunk> ptrChunk = vecSlices[0];
-	for (NSString *str in [propDict allKeys]) {		// type is fvector4
+	for (NSString *str in [propDict allKeys]) {		// type is fvector3
 		if ( [[str lowercaseString] isEqualToString:@"indexorigin"]
 			or [[str lowercaseString] isEqualToString:@"rowvec"]
 			or [[str lowercaseString] isEqualToString:@"columnvec"]
@@ -354,11 +354,11 @@
 			or [[str lowercaseString] isEqualToString:@"voxelsize"]
 			or [[str lowercaseString] isEqualToString:@"voxelgap"])
 		{
-			isis::util::fvector4 prop;
+			isis::util::fvector3 prop;
 			if (YES == [[propDict valueForKey:str] isKindOfClass:[NSArray class]]){
 				for (unsigned int i = 0; i < [[propDict valueForKey:str] count]; i++){
 					prop[i] = [[[propDict valueForKey:str] objectAtIndex:i] floatValue];}
-				mIsisImage->setPropertyAs<isis::util::fvector4>([str cStringUsingEncoding:NSISOLatin1StringEncoding], prop);
+				mIsisImage->setPropertyAs<isis::util::fvector3>([str cStringUsingEncoding:NSISOLatin1StringEncoding], prop);
 			}
 		}
 		else if( [[str lowercaseString] isEqualToString:@"acquisitionnumber"]) //type is u_int32_t

@@ -6,9 +6,9 @@
 //  Copyright 2010 MPI Cognitive and Human Brain Sciences Leipzig. All rights reserved.
 //
 
-#define _GLIBCXX_FULLY_DYNAMIC_STRING 1
-#undef _GLIBCXX_DEBUG
-#undef _GLIBCXX_DEBUG_PEDANTIC
+//#define _GLIBCXX_FULLY_DYNAMIC_STRING 1
+//#undef _GLIBCXX_DEBUG
+//#undef _GLIBCXX_DEBUG_PEDANTIC
 
 #import "EDDataElementIsis.h"
 
@@ -69,7 +69,7 @@
     mImageSize.columns = mIsisImage->getNrOfColumns();
     mImageSize.slices = mIsisImage->getNrOfSlices();
     mImageSize.timesteps = mIsisImage->getNrOfTimesteps();
-    mRepetitionTimeInMs = (mIsisImage->getPropertyAs<isis::util::fvector4>("voxelSize"))[3];
+    mRepetitionTimeInMs = mIsisImage->getPropertyAs<u_int16_t>("repetitionTime");
 	
 	// the image type is now just important for writing
 	
@@ -82,7 +82,7 @@
     if ((self = [self init])) {
 		
 		mImageSize = [s copy];
-        mDataTypeID = isis::data::ValuePtr<float>::staticID;
+        mDataTypeID = isis::data::ValueArray<float>::staticID;
 		mImageType = iType;
         
         
@@ -93,13 +93,13 @@
         for (size_t ts = 0; ts < mImageSize.timesteps; ts++){
             for (size_t sl = 0; sl < mImageSize.slices; sl++){
                 isis::data::MemChunk<float> ch(mImageSize.columns, mImageSize.rows);
-                ch.setPropertyAs<isis::util::fvector4>("indexOrigin", isis::util::fvector4(0,0,sl));//sl
+                ch.setPropertyAs<isis::util::fvector3>("indexOrigin", isis::util::fvector3(0,0,sl));//sl
                 ch.setPropertyAs<u_int32_t>("acquisitionNumber", sl+ts*mImageSize.slices);//sl+ts*mImageSize.slices
                 ch.setPropertyAs<u_int16_t>("sequenceNumber", 1);
-                ch.setPropertyAs<isis::util::fvector4>("voxelSize", isis::util::fvector4(1,1,1,0));
-                ch.setPropertyAs<isis::util::fvector4>("rowVec", isis::util::fvector4(1,0,0,0));
-                ch.setPropertyAs<isis::util::fvector4>("columnVec", isis::util::fvector4(0,1,0,0));
-                ch.setPropertyAs<isis::util::fvector4>("sliceVec", isis::util::fvector4(0,0,1,0));
+                ch.setPropertyAs<isis::util::fvector3>("voxelSize", isis::util::fvector3(1,1,1));
+                ch.setPropertyAs<isis::util::fvector3>("rowVec", isis::util::fvector3(1,0,0));
+                ch.setPropertyAs<isis::util::fvector3>("columnVec", isis::util::fvector3(0,1,0));
+                ch.setPropertyAs<isis::util::fvector3>("sliceVec", isis::util::fvector3(0,0,1));
                 chList.push_back(ch);
             }
         }
@@ -130,7 +130,7 @@
     mImageSize.columns = mIsisImage->getNrOfColumns();
     mImageSize.slices = mIsisImage->getNrOfSlices();
     mImageSize.timesteps = mIsisImage->getNrOfTimesteps();
-    mRepetitionTimeInMs = (mIsisImage->getPropertyAs<isis::util::fvector4>("voxelSize"))[3];
+    mRepetitionTimeInMs = (mIsisImage->getPropertyAs<isis::util::fvector3>("voxelSize"))[3];
 	
 	return self;
 }
@@ -167,42 +167,42 @@
 	//mDataTypeID = isis::data::TypePtr<int8_t>::staticID;
 	std::list<isis::data::Image> imgList;
 	switch (mDataTypeID) {
-		case isis::data::ValuePtr<int8_t>::staticID:
+		case isis::data::ValueArray<int8_t>::staticID:
 		{
 			imgList.push_back( isis::data::TypedImage<int8_t> (*mIsisImage));
 			break;
 		}
-		case isis::data::ValuePtr<u_int8_t>::staticID:
+		case isis::data::ValueArray<u_int8_t>::staticID:
 		{
 			imgList.push_back(  isis::data::TypedImage<u_int8_t> (*mIsisImage));
 			break;
 		}
-		case isis::data::ValuePtr<int16_t>::staticID:
+		case isis::data::ValueArray<int16_t>::staticID:
 		{
 			imgList.push_back( isis::data::TypedImage<int16_t> (*mIsisImage));
 			break;
 		}
-		case isis::data::ValuePtr<u_int16_t>::staticID:
+		case isis::data::ValueArray<u_int16_t>::staticID:
 		{
 			imgList.push_back(  isis::data::TypedImage<u_int16_t> (*mIsisImage));
 			break;
 		}
-		case isis::data::ValuePtr<int32_t>::staticID:
+		case isis::data::ValueArray<int32_t>::staticID:
 		{
 			imgList.push_back(  isis::data::TypedImage<int32_t> (*mIsisImage));
 			break;
 		}
-		case isis::data::ValuePtr<u_int32_t>::staticID:
+		case isis::data::ValueArray<u_int32_t>::staticID:
 		{
 			imgList.push_back(  isis::data::TypedImage<u_int32_t> (*mIsisImage));
 			break;
 		}
-		case isis::data::ValuePtr<float>::staticID:
+		case isis::data::ValueArray<float>::staticID:
 		{
 			imgList.push_back(  isis::data::TypedImage<float> (*mIsisImage));
 			break;
 		}
-		case isis::data::ValuePtr<double>::staticID:
+		case isis::data::ValueArray<double>::staticID:
 		{
 			imgList.push_back(  isis::data::TypedImage<double> (*mIsisImage));
 			break;
@@ -232,7 +232,7 @@
 
 -(void)setImageProperty:(enum ImagePropertyID)key withValue:(id) value
 {	
-	isis::util::fvector4 vec;
+	isis::util::fvector3 vec;
 	switch (key) {
         case PROPID_NAME:
 			mIsisImage->setPropertyAs<std::string>("GLM/name", [value UTF8String]);
@@ -264,33 +264,33 @@
             break;
 		case PROPID_READVEC:
 			if ( 0 != [value count] ){
-				for (unsigned int i = 0; i<4; i++){
+				for (unsigned int i = 0; i<3; i++){
 					vec[i] = [[value objectAtIndex:i] floatValue];}}
-			mIsisImage->setPropertyAs<isis::util::fvector4>("rowVec", vec);
+			mIsisImage->setPropertyAs<isis::util::fvector3>("rowVec", vec);
 			break;
 		case PROPID_PHASEVEC:
 			if ( 0 != [value count] ){
-				for (unsigned int i = 0; i<4; i++){
+				for (unsigned int i = 0; i<3; i++){
 					vec[i] = [[value objectAtIndex:i] floatValue];}}
-			mIsisImage->setPropertyAs<isis::util::fvector4>("columnVec", vec);
+			mIsisImage->setPropertyAs<isis::util::fvector3>("columnVec", vec);
 			break;
 		case PROPID_SLICEVEC:
-			for (unsigned int i = 0; i<4; i++){
+			for (unsigned int i = 0; i<3; i++){
 				vec[i] = [[value objectAtIndex:i] floatValue];}
-			mIsisImage->setPropertyAs<isis::util::fvector4>("sliceVec", vec);
+			mIsisImage->setPropertyAs<isis::util::fvector3>("sliceVec", vec);
 			break;
 		case PROPID_SEQNR:
 			mIsisImage->setPropertyAs<uint16_t>("sequenceNumber", [value unsignedShortValue]);
 			break;
 		case PROPID_VOXELSIZE:
-			for (unsigned int i = 0; i<4; i++){
+			for (unsigned int i = 0; i<3; i++){
 				vec[i] = [[value objectAtIndex:i] floatValue];}
-			mIsisImage->setPropertyAs<isis::util::fvector4>("voxelSize", vec);
+			mIsisImage->setPropertyAs<isis::util::fvector3>("voxelSize", vec);
 			break;
 		case PROPID_ORIGIN:
 			for (unsigned int i = 0; i<3; i++){
 				vec[i] = [[value objectAtIndex:i] floatValue];}
-			mIsisImage->setPropertyAs<isis::util::fvector4>("indexOrigin", vec);
+			mIsisImage->setPropertyAs<isis::util::fvector3>("indexOrigin", vec);
 			break;
         default:
             break;
@@ -333,22 +333,22 @@
         case PROPID_BETA:
             break;
 		case PROPID_READVEC:
-			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("rowVec")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("rowVec")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("rowVec")[2]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("rowVec")[3]], nil ] autorelease];
+			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("rowVec")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("rowVec")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("rowVec")[2]], nil ] autorelease];
 			break;
 		case PROPID_PHASEVEC:
-			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("columnVec")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("columnVec")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("columnVec")[2]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("columnVec")[3]], nil ] autorelease];
+			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("columnVec")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("columnVec")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("columnVec")[2]], nil ] autorelease];
 			break;
 		case PROPID_SLICEVEC:
-			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("sliceVec")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("sliceVec")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("sliceVec")[2]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("sliceVec")[3]], nil ] autorelease];
+			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("sliceVec")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("sliceVec")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("sliceVec")[2]], nil ] autorelease];
 			break;
 		case PROPID_SEQNR:
 			ret = [NSNumber numberWithUnsignedShort:1];
 			break;
 		case PROPID_VOXELSIZE:
-			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("voxelSize")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("voxelSize")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("voxelSize")[2]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("voxelSize")[3]], nil ] autorelease];
+			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("voxelSize")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("voxelSize")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("voxelSize")[2]], nil ] autorelease];
 			break;
 		case PROPID_ORIGIN:
-			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("indexOrigin")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("indexOrigin")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("indexOrigin")[2]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector4>("indexOrigin")[3]], nil ] autorelease];
+			ret = [[[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("indexOrigin")[0]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("indexOrigin")[1]], [NSNumber numberWithFloat:mIsisImage->getPropertyAs<isis::util::fvector3>("indexOrigin")[2]], nil ] autorelease];
 			break;
         default:
             break;
@@ -380,7 +380,7 @@
 	if ([self sizeCheckRows:1 Cols:1 Slices:sliceNr Timesteps:tstep]){
 		isis::data::MemChunkNonDel<float> chSlice(mImageSize.columns, mImageSize.rows);
 		mIsisImage->getChunk(0,0, sliceNr, tstep, false).copySlice(0, 0, chSlice, 0, 0);
-		return (( boost::shared_ptr<float> ) chSlice.getValuePtr<float>()).get();
+		return (( boost::shared_ptr<float> ) chSlice.getValueArray<float>()).get();
 	}
 	return NULL;
 
@@ -393,7 +393,7 @@
 		isis::data::MemChunkNonDel<float> chTimeSeries(nrTimesteps, 1);
 		for (uint i = tstart; i < tend+1; i++){
 			chTimeSeries.voxel<float>(i-tstart,0) = mIsisImage->getChunk(0,0,sl,i, false).voxel<float>(col, row);}
-		return (( boost::shared_ptr<float> ) chTimeSeries.getValuePtr<float>()).get();
+		return (( boost::shared_ptr<float> ) chTimeSeries.getValueArray<float>()).get();
 	}
 	return NULL;
 }
@@ -405,7 +405,7 @@
 		isis::data::Chunk sliceCh = mIsisImage->getChunk(0,0,sl,tstep, false);
 		for (uint i = 0; i < mImageSize.columns; i++){
 			rowChunk.voxel<float>(i, 0) = sliceCh.voxel<float>(i, row, 0, 0);}
-		return (( boost::shared_ptr<float> ) rowChunk.getValuePtr<float>()).get();
+		return (( boost::shared_ptr<float> ) rowChunk.getValueArray<float>()).get();
 	}
 	return NULL;
 }
@@ -417,7 +417,7 @@
 		isis::data::Chunk sliceCh = mIsisImage->getChunk(0,0,sl,tstep, false);
 		for (uint i = 0; i < mImageSize.rows; i++){
 			colChunk.voxel<float>(i, 0) = sliceCh.voxel<float>(col, i, 0, 0);}
-		return (( boost::shared_ptr<float> ) colChunk.getValuePtr<float>()).get();
+		return (( boost::shared_ptr<float> ) colChunk.getValueArray<float>()).get();
 	}
 	return NULL;
 }
@@ -471,7 +471,7 @@
 -(NSDictionary*)getProps:(NSArray*)propList
 {
 	NSMutableArray *propValues = [[NSMutableArray alloc] init];
-	for (NSString *str in propList) {				// type is fvector4
+	for (NSString *str in propList) {				// type is fvector3
 		if ( [[str lowercaseString] isEqualToString:@"indexorigin"]
 		or [[str lowercaseString] isEqualToString:@"rowvec"]
 		or [[str lowercaseString] isEqualToString:@"columnvec"]
@@ -481,8 +481,8 @@
 		or [[str lowercaseString] isEqualToString:@"voxelsize"]
 		or [[str lowercaseString] isEqualToString:@"voxelgap"])
 		{
-			isis::util::fvector4 prop = mIsisImage->getPropertyAs<isis::util::fvector4>([str  cStringUsingEncoding:NSISOLatin1StringEncoding]);
-			NSArray* ret = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:prop[0]], [NSNumber numberWithFloat:prop[1]], [NSNumber numberWithFloat:prop[2]], [NSNumber numberWithFloat:prop[3]], nil ] ;
+			isis::util::fvector3 prop = mIsisImage->getPropertyAs<isis::util::fvector3>([str  cStringUsingEncoding:NSISOLatin1StringEncoding]);
+			NSArray* ret = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:prop[0]], [NSNumber numberWithFloat:prop[1]], [NSNumber numberWithFloat:prop[2]], nil ] ;
 			[propValues addObject:ret];
 		}
 		else if( [[str lowercaseString] isEqualToString:@"acquisitionnumber"]) //type is u_int32_t
@@ -530,7 +530,7 @@
 -(void)setProps:(NSDictionary*)propDict
 {
 	[propDict retain];
-	for (NSString *str in [propDict allKeys]) {		// type is fvector4
+	for (NSString *str in [propDict allKeys]) {		// type is fvector3
 		if ( [[str lowercaseString] isEqualToString:@"indexorigin"]
 			or [[str lowercaseString] isEqualToString:@"rowvec"]
 			or [[str lowercaseString] isEqualToString:@"columnvec"]
@@ -540,13 +540,13 @@
 			or [[str lowercaseString] isEqualToString:@"voxelsize"]
 			or [[str lowercaseString] isEqualToString:@"voxelgap"])
 		{
-			isis::util::fvector4 prop;
+			isis::util::fvector3 prop;
             if (YES == [[propDict valueForKey:str] isKindOfClass:[NSArray class]]){
-                //fvector4 consists of 4 values - if array is longer will be ignored
-                size_t maxCount = [[propDict valueForKey:str] count] < 4 ? [[propDict valueForKey:str] count] : 4;
+                //fvector3 consists of 3 values - if array is longer will be ignored
+                size_t maxCount = [[propDict valueForKey:str] count] < 3 ? [[propDict valueForKey:str] count] : 3;
 				for (size_t i = 0; i < maxCount; i++){
 					prop[i] = [[[propDict valueForKey:str] objectAtIndex:i] floatValue];}
-				mIsisImage->setPropertyAs<isis::util::fvector4>([str cStringUsingEncoding:NSISOLatin1StringEncoding], prop);
+				mIsisImage->setPropertyAs<isis::util::fvector3>([str cStringUsingEncoding:NSISOLatin1StringEncoding], prop);
 			}
 		}
 		else if( [[str lowercaseString] isEqualToString:@"acquisitionnumber"]) //type is u_int32_t
@@ -599,42 +599,42 @@
 -(enum ImageDataType)getImageDataType
 {
 	switch (mDataTypeID) {
-		case isis::data::ValuePtr<int8_t>::staticID:
+		case isis::data::ValueArray<int8_t>::staticID:
 		{
 			return IMAGE_DATA_INT8;
 			break;
 		}
-		case isis::data::ValuePtr<u_int8_t>::staticID:
+		case isis::data::ValueArray<u_int8_t>::staticID:
 		{
 			return IMAGE_DATA_UINT8;
 			break;
 		}
-		case isis::data::ValuePtr<int16_t>::staticID:
+		case isis::data::ValueArray<int16_t>::staticID:
 		{
 			return IMAGE_DATA_INT16;
 			break;
 		}
-		case isis::data::ValuePtr<u_int16_t>::staticID:
+		case isis::data::ValueArray<u_int16_t>::staticID:
 		{
 			return IMAGE_DATA_UINT16;
 			break;
 		}
-		case isis::data::ValuePtr<int32_t>::staticID:
+		case isis::data::ValueArray<int32_t>::staticID:
 		{
 			return IMAGE_DATA_FLOAT;
 			break;
 		}
-		case isis::data::ValuePtr<u_int32_t>::staticID:
+		case isis::data::ValueArray<u_int32_t>::staticID:
 		{
 			return IMAGE_DATA_UINT32;
 			break;
 		}
-		case isis::data::ValuePtr<float>::staticID:
+		case isis::data::ValueArray<float>::staticID:
 		{
 			return IMAGE_DATA_FLOAT;
 			break;
 		}
-		case isis::data::ValuePtr<double>::staticID:
+		case isis::data::ValueArray<double>::staticID:
 		{
 			return IMAGE_DATA_DOUBLE;
 			break;
