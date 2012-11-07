@@ -125,7 +125,7 @@ protected:
 /**
  * MocoRegistration provides functionality for the Motion-Correction of 
  * 3D and 4D fMRI images. The interface works with image data encapsulated 
- * by EDDataElement. 
+ * by EDDataElement or with 3D float itkImages . 
  *
  * Initialization sets default registration properties.
  *
@@ -168,7 +168,7 @@ protected:
 
 
 /**
- * Set the EDDataElement for the reference (stationary image) by given EDDataElement.
+ * Set the image for the reference (stationary image) by given EDDataElement.
  *
  * \param dataElement The referene image as EDDataElement.
  *
@@ -186,7 +186,7 @@ protected:
 
 
 /**
- * Set the image (EDDataElement) for the reference (stationary) by image filename.
+ * Set the image for the reference (stationary image) by image filename.
  * Just working with .nii images at the moment. 
  *
  * \param filePath  Complete path to image file
@@ -239,24 +239,6 @@ protected:
  */
 -(EDDataElement*)resampleMovingEDDataElement:(EDDataElement*)movingDataElement 
                                withTransform:(MocoTransformType::Pointer)transform;
-
-
-
-/**
- * Iitialize the registration with a givenRegistrationProperty. Following members are
- * initialized:
- *  m_metric
- *  m_optimizer
- *  m_transform
- *  m_registrationInterpolator
- *  m_observer
- *  m_registration
- *  m_resampler
- *
- * \param regProperty  The MocoRegistrationProperty object.
- *
- */
--(void)initRegistrationWithRegistrationProperty:(MocoRegistrationProperty*)regProperty;
 
 
 

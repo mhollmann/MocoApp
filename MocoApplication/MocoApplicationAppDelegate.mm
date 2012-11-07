@@ -16,10 +16,6 @@
 #import "BARTNotifications.h"
 
 
-//MH FIXME: just for testing
-#include "itkImageFileReader.h"
-
-
 @interface MocoApplicationAppDelegate (PrivateMethods)
 
     -(void)realTimeTCPIPModeNextDataArrived:(NSNotification*)aNotification;
@@ -49,7 +45,7 @@
 {
     
     //prepare members
-    mRealTimeTCPIPMode = NO;
+    mRealTimeTCPIPMode = YES;
     mMocoIsRunning = NO;
     
     //set the content to the viewControllers' view
@@ -118,22 +114,13 @@
         std::cout << "UseBestFoundParameters:   " << mRegistrationProperty.UseBestFoundParameters << std::endl;
     }
     
-    //maxStepLength Default AFNI: 0.7 * voxel size
-    //numIterations Default AFNI: 19
-    //scale factor: scales the translation parameters because one unit step in translation influences the metric much less than
-    //              one unit step in rotation (a point 100 mm away from rot center is moved about 1.7 mm when rotation
-    //              is 1 deg (0.0175 rad) - factor ca 1/100)
-    
     //parameters orig
     //[mRegistrationProperty setRegistrationParameters:1.0/50.0 MaxStep:0.019 MinStep:0.00001];
-    
-    //parameters software guide ITK
-    //[mRegistrationProperty setRegistrationParameters:1.0/1000.0 MaxStep:0.20000 MinStep:0.0001];
-    
-    //test
+       
+    //this is the standard
     [mRegistrationProperty setRegistrationParameters:1000.0 MaxStep:0.019 MinStep:0.00001];
     
-    mRegistrationProperty.RegistrationInterpolationMode = LINEAR;//BSPLINE2;//
+    mRegistrationProperty.RegistrationInterpolationMode = LINEAR;//BSPLINE2;
     mRegistrationProperty.ResamplingInterpolationMode   = BSPLINE4;
     mRegistrationProperty.SmoothingKernelWidth  = 32;
         
@@ -203,23 +190,6 @@
         
          mRealTimeTCPIPReadingThread = [[NSThread alloc] initWithTarget:mRTDataLoader selector:@selector(startRealTimeInputOfImageType) object:nil];
      }
-    
-    
-    
-    
-    
-    //MH FIXME: Just for Testing
-    NSString *testMocoMovParamsOutFileString = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/testMocoLogger.txt";
-    MocoDataLogger *testMocoLogger = new MocoDataLogger([testMocoMovParamsOutFileString UTF8String], [testMocoMovParamsOutFileString UTF8String]);
-    
-    //NSString *lineToWrite = [NSString stringWithFormat:@"%f %f %f %f %f %f", 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
-    
-    testMocoLogger->addMocoParams(0.1, 0.2, 0.4, 0.1, 0.8, 0.4);
-    testMocoLogger->addMocoParams(0.2, 0.1, 0.42, 0.1, 0.1, 0.7);
-    testMocoLogger->addMocoParams(0.2, 0.1, 0.42, 0.1, 0.1, 0.91);
-    //testMocoLogger->appendLineToFile([testMocoMovParamsOutFileString UTF8String], [lineToWrite UTF8String]);
-    testMocoLogger->dumpMocoParamsToLogfile();
-    delete testMocoLogger;
     
     
 }// end applicationDidFinishLaunching
@@ -347,14 +317,14 @@
     
     
     //get data to analyse out of notification
-    EDDataElement *mInputData4D = [aNotification object];
-    EDDataElement *mInputData3D;
+    EDDataElement *inputData4D = [aNotification object];
+    EDDataElement *inputData3D;
     
-    if ([mInputData4D getImageSize].timesteps == 1)
+    if ([inputData4D getImageSize].timesteps == 1)
     {
         //set reference image
         NSLog(@"TCPIP: First image!");
-        [mRegistrator setReferenceEDDataElement:mInputData4D];
+        [mRegistrator setReferenceImageWithEDDataElement:inputData4D];
         
     }else
     {
@@ -362,11 +332,11 @@
         //++++ Alignment ++++
         gettimeofday(&startTimeAlign, 0);
         
-        NSLog(@"TCPIP: aligning image Nr: %ld", [mInputData4D getImageSize].timesteps);
+        NSLog(@"TCPIP: aligning image Nr: %ld", [inputData4D getImageSize].timesteps);
         
-        mInputData3D = [mInputData4D getDataAtTimeStep:[mInputData4D getImageSize].timesteps-1];
+        inputData3D = [inputData4D getDataAtTimeStep:[inputData4D getImageSize].timesteps-1];
         
-        MocoTransformType::Pointer transform = [mRegistrator alignEDDataElementToReference: mInputData3D];
+        MocoTransformType::Pointer transform = [mRegistrator alignEDDataElementToReference: inputData3D];
         gettimeofday(&endTimeAlign, 0);
         
         //++++ Send transform parameters to graph plot ++++
@@ -397,7 +367,7 @@
 
     
     //free memory
-    [mInputData3D release]; mInputData3D = nil;
+    //[inputData3D release]; mInputData3D = nil;
     
     
     
@@ -452,10 +422,10 @@
     
     
     //Original Karsten's data01
-//    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/data04_vol_dset1.nii";
-//    int numImages = 542;
-//    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/data04_mocoParams_mocoApp";
-//    NSString *mocoResultImagesNameBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/realignedImages/mocoApp_data04/data04_img_";
+    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/data04_vol_dset1.nii";
+    int numImages = 542;
+    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/data04_mocoParams_mocoApp";
+    NSString *mocoResultImagesNameBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/realignedImages/mocoApp_data04/data04_img_";
     
     
     //4D zoomedInEPI
@@ -492,10 +462,16 @@
     
     
     //amynf test - strong trend over time
-    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/data12_RP1T_amyNF.nii";
-    int numImages = 259;
-    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/data12_mocoParams_mocoApp";
-    NSString *mocoResultImagesNameBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/realignedImages/mocoApp_data12/data12_img_";
+//    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/data12_RP1T_amyNF.nii";
+//    int numImages = 259;
+//    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/data12_mocoParams_mocoApp";
+//    NSString *mocoResultImagesNameBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/realignedImages/mocoApp_data12/data12_img_";
+    
+   
+//        NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/MocoApplication/testfiles/testData.nii";
+//        int numImages = 4;
+//        NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/MocoApplication/testfiles/testData_mocoParams";
+    
     
     
     //++++++++++++++++++++++++++++++++++++
@@ -594,15 +570,12 @@
                 }
             });
             
-            
-            
-            
-            //++++ Resampling ++++
+              //++++ Resampling ++++
             gettimeofday(&startTimeResample, 0);
             resultDataEl = [mRegistrator resampleMovingEDDataElement:movingDataEl withTransform:transform];
             gettimeofday(&endTimeResample, 0);
             
-              
+              /*
             //++++ Write result image ++++
             NSString *resultFilename = [mocoResultImagesNameBase stringByAppendingString:[NSString stringWithFormat: @"%.4i",i ]];
             resultFilename = [resultFilename stringByAppendingString:@".nii"];
@@ -616,7 +589,7 @@
             if (mRegistrationProperty.LoggingLevel > 1){
                 NSLog(@"Written aligned image to: %@", resultFilename);
             }
-            
+            */
             
             
             if (mRegistrationProperty.LoggingLevel > 1){
@@ -629,7 +602,7 @@
                 NSLog(@"rotY of transform: %f ", rotAngleY);
                 NSLog(@"rotZ of transform: %f ", rotAngleZ);
                 
-                //std::cout << "Time needed for alignment: " << [self getTimeDifference:startTimeAlign endTime:endTimeAlign] << " s" << std::endl;
+                ; std::cout << "Time needed for alignment: " << [self getTimeDifference:startTimeAlign endTime:endTimeAlign] << " s" << std::endl;
             }
             
         }//endfor

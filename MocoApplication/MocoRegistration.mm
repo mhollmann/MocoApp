@@ -34,6 +34,9 @@
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
 
+//for mask dilation
+#include "itkBinaryDilateImageFilter.h"
+#include "itkBinaryBallStructuringElement.h"
 
 
 @interface MocoRegistration (PrivateMethods)
@@ -50,6 +53,16 @@
  *
  */
 -(MaskImageType3D::Pointer)getMaskImageWithITKImage:(FixedImageType3D::Pointer)itkImage;
+
+
+/**
+ *
+ * Iitialize the registration with a givenRegistrationProperty.
+ * \param regProperty  The MocoRegistrationProperty object.
+ *
+ */
+-(void)initRegistrationWithRegistrationProperty:(MocoRegistrationProperty*)regProperty;
+
 
 @end
 
@@ -194,9 +207,6 @@
         }
     }// end switch
     
-    //MHFIXME: multithreading for interpolator?
-    //interpolator->SetNumberOfThreads(2);
-
     
     //*** Initialize optimizer ***
     typedef MocoOptimizerType::ScalesType MocoOptimizerScalesType;
@@ -394,6 +404,8 @@
 }// end setReferenceImageWithITKImage
 
 
+
+ 
 -(MocoTransformType::Pointer)alignEDDataElementToReference:(EDDataElement*)movingDataElement
 {
     
@@ -403,7 +415,7 @@
 
 
 
-
+// MH FIXME: Check reference image before
 -(MocoTransformType::Pointer)alignITKImageToReference:(MovingImageType3D::Pointer)movingITKImage
 {
 
@@ -474,9 +486,10 @@
         //return EXIT_FAILURE;
 	}
  
-    //Take best parameters saved from observer----------------------------
+    //Take best parameters saved from observer?
 	MocoOptimizerType::ParametersType finalParameters;
-    //TODO statt "< 2" sollte "< 1"
+    
+    //MH FIXME  "< 1" ?
 	if ( self->m_optimizer->GetCurrentIteration() < 2 || !self->m_registrationProperty.UseBestFoundParameters ) {
 		finalParameters = registration->GetLastTransformParameters();
     } else {
@@ -613,7 +626,6 @@
     //define the threshold using otsu
     typedef itk::OtsuThresholdImageFilter<FixedImageType3D, MaskImageType3D > OtsuThresholdFilterType;
     OtsuThresholdFilterType::Pointer otsuFilter = OtsuThresholdFilterType::New();
-    
     otsuFilter->SetInput( itkImage );
     otsuFilter->SetOutsideValue( 1 );
     otsuFilter->SetInsideValue( 0 );
@@ -623,10 +635,22 @@
     
     mask = otsuFilter->GetOutput();
     
+    /*
+    typedef itk::BinaryBallStructuringElement< MaskImageType3D::PixelType, 3 > StructuringElementType;
+    StructuringElementType structuringElement;
+    structuringElement.SetRadius(40);
+    structuringElement.CreateStructuringElement();
     
+    typedef itk::BinaryDilateImageFilter <MaskImageType3D, MaskImageType3D, StructuringElementType>
+    BinaryDilateImageFilterType;
     
-   
-	
+    BinaryDilateImageFilterType::Pointer dilateFilter = BinaryDilateImageFilterType::New();
+    dilateFilter->SetInput(otsuFilter->GetOutput());
+    dilateFilter->SetKernel(structuringElement);
+
+    
+    mask = dilateFilter->GetOutput();
+	*/
     
   /*  
     
@@ -665,7 +689,7 @@
         }
         ++imageIterator;
         ++maskIterator;
-    }
+    }*/
     
     
     
@@ -674,11 +698,11 @@
     if (self->m_registrationProperty.LoggingLevel>2){
         typedef itk::ImageFileWriter< MaskImageType3D >  WriterType;
         WriterType::Pointer  writer =  WriterType::New();
-        writer->SetFileName( [@"/Users/mhollmann/Projekte/Project_MOCOApplication/data/test3D_mask.nii" UTF8String] );
+        writer->SetFileName( [@"/Users/mhollmann/Projekte/Project_MOCOApplication/data/test3D_mask_dilate.nii" UTF8String] );
         writer->SetInput( mask );
         writer->Update();
-        NSLog(@"Mask image written to: %@", @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/test3D_mask.nii");
-    }*/
+        NSLog(@"Mask image written to: %@", @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/test3D_mask_dilate.nii");
+    }
     
     return mask;
     

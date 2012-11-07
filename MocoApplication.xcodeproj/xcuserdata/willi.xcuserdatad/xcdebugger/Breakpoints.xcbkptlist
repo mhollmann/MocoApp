@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MocoApplication/MocoApplicationAppDelegate.mm"
-         timestampString = "373386864.29464"
+         timestampString = "373989448.187744"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "608"
-         endingLineNumber = "608"
+         startingLineNumber = "581"
+         endingLineNumber = "581"
          landmarkName = "-runOfflineMotionCorrection"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MocoApplication/MocoRegistration.mm"
-         timestampString = "373385113.84484"
+         timestampString = "373975342.646088"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "351"
-         endingLineNumber = "351"
+         startingLineNumber = "361"
+         endingLineNumber = "361"
          landmarkName = "-setReferenceImageWithITKImage:"
          landmarkType = "5">
          <Locations>
