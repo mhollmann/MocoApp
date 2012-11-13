@@ -29,6 +29,9 @@
     EDDataElementRealTimeLoader* mRTDataLoader;
     NSThread *mRealTimeTCPIPReadingThread;
     
+    NSString *mMocoResultImagesNameBase;
+    NSString *mMocoParametersOutNameBase;
+     
     bool mMocoIsRunning;
     bool mRealTimeTCPIPMode;
     
@@ -40,13 +43,18 @@
 @property (assign) IBOutlet NSPopUpButton *mNumIterationsPullDown;
 @property (assign) IBOutlet NSPopUpButton *mSmoothKernelPullDown;
 @property (assign) IBOutlet NSPopUpButton *mMaskImagesPullDown;
+@property (assign) IBOutlet NSPopUpButton *mReferenceImagePullDown;
+@property (assign) IBOutlet NSPopUpButton *mInputSourcePullDown;
+@property (assign) IBOutlet NSButton *mStartButton;
 
 
 - (IBAction)setNumIterationsByPullDown:(NSPopUpButton *)sender;
 - (IBAction)setSmoothKernelByPullDown:(NSPopUpButton *)sender;
 - (IBAction)setMaskImagesByPullDown:(NSPopUpButton *)sender;
-- (IBAction)startStopButtonPressed:(NSButton *)sender;
+- (IBAction)setReferenceImageByPulldown:(NSPopUpButton *)sender;
+- (IBAction)setInputSourceByPullDown:(id)sender;
 
+- (IBAction)startStopButtonPressed:(NSButton *)sender;
 
 
 @end

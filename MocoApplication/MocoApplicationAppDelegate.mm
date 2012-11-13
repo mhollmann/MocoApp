@@ -39,6 +39,9 @@
 @synthesize mNumIterationsPullDown;
 @synthesize mSmoothKernelPullDown;
 @synthesize mMaskImagesPullDown;
+@synthesize mReferenceImagePullDown;
+@synthesize mInputSourcePullDown;
+@synthesize mStartButton;
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -47,6 +50,11 @@
     //prepare members
     mRealTimeTCPIPMode = YES;
     mMocoIsRunning = NO;
+    
+    //the standard output path and name base
+    mMocoResultImagesNameBase  = @"/tmp/image_mocoAppExport_MOCO_";
+    mMocoParametersOutNameBase = @"/tmp/mocoParams_mocoApp";
+    
     
     //set the content to the viewControllers' view
     mMocoDrawViewController = [[MocoDrawViewController alloc] initWithNibName:@"MocoDrawView" bundle:nil];
@@ -59,7 +67,8 @@
     [[self.window contentView] replaceSubview:mAppGraphView with:drawView];
     [drawView setFrame:cvFrame];
     
-    
+    //enable start button judt if everything worked fine
+    [mStartButton setEnabled:NO];
     
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //++++ Read the mRegistrationProperty defaults plist file ++++
@@ -90,7 +99,7 @@
     
     if (!arrayFromPlist )
     {
-        NSLog(@"Error reading plist defaultRegParams.plist: %@, format: %lu", errDescr, format);
+        NSLog(@"Warning: Could not read plist defaultRegParams.plist (using standard): %@, format: %lu", errDescr, format);
         
     }else{
         
@@ -102,7 +111,32 @@
         mRegistrationProperty.MaskImagesForRegistration = [[arrayFromPlist objectForKey:@"MaskImagesForRegistration"] boolValue];
         mRegistrationProperty.UseBestFoundParameters    = [[arrayFromPlist objectForKey:@"UseBestFoundParameters"] boolValue];
         mRegistrationProperty.NumberOfIterations        = [[arrayFromPlist objectForKey:@"NumberOfIterations"] unsignedIntegerValue];
+        mMocoResultImagesNameBase                       = [[arrayFromPlist objectForKey:@"ResampleOutputBase"] stringByExpandingTildeInPath];
+        mMocoParametersOutNameBase                      = [[arrayFromPlist objectForKey:@"MocoParamsOutputBase"] stringByExpandingTildeInPath];
     }
+    [mMocoResultImagesNameBase retain];
+    [mMocoParametersOutNameBase retain];
+    
+    
+    //check if there is write access to defined directories
+    NSFileManager *fm = [NSFileManager defaultManager];
+    if ( ![fm createFileAtPath:[mMocoResultImagesNameBase stringByAppendingString:@".tmp"] contents:nil attributes:nil] )
+    {
+        NSLog(@"Error: Seems as path of result file base (coming from default plist file) does not exist, or no write permission for: %@", mMocoResultImagesNameBase);
+        return;
+    }else
+    {
+        [fm removeItemAtPath:[mMocoResultImagesNameBase stringByAppendingString:@".tmp"] error:nil];
+    }
+    if ( ![fm createFileAtPath:[mMocoParametersOutNameBase stringByAppendingString:@".tmp"] contents:nil attributes:nil] )
+    {
+        NSLog(@"Error: Seems as path of result file base (coming from default plist file) does not exist, or there is no write permission for: %@", mMocoParametersOutNameBase);
+        return;
+    }else
+    {
+        [fm removeItemAtPath:[mMocoParametersOutNameBase stringByAppendingString:@".tmp"] error:nil];
+    }
+
     
     if ( mRegistrationProperty.LoggingLevel > 2 ) {
         std::cout << "Params read from plist:   " << std::endl;
@@ -112,6 +146,8 @@
         std::cout << "SmoothingSigma:           " << mRegistrationProperty.SmoothingSigma << std::endl;
         std::cout << "MaskImagesForRegistration:" << mRegistrationProperty.MaskImagesForRegistration << std::endl;
         std::cout << "UseBestFoundParameters:   " << mRegistrationProperty.UseBestFoundParameters << std::endl;
+        NSLog(@"OutfileBase: %@", mMocoResultImagesNameBase);
+        NSLog(@"OutParamBase: %@", mMocoParametersOutNameBase);
     }
     
     //parameters orig
@@ -129,6 +165,14 @@
     //+++++++++ Prepare GUI components ++++++++
     //+++++++++++++++++++++++++++++++++++++++++
     
+    //prepare input source pull down
+    [mInputSourcePullDown removeAllItems];
+    [mInputSourcePullDown addItemWithTitle:@""];
+    [mInputSourcePullDown addItemWithTitle:@"Online TCP/IP input"];
+    [mInputSourcePullDown addItemWithTitle:@"Browse for file ..."];
+    [mInputSourcePullDown setTitle: @"Online TCP/IP input"];
+    
+
     //prepare iterations pull down
     [mNumIterationsPullDown removeAllItems];
     int i;
@@ -170,6 +214,12 @@
     }
     
     
+    //prepare reference image pull down
+    [mReferenceImagePullDown removeAllItems];
+    [mReferenceImagePullDown addItemWithTitle:@""];
+    [mReferenceImagePullDown addItemWithTitle:@"First incoming image"];
+    [mReferenceImagePullDown addItemWithTitle:@"Browse for file ..."];
+    [mReferenceImagePullDown setTitle: @"First incoming image"];
     
     
     //+++++++++++++++++++++++++++++++++++++++++
@@ -191,6 +241,8 @@
          mRealTimeTCPIPReadingThread = [[NSThread alloc] initWithTarget:mRTDataLoader selector:@selector(startRealTimeInputOfImageType) object:nil];
      }
     
+    
+    [mStartButton setEnabled:YES];
     
 }// end applicationDidFinishLaunching
 
@@ -290,6 +342,76 @@
     
 }
 
+- (IBAction)setReferenceImageByPulldown:(NSPopUpButton *)sender {
+    
+    NSString *valSelected = [sender titleOfSelectedItem];
+    
+    if([valSelected isEqualToString:@"Browse for file ..."])
+    {
+        
+        // Create an modal open dialog
+        NSOpenPanel* openDlg = [NSOpenPanel openPanel];
+        [openDlg setCanChooseFiles:YES];
+        [openDlg setCanChooseDirectories:NO];
+        
+        NSArray  * fileTypes = [NSArray arrayWithObjects:@"nii",nil];
+        
+        [openDlg setAllowedFileTypes:fileTypes];
+        
+        if ( [openDlg runModal ] == NSOKButton )
+        {
+            //MH FIXME: deprecated
+            NSArray* files = [openDlg filenames];
+            
+            NSString* fileName = [files objectAtIndex:0];
+            [sender setToolTip:fileName];
+            [sender setTitle: fileName];
+        }
+    }
+    else
+    {
+        [sender setToolTip: @""];
+        [sender setTitle: valSelected];
+    }
+    
+}
+
+- (IBAction)setInputSourceByPullDown:(id)sender {
+    
+    NSString *valSelected = [sender titleOfSelectedItem];
+    
+    if([valSelected isEqualToString:@"Browse for file ..."])
+    {
+        
+        // Create an modal open dialog
+        NSOpenPanel* openDlg = [NSOpenPanel openPanel];
+        [openDlg setCanChooseFiles:YES];
+        [openDlg setCanChooseDirectories:NO];
+        
+        NSArray  * fileTypes = [NSArray arrayWithObjects:@"nii",nil];
+        
+        [openDlg setAllowedFileTypes:fileTypes];
+        
+        if ( [openDlg runModal ] == NSOKButton )
+        {
+            //MH FIXME: deprecated
+            NSArray* files = [openDlg filenames];
+            
+            NSString* fileName = [files objectAtIndex:0];
+            [sender setToolTip:fileName];
+            [sender setTitle: fileName];
+            mRealTimeTCPIPMode = NO;
+        }
+    }
+    else
+    {
+        [sender setToolTip: @""];
+        [sender setTitle: valSelected];
+        mRealTimeTCPIPMode = YES;
+    }
+
+}
+
 
 
 -(void)runRealTimeTCPIPMotionCorrection
@@ -317,26 +439,52 @@
     
     
     //get data to analyse out of notification
-    EDDataElement *inputData4D = [aNotification object];
-    EDDataElement *inputData3D;
+    EDDataElement *inputDataEl4D = [aNotification object];
+    EDDataElement *movingDataEl;
+    EDDataElement *resultDataEl;
     
-    if ([inputData4D getImageSize].timesteps == 1)
+    
+    //if the first scan is coming in we have to set the reference image
+    //either to selected external or to first scan
+    bool alignToExternalReference;
+    if( [inputDataEl4D getImageSize].timesteps == 1 )
     {
         //set reference image
         NSLog(@"TCPIP: First image!");
-        [mRegistrator setReferenceImageWithEDDataElement:inputData4D];
         
-    }else
+        //set correct reference image
+        NSString *valSelected = [mReferenceImagePullDown title];
+        if([valSelected isEqualToString:@"First incoming image"])
+        {
+            [mRegistrator setReferenceImageWithEDDataElement:inputDataEl4D];;
+            alignToExternalReference  = NO;
+        }else{
+            NSLog(@"Reference image: %@", valSelected);
+            EDDataElement *refDataEl3D = [MocoRegistration getEDDataElementFromFile:valSelected];
+            [mRegistrator setReferenceImageWithEDDataElement:refDataEl3D];
+            alignToExternalReference = YES;
+        }
+    }
+    
+    
+    //+++++++++++++++++++
+    //++++ Alignment ++++
+    //+++++++++++++++++++
+    MocoTransformType::Pointer transform;
+    
+    double rotAngleX            = 0;
+    double rotAngleY            = 0;
+    double rotAngleZ            = 0;
+    double finalTranslationX    = 0;
+    double finalTranslationY    = 0;
+    double finalTranslationZ    = 0;
+    
+    movingDataEl = [inputDataEl4D getDataAtTimeStep:[inputDataEl4D getImageSize].timesteps-1];
+    
+    if( [inputDataEl4D getImageSize].timesteps > 1 || alignToExternalReference )
     {
-        
-        //++++ Alignment ++++
         gettimeofday(&startTimeAlign, 0);
-        
-        NSLog(@"TCPIP: aligning image Nr: %ld", [inputData4D getImageSize].timesteps);
-        
-        inputData3D = [inputData4D getDataAtTimeStep:[inputData4D getImageSize].timesteps-1];
-        
-        MocoTransformType::Pointer transform = [mRegistrator alignEDDataElementToReference: inputData3D];
+        transform = [mRegistrator alignEDDataElementToReference: movingDataEl];
         gettimeofday(&endTimeAlign, 0);
         
         //++++ Send transform parameters to graph plot ++++
@@ -345,38 +493,115 @@
         MocoTransformType::OffsetType offset = transform->GetOffset();
         MocoVectorType versor_axis = transform->GetVersor().GetAxis();
         double versor_angle = transform->GetVersor().GetAngle();
-        double rotAngleX              = 180/M_PI * versor_axis[0] * versor_angle;
-        double rotAngleY              = 180/M_PI * versor_axis[1] * versor_angle;
-        double rotAngleZ              = 180/M_PI * versor_axis[2] * versor_angle;
-        double finalTranslationX    = offset[0];
-        double finalTranslationY    = offset[1];
-        double finalTranslationZ    = offset[2];
-    
-        [mMocoDrawViewController addValuesToGraphs:finalTranslationX TransY:finalTranslationY TransZ:finalTranslationZ RotX:rotAngleX RotY:rotAngleY RotZ:rotAngleZ];
+        rotAngleX              = 180/M_PI * versor_axis[0] * versor_angle;
+        rotAngleY              = 180/M_PI * versor_axis[1] * versor_angle;
+        rotAngleZ              = 180/M_PI * versor_axis[2] * versor_angle;
+        finalTranslationX    = offset[0];
+        finalTranslationY    = offset[1];
+        finalTranslationZ    = offset[2];
+        
+    } //endif timesteps > 1 
+        
+        
+        
+    [mMocoDrawViewController addValuesToGraphs:finalTranslationX TransY:finalTranslationY TransZ:finalTranslationZ RotX:rotAngleX RotY:rotAngleY RotZ:rotAngleZ];
             
-        //send the reload to the main thread
-        dispatch_sync(dispatch_get_main_queue(), ^{
+    //send the reload to the main thread
+    dispatch_sync(dispatch_get_main_queue(), ^{
             
-            if(mMocoIsRunning)
-            {
-                [mMocoDrawViewController updateGraphs];
-            }
-            
-        });
-    } //endif timesteps == 1
+        if(mMocoIsRunning)
+        {
+            [mMocoDrawViewController updateGraphs];
+        }
+    });
 
+
+    
+    
+    //++++++++++++++++++++
+    //++++ Resampling ++++
+    //++++++++++++++++++++
+    //do resampling just for n>0 or always if an external reference image was given
+    
+    gettimeofday(&startTimeResample, 0);
+    if([inputDataEl4D getImageSize].timesteps > 1 || alignToExternalReference)
+    {
+        resultDataEl = [mRegistrator resampleMovingEDDataElement:movingDataEl withTransform:transform];
+        
+        //MH FIXME: a workaround because header params are not correctly copied by itkAdapter
+        NSArray *propsToCopy = [NSArray arrayWithObjects:
+                                @"voxelsize",
+                                @"rowVec",
+                                @"sliceVec",
+                                @"columnVec",
+                                @"indexOrigin",
+                                nil];
+        
+        [resultDataEl copyProps:propsToCopy fromDataElement:movingDataEl];       
+    }
+    else
+    {
+        resultDataEl = movingDataEl;
+    }
+    gettimeofday(&endTimeResample, 0);
+    
+    
+    //set sequence description
+    NSDictionary *dic = [NSDictionary dictionaryWithObjects: [NSArray arrayWithObjects:@"mocoAppExport", nil]
+                                                    forKeys: [NSArray arrayWithObjects:@"sequenceDescription", nil] ];
+    [resultDataEl setProps:dic];
+    
+    
+    //++++ Write result image ++++
+    NSString *resultFilename = [mMocoResultImagesNameBase stringByAppendingString:[NSString stringWithFormat: @"%.4li",[inputDataEl4D getImageSize].timesteps ]];
+    resultFilename = [resultFilename stringByAppendingString:@".nii"];
+    //remove the resulting file if it exists
+    NSFileManager *fmri = [NSFileManager defaultManager];
+    if ([fmri fileExistsAtPath:resultFilename])
+    {
+        [fmri removeItemAtPath:resultFilename error:nil];
+    }
+    [resultDataEl WriteDataElementToFile:resultFilename];
+    
+    if (mRegistrationProperty.LoggingLevel > 1)
+    {
+        NSLog(@"Written aligned image to: %@", resultFilename);
+    }
+    
+    
+    
+    if (mRegistrationProperty.LoggingLevel > 1)
+    {
+        NSLog(@"Final Parameters:");
+        NSLog(@"transX of transform: %f ", finalTranslationX);
+        NSLog(@"transY of transform: %f ", finalTranslationY);
+        NSLog(@"transZ of transform: %f ", finalTranslationZ);
+        NSLog(@"rotX of transform: %f ", rotAngleX);
+        NSLog(@"rotY of transform: %f ", rotAngleY);
+        NSLog(@"rotZ of transform: %f ", rotAngleZ);
+        
+        std::cout << "Time needed for alignment: " << [self getTimeDifference:startTimeAlign endTime:endTimeAlign] << " s" << std::endl;
+    }
+    
+    if (mRegistrationProperty.LoggingLevel > 2){
+        
+        //++++ Write original image ++++
+        NSString *resultFilename = [mMocoResultImagesNameBase stringByAppendingString:[NSString stringWithFormat: @"orig_%.4li",[inputDataEl4D getImageSize].timesteps ]];
+        resultFilename = [resultFilename stringByAppendingString:@".nii"];
+        //remove the resulting file if it exists
+        NSFileManager *fmri = [NSFileManager defaultManager];
+        if ([fmri fileExistsAtPath:resultFilename])
+        {
+            [fmri removeItemAtPath:resultFilename error:nil];
+        }
+        [movingDataEl WriteDataElementToFile:resultFilename];
+    }
     
     //free memory
-    //[inputData3D release]; mInputData3D = nil;
+    //[movingDataEl release]; movingDataEl = nil;
+    //[resultDataEl release]; resultDataEl = nil;
     
-    
-    
-    // [mInputData WriteDataElementToFile:@"/tmp/ourdatafromsimulator.nii"];
 
-    //		NSLog(@"Nr of Timesteps in InputData: %lu", [mInputData getImageSize].timesteps);
-    //		if (([mInputData getImageSize].timesteps > startAnalysisAtTimeStep-1 ) && ([mInputData getImageSize].timesteps < [mDesignData mNumberTimesteps])) {
-    //			[NSThread detachNewThreadSelector:@selector(processDataThread) toTarget:self withObject:nil];
-    //		}
 
 }
 
@@ -386,7 +611,6 @@
 {
     NSLog(@"TCPIP: Last Scan Arrived!");
     //	NSTimeInterval ti = [[NSDate date] timeIntervalSince1970];
-    //	//FIXME: folder from edl
     //    if ( nil != [aNotification object] ){
     //        NSString *fname =[NSString stringWithFormat:@"/tmp/{subjectName}_{sequenceNumber}_volumes_%d_%d.nii", [[aNotification object] getImageSize].timesteps, ti];
     //        [[aNotification object] WriteDataElementToFile:fname];
@@ -396,81 +620,26 @@
 
 -(void)runOfflineMotionCorrection
 {
-    //++++++++++++++++++++++++++++++++++++
-    //++++++++++ File definitions ++++++++
-    //++++++++++++++++++++++++++++++++++++
+      
     
-    
-    //++++ 3D test case ++++
-    //    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/test3D.nii";
-    //    int numImages = 0;
-    //    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/testCase";
-    
-    
-    //++++ 4D register to first ++++
-    //Normal motion
-    //    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/data01_funk_64_64_3T_normal.nii";
-    //    int numImages = 506;
-    //    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/data01_mocoParams_mocoApp";
-    
-    
-    //A lot of motion
-    //    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/data03_FD4T_NF4.nii";
-    //    int numImages = 269;
-    //    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/data03_mocoParams_mocoApp";
-    //    NSString *mocoResultImagesNameBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/realignedImages/mocoApp_data03/data03_img_";
-    
-    
-    //Original Karsten's data01
-    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/data04_vol_dset1.nii";
-    int numImages = 542;
-    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/data04_mocoParams_mocoApp";
-    NSString *mocoResultImagesNameBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/realignedImages/mocoApp_data04/data04_img_";
-    
-    
-    //4D zoomedInEPI
-    //    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/data06_zoomedEPI_1_5mm_106_96_30_528_7T.nii";
-    //    int numImages = 527;
-    //    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/data06_mocoParams_mocoApp";
-    //    NSString *mocoResultImagesNameBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/realignedImages/mocoApp_data06/data06_img_";
-    
-    
-    //Kid1 Brauer low motion
-    //    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/data07_kid_lowMovement.nii";
-    //    int numImages = 584;
-    //    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/data07_mocoParams_mocoApp";
-    //    NSString *mocoResultImagesNameBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/realignedImages/mocoApp_data07/data07_img_";
-    
-    
-    //Kid2 Brauer too much motion
-    //    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/data09_kid_tooMuchMovement.nii";
-    //    int numImages = 488;
-    //    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/data09_mocoParams_mocoApp";
-    //    NSString *mocoResultImagesNameBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/realignedImages/mocoApp_data09/data09_img_";
-    
-    //Kid3 Brauer medium motion
-//    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/data10_kid_mediumMotion_KE2K.nii";
-//    int numImages = 539;
-//    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/data10_mocoParams_mocoApp";
-//    NSString *mocoResultImagesNameBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/realignedImages/mocoApp_data10/data10_img_";
-    
-    //Kid4 Brauer medium motion
-//    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/data11_kid_mediumMotion_SP3K.nii";
-//    int numImages = 494;
-//    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/data11_mocoParams_mocoApp";
-//    NSString *mocoResultImagesNameBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/realignedImages/mocoApp_data11/data11_img_";
-    
-    
-    //amynf test - strong trend over time
-//    NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/data12_RP1T_amyNF.nii";
-//    int numImages = 259;
-//    NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/data12_mocoParams_mocoApp";
-//    NSString *mocoResultImagesNameBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/realignedImages/mocoApp_data12/data12_img_";
-    
-   
-//        NSString *file4D = @"/Users/mhollmann/Projekte/Project_MOCOApplication/MocoApplication/testfiles/testData.nii";
-//        int numImages = 4;
-//        NSString *mocoMovParamsOutFileBase = @"/Users/mhollmann/Projekte/Project_MOCOApplication/MocoApplication/testfiles/testData_mocoParams";
+    //set input image - just nifti 4D at the moment
+    NSString *file4D;
+    NSString *valSelected = [mInputSourcePullDown title];
+    if([valSelected isEqualToString:@"Online TCP/IP input"])
+    {
+        NSLog(@"Offline moco can not run in TCP/IP input mode. Please check GUI settings.");
+        return;
+        
+    }else{
+        NSLog(@"Input image: %@", valSelected);
+        NSFileManager *fm = [NSFileManager defaultManager];
+        if (![fm isReadableFileAtPath:valSelected])
+        {
+            NSLog(@"Did not find input image: %@", valSelected);
+            return;
+        }
+        file4D = valSelected;
+    }
     
     
     
@@ -490,11 +659,11 @@
         NSString *mocoMovParamsOutFile;
         //determine correct name for moco-param logfile
         if(mRegistrationProperty.RegistrationInterpolationMode == LINEAR)
-        {mocoMovParamsOutFile = [mocoMovParamsOutFileBase stringByAppendingString:@"_linear"];}
+        {mocoMovParamsOutFile = [mMocoParametersOutNameBase stringByAppendingString:@"_linear"];}
         else if (mRegistrationProperty.RegistrationInterpolationMode == BSPLINE2)
-        {mocoMovParamsOutFile = [mocoMovParamsOutFileBase stringByAppendingString:@"_bspline2"];}
+        {mocoMovParamsOutFile = [mMocoParametersOutNameBase stringByAppendingString:@"_bspline2"];}
         else if (mRegistrationProperty.RegistrationInterpolationMode == BSPLINE4)
-        {mocoMovParamsOutFile = [mocoMovParamsOutFileBase stringByAppendingString:@"_bspline4"];}
+        {mocoMovParamsOutFile = [mMocoParametersOutNameBase stringByAppendingString:@"_bspline4"];}
         
         if( mRegistrationProperty.MaskImagesForRegistration )
         {mocoMovParamsOutFile = [mocoMovParamsOutFile stringByAppendingString:@"_masked"];}
@@ -512,49 +681,73 @@
 
         MocoDataLogger *mocoLogger = new MocoDataLogger(mocoMovParamsOutFileString, mocoMovParamsOutFileString);
         
-        
-        
-        //MH FIXME: Todo ITK image reader etc...
-        
-        
+        //load the 4D image
         EDDataElement *dataEl4D = [MocoRegistration getEDDataElementFromFile:file4D];
-        EDDataElement *refDataEl3D = [dataEl4D getDataAtTimeStep:0];
         
         EDDataElement *resultDataEl;
         EDDataElement *movingDataEl;
         
-        //set reference
-        [mRegistrator setReferenceImageWithEDDataElement:refDataEl3D];
+        bool alignToExternalReference;
+        
+        //set reference image 
+        NSString *valSelected = [mReferenceImagePullDown title];
+        if([valSelected isEqualToString:@"First incoming image"])
+        {
+            EDDataElement *refDataEl3D = [dataEl4D getDataAtTimeStep:0];
+            [mRegistrator setReferenceImageWithEDDataElement:refDataEl3D];
+            alignToExternalReference  = NO;
+            
+        }else{
+            NSLog(@"Reference image: %@", valSelected);
+            EDDataElement *refDataEl3D = [MocoRegistration getEDDataElementFromFile:valSelected];
+            [mRegistrator setReferenceImageWithEDDataElement:refDataEl3D];
+            alignToExternalReference = YES;
+        }
+
         
         int i;
-        for (i = 1; i<=numImages; i++) {
+        for (i = 0; i<=[dataEl4D getImageSize].timesteps-1; i++) {
             
             if(!mMocoIsRunning){
                 break;
             }
              
+            MocoTransformType::Pointer transform;
+            
+            double rotAngleX            = 0;
+            double rotAngleY            = 0;
+            double rotAngleZ            = 0;
+            double finalTranslationX    = 0;
+            double finalTranslationY    = 0;
+            double finalTranslationZ    = 0;
+            
             movingDataEl = [dataEl4D getDataAtTimeStep:i];
             
-            //++++ Alignment ++++
-            gettimeofday(&startTimeAlign, 0);
-            MocoTransformType::Pointer transform = [mRegistrator alignEDDataElementToReference: movingDataEl];
-            gettimeofday(&endTimeAlign, 0);
+            //do alignment just for n>0
+            if(i > 0 || alignToExternalReference)
+            {
+            
+                //++++ Alignment ++++
+                gettimeofday(&startTimeAlign, 0);
+                transform = [mRegistrator alignEDDataElementToReference: movingDataEl];
+                gettimeofday(&endTimeAlign, 0);
+            
+            
+                MocoOptimizerType::ParametersType transParameters;
+                transParameters = transform->GetParameters();
+                MocoTransformType::OffsetType offset = transform->GetOffset();
+                MocoVectorType versor_axis = transform->GetVersor().GetAxis();
+                double versor_angle = transform->GetVersor().GetAngle();
+                rotAngleX              = 180/M_PI * versor_axis[0] * versor_angle;
+                rotAngleY              = 180/M_PI * versor_axis[1] * versor_angle;
+                rotAngleZ              = 180/M_PI * versor_axis[2] * versor_angle;
+                finalTranslationX    = offset[0];
+                finalTranslationY    = offset[1];
+                finalTranslationZ    = offset[2];
+            }
             
             
             //++++ Send transform parameters to graph plot ++++
-            MocoOptimizerType::ParametersType transParameters;
-            transParameters = transform->GetParameters();
-            MocoTransformType::OffsetType offset = transform->GetOffset();
-            MocoVectorType versor_axis = transform->GetVersor().GetAxis();
-            double versor_angle = transform->GetVersor().GetAngle();
-            double rotAngleX              = 180/M_PI * versor_axis[0] * versor_angle;
-            double rotAngleY              = 180/M_PI * versor_axis[1] * versor_angle;
-            double rotAngleZ              = 180/M_PI * versor_axis[2] * versor_angle;
-            double finalTranslationX    = offset[0];
-            double finalTranslationY    = offset[1];
-            double finalTranslationZ    = offset[2];
-            
-            
             [mMocoDrawViewController addValuesToGraphs:finalTranslationX TransY:finalTranslationY TransZ:finalTranslationZ RotX:rotAngleX RotY:rotAngleY RotZ:rotAngleZ];
             
             //store data in the logger
@@ -570,14 +763,42 @@
                 }
             });
             
-              //++++ Resampling ++++
+            
+            
+            //++++ Resampling ++++
+            //do resampling just for n>0 or always if an external reference image was given 
             gettimeofday(&startTimeResample, 0);
-            resultDataEl = [mRegistrator resampleMovingEDDataElement:movingDataEl withTransform:transform];
+            if(i >  0 || alignToExternalReference)
+            {
+                resultDataEl = [mRegistrator resampleMovingEDDataElement:movingDataEl withTransform:transform];
+                
+                //MH FIXME: a workaround because header params are not correctly copied by itkAdapter
+                NSArray *propsToCopy = [NSArray arrayWithObjects:
+                                        @"voxelsize",
+                                        @"rowVec",
+                                        @"sliceVec",
+                                        @"columnVec",
+                                        @"indexOrigin",
+                                        nil];
+                
+                [resultDataEl copyProps:propsToCopy fromDataElement:movingDataEl];
+                 
+            }
+            else
+            {
+                resultDataEl = movingDataEl;
+            }
             gettimeofday(&endTimeResample, 0);
             
-              /*
+            
+            //set sequence description
+            NSDictionary *dic = [NSDictionary dictionaryWithObjects: [NSArray arrayWithObjects:@"mocoAppExport", nil]
+                                                            forKeys: [NSArray arrayWithObjects:@"sequenceDescription", nil] ];
+            [resultDataEl setProps:dic];
+            
+            
             //++++ Write result image ++++
-            NSString *resultFilename = [mocoResultImagesNameBase stringByAppendingString:[NSString stringWithFormat: @"%.4i",i ]];
+            NSString *resultFilename = [mMocoResultImagesNameBase stringByAppendingString:[NSString stringWithFormat: @"%.4i",i+1 ]];
             resultFilename = [resultFilename stringByAppendingString:@".nii"];
             //remove the resulting file if it exists
             NSFileManager *fmri = [NSFileManager defaultManager];
@@ -586,10 +807,11 @@
                 [fmri removeItemAtPath:resultFilename error:nil];
             }
             [resultDataEl WriteDataElementToFile:resultFilename];
+            
             if (mRegistrationProperty.LoggingLevel > 1){
                 NSLog(@"Written aligned image to: %@", resultFilename);
             }
-            */
+            
             
             
             if (mRegistrationProperty.LoggingLevel > 1){
@@ -602,7 +824,7 @@
                 NSLog(@"rotY of transform: %f ", rotAngleY);
                 NSLog(@"rotZ of transform: %f ", rotAngleZ);
                 
-                ; std::cout << "Time needed for alignment: " << [self getTimeDifference:startTimeAlign endTime:endTimeAlign] << " s" << std::endl;
+                std::cout << "Time needed for alignment: " << [self getTimeDifference:startTimeAlign endTime:endTimeAlign] << " s" << std::endl;
             }
             
         }//endfor
@@ -610,9 +832,9 @@
         
         
         
-        //*****************************************
-        //****** Write params to txt file *********
-        //*****************************************
+        //+++++++++++++++++++++++++++++++++++++++++
+        //++++++ Write params to txt file +++++++++
+        //+++++++++++++++++++++++++++++++++++++++++
         mocoLogger->dumpMocoParamsToLogfile();
         if (mRegistrationProperty.LoggingLevel > 0)
         {

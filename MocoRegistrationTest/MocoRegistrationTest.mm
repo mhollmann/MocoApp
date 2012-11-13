@@ -49,7 +49,7 @@ NSString* mFileNameTestMocoParams = @"testData_mocoParams_linear_smoothed5_it12.
     MocoRegistrationProperty *regProperty = [[MocoRegistrationProperty alloc] init];
     STAssertNotNil(regProperty, @"valid init returns nil");
     
-    regProperty.LoggingLevel              = 0;
+    regProperty.LoggingLevel              = 3;
     regProperty.NumberOfThreads           = 1;
     regProperty.Smoothing                 = YES;
     regProperty.SmoothingSigma            = 5;

@@ -575,7 +575,6 @@
     
     self->m_resampler->SetDefaultPixelValue( 0 );
     
-
     
     //MH FIXME: This may be avoided
     ImageType4D::Pointer retImage4D= ImageType4D::New();
@@ -593,7 +592,8 @@
     retImage4D = tiler->GetOutput();
     
     return [movingDataElement convertFromITKImage4D:retImage4D ];
- 
+    //[movingDataElement updateFromITKImage4D:retImage4D ];
+    //return movingDataElement;
 }
 
 
@@ -713,7 +713,6 @@
 - (void)dealloc
 {
     
-    NSLog(@"MocoRegistration Dealloc called!");
     
     //    free(m_registrationProperty);
 //    free(m_registration);

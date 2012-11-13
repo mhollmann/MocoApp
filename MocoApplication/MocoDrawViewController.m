@@ -2,7 +2,7 @@
 //  MocoDraw_viewController.m
 //  MocoApplication
 //
-//  Created by willi on 5/6/12.
+//  Created by Maurice Hollmann on 5/6/12.
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 

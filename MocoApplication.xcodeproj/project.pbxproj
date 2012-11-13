@@ -490,9 +490,9 @@
 			isa = PBXGroup;
 			children = (
 				3E98905116149EA100086C21 /* EDDataElement.h */,
+				3E98905216149EA100086C21 /* EDDataElement.mm */,
 				3EF416321615A2E200443485 /* BARTNotifications.h */,
 				3EF416331615A2E200443485 /* BARTNotifications.m */,
-				3E98905216149EA100086C21 /* EDDataElement.mm */,
 				3E98905316149EA100086C21 /* EDDataElementIsis.h */,
 				3E98905416149EA100086C21 /* EDDataElementIsis.mm */,
 				3E98905516149EA100086C21 /* EDDataElementIsisRealTime.h */,
@@ -964,12 +964,15 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				HEADER_SEARCH_PATHS = (
-					/usr/local/include,
+					"$(inherited)",
 					/opt/X11/include/,
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/",
 				);
 				LD_DYLIB_INSTALL_NAME = "$(EXECUTABLE_PATH)";
 				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/lib/InsightToolkit,
+				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = (
 					"$(inherited)",
 					/usr/local/lib/InsightToolkit,
 				);
@@ -1016,7 +1019,6 @@
 					/usr/local/lib,
 					/usr/local/lib/isis/,
 					/usr/local/lib/InsightToolkit,
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/debug/bin",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1040,8 +1042,28 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/usr/local/include/isis,
+					/usr/local/include/InsightToolkit,
 					/usr/local/include/InsightToolkit/Common,
+					/usr/local/include/InsightToolkit/Utilities,
 					/usr/local/include/InsightToolkit/Utilities/vxl/vcl,
+					/usr/local/include/InsightToolkit/Utilities/vxl/v3p/netlib,
+					/usr/local/include/InsightToolkit/Utilities/vxl/core,
+					/usr/local/include/InsightToolkit/Utilities/gdcm,
+					/usr/local/include/InsightToolkit/Utilities/gdcm/src,
+					/usr/local/include/InsightToolkit/SpatialObject,
+					/usr/local/include/InsightToolkit/Numerics,
+					/usr/local/include/InsightToolkit/Numerics/Statistics,
+					/usr/local/include/InsightToolkit/Algorithms,
+					/usr/local/include/InsightToolkit/BasicFilters,
+					/usr/local/include/InsightToolkit/IO,
+					/usr/local/include/InsightToolkit/Review,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/usr/local/lib/isis/,
+					/usr/local/lib/InsightToolkit,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
