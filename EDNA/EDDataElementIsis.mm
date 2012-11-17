@@ -130,7 +130,7 @@
     mImageSize.columns = mIsisImage->getNrOfColumns();
     mImageSize.slices = mIsisImage->getNrOfSlices();
     mImageSize.timesteps = mIsisImage->getNrOfTimesteps();
-    mRepetitionTimeInMs = (mIsisImage->getPropertyAs<isis::util::fvector3>("voxelSize"))[3];
+    mRepetitionTimeInMs = (mIsisImage->getPropertyAs<u_int16_t>("repetitionTime"));
 	
 	return self;
 }

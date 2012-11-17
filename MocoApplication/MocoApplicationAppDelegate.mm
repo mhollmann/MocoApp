@@ -49,7 +49,9 @@
     
     //prepare members
     mRealTimeTCPIPMode = YES;
-    mMocoIsRunning = NO;
+    mMocoIsRunning     = NO;
+    mRegistrator       = nil;
+    
     
     //the standard output path and name base
     mMocoResultImagesNameBase  = @"/tmp/image_mocoAppExport_MOCO_";
@@ -318,12 +320,12 @@
         //+++++ (Re)Initialize the registrator, because regProperties may have changed +++++
         if(mRegistrator == nil)
         {
-            NSLog(@"mRegistrator is nil ...");
+            NSLog(@"Creating registr...");
             mRegistrator = [ [MocoRegistration alloc]	initWithRegistrationProperty:mRegistrationProperty];
         }
         else
         {
-            NSLog(@"mRegistrator is NOT nil ...");
+            NSLog(@"RE - Creating registr...");
             [mRegistrator release]; mRegistrator = nil;
             mRegistrator = [ [MocoRegistration alloc]	initWithRegistrationProperty:mRegistrationProperty];
         }
@@ -360,10 +362,8 @@
         
         if ( [openDlg runModal ] == NSOKButton )
         {
-            //MH FIXME: deprecated
-            NSArray* files = [openDlg filenames];
-            
-            NSString* fileName = [files objectAtIndex:0];
+            NSArray* files = [openDlg URLs];
+            NSString* fileName = [[files objectAtIndex:0] path];
             [sender setToolTip:fileName];
             [sender setTitle: fileName];
         }
@@ -389,15 +389,12 @@
         [openDlg setCanChooseDirectories:NO];
         
         NSArray  * fileTypes = [NSArray arrayWithObjects:@"nii",nil];
-        
         [openDlg setAllowedFileTypes:fileTypes];
         
         if ( [openDlg runModal ] == NSOKButton )
         {
-            //MH FIXME: deprecated
-            NSArray* files = [openDlg filenames];
-            
-            NSString* fileName = [files objectAtIndex:0];
+            NSArray* files = [openDlg URLs];
+            NSString* fileName = [[files objectAtIndex:0] path];
             [sender setToolTip:fileName];
             [sender setTitle: fileName];
             mRealTimeTCPIPMode = NO;
@@ -537,7 +534,7 @@
                                 @"indexOrigin",
                                 nil];
         
-        [resultDataEl copyProps:propsToCopy fromDataElement:movingDataEl];       
+        [resultDataEl copyProps:propsToCopy fromDataElement:movingDataEl];
     }
     else
     {
@@ -764,16 +761,17 @@
             });
             
             
-            
+            //++++++++++++++++++++
             //++++ Resampling ++++
-            //do resampling just for n>0 or always if an external reference image was given 
+            //++++++++++++++++++++
+            //do resampling just for n>0 or always if an external reference image was given
             gettimeofday(&startTimeResample, 0);
             if(i >  0 || alignToExternalReference)
             {
                 resultDataEl = [mRegistrator resampleMovingEDDataElement:movingDataEl withTransform:transform];
                 
                 //MH FIXME: a workaround because header params are not correctly copied by itkAdapter
-                NSArray *propsToCopy = [NSArray arrayWithObjects:
+                 NSArray *propsToCopy = [NSArray arrayWithObjects:
                                         @"voxelsize",
                                         @"rowVec",
                                         @"sliceVec",

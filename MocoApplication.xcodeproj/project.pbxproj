@@ -927,7 +927,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EDNA/EDNA-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -954,11 +954,11 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EDNA/EDNA-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
@@ -984,6 +984,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1022,7 +1023,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = "";
 			};
 			name = Debug;
 		};
@@ -1030,13 +1031,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"_ENABLE_DEBUG=0",
 					"_ENABLE_LOG=1",
 					"_GLIBCXX_FULLY_DYNAMIC_STRING=1",
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1067,7 +1070,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = "";
 				"VALID_ARCHS[sdk=*]" = "i386 x86_64";
 			};
 			name = Release;
@@ -1078,6 +1081,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1091,18 +1095,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "MocoApplication/MocoApplication-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					/usr/local/lib/isis/,
-					"\"/usr/local/lib\"",
-					"\"/usr/local/lib/InsightToolkit\"",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/debug/bin",
-					/Users/mhollmann/Programming/Library/libEdna,
-					"\"$(SRCROOT)/../../../programs/boost_1_47_0/stage/lib\"",
-					"\"$(SRCROOT)/../../../programs/boost_1_47_0/bin.v2/libs/date_time/build/darwin-4.2.1/release/threading-multi\"",
-					"\"$(SRCROOT)/../../../programs/boost_1_47_0/bin.v2/libs/filesystem/build/darwin-4.2.1/release/threading-multi\"",
-					"\"$(SRCROOT)/../../../programs/boost_1_47_0/bin.v2/libs/system/build/darwin-4.2.1/release/threading-multi\"",
-					"\"$(SRCROOT)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-framework",
 					"Foundation,",
@@ -1127,13 +1120,13 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MocoApplication/MocoApplication-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1141,73 +1134,21 @@
 					"_ENABLE_LOG=1",
 					"_GLIBCXX_FULLY_DYNAMIC_STRING=1",
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
-				HEADER_SEARCH_PATHS = (
-					/Users/mhollmann/Programming/Library/includeEdna/,
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/",
-					/usr/include,
-					/usr/local/include,
-					/usr/local/include/isis,
-					/usr/local/include/InsightToolkit/Utilities,
-					/usr/local/include/InsightToolkit/SpatialObject,
-					/usr/local/include/InsightToolkit/Numerics,
-					/usr/local/include/InsightToolkit/BasicFilters/,
-					/usr/local/include/InsightToolkit/Algorithms,
-					/usr/local/include/InsightToolkit/Numerics/Statistics,
-					/usr/local/include/InsightToolkit/Common,
-					/usr/local/include/InsightToolkit/IO,
-					/usr/local/include/InsightToolkit/Review,
-					/usr/local/include/InsightToolkit/Utilities/vxl/vcl,
-					/usr/local/include/InsightToolkit/Utilities/vxl/core,
-					/usr/local/include/InsightToolkit/Utilities/gdcm/src,
-					/usr/local/include/InsightToolkit/Utilities/gdcm,
-					/usr/local/include/InsightToolkit/Utilities/vxl/v3p/netlib,
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "MocoApplication/MocoApplication-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"/usr/local/lib\"",
-					/usr/local/lib/isis/,
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin",
-					/Users/mhollmann/Programming/Library/libEdna,
-					/usr/local/lib/InsightToolkit,
-					"\"$(SRCROOT)/../../../programs/boost_1_47_0/stage/lib\"",
-					"\"$(SRCROOT)/../../../programs/boost_1_47_0/bin.v2/libs/date_time/build/darwin-4.2.1/release/threading-multi\"",
-					"\"$(SRCROOT)/../../../programs/boost_1_47_0/bin.v2/libs/filesystem/build/darwin-4.2.1/release/threading-multi\"",
-					"\"$(SRCROOT)/../../../programs/boost_1_47_0/bin.v2/libs/system/build/darwin-4.2.1/release/threading-multi\"",
-					"\"$(SRCROOT)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
+					"-framework",
+					"Foundation,",
+					"-framework",
+					"AppKit,",
 					"-Wl,-search_paths_first",
 					"-headerpad_max_install_names",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libITKIO.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libITKNumerics.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libITKNrrdIO.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libitkgdcm.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libitkjpeg12.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libitkjpeg16.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libitkopenjpeg.a",
 					"-framework",
 					System,
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libitkpng.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libitktiff.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libitkjpeg8.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libITKSpatialObject.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libITKMetaIO.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libITKDICOMParser.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libITKEXPAT.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libITKniftiio.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libITKznz.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libitkzlib.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libITKCommon.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libitksys.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libitkvnl_inst.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libitkvnl_algo.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libitkv3p_netlib.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libitkvnl.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libitkvcl.a",
-					"/Users/mhollmann/programs/InsightToolkit-3.20.1/build/release/bin/libitkv3p_lsqr.a",
 					"-lm",
 					"-lpthread",
 					"-lm",

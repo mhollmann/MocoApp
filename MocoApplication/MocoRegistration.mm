@@ -71,7 +71,8 @@
 
 
 - (id)init
-{
+{   //MH FIXME: remove
+    NSLog(@"Calling init...");
     self = [super init];
     if (self) {
         
@@ -89,6 +90,9 @@
 
 - (id)initWithRegistrationProperty:(MocoRegistrationProperty *)regProperty
 {
+    //MH FIXME: remove
+    NSLog(@"Calling initWithRegistrationProperty...");
+
     self = [super init];
     if (self) {
         
@@ -372,18 +376,16 @@
     if( self->m_registrationProperty.Smoothing ){
         
         DiscreteGaussianImageFilterType::Pointer dgImageFilter = DiscreteGaussianImageFilterType::New();
-        
         dgImageFilter->SetInput( self->m_referenceImgITK3D );
         dgImageFilter->SetVariance( self->m_registrationProperty.SmoothingSigma );
         dgImageFilter->SetMaximumKernelWidth( self->m_registrationProperty.SmoothingKernelWidth );
         dgImageFilter->SetUseImageSpacing(true);
         dgImageFilter->SetMaximumError(0.05);
-        
         dgImageFilter->Update();
-        
         self->m_referenceImgITK3DSmoothed = dgImageFilter->GetOutput();
         
     }
+    
     
     //MH FIXME: Check if metric exists in this call before mask is set
     //++++ Masking if needed ++++
@@ -725,7 +727,7 @@
 //    free(m_referenceImgITK3D);
 //    free(m_referenceImgITK3DSmoothed);
 
-    //[super dealloc];
+    [super dealloc];
 }
 
 
