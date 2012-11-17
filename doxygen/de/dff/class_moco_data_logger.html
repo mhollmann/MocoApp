@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -85,6 +85,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="../../dc/de6/class_moco_data_logger-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">MocoDataLogger Class Reference</div>  </div>
@@ -93,69 +94,50 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af037cb30f25ae1cd80b210e56cba70f6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dff/class_moco_data_logger.html#af037cb30f25ae1cd80b210e56cba70f6">MocoDataLogger</a> (string mocoParamsLogfile, string appLogfile)</td></tr>
-<tr class="separator:af037cb30f25ae1cd80b210e56cba70f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a667090743e4c9c030f64d384117c301e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dff/class_moco_data_logger.html#a667090743e4c9c030f64d384117c301e">~MocoDataLogger</a> ()</td></tr>
-<tr class="separator:a667090743e4c9c030f64d384117c301e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8e7e054c5b9c8d20fe2de953907844c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dff/class_moco_data_logger.html#af8e7e054c5b9c8d20fe2de953907844c">setParamsLogFileName</a> (string mocoParamsLogfile)</td></tr>
+<tr class="separator:af8e7e054c5b9c8d20fe2de953907844c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ed6066230354f0d6de315ef4fb8145e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dff/class_moco_data_logger.html#a9ed6066230354f0d6de315ef4fb8145e">setAppLogFileName</a> (string appLogfile)</td></tr>
+<tr class="separator:a9ed6066230354f0d6de315ef4fb8145e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4c19f566432a96c3c7b34d0ad504475"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dff/class_moco_data_logger.html#ad4c19f566432a96c3c7b34d0ad504475">appendLineToFile</a> (string fileName, string lineToWrite)</td></tr>
 <tr class="separator:ad4c19f566432a96c3c7b34d0ad504475"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a43e37f46dd7ae09e4bd65d2cd609c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dff/class_moco_data_logger.html#a1a43e37f46dd7ae09e4bd65d2cd609c9">addMocoParams</a> (float tX, float tY, float tZ, float rX, float rY, float rZ)</td></tr>
 <tr class="separator:a1a43e37f46dd7ae09e4bd65d2cd609c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af79405f86e3b33c98d8fe767be3c54b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dff/class_moco_data_logger.html#af79405f86e3b33c98d8fe767be3c54b8">addMocoAppLogentry</a> (string logEntry)</td></tr>
+<tr class="separator:af79405f86e3b33c98d8fe767be3c54b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11f473c038468693aebf69d32ab8d210"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dff/class_moco_data_logger.html#a11f473c038468693aebf69d32ab8d210">dumpMocoParamsToLogfile</a> (void)</td></tr>
 <tr class="separator:a11f473c038468693aebf69d32ab8d210"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e61a49ec546eee45b0f94125cb615bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dff/class_moco_data_logger.html#a4e61a49ec546eee45b0f94125cb615bf">dumpMocoAppLogsToLogfile</a> (void)</td></tr>
+<tr class="separator:a4e61a49ec546eee45b0f94125cb615bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a0a5462fd2211b48238e96927dc49a2e7"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="../../de/dff/class_moco_data_logger.html">MocoDataLogger</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dff/class_moco_data_logger.html#a0a5462fd2211b48238e96927dc49a2e7">getInstance</a> ()</td></tr>
+<tr class="separator:a0a5462fd2211b48238e96927dc49a2e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="af037cb30f25ae1cd80b210e56cba70f6"></a>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="af79405f86e3b33c98d8fe767be3c54b8"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">MocoDataLogger::MocoDataLogger </td>
+          <td class="memname">void MocoDataLogger::addMocoAppLogentry </td>
           <td>(</td>
           <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>mocoParamsLogfile</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>logEntry</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>appLogfile</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Constructor. If the file already exists it is overwritten.</p>
+<p>Adds a string to the stored log messages. These have to be dumped before the app is closed, otherwise they are lost. Stored format is: month/day hour:minute:sec:millisec logEntry</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mocoParamsLogfile</td><td>Complete path to file that stores motion correction params. </td></tr>
-    <tr><td class="paramname">appLogfile</td><td>Complete path to file that stores log-information [unused now]. </td></tr>
+    <tr><td class="paramname">logEntry</td><td>the log message that should be stored </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a class="anchor" id="a667090743e4c9c030f64d384117c301e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">MocoDataLogger::~MocoDataLogger </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Destructor. </p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a1a43e37f46dd7ae09e4bd65d2cd609c9"></a>
 <div class="memitem">
 <div class="memproto">
@@ -241,7 +223,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This appends a line to a given file. Caution: this is slow because it is opening the file to write each time it is called. For fast acess use "addMocoParams" and "dumpMocoParamsToLogfile".</p>
+<p>This appends a line to a given file. Caution: this is slow because it is opening the file to write each time it is called. For fast access use "addMocoParams" and "dumpMocoParamsToLogfile".</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">fileName</td><td>Complete path to file that the given line should be appended to. </td></tr>
@@ -249,6 +231,23 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a class="anchor" id="a4e61a49ec546eee45b0f94125cb615bf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MocoDataLogger::dumpMocoAppLogsToLogfile </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Dumps the stored application log message (by appending it) to the logfile set in setAppLogFileName. The actually stored log-messages are deleted. </p>
 
 </div>
 </div>
@@ -265,7 +264,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Dumps the stored data to the logfile given in constructor. If the file already exists it is overwritten.</p>
+<p>Dumps the stored data to the logfile set in setParamsLogFileName. If the file already exists it is overwritten.</p>
 <p>Format of resulting file (3.4f):</p>
 <p>transX transY transZ rotX rotY rotZ<br/>
  transX transY transZ rotX rotY rotZ<br/>
@@ -273,14 +272,91 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a0a5462fd2211b48238e96927dc49a2e7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../de/dff/class_moco_data_logger.html">MocoDataLogger</a> * MocoDataLogger::getInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The class is a singleton and the global instance is returned by this function. If the instance does not exist it is created.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mocoParamsLogfile</td><td>Complete path to file that stores motion correction params. </td></tr>
+    <tr><td class="paramname">appLogfile</td><td>Complete path to file that stores log-information. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9ed6066230354f0d6de315ef4fb8145e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MocoDataLogger::setAppLogFileName </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>appLogfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the log-filename for the application log-messages. Setting is can not be modified after th efirst valid call to avoid several logfile locations.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">appLogfile</td><td>Complete path to file that stores log-information. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="af8e7e054c5b9c8d20fe2de953907844c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MocoDataLogger::setParamsLogFileName </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>mocoParamsLogfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the log-filename for the results (parameters) of the motion correction.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mocoParamsLogfile</td><td>Complete path to file that stores motion correction params. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>MocoApplication/<a class="el" href="../../d3/dea/_moco_data_logger_8h_source.html">MocoDataLogger.h</a></li>
-<li>MocoApplication/MocoDataLogger.cpp</li>
+<li>/Users/mhollmann/Projekte/Project_MOCOApplication/MocoApplication/MocoApplication/<a class="el" href="../../d3/dea/_moco_data_logger_8h_source.html">MocoDataLogger.h</a></li>
+<li>/Users/mhollmann/Projekte/Project_MOCOApplication/MocoApplication/MocoApplication/MocoDataLogger.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 17 2012 13:53:55 for MocoApp by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Feb 5 2013 11:37:48 for MocoApp by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.2
 </small></address>

@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -116,57 +116,59 @@ Instance Methods</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
-<tr class="memitem:a05f3a0d536e782c99b72f26eb1710a31"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05f3a0d536e782c99b72f26eb1710a31"></a>
-NSString *&#160;</td><td class="memItemRight" valign="bottom"><b>ParameterOutputFileOffset</b></td></tr>
-<tr class="separator:a05f3a0d536e782c99b72f26eb1710a31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20daa3fa9d7793334831a12cc42e732d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a20daa3fa9d7793334831a12cc42e732d"></a>
-double *&#160;</td><td class="memItemRight" valign="bottom"><b>RegistrationParameters</b></td></tr>
+double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d3c/interface_moco_registration_property.html#a20daa3fa9d7793334831a12cc42e732d">RegistrationParameters</a></td></tr>
+<tr class="memdesc:a20daa3fa9d7793334831a12cc42e732d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Three algo parameters: translationScale, maxStepLength, minStepLength Always set property using: setRegistrationParameters. <br/></td></tr>
 <tr class="separator:a20daa3fa9d7793334831a12cc42e732d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d3de1a667422e890c6ceeb0fdf07beb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9d3de1a667422e890c6ceeb0fdf07beb"></a>
-double *&#160;</td><td class="memItemRight" valign="bottom"><b>FinalMovementParameters</b></td></tr>
-<tr class="separator:a9d3de1a667422e890c6ceeb0fdf07beb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adca6cda4b66898cfb2be9fd2366b941b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adca6cda4b66898cfb2be9fd2366b941b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>RegistrationInterpolationMode</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d3c/interface_moco_registration_property.html#adca6cda4b66898cfb2be9fd2366b941b">RegistrationInterpolationMode</a></td></tr>
+<tr class="memdesc:adca6cda4b66898cfb2be9fd2366b941b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interpolation during alignment: LINEAR, BSPLINE(2-5) , SINC(2-6), INTERPOLATOR_NN Defines which interpolation is done during alignment. LINEAR is usually fast and good! <br/></td></tr>
 <tr class="separator:adca6cda4b66898cfb2be9fd2366b941b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3a93f34214e0be9bb1555c622e1f47e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac3a93f34214e0be9bb1555c622e1f47e"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>ResamplingInterpolationMode</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d3c/interface_moco_registration_property.html#ac3a93f34214e0be9bb1555c622e1f47e">ResamplingInterpolationMode</a></td></tr>
+<tr class="memdesc:ac3a93f34214e0be9bb1555c622e1f47e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interpolation during resampling: LINEAR, BSPLINE(2-5) , SINC(2-6), INTERPOLATOR_NN Defines which interpolation is done for resampling. This should be high quality (usually BSPLINE4 or better). <br/></td></tr>
 <tr class="separator:ac3a93f34214e0be9bb1555c622e1f47e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e2b22aa25f78f18b6e7ca104ed2e869"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9e2b22aa25f78f18b6e7ca104ed2e869"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>NumberOfIterations</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d3c/interface_moco_registration_property.html#a9e2b22aa25f78f18b6e7ca104ed2e869">NumberOfIterations</a></td></tr>
+<tr class="memdesc:a9e2b22aa25f78f18b6e7ca104ed2e869"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of iterations used to find transformation Basic rule: as more movement is in the data, as more iterations are needed. <br/></td></tr>
 <tr class="separator:a9e2b22aa25f78f18b6e7ca104ed2e869"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af45a3f95f508b73e2c3a981e9259767d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af45a3f95f508b73e2c3a981e9259767d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>Smoothing</b></td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d3c/interface_moco_registration_property.html#af45a3f95f508b73e2c3a981e9259767d">Smoothing</a></td></tr>
+<tr class="memdesc:af45a3f95f508b73e2c3a981e9259767d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean that depicts if smoothing should be done. <br/></td></tr>
 <tr class="separator:af45a3f95f508b73e2c3a981e9259767d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68ba3fe613afe95db0ace16e7803b0c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a68ba3fe613afe95db0ace16e7803b0c1"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>SmoothingSigma</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d3c/interface_moco_registration_property.html#a68ba3fe613afe95db0ace16e7803b0c1">SmoothingSigma</a></td></tr>
+<tr class="memdesc:a68ba3fe613afe95db0ace16e7803b0c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The gaussian variance for smoothing in mm (e.g. 5) <br/></td></tr>
 <tr class="separator:a68ba3fe613afe95db0ace16e7803b0c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af03cc1549809c323c87fa977548695d8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af03cc1549809c323c87fa977548695d8"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>SmoothingKernelWidth</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d3c/interface_moco_registration_property.html#af03cc1549809c323c87fa977548695d8">SmoothingKernelWidth</a></td></tr>
+<tr class="memdesc:af03cc1549809c323c87fa977548695d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kernel width for smoothing in mm (e.g. 32) <br/></td></tr>
 <tr class="separator:af03cc1549809c323c87fa977548695d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adadf36ddf6f75991e53468b70fcc602c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adadf36ddf6f75991e53468b70fcc602c"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>NumberOfThreads</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d3c/interface_moco_registration_property.html#adadf36ddf6f75991e53468b70fcc602c">NumberOfThreads</a></td></tr>
+<tr class="memdesc:adadf36ddf6f75991e53468b70fcc602c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of threads that should be used to parallelize alignment and resampling (e.g. 16). The more threads are used the faster is the processing. <br/></td></tr>
 <tr class="separator:adadf36ddf6f75991e53468b70fcc602c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4db0ddd89106cdac6f6bc7210b88f5fb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4db0ddd89106cdac6f6bc7210b88f5fb"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>MaskImagesForRegistration</b></td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d3c/interface_moco_registration_property.html#a4db0ddd89106cdac6f6bc7210b88f5fb">MaskImagesForRegistration</a></td></tr>
+<tr class="memdesc:a4db0ddd89106cdac6f6bc7210b88f5fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean that depicts if the images should be masked for alignment. Masking makes the alignment more stable and faster, because the metric is not computed over background voxels. <br/></td></tr>
 <tr class="separator:a4db0ddd89106cdac6f6bc7210b88f5fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade09f48f3ae242523a335682ae22a477"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ade09f48f3ae242523a335682ae22a477"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>UseBestFoundParameters</b></td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d3c/interface_moco_registration_property.html#ade09f48f3ae242523a335682ae22a477">UseBestFoundParameters</a></td></tr>
+<tr class="memdesc:ade09f48f3ae242523a335682ae22a477"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean that depicts if the best parameters from all iteration should be used. The best parameters are often reprsenting local minima in metric, so usually this value should be false. <br/></td></tr>
 <tr class="separator:ade09f48f3ae242523a335682ae22a477"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7e688acd917c2df32805910d34c1a45"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac7e688acd917c2df32805910d34c1a45"></a>
-short&#160;</td><td class="memItemRight" valign="bottom"><b>Threshold</b></td></tr>
-<tr class="separator:ac7e688acd917c2df32805910d34c1a45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe94acdc18d3dd075a65c40c4657b00d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abe94acdc18d3dd075a65c40c4657b00d"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>LoggingLevel</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d3c/interface_moco_registration_property.html#abe94acdc18d3dd075a65c40c4657b00d">LoggingLevel</a></td></tr>
+<tr class="memdesc:abe94acdc18d3dd075a65c40c4657b00d"><td class="mdescLeft">&#160;</td><td class="mdescRight">logging level (0-3): 0: no logging, 1: low logging ... 3: all logging messages <br/></td></tr>
 <tr class="separator:abe94acdc18d3dd075a65c40c4657b00d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>MocoApplication/<a class="el" href="../../d6/d44/_moco_registration_property_8h_source.html">MocoRegistrationProperty.h</a></li>
-<li>MocoApplication/MocoRegistrationProperty.m</li>
+<li>/Users/mhollmann/Projekte/Project_MOCOApplication/MocoApplication/MocoApplication/<a class="el" href="../../d6/d44/_moco_registration_property_8h_source.html">MocoRegistrationProperty.h</a></li>
+<li>/Users/mhollmann/Projekte/Project_MOCOApplication/MocoApplication/MocoApplication/MocoRegistrationProperty.m</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 17 2012 13:53:55 for MocoApp by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Feb 5 2013 11:37:48 for MocoApp by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.2
 </small></address>
