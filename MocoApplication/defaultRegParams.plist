@@ -5,7 +5,7 @@
 	<key>LoggingLevel</key>
 	<integer>3</integer>
 	<key>NumberOfThreads</key>
-	<integer>1</integer>
+	<integer>2</integer>
 	<key>Smoothing</key>
 	<true/>
 	<key>SmoothingSigma</key>
@@ -19,6 +19,6 @@
 	<key>ResampleOutputBase</key>
 	<string>/Users/realtime/MRINCOMING/image_mocoAppExport_MOCO_</string>
 	<key>MocoParamsOutputBase</key>
-	<string>/Users/realtime/MRINCOMING/mocoParameters_mocoApp_</string>
+	<string>/Users/realtime/MRINCOMING/mocoParameters_mocoApp</string>
 </dict>
 </plist>

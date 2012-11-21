@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E2D538A165A70AD00F49D20 /* Icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E2D5389165A70AD00F49D20 /* Icon2.png */; };
+		3E2D538C165A70D600F49D20 /* Icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E2D538B165A70D600F49D20 /* Icon2.png */; };
 		3E41C05815D50A17001FDFCB /* MocoRegistration.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05515D50A17001FDFCB /* MocoRegistration.mm */; };
 		3E41C05915D50A17001FDFCB /* MocoRegistrationProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05715D50A17001FDFCB /* MocoRegistrationProperty.m */; };
 		3E56B30815C7C12800493310 /* MocoDrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E56B30715C7C12700493310 /* MocoDrawView.xib */; };
@@ -59,6 +61,7 @@
 		3E5A312716490B88004E01F5 /* testData_mocoParams_linear_smoothed5_it12.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3E5A312616490B88004E01F5 /* testData_mocoParams_linear_smoothed5_it12.txt */; };
 		3E5A31291649A75F004E01F5 /* libisis_core.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E5A31281649A75F004E01F5 /* libisis_core.3.0.0.dylib */; };
 		3E5A312A1649A77B004E01F5 /* libisis_core.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E5A31281649A75F004E01F5 /* libisis_core.3.0.0.dylib */; };
+		3E666451165A2BBB00855C46 /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EEE66CD1553E97300AA0F7F /* CorePlot.framework */; };
 		3E7DB64C15A45595002966AE /* libITKAlgorithms.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB62C15A45595002966AE /* libITKAlgorithms.a */; };
 		3E7DB64D15A45595002966AE /* libITKBasicFilters.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB62D15A45595002966AE /* libITKBasicFilters.a */; };
 		3E7DB64E15A45595002966AE /* libITKCommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB62E15A45595002966AE /* libITKCommon.a */; };
@@ -186,8 +189,9 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 16;
+			dstSubfolderSpec = 10;
 			files = (
+				3E666451165A2BBB00855C46 /* CorePlot.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +207,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3E2D5389165A70AD00F49D20 /* Icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon2.png; path = ../../AppIcon/Icon2.png; sourceTree = "<group>"; };
+		3E2D538B165A70D600F49D20 /* Icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon2.png; sourceTree = "<group>"; };
 		3E3B07E815EE358D00198665 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3E41C05415D50A17001FDFCB /* MocoRegistration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoRegistration.h; sourceTree = "<group>"; };
 		3E41C05515D50A17001FDFCB /* MocoRegistration.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MocoRegistration.mm; sourceTree = "<group>"; };
@@ -442,6 +448,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		3E66644F1657BBD100855C46 /* docs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = docs;
+			sourceTree = "<group>";
+		};
 		3E7DB62915A45324002966AE /* libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -517,6 +530,8 @@
 		3EDA32B515513A7900787007 = {
 			isa = PBXGroup;
 			children = (
+				3E2D538B165A70D600F49D20 /* Icon2.png */,
+				3E66644F1657BBD100855C46 /* docs */,
 				3E7DB62915A45324002966AE /* libs */,
 				3EDA32CA15513A7900787007 /* MocoApplication */,
 				3E98904816149E4300086C21 /* EDNA */,
@@ -586,6 +601,7 @@
 		3EDA32CB15513A7900787007 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3E2D5389165A70AD00F49D20 /* Icon2.png */,
 				3E57015515A44D7000845683 /* defaultRegParams.plist */,
 				3EDA32CC15513A7900787007 /* MocoApplication-Info.plist */,
 				3EDA32CD15513A7900787007 /* InfoPlist.strings */,
@@ -750,6 +766,8 @@
 				3EDA32DB15513A7900787007 /* MainMenu.xib in Resources */,
 				3E57015615A44D7000845683 /* defaultRegParams.plist in Resources */,
 				3E56B30815C7C12800493310 /* MocoDrawView.xib in Resources */,
+				3E2D538A165A70AD00F49D20 /* Icon2.png in Resources */,
+				3E2D538C165A70D600F49D20 /* Icon2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
