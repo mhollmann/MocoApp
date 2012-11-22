@@ -197,7 +197,7 @@
             self->m_registrationInterpolator = pInterpolator;
             break;
         }        
-        case NN:
+        case INTERPOLATOR_NN:
         {
             InterpolatorType_NN::Pointer pInterpolator  = InterpolatorType_NN::New();
             self->m_registrationInterpolator = pInterpolator;
@@ -315,7 +315,7 @@
             self->m_resampleInterpolator = rpInterpolator;
             break;
         }        
-        case NN:
+        case INTERPOLATOR_NN:
         {
             InterpolatorType_NN::Pointer rpInterpolator  = InterpolatorType_NN::New();
             self->m_resampleInterpolator = rpInterpolator;
