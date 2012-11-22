@@ -475,7 +475,7 @@
     self->m_observer->bestValue = std::numeric_limits<double>::max();
     
   	try {
-        registration->StartRegistration();
+        registration->Update();
         if (self->m_registrationProperty.LoggingLevel > 1) {
             std::cout << "Optimizer stop condition: "
             << registration->GetOptimizer()->GetStopConditionDescription()
