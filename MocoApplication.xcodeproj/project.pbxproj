@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E2D538A165A70AD00F49D20 /* Icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E2D5389165A70AD00F49D20 /* Icon2.png */; };
 		3E2D538C165A70D600F49D20 /* Icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E2D538B165A70D600F49D20 /* Icon2.png */; };
 		3E41C05815D50A17001FDFCB /* MocoRegistration.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05515D50A17001FDFCB /* MocoRegistration.mm */; };
 		3E41C05915D50A17001FDFCB /* MocoRegistrationProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05715D50A17001FDFCB /* MocoRegistrationProperty.m */; };
@@ -144,33 +143,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		00D3AFE3165E558E0034A86D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = CorePlot;
+		};
+		00D3AFE5165E558E0034A86D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0730F600109492D800E95162;
+			remoteInfo = UnitTests;
+		};
 		3E5A30D2164801E4004E01F5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3EDA32B715513A7900787007 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 3EDA32BF15513A7900787007;
 			remoteInfo = MocoApplication;
-		};
-		3EEE66C31553E74600AA0F7F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3EEE66BA1553E74600AA0F7F /* CorePlot.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = CorePlot;
-		};
-		3EEE66C51553E74600AA0F7F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3EEE66BA1553E74600AA0F7F /* CorePlot.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0730F600109492D800E95162;
-			remoteInfo = UnitTests;
-		};
-		3EEE66CF1553E9C500AA0F7F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3EEE66BA1553E74600AA0F7F /* CorePlot.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = CorePlot;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -207,7 +199,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3E2D5389165A70AD00F49D20 /* Icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon2.png; path = ../../AppIcon/Icon2.png; sourceTree = "<group>"; };
+		00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CorePlot.xcodeproj; path = CorePlot_1.1/Source/framework/CorePlot.xcodeproj; sourceTree = "<group>"; };
 		3E2D538B165A70D600F49D20 /* Icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon2.png; sourceTree = "<group>"; };
 		3E3B07E815EE358D00198665 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3E41C05415D50A17001FDFCB /* MocoRegistration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoRegistration.h; sourceTree = "<group>"; };
@@ -261,10 +253,10 @@
 		3E7DB64915A45595002966AE /* libitkvnl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libitkvnl.a; path = /usr/local/lib/InsightToolkit/libitkvnl.a; sourceTree = "<absolute>"; };
 		3E7DB64A15A45595002966AE /* libitkzlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libitkzlib.a; path = /usr/local/lib/InsightToolkit/libitkzlib.a; sourceTree = "<absolute>"; };
 		3E7DB64B15A45595002966AE /* libITKznz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libITKznz.a; path = /usr/local/lib/InsightToolkit/libITKznz.a; sourceTree = "<absolute>"; };
-		3E98903A16143FF200086C21 /* libboost_date_time-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_date_time-mt.dylib"; path = "../../../../../usr/local/lib/libboost_date_time-mt.dylib"; sourceTree = "<group>"; };
-		3E98903C1614401800086C21 /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "../../../../../usr/local/lib/libboost_filesystem-mt.dylib"; sourceTree = "<group>"; };
-		3E98903E1614402600086C21 /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "../../../../../usr/local/lib/libboost_system-mt.dylib"; sourceTree = "<group>"; };
-		3E9890401614404D00086C21 /* libboost_regex-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_regex-mt.dylib"; path = "../../../../../usr/local/lib/libboost_regex-mt.dylib"; sourceTree = "<group>"; };
+		3E98903A16143FF200086C21 /* libboost_date_time-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_date_time-mt.dylib"; path = "/usr/lib/libboost_date_time-mt.dylib"; sourceTree = "<absolute>"; };
+		3E98903C1614401800086C21 /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "/usr/lib/libboost_filesystem-mt.dylib"; sourceTree = "<absolute>"; };
+		3E98903E1614402600086C21 /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "/usr/lib/libboost_system-mt.dylib"; sourceTree = "<absolute>"; };
+		3E9890401614404D00086C21 /* libboost_regex-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_regex-mt.dylib"; path = "/usr/lib/libboost_regex-mt.dylib"; sourceTree = "<absolute>"; };
 		3E98904616149E4300086C21 /* EDNA.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = EDNA.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E98904A16149E4300086C21 /* EDNA-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EDNA-Prefix.pch"; sourceTree = "<group>"; };
 		3E98905116149EA100086C21 /* EDDataElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDDataElement.h; sourceTree = "<group>"; };
@@ -293,7 +285,6 @@
 		3EDA32D715513A7900787007 /* MocoApplicationAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MocoApplicationAppDelegate.mm; sourceTree = "<group>"; };
 		3EDA32DA15513A7900787007 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		3EDA32EA15513BFE00787007 /* MocoDrawTranslationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MocoDrawTranslationView.m; sourceTree = "<group>"; };
-		3EEE66BA1553E74600AA0F7F /* CorePlot.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CorePlot.xcodeproj; path = ../../../programs/CorePlot_1.0/Source/framework/CorePlot.xcodeproj; sourceTree = "<group>"; };
 		3EEE66CD1553E97300AA0F7F /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EEE66D115566DCB00AA0F7F /* MocoDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoDrawViewController.h; sourceTree = "<group>"; };
 		3EEE66D215566DCB00AA0F7F /* MocoDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MocoDrawViewController.m; sourceTree = "<group>"; };
@@ -426,6 +417,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00D3AFDB165E558D0034A86D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				00D3AFE4165E558E0034A86D /* CorePlot.framework */,
+				00D3AFE6165E558E0034A86D /* UnitTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3E5A30BA1647F651004E01F5 /* MocoRegistrationTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -530,6 +530,7 @@
 		3EDA32B515513A7900787007 = {
 			isa = PBXGroup;
 			children = (
+				00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */,
 				3E2D538B165A70D600F49D20 /* Icon2.png */,
 				3E66644F1657BBD100855C46 /* docs */,
 				3E7DB62915A45324002966AE /* libs */,
@@ -538,7 +539,6 @@
 				3E5A30BA1647F651004E01F5 /* MocoRegistrationTest */,
 				3EDA32C115513A7900787007 /* Products */,
 				3EDA32C315513A7900787007 /* Frameworks */,
-				3EEE66BA1553E74600AA0F7F /* CorePlot.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -601,7 +601,6 @@
 		3EDA32CB15513A7900787007 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3E2D5389165A70AD00F49D20 /* Icon2.png */,
 				3E57015515A44D7000845683 /* defaultRegParams.plist */,
 				3EDA32CC15513A7900787007 /* MocoApplication-Info.plist */,
 				3EDA32CD15513A7900787007 /* InfoPlist.strings */,
@@ -610,15 +609,6 @@
 				3EDA32D315513A7900787007 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		3EEE66BB1553E74600AA0F7F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3EEE66C41553E74600AA0F7F /* CorePlot.framework */,
-				3EEE66C61553E74600AA0F7F /* UnitTests.octest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -690,7 +680,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				3EEE66D01553E9C500AA0F7F /* PBXTargetDependency */,
 			);
 			name = MocoApplication;
 			productName = MocoApplication;
@@ -717,8 +706,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 3EEE66BB1553E74600AA0F7F /* Products */;
-					ProjectRef = 3EEE66BA1553E74600AA0F7F /* CorePlot.xcodeproj */;
+					ProductGroup = 00D3AFDB165E558D0034A86D /* Products */;
+					ProjectRef = 00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -731,18 +720,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3EEE66C41553E74600AA0F7F /* CorePlot.framework */ = {
+		00D3AFE4165E558E0034A86D /* CorePlot.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = CorePlot.framework;
-			remoteRef = 3EEE66C31553E74600AA0F7F /* PBXContainerItemProxy */;
+			remoteRef = 00D3AFE3165E558E0034A86D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3EEE66C61553E74600AA0F7F /* UnitTests.octest */ = {
+		00D3AFE6165E558E0034A86D /* UnitTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = UnitTests.octest;
-			remoteRef = 3EEE66C51553E74600AA0F7F /* PBXContainerItemProxy */;
+			remoteRef = 00D3AFE5165E558E0034A86D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -766,7 +755,6 @@
 				3EDA32DB15513A7900787007 /* MainMenu.xib in Resources */,
 				3E57015615A44D7000845683 /* defaultRegParams.plist in Resources */,
 				3E56B30815C7C12800493310 /* MocoDrawView.xib in Resources */,
-				3E2D538A165A70AD00F49D20 /* Icon2.png in Resources */,
 				3E2D538C165A70D600F49D20 /* Icon2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -835,11 +823,6 @@
 			isa = PBXTargetDependency;
 			target = 3EDA32BF15513A7900787007 /* MocoApplication */;
 			targetProxy = 3E5A30D2164801E4004E01F5 /* PBXContainerItemProxy */;
-		};
-		3EEE66D01553E9C500AA0F7F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CorePlot;
-			targetProxy = 3EEE66CF1553E9C500AA0F7F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1039,7 +1022,7 @@
 					/usr/local/lib/isis/,
 					/usr/local/lib/InsightToolkit,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = "";
 			};
@@ -1086,7 +1069,7 @@
 					/usr/local/lib/isis/,
 					/usr/local/lib/InsightToolkit,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = "";
 				"VALID_ARCHS[sdk=*]" = "i386 x86_64";
