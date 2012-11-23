@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E2D538A165A70AD00F49D20 /* Icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E2D5389165A70AD00F49D20 /* Icon2.png */; };
-		3E2D538C165A70D600F49D20 /* Icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E2D538B165A70D600F49D20 /* Icon2.png */; };
 		3E41C05815D50A17001FDFCB /* MocoRegistration.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05515D50A17001FDFCB /* MocoRegistration.mm */; };
 		3E41C05915D50A17001FDFCB /* MocoRegistrationProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05715D50A17001FDFCB /* MocoRegistrationProperty.m */; };
 		3E56B30815C7C12800493310 /* MocoDrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E56B30715C7C12700493310 /* MocoDrawView.xib */; };
@@ -110,6 +108,7 @@
 		3E98906716149EA100086C21 /* EDIsisImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E98905B16149EA100086C21 /* EDIsisImage.cpp */; };
 		3E98906816149EA100086C21 /* EDIsisImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E98905C16149EA100086C21 /* EDIsisImage.h */; };
 		3EA6E32E1622DCA7001F3C6E /* MocoDataLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EA6E32C1622DCA7001F3C6E /* MocoDataLogger.cpp */; };
+		3ED2BAB6165F8FA900DA257D /* appIcon.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 3ED2BAB5165F8FA900DA257D /* appIcon.iconset */; };
 		3EDA32C515513A7900787007 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EDA32C415513A7900787007 /* Cocoa.framework */; };
 		3EDA32CF15513A7900787007 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA32CD15513A7900787007 /* InfoPlist.strings */; };
 		3EDA32D215513A7900787007 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA32D115513A7900787007 /* main.m */; };
@@ -207,8 +206,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3E2D5389165A70AD00F49D20 /* Icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon2.png; path = ../../AppIcon/Icon2.png; sourceTree = "<group>"; };
-		3E2D538B165A70D600F49D20 /* Icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon2.png; sourceTree = "<group>"; };
 		3E3B07E815EE358D00198665 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3E41C05415D50A17001FDFCB /* MocoRegistration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoRegistration.h; sourceTree = "<group>"; };
 		3E41C05515D50A17001FDFCB /* MocoRegistration.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MocoRegistration.mm; sourceTree = "<group>"; };
@@ -279,6 +276,7 @@
 		3E98905C16149EA100086C21 /* EDIsisImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDIsisImage.h; sourceTree = "<group>"; };
 		3EA6E32C1622DCA7001F3C6E /* MocoDataLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MocoDataLogger.cpp; sourceTree = "<group>"; };
 		3EA6E32D1622DCA7001F3C6E /* MocoDataLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoDataLogger.h; sourceTree = "<group>"; };
+		3ED2BAB5165F8FA900DA257D /* appIcon.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; name = appIcon.iconset; path = ../appIcon.iconset; sourceTree = "<group>"; };
 		3EDA32C015513A7900787007 /* MocoApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MocoApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EDA32C415513A7900787007 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		3EDA32C715513A7900787007 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -530,7 +528,6 @@
 		3EDA32B515513A7900787007 = {
 			isa = PBXGroup;
 			children = (
-				3E2D538B165A70D600F49D20 /* Icon2.png */,
 				3E66644F1657BBD100855C46 /* docs */,
 				3E7DB62915A45324002966AE /* libs */,
 				3EDA32CA15513A7900787007 /* MocoApplication */,
@@ -577,6 +574,7 @@
 		3EDA32CA15513A7900787007 /* MocoApplication */ = {
 			isa = PBXGroup;
 			children = (
+				3ED2BAB5165F8FA900DA257D /* appIcon.iconset */,
 				3EDA32D615513A7900787007 /* MocoApplicationAppDelegate.h */,
 				3EDA32D715513A7900787007 /* MocoApplicationAppDelegate.mm */,
 				3E56B30915C7C3C600493310 /* MocoDrawTranslationView.h */,
@@ -601,7 +599,6 @@
 		3EDA32CB15513A7900787007 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3E2D5389165A70AD00F49D20 /* Icon2.png */,
 				3E57015515A44D7000845683 /* defaultRegParams.plist */,
 				3EDA32CC15513A7900787007 /* MocoApplication-Info.plist */,
 				3EDA32CD15513A7900787007 /* InfoPlist.strings */,
@@ -766,8 +763,7 @@
 				3EDA32DB15513A7900787007 /* MainMenu.xib in Resources */,
 				3E57015615A44D7000845683 /* defaultRegParams.plist in Resources */,
 				3E56B30815C7C12800493310 /* MocoDrawView.xib in Resources */,
-				3E2D538A165A70AD00F49D20 /* Icon2.png in Resources */,
-				3E2D538C165A70D600F49D20 /* Icon2.png in Resources */,
+				3ED2BAB6165F8FA900DA257D /* appIcon.iconset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
