@@ -19,7 +19,7 @@
 #define SINC5 8
 #define SINC6 9
 #define LINEAR 10
-#define NN 11 
+#define INTERPOLATOR_NN 11 
 
 
 #define METRIC_FAILURE 100
