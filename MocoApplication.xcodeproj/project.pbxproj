@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		003AC6731664F42B00E0BEE1 /* MocoRegistration.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05515D50A17001FDFCB /* MocoRegistration.mm */; };
 		3E2D538C165A70D600F49D20 /* Icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E2D538B165A70D600F49D20 /* Icon2.png */; };
 		3E41C05815D50A17001FDFCB /* MocoRegistration.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05515D50A17001FDFCB /* MocoRegistration.mm */; };
 		3E41C05915D50A17001FDFCB /* MocoRegistrationProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05715D50A17001FDFCB /* MocoRegistrationProperty.m */; };
@@ -64,6 +65,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		003AC66F165E865000E0BEE1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EDA32B715513A7900787007 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E98904516149E4300086C21;
+			remoteInfo = EDNA;
+		};
+		003AC6711664F3D000E0BEE1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3EDA32B715513A7900787007 /* Project object */;
 			proxyType = 1;
@@ -491,6 +499,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				003AC6721664F3D000E0BEE1 /* PBXTargetDependency */,
 				3E5A30D3164801E4004E01F5 /* PBXTargetDependency */,
 			);
 			name = MocoRegistrationTest;
@@ -633,6 +642,7 @@
 			files = (
 				3E5A30C21647F652004E01F5 /* MocoRegistrationTest.mm in Sources */,
 				3E5A310E16480A6A004E01F5 /* MocoRegistrationProperty.m in Sources */,
+				003AC6731664F42B00E0BEE1 /* MocoRegistration.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,6 +681,11 @@
 			isa = PBXTargetDependency;
 			target = 3E98904516149E4300086C21 /* EDNA */;
 			targetProxy = 003AC66F165E865000E0BEE1 /* PBXContainerItemProxy */;
+		};
+		003AC6721664F3D000E0BEE1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3E98904516149E4300086C21 /* EDNA */;
+			targetProxy = 003AC6711664F3D000E0BEE1 /* PBXContainerItemProxy */;
 		};
 		3E5A30D3164801E4004E01F5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -844,10 +859,9 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"_ENABLE_DEBUG=1",
 					"_ENABLE_LOG=1",
-					"_GLIBCXX_FULLY_DYNAMIC_STRING=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -888,10 +902,9 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"_ENABLE_DEBUG=0",
 					"_ENABLE_LOG=1",
-					"_GLIBCXX_FULLY_DYNAMIC_STRING=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -939,7 +952,7 @@
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MocoApplication/MocoApplication-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "MocoApplication/MocoApplication-Info.plist";
@@ -981,10 +994,9 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"_ENABLE_DEBUG=0",
 					"_ENABLE_LOG=1",
-					"_GLIBCXX_FULLY_DYNAMIC_STRING=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "MocoApplication/MocoApplication-Info.plist";
