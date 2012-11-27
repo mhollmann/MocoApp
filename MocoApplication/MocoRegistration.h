@@ -150,8 +150,8 @@ protected:
     
     
     MaskImageType3D::Pointer m_referenceImgMask;
-    MaskType3D::Pointer m_referenceMask;
-    MaskType3D::Pointer m_movingMask;
+    MaskType3D::Pointer      m_referenceMask;
+    MaskType3D::Pointer      m_movingMask;
     
 }
 

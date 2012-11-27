@@ -44,6 +44,12 @@ NSString* mFileNameTestMocoParams = @"testData_mocoParams_linear_smoothed5_it12.
 
 
 
+- (void)testInitialization
+{
+    
+}
+    
+
 - (void)testAlign
 {
     MocoRegistrationProperty *regProperty = [[MocoRegistrationProperty alloc] init];
@@ -144,7 +150,7 @@ NSString* mFileNameTestMocoParams = @"testData_mocoParams_linear_smoothed5_it12.
         STAssertEquals( [[NSNumber numberWithFloat: vrY] integerValue] , rY , @"incorrect value returned for reg param");
         STAssertEquals( [[NSNumber numberWithFloat: vrZ] integerValue] , rZ , @"incorrect value returned for reg param");
     }
-        
+    
 }
 
 
