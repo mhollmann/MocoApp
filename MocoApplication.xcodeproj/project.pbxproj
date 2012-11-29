@@ -16,86 +16,12 @@
 		3E5A30B91647F651004E01F5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EDA32C415513A7900787007 /* Cocoa.framework */; };
 		3E5A30BF1647F652004E01F5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E5A30BD1647F652004E01F5 /* InfoPlist.strings */; };
 		3E5A30C21647F652004E01F5 /* MocoRegistrationTest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E5A30C11647F652004E01F5 /* MocoRegistrationTest.mm */; };
-		3E5A30D616480201004E01F5 /* libboost_date_time-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98903A16143FF200086C21 /* libboost_date_time-mt.dylib */; };
-		3E5A30D716480201004E01F5 /* libboost_filesystem-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98903C1614401800086C21 /* libboost_filesystem-mt.dylib */; };
-		3E5A30D816480201004E01F5 /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98903E1614402600086C21 /* libboost_system-mt.dylib */; };
-		3E5A30D916480201004E01F5 /* libboost_regex-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9890401614404D00086C21 /* libboost_regex-mt.dylib */; };
-		3E5A30DA16480201004E01F5 /* libITKAlgorithms.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB62C15A45595002966AE /* libITKAlgorithms.a */; };
-		3E5A30DB16480201004E01F5 /* libITKBasicFilters.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB62D15A45595002966AE /* libITKBasicFilters.a */; };
-		3E5A30DC16480201004E01F5 /* libITKCommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB62E15A45595002966AE /* libITKCommon.a */; };
-		3E5A30DD16480201004E01F5 /* libITKDICOMParser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB62F15A45595002966AE /* libITKDICOMParser.a */; };
-		3E5A30DE16480201004E01F5 /* libITKEXPAT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63015A45595002966AE /* libITKEXPAT.a */; };
-		3E5A30DF16480201004E01F5 /* libITKFEM.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63115A45595002966AE /* libITKFEM.a */; };
-		3E5A30E016480201004E01F5 /* libitkgdcm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63215A45595002966AE /* libitkgdcm.a */; };
-		3E5A30E116480201004E01F5 /* libITKIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63315A45595002966AE /* libITKIO.a */; };
-		3E5A30E216480201004E01F5 /* libITKIOReview.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63415A45595002966AE /* libITKIOReview.a */; };
-		3E5A30E316480201004E01F5 /* libitkjpeg8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63515A45595002966AE /* libitkjpeg8.a */; };
-		3E5A30E416480201004E01F5 /* libitkjpeg12.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63615A45595002966AE /* libitkjpeg12.a */; };
-		3E5A30E516480201004E01F5 /* libitkjpeg16.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63715A45595002966AE /* libitkjpeg16.a */; };
-		3E5A30E616480201004E01F5 /* libITKMetaIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63815A45595002966AE /* libITKMetaIO.a */; };
-		3E5A30E716480201004E01F5 /* libitkNetlibSlatec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63915A45595002966AE /* libitkNetlibSlatec.a */; };
-		3E5A30E816480201004E01F5 /* libITKniftiio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63A15A45595002966AE /* libITKniftiio.a */; };
-		3E5A30E916480201004E01F5 /* libITKNrrdIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63B15A45595002966AE /* libITKNrrdIO.a */; };
-		3E5A30EA16480201004E01F5 /* libITKNumerics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63C15A45595002966AE /* libITKNumerics.a */; };
-		3E5A30EB16480201004E01F5 /* libitkopenjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63D15A45595002966AE /* libitkopenjpeg.a */; };
-		3E5A30EC16480201004E01F5 /* libitkpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63E15A45595002966AE /* libitkpng.a */; };
-		3E5A30ED16480201004E01F5 /* libITKQuadEdgeMesh.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63F15A45595002966AE /* libITKQuadEdgeMesh.a */; };
-		3E5A30EE16480201004E01F5 /* libITKSpatialObject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64015A45595002966AE /* libITKSpatialObject.a */; };
-		3E5A30EF16480201004E01F5 /* libITKStatistics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64115A45595002966AE /* libITKStatistics.a */; };
-		3E5A30F016480201004E01F5 /* libitksys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64215A45595002966AE /* libitksys.a */; };
-		3E5A30F116480201004E01F5 /* libitktiff.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64315A45595002966AE /* libitktiff.a */; };
-		3E5A30F216480201004E01F5 /* libitkv3p_lsqr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64415A45595002966AE /* libitkv3p_lsqr.a */; };
-		3E5A30F316480201004E01F5 /* libitkv3p_netlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64515A45595002966AE /* libitkv3p_netlib.a */; };
-		3E5A30F416480201004E01F5 /* libitkvcl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64615A45595002966AE /* libitkvcl.a */; };
-		3E5A30F516480201004E01F5 /* libitkvnl_algo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64715A45595002966AE /* libitkvnl_algo.a */; };
-		3E5A30F616480201004E01F5 /* libitkvnl_inst.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64815A45595002966AE /* libitkvnl_inst.a */; };
-		3E5A30F716480201004E01F5 /* libitkvnl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64915A45595002966AE /* libitkvnl.a */; };
-		3E5A30F816480201004E01F5 /* libitkzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64A15A45595002966AE /* libitkzlib.a */; };
-		3E5A30F916480201004E01F5 /* libITKznz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64B15A45595002966AE /* libITKznz.a */; };
 		3E5A310D164808FB004E01F5 /* EDNA.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98904616149E4300086C21 /* EDNA.dylib */; };
 		3E5A310E16480A6A004E01F5 /* MocoRegistrationProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05715D50A17001FDFCB /* MocoRegistrationProperty.m */; };
 		3E5A310F16480A6E004E01F5 /* MocoRegistration.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05515D50A17001FDFCB /* MocoRegistration.mm */; };
 		3E5A311116480C81004E01F5 /* testData.nii in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E5A30FA164802F5004E01F5 /* testData.nii */; };
 		3E5A312716490B88004E01F5 /* testData_mocoParams_linear_smoothed5_it12.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3E5A312616490B88004E01F5 /* testData_mocoParams_linear_smoothed5_it12.txt */; };
-		3E5A31291649A75F004E01F5 /* libisis_core.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E5A31281649A75F004E01F5 /* libisis_core.3.0.0.dylib */; };
-		3E5A312A1649A77B004E01F5 /* libisis_core.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E5A31281649A75F004E01F5 /* libisis_core.3.0.0.dylib */; };
 		3E666451165A2BBB00855C46 /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EEE66CD1553E97300AA0F7F /* CorePlot.framework */; };
-		3E7DB64C15A45595002966AE /* libITKAlgorithms.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB62C15A45595002966AE /* libITKAlgorithms.a */; };
-		3E7DB64D15A45595002966AE /* libITKBasicFilters.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB62D15A45595002966AE /* libITKBasicFilters.a */; };
-		3E7DB64E15A45595002966AE /* libITKCommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB62E15A45595002966AE /* libITKCommon.a */; };
-		3E7DB64F15A45595002966AE /* libITKDICOMParser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB62F15A45595002966AE /* libITKDICOMParser.a */; };
-		3E7DB65015A45595002966AE /* libITKEXPAT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63015A45595002966AE /* libITKEXPAT.a */; };
-		3E7DB65115A45595002966AE /* libITKFEM.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63115A45595002966AE /* libITKFEM.a */; };
-		3E7DB65215A45595002966AE /* libitkgdcm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63215A45595002966AE /* libitkgdcm.a */; };
-		3E7DB65315A45595002966AE /* libITKIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63315A45595002966AE /* libITKIO.a */; };
-		3E7DB65415A45595002966AE /* libITKIOReview.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63415A45595002966AE /* libITKIOReview.a */; };
-		3E7DB65515A45595002966AE /* libitkjpeg8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63515A45595002966AE /* libitkjpeg8.a */; };
-		3E7DB65615A45595002966AE /* libitkjpeg12.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63615A45595002966AE /* libitkjpeg12.a */; };
-		3E7DB65715A45595002966AE /* libitkjpeg16.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63715A45595002966AE /* libitkjpeg16.a */; };
-		3E7DB65815A45595002966AE /* libITKMetaIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63815A45595002966AE /* libITKMetaIO.a */; };
-		3E7DB65915A45595002966AE /* libitkNetlibSlatec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63915A45595002966AE /* libitkNetlibSlatec.a */; };
-		3E7DB65A15A45595002966AE /* libITKniftiio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63A15A45595002966AE /* libITKniftiio.a */; };
-		3E7DB65B15A45595002966AE /* libITKNrrdIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63B15A45595002966AE /* libITKNrrdIO.a */; };
-		3E7DB65C15A45595002966AE /* libITKNumerics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63C15A45595002966AE /* libITKNumerics.a */; };
-		3E7DB65D15A45595002966AE /* libitkopenjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63D15A45595002966AE /* libitkopenjpeg.a */; };
-		3E7DB65E15A45595002966AE /* libitkpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63E15A45595002966AE /* libitkpng.a */; };
-		3E7DB65F15A45595002966AE /* libITKQuadEdgeMesh.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63F15A45595002966AE /* libITKQuadEdgeMesh.a */; };
-		3E7DB66015A45595002966AE /* libITKSpatialObject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64015A45595002966AE /* libITKSpatialObject.a */; };
-		3E7DB66115A45595002966AE /* libITKStatistics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64115A45595002966AE /* libITKStatistics.a */; };
-		3E7DB66215A45595002966AE /* libitksys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64215A45595002966AE /* libitksys.a */; };
-		3E7DB66315A45595002966AE /* libitktiff.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64315A45595002966AE /* libitktiff.a */; };
-		3E7DB66415A45595002966AE /* libitkv3p_lsqr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64415A45595002966AE /* libitkv3p_lsqr.a */; };
-		3E7DB66515A45595002966AE /* libitkv3p_netlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64515A45595002966AE /* libitkv3p_netlib.a */; };
-		3E7DB66615A45595002966AE /* libitkvcl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64615A45595002966AE /* libitkvcl.a */; };
-		3E7DB66715A45595002966AE /* libitkvnl_algo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64715A45595002966AE /* libitkvnl_algo.a */; };
-		3E7DB66815A45595002966AE /* libitkvnl_inst.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64815A45595002966AE /* libitkvnl_inst.a */; };
-		3E7DB66915A45595002966AE /* libitkvnl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64915A45595002966AE /* libitkvnl.a */; };
-		3E7DB66A15A45595002966AE /* libitkzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64A15A45595002966AE /* libitkzlib.a */; };
-		3E7DB66B15A45595002966AE /* libITKznz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64B15A45595002966AE /* libITKznz.a */; };
-		3E98903B16143FF200086C21 /* libboost_date_time-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98903A16143FF200086C21 /* libboost_date_time-mt.dylib */; };
-		3E98903D1614401800086C21 /* libboost_filesystem-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98903C1614401800086C21 /* libboost_filesystem-mt.dylib */; };
-		3E98903F1614402600086C21 /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98903E1614402600086C21 /* libboost_system-mt.dylib */; };
-		3E9890411614404D00086C21 /* libboost_regex-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9890401614404D00086C21 /* libboost_regex-mt.dylib */; };
 		3E98904716149E4300086C21 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EDA32C415513A7900787007 /* Cocoa.framework */; };
 		3E98905D16149EA100086C21 /* EDDataElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E98905116149EA100086C21 /* EDDataElement.h */; };
 		3E98905E16149EA100086C21 /* EDDataElement.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E98905216149EA100086C21 /* EDDataElement.mm */; };
@@ -120,25 +46,6 @@
 		3EEE66D415566DCB00AA0F7F /* MocoDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEE66D215566DCB00AA0F7F /* MocoDrawViewController.m */; };
 		3EF416341615A2E200443485 /* BARTNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EF416321615A2E200443485 /* BARTNotifications.h */; };
 		3EF416351615A2E200443485 /* BARTNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF416331615A2E200443485 /* BARTNotifications.m */; };
-		3EF416381615A5F400443485 /* libitkvnl_algo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64715A45595002966AE /* libitkvnl_algo.a */; };
-		3EF416391615A5F400443485 /* libitkvnl_inst.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64815A45595002966AE /* libitkvnl_inst.a */; };
-		3EF4163A1615A5F400443485 /* libitkvnl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64915A45595002966AE /* libitkvnl.a */; };
-		3EF4163B1615A60700443485 /* libboost_date_time-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98903A16143FF200086C21 /* libboost_date_time-mt.dylib */; };
-		3EF4163C1615A60700443485 /* libboost_filesystem-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98903C1614401800086C21 /* libboost_filesystem-mt.dylib */; };
-		3EF4163D1615A60700443485 /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98903E1614402600086C21 /* libboost_system-mt.dylib */; };
-		3EF4163E1615A60700443485 /* libboost_regex-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9890401614404D00086C21 /* libboost_regex-mt.dylib */; };
-		3EF4163F1615A62B00443485 /* libITKAlgorithms.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB62C15A45595002966AE /* libITKAlgorithms.a */; };
-		3EF416401615A62B00443485 /* libITKBasicFilters.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB62D15A45595002966AE /* libITKBasicFilters.a */; };
-		3EF416411615A62B00443485 /* libITKCommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB62E15A45595002966AE /* libITKCommon.a */; };
-		3EF416421615A63600443485 /* libITKIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63315A45595002966AE /* libITKIO.a */; };
-		3EF416431615A64900443485 /* libITKNumerics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB63C15A45595002966AE /* libITKNumerics.a */; };
-		3EF416441615A64E00443485 /* libITKSpatialObject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64015A45595002966AE /* libITKSpatialObject.a */; };
-		3EF416451615A67000443485 /* libITKStatistics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64115A45595002966AE /* libITKStatistics.a */; };
-		3EF416461615A6A200443485 /* libitksys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64215A45595002966AE /* libitksys.a */; };
-		3EF416481615A6A200443485 /* libitkv3p_lsqr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64415A45595002966AE /* libitkv3p_lsqr.a */; };
-		3EF416491615A6A200443485 /* libitkv3p_netlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64515A45595002966AE /* libitkv3p_netlib.a */; };
-		3EF4164A1615A6A200443485 /* libitkvcl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64615A45595002966AE /* libitkvcl.a */; };
-		3EF4164B1615A6E000443485 /* libitkzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7DB64A15A45595002966AE /* libitkzlib.a */; };
 		3EF4164D1615AA1800443485 /* EDNA.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98904616149E4300086C21 /* EDNA.dylib */; };
 /* End PBXBuildFile section */
 
@@ -225,43 +132,6 @@
 		3E5A30C31647F652004E01F5 /* MocoRegistrationTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MocoRegistrationTest-Prefix.pch"; sourceTree = "<group>"; };
 		3E5A30FA164802F5004E01F5 /* testData.nii */ = {isa = PBXFileReference; lastKnownFileType = file; name = testData.nii; path = testfiles/testData.nii; sourceTree = SOURCE_ROOT; };
 		3E5A312616490B88004E01F5 /* testData_mocoParams_linear_smoothed5_it12.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = testData_mocoParams_linear_smoothed5_it12.txt; path = testfiles/testData_mocoParams_linear_smoothed5_it12.txt; sourceTree = SOURCE_ROOT; };
-		3E5A31281649A75F004E01F5 /* libisis_core.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libisis_core.3.0.0.dylib; path = ../../../../../usr/local/lib/libisis_core.3.0.0.dylib; sourceTree = "<group>"; };
-		3E7DB62C15A45595002966AE /* libITKAlgorithms.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libITKAlgorithms.a; path = /usr/local/lib/InsightToolkit/libITKAlgorithms.a; sourceTree = "<absolute>"; };
-		3E7DB62D15A45595002966AE /* libITKBasicFilters.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libITKBasicFilters.a; path = /usr/local/lib/InsightToolkit/libITKBasicFilters.a; sourceTree = "<absolute>"; };
-		3E7DB62E15A45595002966AE /* libITKCommon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libITKCommon.a; path = /usr/local/lib/InsightToolkit/libITKCommon.a; sourceTree = "<absolute>"; };
-		3E7DB62F15A45595002966AE /* libITKDICOMParser.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libITKDICOMParser.a; path = /usr/local/lib/InsightToolkit/libITKDICOMParser.a; sourceTree = "<absolute>"; };
-		3E7DB63015A45595002966AE /* libITKEXPAT.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libITKEXPAT.a; path = /usr/local/lib/InsightToolkit/libITKEXPAT.a; sourceTree = "<absolute>"; };
-		3E7DB63115A45595002966AE /* libITKFEM.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libITKFEM.a; path = /usr/local/lib/InsightToolkit/libITKFEM.a; sourceTree = "<absolute>"; };
-		3E7DB63215A45595002966AE /* libitkgdcm.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libitkgdcm.a; path = /usr/local/lib/InsightToolkit/libitkgdcm.a; sourceTree = "<absolute>"; };
-		3E7DB63315A45595002966AE /* libITKIO.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libITKIO.a; path = /usr/local/lib/InsightToolkit/libITKIO.a; sourceTree = "<absolute>"; };
-		3E7DB63415A45595002966AE /* libITKIOReview.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libITKIOReview.a; path = /usr/local/lib/InsightToolkit/libITKIOReview.a; sourceTree = "<absolute>"; };
-		3E7DB63515A45595002966AE /* libitkjpeg8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libitkjpeg8.a; path = /usr/local/lib/InsightToolkit/libitkjpeg8.a; sourceTree = "<absolute>"; };
-		3E7DB63615A45595002966AE /* libitkjpeg12.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libitkjpeg12.a; path = /usr/local/lib/InsightToolkit/libitkjpeg12.a; sourceTree = "<absolute>"; };
-		3E7DB63715A45595002966AE /* libitkjpeg16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libitkjpeg16.a; path = /usr/local/lib/InsightToolkit/libitkjpeg16.a; sourceTree = "<absolute>"; };
-		3E7DB63815A45595002966AE /* libITKMetaIO.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libITKMetaIO.a; path = /usr/local/lib/InsightToolkit/libITKMetaIO.a; sourceTree = "<absolute>"; };
-		3E7DB63915A45595002966AE /* libitkNetlibSlatec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libitkNetlibSlatec.a; path = /usr/local/lib/InsightToolkit/libitkNetlibSlatec.a; sourceTree = "<absolute>"; };
-		3E7DB63A15A45595002966AE /* libITKniftiio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libITKniftiio.a; path = /usr/local/lib/InsightToolkit/libITKniftiio.a; sourceTree = "<absolute>"; };
-		3E7DB63B15A45595002966AE /* libITKNrrdIO.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libITKNrrdIO.a; path = /usr/local/lib/InsightToolkit/libITKNrrdIO.a; sourceTree = "<absolute>"; };
-		3E7DB63C15A45595002966AE /* libITKNumerics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libITKNumerics.a; path = /usr/local/lib/InsightToolkit/libITKNumerics.a; sourceTree = "<absolute>"; };
-		3E7DB63D15A45595002966AE /* libitkopenjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libitkopenjpeg.a; path = /usr/local/lib/InsightToolkit/libitkopenjpeg.a; sourceTree = "<absolute>"; };
-		3E7DB63E15A45595002966AE /* libitkpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libitkpng.a; path = /usr/local/lib/InsightToolkit/libitkpng.a; sourceTree = "<absolute>"; };
-		3E7DB63F15A45595002966AE /* libITKQuadEdgeMesh.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libITKQuadEdgeMesh.a; path = /usr/local/lib/InsightToolkit/libITKQuadEdgeMesh.a; sourceTree = "<absolute>"; };
-		3E7DB64015A45595002966AE /* libITKSpatialObject.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libITKSpatialObject.a; path = /usr/local/lib/InsightToolkit/libITKSpatialObject.a; sourceTree = "<absolute>"; };
-		3E7DB64115A45595002966AE /* libITKStatistics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libITKStatistics.a; path = /usr/local/lib/InsightToolkit/libITKStatistics.a; sourceTree = "<absolute>"; };
-		3E7DB64215A45595002966AE /* libitksys.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libitksys.a; path = /usr/local/lib/InsightToolkit/libitksys.a; sourceTree = "<absolute>"; };
-		3E7DB64315A45595002966AE /* libitktiff.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libitktiff.a; path = /usr/local/lib/InsightToolkit/libitktiff.a; sourceTree = "<absolute>"; };
-		3E7DB64415A45595002966AE /* libitkv3p_lsqr.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libitkv3p_lsqr.a; path = /usr/local/lib/InsightToolkit/libitkv3p_lsqr.a; sourceTree = "<absolute>"; };
-		3E7DB64515A45595002966AE /* libitkv3p_netlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libitkv3p_netlib.a; path = /usr/local/lib/InsightToolkit/libitkv3p_netlib.a; sourceTree = "<absolute>"; };
-		3E7DB64615A45595002966AE /* libitkvcl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libitkvcl.a; path = /usr/local/lib/InsightToolkit/libitkvcl.a; sourceTree = "<absolute>"; };
-		3E7DB64715A45595002966AE /* libitkvnl_algo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libitkvnl_algo.a; path = /usr/local/lib/InsightToolkit/libitkvnl_algo.a; sourceTree = "<absolute>"; };
-		3E7DB64815A45595002966AE /* libitkvnl_inst.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libitkvnl_inst.a; path = /usr/local/lib/InsightToolkit/libitkvnl_inst.a; sourceTree = "<absolute>"; };
-		3E7DB64915A45595002966AE /* libitkvnl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libitkvnl.a; path = /usr/local/lib/InsightToolkit/libitkvnl.a; sourceTree = "<absolute>"; };
-		3E7DB64A15A45595002966AE /* libitkzlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libitkzlib.a; path = /usr/local/lib/InsightToolkit/libitkzlib.a; sourceTree = "<absolute>"; };
-		3E7DB64B15A45595002966AE /* libITKznz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libITKznz.a; path = /usr/local/lib/InsightToolkit/libITKznz.a; sourceTree = "<absolute>"; };
-		3E98903A16143FF200086C21 /* libboost_date_time-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_date_time-mt.dylib"; path = "../../../../../usr/local/lib/libboost_date_time-mt.dylib"; sourceTree = "<group>"; };
-		3E98903C1614401800086C21 /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "../../../../../usr/local/lib/libboost_filesystem-mt.dylib"; sourceTree = "<group>"; };
-		3E98903E1614402600086C21 /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "../../../../../usr/local/lib/libboost_system-mt.dylib"; sourceTree = "<group>"; };
-		3E9890401614404D00086C21 /* libboost_regex-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_regex-mt.dylib"; path = "../../../../../usr/local/lib/libboost_regex-mt.dylib"; sourceTree = "<group>"; };
 		3E98904616149E4300086C21 /* EDNA.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = EDNA.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E98904A16149E4300086C21 /* EDNA-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EDNA-Prefix.pch"; sourceTree = "<group>"; };
 		3E98905116149EA100086C21 /* EDDataElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDDataElement.h; sourceTree = "<group>"; };
@@ -307,43 +177,6 @@
 				3E5A310D164808FB004E01F5 /* EDNA.dylib in Frameworks */,
 				3E5A30B81647F651004E01F5 /* SenTestingKit.framework in Frameworks */,
 				3E5A30B91647F651004E01F5 /* Cocoa.framework in Frameworks */,
-				3E5A30D616480201004E01F5 /* libboost_date_time-mt.dylib in Frameworks */,
-				3E5A30D716480201004E01F5 /* libboost_filesystem-mt.dylib in Frameworks */,
-				3E5A30D816480201004E01F5 /* libboost_system-mt.dylib in Frameworks */,
-				3E5A30D916480201004E01F5 /* libboost_regex-mt.dylib in Frameworks */,
-				3E5A30DA16480201004E01F5 /* libITKAlgorithms.a in Frameworks */,
-				3E5A30DB16480201004E01F5 /* libITKBasicFilters.a in Frameworks */,
-				3E5A30DC16480201004E01F5 /* libITKCommon.a in Frameworks */,
-				3E5A30DD16480201004E01F5 /* libITKDICOMParser.a in Frameworks */,
-				3E5A30DE16480201004E01F5 /* libITKEXPAT.a in Frameworks */,
-				3E5A30DF16480201004E01F5 /* libITKFEM.a in Frameworks */,
-				3E5A30E016480201004E01F5 /* libitkgdcm.a in Frameworks */,
-				3E5A30E116480201004E01F5 /* libITKIO.a in Frameworks */,
-				3E5A30E216480201004E01F5 /* libITKIOReview.a in Frameworks */,
-				3E5A30E316480201004E01F5 /* libitkjpeg8.a in Frameworks */,
-				3E5A30E416480201004E01F5 /* libitkjpeg12.a in Frameworks */,
-				3E5A30E516480201004E01F5 /* libitkjpeg16.a in Frameworks */,
-				3E5A30E616480201004E01F5 /* libITKMetaIO.a in Frameworks */,
-				3E5A30E716480201004E01F5 /* libitkNetlibSlatec.a in Frameworks */,
-				3E5A30E816480201004E01F5 /* libITKniftiio.a in Frameworks */,
-				3E5A30E916480201004E01F5 /* libITKNrrdIO.a in Frameworks */,
-				3E5A30EA16480201004E01F5 /* libITKNumerics.a in Frameworks */,
-				3E5A30EB16480201004E01F5 /* libitkopenjpeg.a in Frameworks */,
-				3E5A30EC16480201004E01F5 /* libitkpng.a in Frameworks */,
-				3E5A30ED16480201004E01F5 /* libITKQuadEdgeMesh.a in Frameworks */,
-				3E5A30EE16480201004E01F5 /* libITKSpatialObject.a in Frameworks */,
-				3E5A30EF16480201004E01F5 /* libITKStatistics.a in Frameworks */,
-				3E5A30F016480201004E01F5 /* libitksys.a in Frameworks */,
-				3E5A30F116480201004E01F5 /* libitktiff.a in Frameworks */,
-				3E5A30F216480201004E01F5 /* libitkv3p_lsqr.a in Frameworks */,
-				3E5A30F316480201004E01F5 /* libitkv3p_netlib.a in Frameworks */,
-				3E5A30F416480201004E01F5 /* libitkvcl.a in Frameworks */,
-				3E5A30F516480201004E01F5 /* libitkvnl_algo.a in Frameworks */,
-				3E5A30F616480201004E01F5 /* libitkvnl_inst.a in Frameworks */,
-				3E5A30F716480201004E01F5 /* libitkvnl.a in Frameworks */,
-				3E5A30F816480201004E01F5 /* libitkzlib.a in Frameworks */,
-				3E5A30F916480201004E01F5 /* libITKznz.a in Frameworks */,
-				3E5A31291649A75F004E01F5 /* libisis_core.3.0.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,26 +185,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E98904716149E4300086C21 /* Cocoa.framework in Frameworks */,
-				3E5A312A1649A77B004E01F5 /* libisis_core.3.0.0.dylib in Frameworks */,
-				3EF4163F1615A62B00443485 /* libITKAlgorithms.a in Frameworks */,
-				3EF416401615A62B00443485 /* libITKBasicFilters.a in Frameworks */,
-				3EF416411615A62B00443485 /* libITKCommon.a in Frameworks */,
-				3EF416431615A64900443485 /* libITKNumerics.a in Frameworks */,
-				3EF416441615A64E00443485 /* libITKSpatialObject.a in Frameworks */,
-				3EF416421615A63600443485 /* libITKIO.a in Frameworks */,
-				3EF416451615A67000443485 /* libITKStatistics.a in Frameworks */,
-				3EF416461615A6A200443485 /* libitksys.a in Frameworks */,
-				3EF416481615A6A200443485 /* libitkv3p_lsqr.a in Frameworks */,
-				3EF416491615A6A200443485 /* libitkv3p_netlib.a in Frameworks */,
-				3EF4164A1615A6A200443485 /* libitkvcl.a in Frameworks */,
-				3EF416381615A5F400443485 /* libitkvnl_algo.a in Frameworks */,
-				3EF416391615A5F400443485 /* libitkvnl_inst.a in Frameworks */,
-				3EF4163A1615A5F400443485 /* libitkvnl.a in Frameworks */,
-				3EF4164B1615A6E000443485 /* libitkzlib.a in Frameworks */,
-				3EF4163B1615A60700443485 /* libboost_date_time-mt.dylib in Frameworks */,
-				3EF4163C1615A60700443485 /* libboost_filesystem-mt.dylib in Frameworks */,
-				3EF4163D1615A60700443485 /* libboost_system-mt.dylib in Frameworks */,
-				3EF4163E1615A60700443485 /* libboost_regex-mt.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,42 +192,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E7DB64C15A45595002966AE /* libITKAlgorithms.a in Frameworks */,
-				3E7DB64D15A45595002966AE /* libITKBasicFilters.a in Frameworks */,
-				3E7DB64E15A45595002966AE /* libITKCommon.a in Frameworks */,
-				3E7DB64F15A45595002966AE /* libITKDICOMParser.a in Frameworks */,
-				3E7DB65015A45595002966AE /* libITKEXPAT.a in Frameworks */,
-				3E7DB65115A45595002966AE /* libITKFEM.a in Frameworks */,
-				3E7DB65215A45595002966AE /* libitkgdcm.a in Frameworks */,
-				3E7DB65315A45595002966AE /* libITKIO.a in Frameworks */,
-				3E7DB65415A45595002966AE /* libITKIOReview.a in Frameworks */,
-				3E7DB65515A45595002966AE /* libitkjpeg8.a in Frameworks */,
-				3E7DB65615A45595002966AE /* libitkjpeg12.a in Frameworks */,
-				3E7DB65715A45595002966AE /* libitkjpeg16.a in Frameworks */,
-				3E7DB65815A45595002966AE /* libITKMetaIO.a in Frameworks */,
-				3E7DB65915A45595002966AE /* libitkNetlibSlatec.a in Frameworks */,
-				3E7DB65A15A45595002966AE /* libITKniftiio.a in Frameworks */,
-				3E7DB65B15A45595002966AE /* libITKNrrdIO.a in Frameworks */,
-				3E7DB65C15A45595002966AE /* libITKNumerics.a in Frameworks */,
-				3E7DB65D15A45595002966AE /* libitkopenjpeg.a in Frameworks */,
-				3E7DB65E15A45595002966AE /* libitkpng.a in Frameworks */,
-				3E7DB65F15A45595002966AE /* libITKQuadEdgeMesh.a in Frameworks */,
-				3E7DB66015A45595002966AE /* libITKSpatialObject.a in Frameworks */,
-				3E7DB66115A45595002966AE /* libITKStatistics.a in Frameworks */,
-				3E7DB66215A45595002966AE /* libitksys.a in Frameworks */,
-				3E7DB66315A45595002966AE /* libitktiff.a in Frameworks */,
-				3E7DB66415A45595002966AE /* libitkv3p_lsqr.a in Frameworks */,
-				3E7DB66515A45595002966AE /* libitkv3p_netlib.a in Frameworks */,
-				3E7DB66615A45595002966AE /* libitkvcl.a in Frameworks */,
-				3E7DB66715A45595002966AE /* libitkvnl_algo.a in Frameworks */,
-				3E7DB66815A45595002966AE /* libitkvnl_inst.a in Frameworks */,
-				3E7DB66915A45595002966AE /* libitkvnl.a in Frameworks */,
-				3E7DB66A15A45595002966AE /* libitkzlib.a in Frameworks */,
-				3E7DB66B15A45595002966AE /* libITKznz.a in Frameworks */,
-				3E98903B16143FF200086C21 /* libboost_date_time-mt.dylib in Frameworks */,
-				3E98903D1614401800086C21 /* libboost_filesystem-mt.dylib in Frameworks */,
-				3E98903F1614402600086C21 /* libboost_system-mt.dylib in Frameworks */,
-				3E9890411614404D00086C21 /* libboost_regex-mt.dylib in Frameworks */,
 				3EF4164D1615AA1800443485 /* EDNA.dylib in Frameworks */,
 				3EEE66CE1553E97300AA0F7F /* CorePlot.framework in Frameworks */,
 				3EDA32C515513A7900787007 /* Cocoa.framework in Frameworks */,
@@ -453,50 +230,6 @@
 			name = docs;
 			sourceTree = "<group>";
 		};
-		3E7DB62915A45324002966AE /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				3E5A31281649A75F004E01F5 /* libisis_core.3.0.0.dylib */,
-				3E98903A16143FF200086C21 /* libboost_date_time-mt.dylib */,
-				3E98903C1614401800086C21 /* libboost_filesystem-mt.dylib */,
-				3E98903E1614402600086C21 /* libboost_system-mt.dylib */,
-				3E9890401614404D00086C21 /* libboost_regex-mt.dylib */,
-				3E7DB62C15A45595002966AE /* libITKAlgorithms.a */,
-				3E7DB62D15A45595002966AE /* libITKBasicFilters.a */,
-				3E7DB62E15A45595002966AE /* libITKCommon.a */,
-				3E7DB62F15A45595002966AE /* libITKDICOMParser.a */,
-				3E7DB63015A45595002966AE /* libITKEXPAT.a */,
-				3E7DB63115A45595002966AE /* libITKFEM.a */,
-				3E7DB63215A45595002966AE /* libitkgdcm.a */,
-				3E7DB63315A45595002966AE /* libITKIO.a */,
-				3E7DB63415A45595002966AE /* libITKIOReview.a */,
-				3E7DB63515A45595002966AE /* libitkjpeg8.a */,
-				3E7DB63615A45595002966AE /* libitkjpeg12.a */,
-				3E7DB63715A45595002966AE /* libitkjpeg16.a */,
-				3E7DB63815A45595002966AE /* libITKMetaIO.a */,
-				3E7DB63915A45595002966AE /* libitkNetlibSlatec.a */,
-				3E7DB63A15A45595002966AE /* libITKniftiio.a */,
-				3E7DB63B15A45595002966AE /* libITKNrrdIO.a */,
-				3E7DB63C15A45595002966AE /* libITKNumerics.a */,
-				3E7DB63D15A45595002966AE /* libitkopenjpeg.a */,
-				3E7DB63E15A45595002966AE /* libitkpng.a */,
-				3E7DB63F15A45595002966AE /* libITKQuadEdgeMesh.a */,
-				3E7DB64015A45595002966AE /* libITKSpatialObject.a */,
-				3E7DB64115A45595002966AE /* libITKStatistics.a */,
-				3E7DB64215A45595002966AE /* libitksys.a */,
-				3E7DB64315A45595002966AE /* libitktiff.a */,
-				3E7DB64415A45595002966AE /* libitkv3p_lsqr.a */,
-				3E7DB64515A45595002966AE /* libitkv3p_netlib.a */,
-				3E7DB64615A45595002966AE /* libitkvcl.a */,
-				3E7DB64715A45595002966AE /* libitkvnl_algo.a */,
-				3E7DB64815A45595002966AE /* libitkvnl_inst.a */,
-				3E7DB64915A45595002966AE /* libitkvnl.a */,
-				3E7DB64A15A45595002966AE /* libitkzlib.a */,
-				3E7DB64B15A45595002966AE /* libITKznz.a */,
-			);
-			name = libs;
-			sourceTree = "<group>";
-		};
 		3E98904816149E4300086C21 /* EDNA */ = {
 			isa = PBXGroup;
 			children = (
@@ -529,7 +262,6 @@
 			isa = PBXGroup;
 			children = (
 				3E66644F1657BBD100855C46 /* docs */,
-				3E7DB62915A45324002966AE /* libs */,
 				3EDA32CA15513A7900787007 /* MocoApplication */,
 				3E98904816149E4300086C21 /* EDNA */,
 				3E5A30BA1647F651004E01F5 /* MocoRegistrationTest */,
@@ -901,6 +633,30 @@
 					"$(inherited)",
 					/usr/local/lib/InsightToolkit,
 				);
+				OTHER_LDFLAGS = (
+					"-lITKAlgorithms",
+					"-lITKCommon",
+					"-lITKDICOMParser",
+					"-litkgdcm",
+					"-lITKIO",
+					"-litkjpeg8",
+					"-litkjpeg12",
+					"-litkjpeg16",
+					"-lITKMetaIO",
+					"-lITKniftiIO",
+					"-lITKnrrdIO",
+					"-lITKNumerics",
+					"-litkopenjpeg",
+					"-litkpng",
+					"-litksys",
+					"-litktiff",
+					"-litkv3p_netlib",
+					"-litkvnl_algo",
+					"-litkvnl",
+					"-litkzlib",
+					"-lITKznz",
+					"-lboost_system-mt",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -926,6 +682,30 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/lib/InsightToolkit,
+				);
+				OTHER_LDFLAGS = (
+					"-lITKAlgorithms",
+					"-lITKCommon",
+					"-lITKDICOMParser",
+					"-litkgdcm",
+					"-lITKIO",
+					"-litkjpeg8",
+					"-litkjpeg12",
+					"-litkjpeg16",
+					"-lITKMetaIO",
+					"-lITKniftiIO",
+					"-lITKnrrdIO",
+					"-lITKNumerics",
+					"-litkopenjpeg",
+					"-litkpng",
+					"-litksys",
+					"-litktiff",
+					"-litkv3p_netlib",
+					"-litkvnl_algo",
+					"-litkvnl",
+					"-litkzlib",
+					"-lITKznz",
+					"-lboost_system-mt",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
@@ -959,6 +739,19 @@
 					"$(inherited)",
 					/usr/local/lib/InsightToolkit,
 				);
+				OTHER_LDFLAGS = (
+					"-lITKCommon",
+					"-litksys",
+					"-litkv3p_netlib",
+					"-litkvnl_algo",
+					"-litkvnl",
+					"-lITKznz",
+					"-lisis_core.3.0.0",
+					"-lboost_date_time-mt",
+					"-lboost_system-mt",
+					"-lboost_filesystem-mt",
+					"-lboost_regex-mt",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -990,6 +783,19 @@
 					"$(inherited)",
 					/usr/local/lib/InsightToolkit,
 				);
+				OTHER_LDFLAGS = (
+					"-lITKCommon",
+					"-litksys",
+					"-litkv3p_netlib",
+					"-litkvnl_algo",
+					"-litkvnl",
+					"-lITKznz",
+					"-lisis_core.3.0.0",
+					"-lboost_date_time-mt",
+					"-lboost_system-mt",
+					"-lboost_filesystem-mt",
+					"-lboost_regex-mt",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -1007,7 +813,7 @@
 					"_GLIBCXX_FULLY_DYNAMIC_STRING=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1054,7 +860,7 @@
 					"_GLIBCXX_FULLY_DYNAMIC_STRING=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1105,11 +911,14 @@
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MocoApplication/MocoApplication-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "MocoApplication/MocoApplication-Info.plist";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/lib/InsightToolkit,
+				);
 				OTHER_LDFLAGS = (
 					"-framework",
 					"Foundation,",
@@ -1122,6 +931,28 @@
 					"-lm",
 					"-lpthread",
 					"-lm",
+					"-lITKAlgorithms",
+					"-lITKCommon",
+					"-lITKDICOMParser",
+					"-litkgdcm",
+					"-lITKIO",
+					"-litkjpeg8",
+					"-litkjpeg12",
+					"-litkjpeg16",
+					"-lITKMetaIO",
+					"-lITKniftiIO",
+					"-lITKnrrdIO",
+					"-lITKNumerics",
+					"-litkopenjpeg",
+					"-litkpng",
+					"-litksys",
+					"-litktiff",
+					"-litkv3p_netlib",
+					"-litkvnl_algo",
+					"-litkvnl",
+					"-litkzlib",
+					"-lITKznz",
+					"-lboost_system-mt",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1149,11 +980,14 @@
 					"_GLIBCXX_FULLY_DYNAMIC_STRING=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "MocoApplication/MocoApplication-Info.plist";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/lib/InsightToolkit,
+				);
 				OTHER_LDFLAGS = (
 					"-framework",
 					"Foundation,",
@@ -1166,6 +1000,28 @@
 					"-lm",
 					"-lpthread",
 					"-lm",
+					"-lITKAlgorithms",
+					"-lITKCommon",
+					"-lITKDICOMParser",
+					"-litkgdcm",
+					"-lITKIO",
+					"-litkjpeg8",
+					"-litkjpeg12",
+					"-litkjpeg16",
+					"-lITKMetaIO",
+					"-lITKniftiIO",
+					"-lITKnrrdIO",
+					"-lITKNumerics",
+					"-litkopenjpeg",
+					"-litkpng",
+					"-litksys",
+					"-litktiff",
+					"-litkv3p_netlib",
+					"-litkvnl_algo",
+					"-litkvnl",
+					"-litkzlib",
+					"-lITKznz",
+					"-lboost_system-mt",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
