@@ -122,6 +122,7 @@
 -(id)initFromImage:(isis::data::Image) img  ofImageType:(enum ImageType)imgType
 {
 	self = [self init];
+    mImageSize = [[BARTImageSize alloc] init];
 	mIsisImage = new isis::data::Image(img);
 	mImageType = imgType;
     

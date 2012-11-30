@@ -106,10 +106,7 @@ enum ImagePropertyID{
 
 -(void)dealloc;
 
-// DEPRECATED == VI stuff
--(id)initWithDatasetFile:(NSString*)path ofImageDataType:(enum ImageDataType)type;
 
--(id)initWithDataType:(enum ImageDataType)type andRows:(int) rows andCols:(int)cols andSlices:(int)slices andTimesteps:(int) tsteps;
 
 -(BARTImageSize*)getImageSize;
 
