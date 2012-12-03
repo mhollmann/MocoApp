@@ -47,6 +47,48 @@ NSString* mFileNameTestMocoParams = @"testData_mocoParams_linear_smoothed5_it12.
 - (void)testInitialization
 {
     
+    MocoRegistrationProperty *regProperty = [[MocoRegistrationProperty alloc] init];
+    STAssertNotNil(regProperty, @"valid init returns nil");
+
+    regProperty.LoggingLevel              = 3;
+    regProperty.NumberOfThreads           = 10;
+    regProperty.Smoothing                 = YES;
+    regProperty.SmoothingSigma            = 5;
+    regProperty.MaskImagesForRegistration = NO;
+    regProperty.UseBestFoundParameters    = NO;
+    regProperty.NumberOfIterations        = 12;
+    [regProperty setRegistrationParameters:1000.0 MaxStep:0.019 MinStep:0.00001];
+    
+    STAssertEquals( 1000.0  , regProperty.RegistrationParameters[0] , @"incorrect value returned for init registrationProperty");
+    STAssertEquals( 0.019   , regProperty.RegistrationParameters[1] , @"incorrect value returned for init registrationProperty");
+    STAssertEquals( 0.00001 , regProperty.RegistrationParameters[2] , @"incorrect value returned for init registrationProperty");
+    
+    regProperty.RegistrationInterpolationMode = LINEAR;
+    regProperty.ResamplingInterpolationMode   = BSPLINE4;
+    regProperty.SmoothingKernelWidth  = 32;
+    
+    
+    //init with default params
+    MocoRegistration *registratorDefault = [ [MocoRegistration alloc]	init];
+    STAssertNotNil(registratorDefault, @"valid init returns nil");
+    
+    //create metric, optimizer, and transform
+    //registratorDefault->m_metric    = MocoMetricType::New();
+    //registratorDefault->m_optimizer = MocoOptimizerType::New();
+    //registratorDefault->m_transform = MocoTransformType::New();
+    
+    //set metric params
+    //registratorDefault->m_metric->SetNumberOfThreads(regProperty.NumberOfThreads);
+    
+    //set global threadnum
+    //registratorDefault->m_metric->GetThreader()->SetGlobalMaximumNumberOfThreads(regProperty.NumberOfThreads);
+    //registratorDefault->m_metric->GetThreader()->SetGlobalDefaultNumberOfThreads(regProperty.NumberOfThreads);
+    
+    
+    MocoRegistration *registrator = [ [MocoRegistration alloc]	initWithRegistrationProperty:regProperty];
+    STAssertNotNil(registrator, @"valid init returns nil");
+
+    
 }
     
 
@@ -104,6 +146,7 @@ NSString* mFileNameTestMocoParams = @"testData_mocoParams_linear_smoothed5_it12.
     //set reference
     MocoRegistration *registrator;
     registrator = [ [MocoRegistration alloc]	initWithRegistrationProperty:regProperty];
+    STAssertNotNil(registrator, @"valid init returns nil");
     [registrator setReferenceImageWithEDDataElement:refDataEl3D];
     
     int numImages = 5;

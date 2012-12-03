@@ -33,7 +33,7 @@
  
     if ( (self = [super init]) ) {
         RegistrationParameters  = (double *) malloc( 3 * sizeof(double) );
-        RegistrationParameters[0] = 1.0/50.0;
+        RegistrationParameters[0] = 1000;
         RegistrationParameters[1] = 0.019;
         RegistrationParameters[2] = 0.00001;
         
@@ -46,8 +46,8 @@
         
         NumberOfThreads           = 1;
         Smoothing                 = YES;
-        SmoothingSigma            = 8; //== FWHM / 2.35482
-        SmoothingKernelWidth      = 64;
+        SmoothingSigma            = 5;
+        SmoothingKernelWidth      = 32;
         MaskImagesForRegistration = YES;
         
         UseBestFoundParameters  = NO;

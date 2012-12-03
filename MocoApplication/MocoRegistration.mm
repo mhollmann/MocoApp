@@ -57,11 +57,20 @@
 
 /**
  *
- * Iitialize the registration with a givenRegistrationProperty.
+ * Iitialize the registration with a given RegistrationProperty.
  * \param regProperty  The MocoRegistrationProperty object.
  *
  */
 -(void)initRegistrationWithRegistrationProperty:(MocoRegistrationProperty*)regProperty;
+
+
+/** MH FIXME: check for soundness of regProperties - return nil if ok, NSError otherwise...
+ *
+ * Check a given RegistrationProperty for param soundness.
+ * \param regProperty  The MocoRegistrationProperty object to check.
+ *
+ */
+//-(NSError)checkRegistrationProperty:(MocoRegistrationProperty*)regProperty;
 
 
 @end
@@ -71,8 +80,7 @@
 
 
 - (id)init
-{   //MH FIXME: remove
-    NSLog(@"Calling init...");
+{
     self = [super init];
     if (self) {
         
@@ -80,7 +88,6 @@
         
         //will set properties and initialize member vars
         [self initRegistrationWithRegistrationProperty: rProperty];
-        
     }
     
     return self;
@@ -90,8 +97,6 @@
 
 - (id)initWithRegistrationProperty:(MocoRegistrationProperty *)regProperty
 {
-    //MH FIXME: remove
-    NSLog(@"Calling initWithRegistrationProperty...");
 
     self = [super init];
     if (self) {

@@ -645,44 +645,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "MocoRegistrationTest/MocoRegistrationTest-Info.plist";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_LDFLAGS = (
-					"-framework",
-					"Foundation,",
-					"-framework",
-					"AppKit,",
-					"-Wl,-search_paths_first",
-					"-headerpad_max_install_names",
-					"-framework",
-					System,
-					"-lm",
-					"-lpthread",
-					"-lm",
-					"$(inherited)",
-				);
-				OTHER_LDFLAGS = (
-					"-lITKAlgorithms",
-					"-lITKCommon",
-					"-lITKDICOMParser",
-					"-litkgdcm",
-					"-lITKIO",
-					"-litkjpeg8",
-					"-litkjpeg12",
-					"-litkjpeg16",
-					"-lITKMetaIO",
-					"-lITKniftiIO",
-					"-lITKnrrdIO",
-					"-lITKNumerics",
-					"-litkopenjpeg",
-					"-litkpng",
-					"-litksys",
-					"-litktiff",
-					"-litkv3p_netlib",
-					"-litkvnl_algo",
-					"-litkvnl",
-					"-litkzlib",
-					"-lITKznz",
-					"-lboost_system-mt",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_AFTER_BUILD = YES;
 				WRAPPER_EXTENSION = octest;
@@ -709,44 +672,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "MocoRegistrationTest/MocoRegistrationTest-Info.plist";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_LDFLAGS = (
-					"-framework",
-					"Foundation,",
-					"-framework",
-					"AppKit,",
-					"-Wl,-search_paths_first",
-					"-headerpad_max_install_names",
-					"-framework",
-					System,
-					"-lm",
-					"-lpthread",
-					"-lm",
-					"$(inherited)",
-				);
-				OTHER_LDFLAGS = (
-					"-lITKAlgorithms",
-					"-lITKCommon",
-					"-lITKDICOMParser",
-					"-litkgdcm",
-					"-lITKIO",
-					"-litkjpeg8",
-					"-litkjpeg12",
-					"-litkjpeg16",
-					"-lITKMetaIO",
-					"-lITKniftiIO",
-					"-lITKnrrdIO",
-					"-lITKNumerics",
-					"-litkopenjpeg",
-					"-litkpng",
-					"-litksys",
-					"-litktiff",
-					"-litkv3p_netlib",
-					"-litkvnl_algo",
-					"-litkvnl",
-					"-litkzlib",
-					"-lITKznz",
-					"-lboost_system-mt",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_AFTER_BUILD = YES;
 				WRAPPER_EXTENSION = octest;
@@ -780,19 +706,7 @@
 					"$(inherited)",
 					/usr/local/lib/InsightToolkit,
 				);
-				OTHER_LDFLAGS = (
-					"-lITKCommon",
-					"-litksys",
-					"-litkv3p_netlib",
-					"-litkvnl_algo",
-					"-litkvnl",
-					"-lITKznz",
-					"-lisis_core.3.0.0",
-					"-lboost_date_time-mt",
-					"-lboost_system-mt",
-					"-lboost_filesystem-mt",
-					"-lboost_regex-mt",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -824,19 +738,7 @@
 					"$(inherited)",
 					/usr/local/lib/InsightToolkit,
 				);
-				OTHER_LDFLAGS = (
-					"-lITKCommon",
-					"-litksys",
-					"-litkv3p_netlib",
-					"-litkvnl_algo",
-					"-litkvnl",
-					"-lITKznz",
-					"-lisis_core.3.0.0",
-					"-lboost_date_time-mt",
-					"-lboost_system-mt",
-					"-lboost_filesystem-mt",
-					"-lboost_regex-mt",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -962,41 +864,7 @@
 					"$(inherited)",
 					/usr/local/lib/InsightToolkit,
 				);
-				OTHER_LDFLAGS = (
-					"-framework",
-					"Foundation,",
-					"-framework",
-					"AppKit,",
-					"-Wl,-search_paths_first",
-					"-headerpad_max_install_names",
-					"-framework",
-					System,
-					"-lm",
-					"-lpthread",
-					"-lm",
-					"-lITKAlgorithms",
-					"-lITKCommon",
-					"-lITKDICOMParser",
-					"-litkgdcm",
-					"-lITKIO",
-					"-litkjpeg8",
-					"-litkjpeg12",
-					"-litkjpeg16",
-					"-lITKMetaIO",
-					"-lITKniftiIO",
-					"-lITKnrrdIO",
-					"-lITKNumerics",
-					"-litkopenjpeg",
-					"-litkpng",
-					"-litksys",
-					"-litktiff",
-					"-litkv3p_netlib",
-					"-litkvnl_algo",
-					"-litkvnl",
-					"-litkzlib",
-					"-lITKznz",
-					"-lboost_system-mt",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1030,41 +898,7 @@
 					"$(inherited)",
 					/usr/local/lib/InsightToolkit,
 				);
-				OTHER_LDFLAGS = (
-					"-framework",
-					"Foundation,",
-					"-framework",
-					"AppKit,",
-					"-Wl,-search_paths_first",
-					"-headerpad_max_install_names",
-					"-framework",
-					System,
-					"-lm",
-					"-lpthread",
-					"-lm",
-					"-lITKAlgorithms",
-					"-lITKCommon",
-					"-lITKDICOMParser",
-					"-litkgdcm",
-					"-lITKIO",
-					"-litkjpeg8",
-					"-litkjpeg12",
-					"-litkjpeg16",
-					"-lITKMetaIO",
-					"-lITKniftiIO",
-					"-lITKnrrdIO",
-					"-lITKNumerics",
-					"-litkopenjpeg",
-					"-litkpng",
-					"-litksys",
-					"-litktiff",
-					"-litkv3p_netlib",
-					"-litkvnl_algo",
-					"-litkvnl",
-					"-litkzlib",
-					"-lITKznz",
-					"-lboost_system-mt",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
