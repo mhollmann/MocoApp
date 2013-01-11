@@ -9,16 +9,24 @@
 #include "MocoDataLogger.h"
 #include <fstream>
 #include <stdio.h>
+#include <sys/time.h>
 
 
-MocoDataLogger::MocoDataLogger(string mocoParamsLogfile, string appLogfile)
+MocoDataLogger* MocoDataLogger::mLoggerInstance = NULL;
+
+
+
+//can only be reached from inside this class
+MocoDataLogger::MocoDataLogger()
 {
+    this->mMocoParamArray        = new MocoDataLogger::mocoTransformParametersStruct[MOCOLOG_MAX_NUMBER_SCANS];
+    this->mMocoParamArrayIndex   = 0;
     
-    this->mMocoParamsLogfile = mocoParamsLogfile;
-    this->mMocoAppLogfile    = appLogfile;
+    this->mMocoAppLogArray       = new string[MOCOLOG_MAX_NUMBER_APPLOGITEMS];
+    this->mMocoAppLogArrayIndex  = 0;
     
-    this->mMocoParamArray      = new MocoDataLogger::mocoTransformParametersStruct[MOCOLOG_MAX_NUMBER_SCANS];
-    this->mMocoParamArrayIndex = 0;
+    this->mMocoParamsLogfileName = "-";
+    this->mMocoAppLogfileName    = "-";
 }
 
 
@@ -27,6 +35,42 @@ MocoDataLogger::~MocoDataLogger()
     delete[] this->mMocoParamArray;
 }
 
+
+
+MocoDataLogger* MocoDataLogger::getInstance()
+{
+    if(!mLoggerInstance)
+    {
+        mLoggerInstance = new MocoDataLogger;
+    }
+    
+    return mLoggerInstance;
+}
+
+
+void MocoDataLogger::setParamsLogFileName(string mocoParamsLogfile)
+{
+    if (mMocoParamsLogfileName.compare(string("-")) != 0)
+    {
+        //MH FIXME todo
+    }else
+    {
+        this->mMocoParamsLogfileName = mocoParamsLogfile;
+    }
+}
+
+
+void MocoDataLogger::setAppLogFileName(string mocoAppLogfile)
+{
+    if (mMocoAppLogfileName.compare(string("-")) != 0)
+    {
+        //MH FIXME todo
+        cout << "Warning: AppLogFileName is already set to:" << this->mMocoAppLogfileName << std::endl;
+    }else
+    {
+        this->mMocoAppLogfileName = mocoAppLogfile;
+    }
+}
 
 
 void MocoDataLogger::addMocoParams(float tX, float tY, float tZ, float rX, float rY, float rZ)
@@ -41,16 +85,35 @@ void MocoDataLogger::addMocoParams(float tX, float tY, float tZ, float rX, float
 }
 
 
+void MocoDataLogger::addMocoAppLogentry(string logEntry)
+{
+    
+    struct timeval actTime;
+    gettimeofday(&actTime, NULL);
+    
+    time_t currtime  = actTime.tv_sec;
+    tm *t = localtime(&currtime);
+    
+    char msg[10+logEntry.length()];
+    
+    sprintf(msg, "%02d:%02d:%02d:%04d %s", t->tm_hour, t->tm_min, t->tm_sec, actTime.tv_usec/1000, logEntry.c_str());
+    
+    this->mMocoAppLogArray[this->mMocoAppLogArrayIndex] = string(msg);
+    this->mMocoAppLogArrayIndex++;
+}
+
 void MocoDataLogger::dumpMocoParamsToLogfile(void)
 {
     FILE * pFile;
-    pFile = std::fopen(this->mMocoParamsLogfile.c_str(),"w+");
+    pFile = std::fopen(this->mMocoParamsLogfileName.c_str(),"w+");
     if (pFile==NULL)
     {
-        cout << "Unable to open file: " << this->mMocoParamsLogfile << std::endl;
+        cout << "Unable to open file: " << this->mMocoParamsLogfileName << std::endl;
     }
     else
     {
+        cout << "Writing data to file: " << this->mMocoParamsLogfileName << std::endl;
+        
         for(int i=0; i<=this->mMocoParamArrayIndex-1; i++)
         {
             std::fprintf(pFile, "%3.4f %3.4f %3.4f %3.4f %3.4f %3.4f\n",
@@ -62,12 +125,29 @@ void MocoDataLogger::dumpMocoParamsToLogfile(void)
 }
 
 
+void MocoDataLogger::dumpMocoAppLogsToLogfile(void)
+{
+    FILE * pFile;
+    pFile = std::fopen(this->mMocoAppLogfileName.c_str(),"w+");
+    if (pFile==NULL)
+    {
+        cout << "Unable to open file: " << this->mMocoAppLogfileName << std::endl;
+    }
+    else
+    {
+        cout << "Writing data to file: " << this->mMocoAppLogfileName << std::endl;
+        
+        for(int i=0; i<=this->mMocoAppLogArrayIndex-1; i++)
+        {
+            std::fprintf( pFile, "%s\n", this->mMocoAppLogArray[i].c_str());
+        }
+        std::fclose(pFile);
+    }
+}
+
 
 void MocoDataLogger::appendLineToFile(string fileName, string lineToWrite)
 {
-    
-    std::cout << "p logfile: " << mMocoParamsLogfile << std::endl;
-    std::cout << "value: " <<  mMocoParamArray[this->mMocoParamArrayIndex-1].rotZ << std::endl;
     
     ofstream txtFile;
     txtFile.open(fileName.c_str(), ios::out | ios::app);

@@ -17,11 +17,15 @@
 #ifndef MOCOLOG_MAX_NUMBER_SCANS
 #define MOCOLOG_MAX_NUMBER_SCANS 5000
 #endif
-
+#ifndef MOCOLOG_MAX_NUMBER_APPLOGITEMS
+#define MOCOLOG_MAX_NUMBER_APPLOGITEMS 50000
+#endif
 
 
 using namespace std;
 
+
+//This class is a singleton, the instance is provided via getInstance()
 class MocoDataLogger
 {
     
@@ -36,35 +40,61 @@ class MocoDataLogger
     };
     
 private:
-
-    string mMocoParamsLogfile;
-    string mMocoAppLogfile;
+    
+    static MocoDataLogger* mLoggerInstance;
+    
+    string mMocoParamsLogfileName;
+    string mMocoAppLogfileName;
+    
     struct mocoTransformParametersStruct *mMocoParamArray;
     int    mMocoParamArrayIndex;
+    
+    string *mMocoAppLogArray;
+    int    mMocoAppLogArrayIndex;
+    
+    //the constructor is private to avoid access from outside
+    MocoDataLogger();
+    
+    //the destructor
+    ~MocoDataLogger();
+    
     
 public:
     
     /**
-     * Constructor.
-     * If the file already exists it is overwritten.
+     * The class is a singleton and the global instance is returned by this function.
+     * If the instance does not exist it is created. 
      *
      * \param mocoParamsLogfile  Complete path to file that stores motion correction params.
-     * \param appLogfile         Complete path to file that stores log-information [unused now].
+     * \param appLogfile         Complete path to file that stores log-information.
      *
      */
-    MocoDataLogger(string mocoParamsLogfile, string appLogfile);
+    static MocoDataLogger* getInstance();
+    
     
     
     /**
-     * Destructor.
-    */
-    ~MocoDataLogger();
+     * Sets the log-filename for the results (parameters) of the motion correction.
+     *
+     * \param mocoParamsLogfile  Complete path to file that stores motion correction params.
+     *
+     */
+    void setParamsLogFileName(string mocoParamsLogfile);
+   
+    
+    /**
+     * Sets the log-filename for the application log-messages.
+     *
+     * \param appLogfile         Complete path to file that stores log-information.
+     *
+     */
+    void setAppLogFileName(string appLogfile);
     
     
      /**
      * This appends a line to a given file.
      * Caution: this is slow because it is opening the file to write each time it is called.
-     * For fast acess use "addMocoParams" and "dumpMocoParamsToLogfile".
+     * For fast access use "addMocoParams" and "dumpMocoParamsToLogfile".
      *
      * \param fileName     Complete path to file that the given line should be appended to.
      * \param lineToWrite  Line of text that should be appended.
@@ -88,7 +118,15 @@ public:
    
     
     /**
-     * Dumps the stored data to the logfile given in constructor.
+     * Adds a string to the stored log messages. These have to be dumped before the app is closed.
+     *
+     * \param logEntry  the log message that should be stored 
+     */
+    void addMocoAppLogentry(string logEntry);
+    
+    
+    /**
+     * Dumps the stored data to the logfile set in setParamsLogFileName.
      * If the file already exists it is overwritten.
      *
      * Format of resulting file (3.4f):
@@ -99,4 +137,11 @@ public:
      */
     void dumpMocoParamsToLogfile(void);
 
+    
+    /**
+     * Dumps the stored application log message to the logfile set in setAppLogFileName.
+     * If the file already exists it is overwritten.
+     */
+    void dumpMocoAppLogsToLogfile(void);
+    
 };

@@ -12,7 +12,6 @@
 #include <iostream>
 #include <fstream>
 
-#import "MocoDataLogger.h"
 #import "BARTNotifications.h"
 
 
@@ -52,6 +51,12 @@
     mMocoIsRunning     = NO;
     mRegistrator       = nil;
     
+    //++++++++++++++++++++++++++++++++
+    //+++++++ Initialize logging +++++
+    //++++++++++++++++++++++++++++++++
+    mMocoDataLogger = MocoDataLogger::getInstance();
+    mMocoDataLogger->setAppLogFileName(std::string("/tmp/mocoAppLog.txt"));
+
     
     //the standard output path and name base
     mMocoResultImagesNameBase  = @"/tmp/image_mocoAppExport_MOCO_";
@@ -87,6 +92,7 @@
     }
     if ( ![[NSFileManager defaultManager] fileExistsAtPath:plistPath] ) {
         NSLog(@"Errror: Could not read configuration from plist file (file not found): %@", plistPath);
+        mMocoDataLogger->addMocoAppLogentry(string("Errror: Could not read configuration from plist file (file not found)."));
         return;
     }
     
@@ -102,7 +108,7 @@
     if (!arrayFromPlist )
     {
         NSLog(@"Warning: Could not read plist defaultRegParams.plist (using standard): %@, format: %lu", errDescr, format);
-        
+        mMocoDataLogger->addMocoAppLogentry(string("Warning: Could not read plist defaultRegParams.plist (using standard)."));
     }else{
         
         //assign params from plist
@@ -125,6 +131,7 @@
     if ( ![fm createFileAtPath:[mMocoResultImagesNameBase stringByAppendingString:@".tmp"] contents:nil attributes:nil] )
     {
         NSLog(@"Error: Seems as path of result file base (coming from default plist file) does not exist, or no write permission for: %@", mMocoResultImagesNameBase);
+        mMocoDataLogger->addMocoAppLogentry(string("Error: Seems as path of result file base (coming from default plist file) does not exist, or having no write permission."));
         return;
     }else
     {
@@ -132,7 +139,8 @@
     }
     if ( ![fm createFileAtPath:[mMocoParametersOutNameBase stringByAppendingString:@".tmp"] contents:nil attributes:nil] )
     {
-        NSLog(@"Error: Seems as path of result file base (coming from default plist file) does not exist, or there is no write permission for: %@", mMocoParametersOutNameBase);
+        NSLog(@"Error: Seems as path of moco param file base (coming from default plist file) does not exist, or there is no write permission for: %@", mMocoParametersOutNameBase);
+        mMocoDataLogger->addMocoAppLogentry(string("Error: Seems as path of moco param file base (coming from default plist file) does not exist, or having no write permission."));
         return;
     }else
     {
@@ -151,10 +159,7 @@
         NSLog(@"OutfileBase: %@", mMocoResultImagesNameBase);
         NSLog(@"OutParamBase: %@", mMocoParametersOutNameBase);
     }
-    
-    //parameters orig
-    //[mRegistrationProperty setRegistrationParameters:1.0/50.0 MaxStep:0.019 MinStep:0.00001];
-       
+           
     //this is the standard
     [mRegistrationProperty setRegistrationParameters:1000.0 MaxStep:0.019 MinStep:0.00001];
     
@@ -303,11 +308,14 @@
         if(mRealTimeTCPIPMode)
         {
             NSLog(@"Stopping Real-Time Moco...");
+            mMocoDataLogger->addMocoAppLogentry(string("Stopping Real-Time Moco..."));
             [mRealTimeTCPIPReadingThread cancel];
-        }
+         }
             
         //clear view and data of the view controller
         [mMocoDrawViewController clearDataAndGraphs];
+        
+        mMocoDataLogger->dumpMocoAppLogsToLogfile();
         
         [sender setTitle: @"Start"];
         return;
@@ -320,12 +328,10 @@
         //+++++ (Re)Initialize the registrator, because regProperties may have changed +++++
         if(mRegistrator == nil)
         {
-            NSLog(@"Creating registr...");
             mRegistrator = [ [MocoRegistration alloc]	initWithRegistrationProperty:mRegistrationProperty];
         }
         else
         {
-            NSLog(@"RE - Creating registr...");
             [mRegistrator release]; mRegistrator = nil;
             mRegistrator = [ [MocoRegistration alloc]	initWithRegistrationProperty:mRegistrationProperty];
         }
@@ -429,8 +435,10 @@
 -(void)realTimeTCPIPModeNextDataArrived:(NSNotification*)aNotification
 {
     
+    @try {
+    
     NSLog(@"TCPIP: Next Data Arrived!");
-
+    mMocoDataLogger->addMocoAppLogentry(string("TCPIP: data arrived ..."));
     timeval startTimeAlign, endTimeAlign;
     timeval startTimeResample, endTimeResample;
     
@@ -446,9 +454,7 @@
     bool alignToExternalReference;
     if( [inputDataEl4D getImageSize].timesteps == 1 )
     {
-        //set reference image
-        NSLog(@"TCPIP: First image!");
-        
+        mMocoDataLogger->addMocoAppLogentry(string("TCPIP: first image arrived ..."));
         //set correct reference image
         NSString *valSelected = [mReferenceImagePullDown title];
         if([valSelected isEqualToString:@"First incoming image"])
@@ -563,6 +569,7 @@
     if (mRegistrationProperty.LoggingLevel > 1)
     {
         NSLog(@"Written aligned image to: %@", resultFilename);
+        mMocoDataLogger->addMocoAppLogentry(string("Written aligned image to: ")+[resultFilename UTF8String]);
     }
     
     
@@ -594,10 +601,21 @@
         [movingDataEl WriteDataElementToFile:resultFilename];
     }
     
-    //free memory
-    //[movingDataEl release]; movingDataEl = nil;
-    //[resultDataEl release]; resultDataEl = nil;
     
+    }
+    @catch (NSException *exception) {
+        
+        NSMutableDictionary *errorDict = [NSMutableDictionary dictionary];
+        
+        [errorDict setObject:[NSString stringWithFormat:@"Error: %@.", [exception reason]] forKey:NSAppleScriptErrorMessage];
+        
+        string exString = string("Exception: ")+[[exception reason] UTF8String];
+        
+        mMocoDataLogger->addMocoAppLogentry(exString);
+        
+        //dump logfile in case of an exception
+        mMocoDataLogger->dumpMocoAppLogsToLogfile();
+    }
 
 
 }
@@ -607,11 +625,7 @@
 -(void)realTimeTCPIPModeLastScanArrived:(NSNotification*)aNotification
 {
     NSLog(@"TCPIP: Last Scan Arrived!");
-    //	NSTimeInterval ti = [[NSDate date] timeIntervalSince1970];
-    //    if ( nil != [aNotification object] ){
-    //        NSString *fname =[NSString stringWithFormat:@"/tmp/{subjectName}_{sequenceNumber}_volumes_%d_%d.nii", [[aNotification object] getImageSize].timesteps, ti];
-    //        [[aNotification object] WriteDataElementToFile:fname];
-    //    }
+    mMocoDataLogger->addMocoAppLogentry(string("Last scan arrived. "));
 }
 
 
@@ -633,6 +647,7 @@
         if (![fm isReadableFileAtPath:valSelected])
         {
             NSLog(@"Did not find input image: %@", valSelected);
+            mMocoDataLogger->addMocoAppLogentry(string("Did not find input image: ")+[valSelected UTF8String]);
             return;
         }
         file4D = valSelected;
@@ -670,13 +685,16 @@
         
         mocoMovParamsOutFile = [mocoMovParamsOutFile stringByAppendingString: [NSString stringWithFormat:@"_it%i.txt", mRegistrationProperty.NumberOfIterations]];
         
+        
+        
+        //MH FIXME: This should just be done in logger!
         //remove the resulting file if it exists
         NSFileManager *fm = [NSFileManager defaultManager];
         if ([fm fileExistsAtPath:mocoMovParamsOutFile])
         {[fm removeItemAtPath:mocoMovParamsOutFile error:nil];}
         std::string mocoMovParamsOutFileString = [mocoMovParamsOutFile UTF8String];
 
-        MocoDataLogger *mocoLogger = new MocoDataLogger(mocoMovParamsOutFileString, mocoMovParamsOutFileString);
+        mMocoDataLogger->setParamsLogFileName(mocoMovParamsOutFileString);
         
         //load the 4D image
         EDDataElement *dataEl4D = [MocoRegistration getEDDataElementFromFile:file4D];
@@ -702,6 +720,10 @@
         }
 
         
+        if (mRegistrationProperty.LoggingLevel > 1){
+            mMocoDataLogger->addMocoAppLogentry(string("Starting alignment for data: ")+[file4D UTF8String]);
+        }
+        
         int i;
         for (i = 0; i<=[dataEl4D getImageSize].timesteps-1; i++) {
             
@@ -719,6 +741,8 @@
             double finalTranslationZ    = 0;
             
             movingDataEl = [dataEl4D getDataAtTimeStep:i];
+            
+            
             
             //do alignment just for n>0
             if(i > 0 || alignToExternalReference)
@@ -748,7 +772,7 @@
             [mMocoDrawViewController addValuesToGraphs:finalTranslationX TransY:finalTranslationY TransZ:finalTranslationZ RotX:rotAngleX RotY:rotAngleY RotZ:rotAngleZ];
             
             //store data in the logger
-            mocoLogger->addMocoParams(finalTranslationX, finalTranslationY, finalTranslationZ, rotAngleX, rotAngleY, rotAngleZ);
+            mMocoDataLogger->addMocoParams(finalTranslationX, finalTranslationY, finalTranslationZ, rotAngleX, rotAngleY, rotAngleZ);
             
             
             //send the reload to the main thread
@@ -808,6 +832,7 @@
             
             if (mRegistrationProperty.LoggingLevel > 1){
                 NSLog(@"Written aligned image to: %@", resultFilename);
+                mMocoDataLogger->addMocoAppLogentry(string("Written aligned image to: ")+[resultFilename UTF8String]);
             }
             
             
@@ -827,18 +852,17 @@
             
         }//endfor
         
-        
-        
-        
         //+++++++++++++++++++++++++++++++++++++++++
-        //++++++ Write params to txt file +++++++++
+        //++++++ Write params to log file +++++++++
         //+++++++++++++++++++++++++++++++++++++++++
-        mocoLogger->dumpMocoParamsToLogfile();
+        mMocoDataLogger->dumpMocoParamsToLogfile();
         if (mRegistrationProperty.LoggingLevel > 0)
         {
             NSLog(@"Written mocoParams to file: %@", mocoMovParamsOutFile);
+            mMocoDataLogger->addMocoAppLogentry(string("Written moco parameters to: ")+[mocoMovParamsOutFile UTF8String]);
         }
-        delete mocoLogger;
+        
+        mMocoDataLogger->dumpMocoAppLogsToLogfile();
          
     });//end dispatch async
 } // end runOfflineMotionCorrection
@@ -866,11 +890,8 @@
             
             diffSec  = endTime.tv_sec - startTime.tv_sec;
             diffUSec = endTime.tv_usec - startTime.tv_usec;
-            
         }
     }
-    
-    
     return diffSec+diffUSec/1000000;
 }
 

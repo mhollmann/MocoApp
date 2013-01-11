@@ -357,7 +357,15 @@
 
 - (void)setReferenceImageWithEDDataElement:(EDDataElement *)dataElement
 {
-    [self setReferenceImageWithITKImage: [dataElement asITKImage]];
+    @try{
+        [self setReferenceImageWithITKImage: [dataElement asITKImage]];
+    }
+    @catch(NSException *e){
+    
+        //MH FIXME test exception
+        NSException* except = [NSException exceptionWithName:@"SetReferenceImageException" reason:@"Error setting the reference image for registration" userInfo:nil];
+        @throw except;
+    }
     
 }// end setReferenceImageWithEDDataElement 
 
@@ -368,7 +376,6 @@
     
     //reference is always 3D
     self->m_referenceImgITK3D = itkImage;
-
     
     if( self->m_registrationProperty.LoggingLevel > 1 ){
         
@@ -426,119 +433,131 @@
 -(MocoTransformType::Pointer)alignITKImageToReference:(MovingImageType3D::Pointer)movingITKImage
 {
 
-    MocoRegistrationType::Pointer   registration  = MocoRegistrationType::New();
+    @try{
+        MocoRegistrationType::Pointer   registration  = MocoRegistrationType::New();
 
-    registration->SetMetric(    self->m_metric );
-    registration->SetOptimizer( self->m_optimizer );
-    
-    registration->SetInterpolator(  self->m_registrationInterpolator  );
-    
-    MocoTransformType::Pointer  transform = MocoTransformType::New();
-    registration->SetTransform( transform );
-    
-    
-    MocoTransformInitializerType::Pointer initializer = MocoTransformInitializerType::New();
-    initializer->SetTransform(   transform );
-    
-    
-    if (self->m_registrationProperty.Smoothing) {
+        registration->SetMetric(    self->m_metric );
+        registration->SetOptimizer( self->m_optimizer );
         
-        typedef itk::DiscreteGaussianImageFilter< FixedImageType3D, MovingImageType3D > FilterType;
-        FilterType::Pointer movingFilter = FilterType::New();
+        registration->SetInterpolator(  self->m_registrationInterpolator  );
         
-        movingFilter->SetInput( movingITKImage );
-        
-        movingFilter->SetVariance( self->m_registrationProperty.SmoothingSigma );
-        movingFilter->SetMaximumKernelWidth( self->m_registrationProperty.SmoothingKernelWidth );
-        movingFilter->SetMaximumError(0.01);
+        MocoTransformType::Pointer  transform = MocoTransformType::New();
+        registration->SetTransform( transform );
         
         
-        //set the smoothed fixed image for registration and transform initializer
-        movingFilter->Update();
-        self->m_referenceImgITK3DSmoothed->DataObject::Update();
-        registration->SetFixedImage( self->m_referenceImgITK3DSmoothed );
-        registration->SetMovingImage(   movingFilter->GetOutput()   );
-        initializer->SetFixedImage(  self->m_referenceImgITK3DSmoothed );
-        initializer->SetMovingImage( movingFilter->GetOutput() );
+        MocoTransformInitializerType::Pointer initializer = MocoTransformInitializerType::New();
+        initializer->SetTransform(   transform );
         
-        
-    } else {
-        
-        registration->SetFixedImage(    self->m_referenceImgITK3D    );
-        registration->SetMovingImage(   movingITKImage  );
-        initializer->SetMovingImage( movingITKImage );
-    }
     
-    registration->SetFixedImageRegion( self->m_referenceImgITK3D->GetBufferedRegion() );
-    
-    //initialize the transformation
-    initializer->MomentsOn();
-    initializer->InitializeTransform();
-    registration->SetInitialTransformParameters( transform->GetParameters() );
-    
-    //set back the best value to max
-    self->m_observer->bestValue = std::numeric_limits<double>::max();
-    
-  	try {
-        registration->Update();
-        if (self->m_registrationProperty.LoggingLevel > 1) {
-            std::cout << "Optimizer stop condition: "
-            << registration->GetOptimizer()->GetStopConditionDescription()
-            << std::endl;
+        if (self->m_registrationProperty.Smoothing) {
+            
+            typedef itk::DiscreteGaussianImageFilter< FixedImageType3D, MovingImageType3D > FilterType;
+            FilterType::Pointer movingFilter = FilterType::New();
+            
+            movingFilter->SetInput( movingITKImage );
+            
+            movingFilter->SetVariance( self->m_registrationProperty.SmoothingSigma );
+            movingFilter->SetMaximumKernelWidth( self->m_registrationProperty.SmoothingKernelWidth );
+            movingFilter->SetMaximumError(0.01);
+            
+            
+            //set the smoothed fixed image for registration and transform initializer
+            movingFilter->Update();
+            self->m_referenceImgITK3DSmoothed->DataObject::Update();
+            registration->SetFixedImage( self->m_referenceImgITK3DSmoothed );
+            registration->SetMovingImage(   movingFilter->GetOutput()   );
+            initializer->SetFixedImage(  self->m_referenceImgITK3DSmoothed );
+            initializer->SetMovingImage( movingFilter->GetOutput() );
+            
+            
+        } else {
+            
+            registration->SetFixedImage(    self->m_referenceImgITK3D    );
+            registration->SetMovingImage(   movingITKImage  );
+            initializer->SetMovingImage( movingITKImage );
         }
+        
+        registration->SetFixedImageRegion( self->m_referenceImgITK3D->GetBufferedRegion() );
+        
+        //initialize the transformation
+        initializer->MomentsOn();
+        initializer->InitializeTransform();
+        registration->SetInitialTransformParameters( transform->GetParameters() );
+        
+        //set back the best value to max
+        self->m_observer->bestValue = std::numeric_limits<double>::max();
+        
+        try {
+            registration->Update();
+            if (self->m_registrationProperty.LoggingLevel > 1) {
+                std::cout << "Optimizer stop condition: "
+                << registration->GetOptimizer()->GetStopConditionDescription()
+                << std::endl;
+            }
+        }
+        catch( itk::ExceptionObject & err ) {
+            std::cerr << "ExceptionObject caught !" << std::endl;
+            std::cerr << err << std::endl;
+            //return EXIT_FAILURE;
+            
+            NSException* except = [NSException exceptionWithName:@"ITKRegistrationException" reason:@"Error during ITK registration" userInfo:nil];
+            @throw except;
+            
+        }
+     
+        //Take best parameters saved from observer?
+        MocoOptimizerType::ParametersType finalParameters;
+        
+        //MH FIXME  "< 1" ?
+        if ( self->m_optimizer->GetCurrentIteration() < 2 || !self->m_registrationProperty.UseBestFoundParameters ) {
+            finalParameters = registration->GetLastTransformParameters();
+        } else {
+            finalParameters = self->m_observer->bestParameters;
+        }
+       
+        
+        
+        if( self->m_registrationProperty.LoggingLevel > 1 ) {
+            
+            double versorX              = finalParameters[0];
+            double versorY              = finalParameters[1];
+            double versorZ              = finalParameters[2];
+            double finalTranslationX    = finalParameters[3];
+            double finalTranslationY    = finalParameters[4];
+            double finalTranslationZ    = finalParameters[5];
+            
+            unsigned int numberOfIterations = m_optimizer->GetCurrentIteration();
+            
+            double bestValue = m_optimizer->GetValue();
+            
+            
+            // Print out results
+            std::cout << std::endl << std::endl;
+            std::cout << "Result = " << std::endl;
+            std::cout << " versor X      = " << versorX  << std::endl;
+            std::cout << " versor Y      = " << versorY  << std::endl;
+            std::cout << " versor Z      = " << versorZ  << std::endl;
+            std::cout << " Translation X = " << finalTranslationX  << std::endl;
+            std::cout << " Translation Y = " << finalTranslationY  << std::endl;
+            std::cout << " Translation Z = " << finalTranslationZ  << std::endl;
+            std::cout << " Iterations    = " << numberOfIterations << std::endl;
+            
+            std::cout << " Metric value  = " << bestValue          << std::endl;
+            std::cout << " Observer value  = " << m_observer->bestValue << " " << std::endl;
+            
+        }
+        
+      
+        //finally set the transform parameters
+        transform->SetParameters( finalParameters );
+        return transform;
     }
-  	catch( itk::ExceptionObject & err ) {
-        std::cerr << "ExceptionObject caught !" << std::endl;
-        std::cerr << err << std::endl;
-        //return EXIT_FAILURE;
-	}
- 
-    //Take best parameters saved from observer?
-	MocoOptimizerType::ParametersType finalParameters;
-    
-    //MH FIXME  "< 1" ?
-	if ( self->m_optimizer->GetCurrentIteration() < 2 || !self->m_registrationProperty.UseBestFoundParameters ) {
-		finalParameters = registration->GetLastTransformParameters();
-    } else {
-        finalParameters = self->m_observer->bestParameters;
+    @catch(NSException *e){
+        
+        NSException* except = [NSException exceptionWithName:@"AlignImageException"
+                                                      reason:[@"Error aligning image to reference:" stringByAppendingString:[e reason]] userInfo:nil];
+        @throw except;
     }
-   
-    
-    
-    if( self->m_registrationProperty.LoggingLevel > 1 ) {
-        
-        double versorX              = finalParameters[0];
-        double versorY              = finalParameters[1];
-        double versorZ              = finalParameters[2];
-        double finalTranslationX    = finalParameters[3];
-        double finalTranslationY    = finalParameters[4];
-        double finalTranslationZ    = finalParameters[5];
-        
-        unsigned int numberOfIterations = m_optimizer->GetCurrentIteration();
-        
-        double bestValue = m_optimizer->GetValue();
-        
-        
-        // Print out results
-        std::cout << std::endl << std::endl;
-        std::cout << "Result = " << std::endl;
-        std::cout << " versor X      = " << versorX  << std::endl;
-        std::cout << " versor Y      = " << versorY  << std::endl;
-        std::cout << " versor Z      = " << versorZ  << std::endl;
-        std::cout << " Translation X = " << finalTranslationX  << std::endl;
-        std::cout << " Translation Y = " << finalTranslationY  << std::endl;
-        std::cout << " Translation Z = " << finalTranslationZ  << std::endl;
-        std::cout << " Iterations    = " << numberOfIterations << std::endl;
-        
-        std::cout << " Metric value  = " << bestValue          << std::endl;
-        std::cout << " Observer value  = " << m_observer->bestValue << " " << std::endl;
-        
-    }
-    
-  
-    //finally set the transform parameters
-    transform->SetParameters( finalParameters );
-    return transform;
     
 }// end alignITKImageToReference
 
@@ -550,7 +569,6 @@
     
     //moving image is 3D
     ITKImage::Pointer movingImgITK3D = [movingDataElement asITKImage];
-
     
     //++++ Resampling ++++
     MocoTransformType::Pointer finalTransform = MocoTransformType::New();

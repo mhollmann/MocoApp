@@ -18,6 +18,8 @@
 #import "EDDataElementIsis.h"
 #import "EDDataElementRealTimeLoader.h"
 
+#import "MocoDataLogger.h"
+
 @interface MocoApplicationAppDelegate : NSObject <NSApplicationDelegate> {
 @private
     NSWindow *window;
@@ -25,6 +27,7 @@
     MocoDrawViewController* mMocoDrawViewController;
     MocoRegistrationProperty* mRegistrationProperty;
     MocoRegistration* mRegistrator;
+    MocoDataLogger* mMocoDataLogger;
     
     EDDataElementRealTimeLoader* mRTDataLoader;
     NSThread *mRealTimeTCPIPReadingThread;

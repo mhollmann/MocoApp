@@ -470,6 +470,8 @@
 
     self.scanCounter = 0;
     
+    //MH FIXME: also reset plot range in X ! 
+    
     [self updateGraphs];
 
 }
