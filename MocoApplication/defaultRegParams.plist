@@ -20,5 +20,7 @@
 	<string>/Users/realtime/MRINCOMING/image_mocoAppExport_MOCO_</string>
 	<key>MocoParamsOutputBase</key>
 	<string>/Users/realtime/MRINCOMING/mocoParameters_mocoApp</string>
+	<key>MocoAppLogfileName</key>
+	<string>/tmp/mocoAppLog.txt</string>
 </dict>
 </plist>

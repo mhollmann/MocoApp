@@ -21,7 +21,6 @@
 #define MOCOLOG_MAX_NUMBER_APPLOGITEMS 50000
 #endif
 
-
 using namespace std;
 
 
@@ -45,6 +44,9 @@ private:
     
     string mMocoParamsLogfileName;
     string mMocoAppLogfileName;
+    
+    static const string STANDARD_MOCOPARAMS_LOGFILENAME;
+    static const string STANDARD_APP_LOGFILENAME;
     
     struct mocoTransformParametersStruct *mMocoParamArray;
     int    mMocoParamArrayIndex;
@@ -118,7 +120,8 @@ public:
    
     
     /**
-     * Adds a string to the stored log messages. These have to be dumped before the app is closed.
+     * Adds a string to the stored log messages. These have to be dumped before the app is closed, otherwise they are lost.
+     * Stored format is: month/day hour:minute:sec:millisec logEntry
      *
      * \param logEntry  the log message that should be stored 
      */
@@ -139,8 +142,9 @@ public:
 
     
     /**
-     * Dumps the stored application log message to the logfile set in setAppLogFileName.
-     * If the file already exists it is overwritten.
+     * Dumps (by appending) the stored application log message to the logfile set in setAppLogFileName.
+     * The actually stored log-messages are deleted. 
+     *
      */
     void dumpMocoAppLogsToLogfile(void);
     

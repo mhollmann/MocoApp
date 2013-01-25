@@ -71,7 +71,7 @@
 
 
 -(id)initWithDataFile:(NSString*)path andSuffix:(NSString*)suffix andDialect:(NSString*)dialect ofImageType:(enum ImageType)iType
-{
+{    
 	NSFileManager *fm = [[NSFileManager alloc] init];
 	if ( NO == [fm fileExistsAtPath:path]){
         [fm release];

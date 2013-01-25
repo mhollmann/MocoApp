@@ -357,15 +357,14 @@
 
 - (void)setReferenceImageWithEDDataElement:(EDDataElement *)dataElement
 {
-    @try{
+    //@try{
         [self setReferenceImageWithITKImage: [dataElement asITKImage]];
-    }
-    @catch(NSException *e){
+    //}
+    /*@catch(NSException *e){
     
-        //MH FIXME test exception
         NSException* except = [NSException exceptionWithName:@"SetReferenceImageException" reason:@"Error setting the reference image for registration" userInfo:nil];
         @throw except;
-    }
+    }*/
     
 }// end setReferenceImageWithEDDataElement 
 
@@ -634,9 +633,13 @@
         return nil;
     }
     
+    NSLog(@"msg 1 ...");
+
+    
     EDDataElement *retEDDataEl =
     [[EDDataElement alloc] initWithDataFile:filePath andSuffix:@"" andDialect:@"" ofImageType:IMAGE_FCTDATA];
 
+     
     return retEDDataEl;
 }
 
