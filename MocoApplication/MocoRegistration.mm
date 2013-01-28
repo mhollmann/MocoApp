@@ -447,7 +447,6 @@
         MocoTransformInitializerType::Pointer initializer = MocoTransformInitializerType::New();
         initializer->SetTransform(   transform );
         
-    
         if (self->m_registrationProperty.Smoothing) {
             
             typedef itk::DiscreteGaussianImageFilter< FixedImageType3D, MovingImageType3D > FilterType;
@@ -473,6 +472,7 @@
             
             registration->SetFixedImage(    self->m_referenceImgITK3D    );
             registration->SetMovingImage(   movingITKImage  );
+            initializer->SetFixedImage(  self->m_referenceImgITK3D );
             initializer->SetMovingImage( movingITKImage );
         }
         
@@ -488,7 +488,7 @@
         
         try {
             registration->Update();
-            if (self->m_registrationProperty.LoggingLevel > 1) {
+            if (self->m_registrationProperty.LoggingLevel > 2) {
                 std::cout << "Optimizer stop condition: "
                 << registration->GetOptimizer()->GetStopConditionDescription()
                 << std::endl;
@@ -516,7 +516,7 @@
        
         
         
-        if( self->m_registrationProperty.LoggingLevel > 1 ) {
+        if( self->m_registrationProperty.LoggingLevel > 2 ) {
             
             double versorX              = finalParameters[0];
             double versorY              = finalParameters[1];
@@ -616,8 +616,6 @@
     retImage4D = tiler->GetOutput();
     
     return [movingDataElement convertFromITKImage4D:retImage4D ];
-    //[movingDataElement updateFromITKImage4D:retImage4D ];
-    //return movingDataElement;
 }
 
 
@@ -632,13 +630,9 @@
         NSLog(@"Did not find image file: %@", filePath);
         return nil;
     }
-    
-    NSLog(@"msg 1 ...");
 
-    
     EDDataElement *retEDDataEl =
     [[EDDataElement alloc] initWithDataFile:filePath andSuffix:@"" andDialect:@"" ofImageType:IMAGE_FCTDATA];
-
      
     return retEDDataEl;
 }

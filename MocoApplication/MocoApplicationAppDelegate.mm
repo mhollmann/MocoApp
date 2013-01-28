@@ -162,7 +162,9 @@
     //this is the standard
     [mRegistrationProperty setRegistrationParameters:1000.0 MaxStep:0.019 MinStep:0.00001];
     
-    mRegistrationProperty.RegistrationInterpolationMode = LINEAR;//BSPLINE2;
+    mRegistrationProperty.RegistrationInterpolationMode = LINEAR;
+    //mRegistrationProperty.RegistrationInterpolationMode = BSPLINE2;
+    
     mRegistrationProperty.ResamplingInterpolationMode   = BSPLINE4;
     mRegistrationProperty.SmoothingKernelWidth  = 32;
         
@@ -310,13 +312,13 @@
             NSLog(@"Stopping Real-Time Moco...");
             mMocoDataLogger->addMocoAppLogentry(string("Stopping Real-Time Moco..."));
             [mRealTimeTCPIPReadingThread cancel];
+            mMocoDataLogger->dumpMocoParamsToLogfile();
          }
             
         //clear view and data of the view controller
         [mMocoDrawViewController clearDataAndGraphs];
         
-        //dunp all infos, because these may be lost otherwise
-        mMocoDataLogger->dumpMocoParamsToLogfile();
+        //dump log infos, because these may be lost otherwise
         mMocoDataLogger->dumpMocoAppLogsToLogfile();
         
         [sender setTitle: @"Start"];
@@ -337,7 +339,6 @@
             [mRegistrator release]; mRegistrator = nil;
             mRegistrator = [ [MocoRegistration alloc]	initWithRegistrationProperty:mRegistrationProperty];
         }
-        
     }
         
     
@@ -352,8 +353,8 @@
     {
         [self runOfflineMotionCorrection];
     }
-    
 }
+
 
 - (IBAction)setReferenceImageByPulldown:(NSPopUpButton *)sender {
     
@@ -585,7 +586,8 @@
             NSLog(@"rotY of transform: %f ", rotAngleY);
             NSLog(@"rotZ of transform: %f ", rotAngleZ);
             
-            std::cout << "Time needed for alignment: " << [self getTimeDifference:startTimeAlign endTime:endTimeAlign] << " s" << std::endl;
+            NSLog(@"Time needed for alignment: %f ", [self getTimeDifference:startTimeAlign endTime:endTimeAlign]);
+            NSLog(@"Time needed overall:       %f ", [self getTimeDifference:startTimeAlign endTime:endTimeResample]);
         }
         
         if (mRegistrationProperty.LoggingLevel > 2){
@@ -661,23 +663,31 @@
         timeval startTimeAlign, endTimeAlign;
         timeval startTimeResample, endTimeResample;
          
-        //prepare moco parmaeter logging
+        
+        //+++ prepare file name for moco parameter logging +++
         NSString *mocoMovParamsOutFile;
+        
+        //add the first 6 chars from filename
+        NSString* fName = [[file4D lastPathComponent] stringByDeletingPathExtension];
+        mocoMovParamsOutFile = [mMocoParametersOutNameBase stringByAppendingString:@"_" ];
+        mocoMovParamsOutFile = [mocoMovParamsOutFile stringByAppendingString:[fName substringWithRange:NSMakeRange(0, 6)] ];
+
         //determine correct name for moco-param logfile
         if(mRegistrationProperty.RegistrationInterpolationMode == LINEAR)
-        {mocoMovParamsOutFile = [mMocoParametersOutNameBase stringByAppendingString:@"_linear"];}
+        {mocoMovParamsOutFile = [mocoMovParamsOutFile stringByAppendingString:@"_linear"];}
         else if (mRegistrationProperty.RegistrationInterpolationMode == BSPLINE2)
-        {mocoMovParamsOutFile = [mMocoParametersOutNameBase stringByAppendingString:@"_bspline2"];}
+        {mocoMovParamsOutFile = [mocoMovParamsOutFile stringByAppendingString:@"_bspline2"];}
         else if (mRegistrationProperty.RegistrationInterpolationMode == BSPLINE4)
-        {mocoMovParamsOutFile = [mMocoParametersOutNameBase stringByAppendingString:@"_bspline4"];}
+        {mocoMovParamsOutFile = [mocoMovParamsOutFile stringByAppendingString:@"_bspline4"];}
         if( mRegistrationProperty.MaskImagesForRegistration )
         {mocoMovParamsOutFile = [mocoMovParamsOutFile stringByAppendingString:@"_masked"];}
         if(mRegistrationProperty.Smoothing)
         {mocoMovParamsOutFile = [mocoMovParamsOutFile stringByAppendingString: [NSString stringWithFormat: @"_smoothed%i", mRegistrationProperty.SmoothingSigma ]];}
         mocoMovParamsOutFile = [mocoMovParamsOutFile stringByAppendingString: [NSString stringWithFormat:@"_it%i.txt", mRegistrationProperty.NumberOfIterations]];
+        NSLog(@"Out: %@",mocoMovParamsOutFile);
+        mMocoDataLogger->setParamsLogFileName([mocoMovParamsOutFile UTF8String]);
         
-        std::string mocoMovParamsOutFileString = [mocoMovParamsOutFile UTF8String];
-        mMocoDataLogger->setParamsLogFileName(mocoMovParamsOutFileString);
+        
         
         EDDataElement *resultDataEl;
         EDDataElement *movingDataEl;
@@ -827,7 +837,8 @@
                 NSLog(@"rotY of transform: %f ", rotAngleY);
                 NSLog(@"rotZ of transform: %f ", rotAngleZ);
                 
-                std::cout << "Time needed for alignment: " << [self getTimeDifference:startTimeAlign endTime:endTimeAlign] << " s" << std::endl;
+                NSLog(@"Time needed for alignment: %f ", [self getTimeDifference:startTimeAlign endTime:endTimeAlign]);
+                NSLog(@"Time needed overall:       %f ", [self getTimeDifference:startTimeAlign endTime:endTimeResample]);
             }
             
         }//endfor
