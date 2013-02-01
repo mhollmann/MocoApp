@@ -4,16 +4,16 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "MocoApplication/MocoApplicationAppDelegate.mm"
-         timestampString = "380803899.674625"
+         filePath = "MocoApplication/MocoRegistration.mm"
+         timestampString = "381155854.635567"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "348"
-         endingLineNumber = "348"
-         landmarkName = "-startStopButtonPressed:"
+         startingLineNumber = "570"
+         endingLineNumber = "570"
+         landmarkName = "-alignITKImageToReference:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

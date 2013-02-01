@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		00AD50271665101B008EC9C2 /* MocoRegistration.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05515D50A17001FDFCB /* MocoRegistration.mm */; };
+		3E1B091516BA55E1008ED504 /* res_0004.nii in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E1B091416BA55E1008ED504 /* res_0004.nii */; };
+		3E221E9516BAC3BC0072DA13 /* EDNA.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 3E98904616149E4300086C21 /* EDNA.dylib */; };
+		3E221E9916BAC4580072DA13 /* EDNA.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98904616149E4300086C21 /* EDNA.dylib */; };
 		3E41C05815D50A17001FDFCB /* MocoRegistration.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05515D50A17001FDFCB /* MocoRegistration.mm */; };
 		3E41C05915D50A17001FDFCB /* MocoRegistrationProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05715D50A17001FDFCB /* MocoRegistrationProperty.m */; };
 		3E56B30815C7C12800493310 /* MocoDrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E56B30715C7C12700493310 /* MocoDrawView.xib */; };
@@ -46,7 +49,6 @@
 		3EEE66D415566DCB00AA0F7F /* MocoDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEE66D215566DCB00AA0F7F /* MocoDrawViewController.m */; };
 		3EF416341615A2E200443485 /* BARTNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EF416321615A2E200443485 /* BARTNotifications.h */; };
 		3EF416351615A2E200443485 /* BARTNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF416331615A2E200443485 /* BARTNotifications.m */; };
-		3EF4164D1615AA1800443485 /* EDNA.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98904616149E4300086C21 /* EDNA.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				3E1B091516BA55E1008ED504 /* res_0004.nii in CopyFiles */,
 				3E5A311116480C81004E01F5 /* testData.nii in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,6 +124,8 @@
 
 /* Begin PBXFileReference section */
 		00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CorePlot.xcodeproj; path = CorePlot_1.1/Source/framework/CorePlot.xcodeproj; sourceTree = "<group>"; };
+		3E1B091416BA55E1008ED504 /* res_0004.nii */ = {isa = PBXFileReference; lastKnownFileType = file; name = res_0004.nii; path = ../testfiles/res_0004.nii; sourceTree = "<group>"; };
+		3E221E9616BAC4200072DA13 /* MocoApplication.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = MocoApplication.app; path = "../../../Programming/Library/Developer/Xcode/DerivedData/MocoApplication-bnbxeedqyvjztnbxbsdvkrmcaddt/Build/Products/Debug/MocoApplication.app"; sourceTree = "<group>"; };
 		3E3B07E815EE358D00198665 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3E41C05415D50A17001FDFCB /* MocoRegistration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoRegistration.h; sourceTree = "<group>"; };
 		3E41C05515D50A17001FDFCB /* MocoRegistration.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MocoRegistration.mm; sourceTree = "<group>"; };
@@ -199,7 +204,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EF4164D1615AA1800443485 /* EDNA.dylib in Frameworks */,
+				3E221E9916BAC4580072DA13 /* EDNA.dylib in Frameworks */,
 				3EEE66CE1553E97300AA0F7F /* CorePlot.framework in Frameworks */,
 				3EDA32C515513A7900787007 /* Cocoa.framework in Frameworks */,
 			);
@@ -223,6 +228,7 @@
 				3E5A30C01647F652004E01F5 /* MocoRegistrationTest.h */,
 				3E5A30C11647F652004E01F5 /* MocoRegistrationTest.mm */,
 				3E5A30FA164802F5004E01F5 /* testData.nii */,
+				3E1B091416BA55E1008ED504 /* res_0004.nii */,
 				3E5A312616490B88004E01F5 /* testData_mocoParams_linear_smoothed5_it12.txt */,
 				3E5A30BB1647F651004E01F5 /* Supporting Files */,
 			);
@@ -277,6 +283,7 @@
 		3EDA32B515513A7900787007 = {
 			isa = PBXGroup;
 			children = (
+				3E221E9616BAC4200072DA13 /* MocoApplication.app */,
 				00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */,
 				3E66644F1657BBD100855C46 /* docs */,
 				3EDA32CA15513A7900787007 /* MocoApplication */,
@@ -498,6 +505,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E221E9516BAC3BC0072DA13 /* EDNA.dylib in Resources */,
 				3EDA32CF15513A7900787007 /* InfoPlist.strings in Resources */,
 				3EDA32D515513A7900787007 /* Credits.rtf in Resources */,
 				3EDA32DB15513A7900787007 /* MainMenu.xib in Resources */,
@@ -767,6 +775,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
 					/usr/local/lib/isis/,
+					"$(BUILT_PRODUCTS_DIR)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
@@ -815,6 +824,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
 					/usr/local/lib/isis/,
+					"$(BUILT_PRODUCTS_DIR)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;

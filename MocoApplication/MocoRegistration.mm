@@ -428,7 +428,6 @@
 
 
 
-// MH FIXME: Check reference image before
 -(MocoTransformType::Pointer)alignITKImageToReference:(MovingImageType3D::Pointer)movingITKImage
 {
 
@@ -448,6 +447,15 @@
         initializer->SetTransform(   transform );
         
         if (self->m_registrationProperty.Smoothing) {
+            
+            if( self->m_referenceImgITK3DSmoothed.IsNull() )
+            {
+                NSException* except = [NSException exceptionWithName:@"MocoRegistrationConfigurationException"
+                                                              reason:@"Error aligning image. Reference image was not set!"
+                                                            userInfo:nil];
+                @throw except;
+            }
+            
             
             typedef itk::DiscreteGaussianImageFilter< FixedImageType3D, MovingImageType3D > FilterType;
             FilterType::Pointer movingFilter = FilterType::New();
@@ -469,6 +477,14 @@
             
             
         } else {
+            
+            if( self->m_referenceImgITK3D.IsNull() )
+            {
+                NSException* except = [NSException exceptionWithName:@"MocoRegistrationConfigurationException"
+                                                              reason:@"Error aligning image. Reference image was not set!"
+                                                            userInfo:nil];
+                @throw except;
+            }
             
             registration->SetFixedImage(    self->m_referenceImgITK3D    );
             registration->SetMovingImage(   movingITKImage  );
@@ -565,7 +581,7 @@
 
 -(EDDataElement*)resampleMovingEDDataElement:(EDDataElement*)movingDataElement withTransform:(MocoTransformType::Pointer)transform
 {
-    
+        
     //moving image is 3D
     ITKImage::Pointer movingImgITK3D = [movingDataElement asITKImage];
     
@@ -580,7 +596,16 @@
     self->m_resampler->SetTransform( finalTransform );
     self->m_resampler->SetInput( [movingDataElement asITKImage] );
 
-    if( self->m_registrationProperty.Smoothing ){ 
+
+    if( self->m_registrationProperty.Smoothing ){
+        
+        if( self->m_referenceImgITK3DSmoothed.IsNull() )
+        {
+            NSException* except = [NSException exceptionWithName:@"MocoRegistrationConfigurationException"
+                                                          reason:@"Error resampling image. Reference image was not set!"
+                                                          userInfo:nil];
+            @throw except;
+        }
         
         self->m_resampler->SetSize( self->m_referenceImgITK3DSmoothed->GetLargestPossibleRegion().GetSize() );
         self->m_resampler->SetOutputOrigin( self->m_referenceImgITK3DSmoothed->GetOrigin() );
@@ -589,6 +614,14 @@
         
     }
     else{
+        
+        if( self->m_referenceImgITK3D.IsNull())
+        {
+            NSException* except = [NSException exceptionWithName:@"MocoRegistrationConfigurationException"
+                                                          reason:@"Error resampling image. Reference image was not set!"
+                                                        userInfo:nil];
+            @throw except;
+        }
         
         self->m_resampler->SetSize( self->m_referenceImgITK3D->GetLargestPossibleRegion().GetSize() );
         self->m_resampler->SetOutputOrigin( self->m_referenceImgITK3D->GetOrigin() );

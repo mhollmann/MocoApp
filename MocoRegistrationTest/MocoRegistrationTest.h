@@ -10,14 +10,12 @@
 
 @interface MocoRegistrationTest : SenTestCase{
 
-@private
-    
-   
-
 }
 
 - (void)testInitialization;
 
 - (void)testAlign;
+
+- (void)testResample;
 
 @end

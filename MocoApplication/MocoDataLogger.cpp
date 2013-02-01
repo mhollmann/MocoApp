@@ -15,7 +15,7 @@
 
 MocoDataLogger* MocoDataLogger::mLoggerInstance = NULL;
 const string MocoDataLogger::STANDARD_MOCOPARAMS_LOGFILENAME = "/tmp/mocoApp_mocoParams.txt ";
-const string MocoDataLogger::STANDARD_APP_LOGFILENAME = "/tmp/mocoAppLog.txt ";
+const string MocoDataLogger::STANDARD_APP_LOGFILENAME = "/tmp/mocoAppLog.log";
 
 
 //can only be reached from inside this class
@@ -53,15 +53,8 @@ MocoDataLogger* MocoDataLogger::getInstance()
 
 void MocoDataLogger::setParamsLogFileName(string mocoParamsLogfile)
 {
-    if (mMocoParamsLogfileName.compare(string("-")) != 0)
-    {
-        this->addMocoAppLogentry(string("Warning: moco-params logfile name was already set. Cannot set to new value: ") + mocoParamsLogfile);
-    
-    }else
-    {
-        //MH FIXME: check if path exists
-        this->mMocoParamsLogfileName = mocoParamsLogfile;
-    }
+    //MH FIXME: check if path exists
+    this->mMocoParamsLogfileName = mocoParamsLogfile;
 }
 
 

@@ -19,8 +19,8 @@
 	<key>ResampleOutputBase</key>
 	<string>/Users/realtime/MRINCOMING/image_mocoAppExport_MOCO_</string>
 	<key>MocoParamsOutputBase</key>
-	<string>/Users/realtime/MRINCOMING/mocoParameters_mocoApp</string>
+	<string>/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/mocoAppParams</string>
 	<key>MocoAppLogfileName</key>
-	<string>/tmp/mocoAppLog.txt</string>
+	<string>/tmp/mocoAppLog.log</string>
 </dict>
 </plist>

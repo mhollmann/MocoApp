@@ -85,9 +85,10 @@ public:
    
     
     /**
-     * Sets the log-filename for the application log-messages.
+     * Sets the log-filename for the application log-messages. Setting is can not be modified
+     * after th efirst valid call to avoid several logfile locations.
      *
-     * \param appLogfile         Complete path to file that stores log-information.
+     * \param appLogfile  Complete path to file that stores log-information.
      *
      */
     void setAppLogFileName(string appLogfile);
@@ -142,7 +143,7 @@ public:
 
     
     /**
-     * Dumps (by appending) the stored application log message to the logfile set in setAppLogFileName.
+     * Dumps the stored application log message (by appending it) to the logfile set in setAppLogFileName.
      * The actually stored log-messages are deleted. 
      *
      */

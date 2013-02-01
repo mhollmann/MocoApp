@@ -5,6 +5,29 @@
 //  Created by Maurice Hollmann on 11/5/12.
 //  Copyright (c) 2012 MPI Cognitive and Human Brain Sciences Leipzig. All rights reserved.
 //
+/*
+ Testcases:
+ 
+ Initialization
+    - regProperty function
+        - set/get: OK
+        - false / extreme values:
+    - order of init steps
+    - error handling
+ 
+ Align  
+    - call align without reference image set: OK
+    - expected rp's
+        - offline EDDatalements: OK
+        - variations of parameters (smooth, extreme values):
+ 
+ Resample   
+    - call resample without reference image set: OK
+    - expected img data
+      - check transform resampling result: OK 
+
+ */
+
 
 #import "MocoRegistrationTest.h"
 
@@ -15,17 +38,11 @@
 
 @implementation MocoRegistrationTest
 
-/*
- Testcases:
- Initialization - regProperty function + order of init steps + error handling
- Align          - expected rp's
- Resample       - expected img data
- */
-
-
 NSString* mCurDir = @"";
 NSString* mFileNameTestDataNii = @"testData.nii";
+NSString* mFileNameTestDataResult3Nii = @"res_0004.nii";
 NSString* mFileNameTestData = @"";
+NSString* mFileNameTestDataResult3 = @"";
 NSString* mFileNameTestMocoParams = @"testData_mocoParams_linear_smoothed5_it12.txt";
 
 - (void)setUp
@@ -33,12 +50,12 @@ NSString* mFileNameTestMocoParams = @"testData_mocoParams_linear_smoothed5_it12.
     [super setUp];
     mCurDir = [[NSBundle bundleForClass:[self class] ] resourcePath];
     mFileNameTestData = [NSString stringWithFormat:@"%@/%@", mCurDir, mFileNameTestDataNii];
+    mFileNameTestDataResult3 = [NSString stringWithFormat:@"%@/%@", mCurDir, mFileNameTestDataResult3Nii];
 }
 
 - (void)tearDown
 {
     // Tear-down code here.
-    
     [super tearDown];
 }
 
@@ -50,7 +67,7 @@ NSString* mFileNameTestMocoParams = @"testData_mocoParams_linear_smoothed5_it12.
     MocoRegistrationProperty *regProperty = [[MocoRegistrationProperty alloc] init];
     STAssertNotNil(regProperty, @"valid init returns nil");
 
-    regProperty.LoggingLevel              = 3;
+    regProperty.LoggingLevel              = 1;
     regProperty.NumberOfThreads           = 10;
     regProperty.Smoothing                 = YES;
     regProperty.SmoothingSigma            = 5;
@@ -72,23 +89,8 @@ NSString* mFileNameTestMocoParams = @"testData_mocoParams_linear_smoothed5_it12.
     MocoRegistration *registratorDefault = [ [MocoRegistration alloc]	init];
     STAssertNotNil(registratorDefault, @"valid init returns nil");
     
-    //create metric, optimizer, and transform
-    //registratorDefault->m_metric    = MocoMetricType::New();
-    //registratorDefault->m_optimizer = MocoOptimizerType::New();
-    //registratorDefault->m_transform = MocoTransformType::New();
-    
-    //set metric params
-    //registratorDefault->m_metric->SetNumberOfThreads(regProperty.NumberOfThreads);
-    
-    //set global threadnum
-    //registratorDefault->m_metric->GetThreader()->SetGlobalMaximumNumberOfThreads(regProperty.NumberOfThreads);
-    //registratorDefault->m_metric->GetThreader()->SetGlobalDefaultNumberOfThreads(regProperty.NumberOfThreads);
-    
-    
     MocoRegistration *registrator = [ [MocoRegistration alloc]	initWithRegistrationProperty:regProperty];
     STAssertNotNil(registrator, @"valid init returns nil");
-
-    
 }
     
 
@@ -97,7 +99,7 @@ NSString* mFileNameTestMocoParams = @"testData_mocoParams_linear_smoothed5_it12.
     MocoRegistrationProperty *regProperty = [[MocoRegistrationProperty alloc] init];
     STAssertNotNil(regProperty, @"valid init returns nil");
     
-    regProperty.LoggingLevel              = 3;
+    regProperty.LoggingLevel              = 1;
     regProperty.NumberOfThreads           = 1;
     regProperty.Smoothing                 = YES;
     regProperty.SmoothingSigma            = 5;
@@ -143,11 +145,18 @@ NSString* mFileNameTestMocoParams = @"testData_mocoParams_linear_smoothed5_it12.
 
     EDDataElement *movingDataEl;
     
-    //set reference
+    
     MocoRegistration *registrator;
     registrator = [ [MocoRegistration alloc]	initWithRegistrationProperty:regProperty];
     STAssertNotNil(registrator, @"valid init returns nil");
+    
+    //+++ check if calling align without having set the reference throws an exeption +++
+    MocoTransformType::Pointer testTransform;
+    STAssertThrows( testTransform = [registrator alignEDDataElementToReference: refDataEl3D] , @"Calling align without having set the reference image must throw an exception!");
+    
+    //set reference
     [registrator setReferenceImageWithEDDataElement:refDataEl3D];
+    
     
     int numImages = 5;
     int precisionFactor = 100;//defines the precision needed 100 == 2 decimal positions
@@ -158,10 +167,9 @@ NSString* mFileNameTestMocoParams = @"testData_mocoParams_linear_smoothed5_it12.
         
         movingDataEl = [dataEl4D getDataAtTimeStep:i];
         
-        //++++ Alignment ++++
+        //++++ Alignment with correctly set reference image ++++
         MocoTransformType::Pointer transform = [registrator alignEDDataElementToReference: movingDataEl];
          
-        //++++ Send transform parameters to graph plot ++++
         MocoOptimizerType::ParametersType transParameters;
         transParameters = transform->GetParameters();
         MocoTransformType::OffsetType offset = transform->GetOffset();
@@ -194,6 +202,112 @@ NSString* mFileNameTestMocoParams = @"testData_mocoParams_linear_smoothed5_it12.
         STAssertEquals( [[NSNumber numberWithFloat: vrZ] integerValue] , rZ , @"incorrect value returned for reg param");
     }
     
+}
+
+- (void)testResample
+{
+    MocoRegistrationProperty *regProperty = [[MocoRegistrationProperty alloc] init];
+    regProperty.LoggingLevel              = 3;
+    regProperty.NumberOfThreads           = 1;
+    regProperty.Smoothing                 = YES;
+    regProperty.SmoothingSigma            = 5;
+    regProperty.MaskImagesForRegistration = NO;
+    regProperty.UseBestFoundParameters    = NO;
+    regProperty.NumberOfIterations        = 12;
+    [regProperty setRegistrationParameters:1000.0 MaxStep:0.019 MinStep:0.00001];
+    regProperty.RegistrationInterpolationMode = LINEAR;
+    regProperty.SmoothingKernelWidth  = 32;
+
+    MocoRegistration *registrator;
+    registrator = [ [MocoRegistration alloc]	initWithRegistrationProperty:regProperty];
+    STAssertNotNil(registrator, @"valid init returns nil");
+    
+    
+    //+++++ transform values expected +++++
+    /* for resampling the third test image
+    Matrix:
+    0.999993 -0.00374773 0.000392405
+    0.00374604 0.999984 0.00422586
+    -0.000408236 -0.00422436 0.999991
+    Offset: [0.23762, -0.0811229, -0.252632]
+    Center: [3.43672, 4.61626, 26.7917]
+    Translation: [0.230808, 0.0448957, -0.273777]
+    Inverse:
+    0.999993 0.00374604 -0.000408236
+    -0.00374773 0.999984 -0.00422436
+    0.000392405 0.00422586 0.999991
+    Singular: 0
+    Versor: [-0.00211257, 0.000200161, 0.00187345, 0.999996 ]
+    */
+    MocoTransformType::Pointer  transform = MocoTransformType::New();
+    
+    MocoTransformType::InputPointType centerPoint;
+    centerPoint = transform->GetCenter();
+    centerPoint[0] = 3.43672;
+    centerPoint[1] = 4.61626;
+    centerPoint[2] = 26.7917;
+    transform->SetCenter(centerPoint);
+    
+    MocoTransformType::ParametersType params;
+    params = transform->GetParameters();
+    params[0] = -0.00211257;
+    params[1] =  0.000200161;
+    params[2] =  0.00187345;
+    params[3] =  0.230808;
+    params[4] =  0.0448957;
+    params[5] = -0.273777;
+    
+    transform->SetParameters(params);
+    
+    //set up images
+    EDDataElement *dataEl4D    = [MocoRegistration getEDDataElementFromFile: mFileNameTestData];
+    EDDataElement *movDataEl3D;
+    movDataEl3D = [dataEl4D getDataAtTimeStep:3];
+    EDDataElement *resultDataEl;
+    
+    //MH FIXME: Is there an ISIS debug warning if loading a 3D image??? (EDDatalElement initWithDataFile)
+    EDDataElement *resultCompareDataEl = [MocoRegistration getEDDataElementFromFile: mFileNameTestDataResult3];
+    
+    //Check call with MISSING reference image
+    STAssertThrows(resultDataEl = [registrator resampleMovingEDDataElement:movDataEl3D withTransform:transform], @"Calling resampling without having set the reference image must throw an exception!");
+    
+    //Go on with correctly set reference image
+    [registrator setReferenceImageWithEDDataElement:[dataEl4D getDataAtTimeStep:0]];
+    resultDataEl = [registrator resampleMovingEDDataElement:movDataEl3D withTransform:transform];
+        
+    //MH FIXME: a workaround because header params are not correctly copied by itkAdapter
+    NSArray *propsToCopy = [NSArray arrayWithObjects:
+                                @"voxelsize",
+                                @"rowVec",
+                                @"sliceVec",
+                                @"columnVec",
+                                @"indexOrigin",
+                                nil];
+    [resultDataEl copyProps:propsToCopy fromDataElement:movDataEl3D];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjects: [NSArray arrayWithObjects:@"mocoAppExport", nil]
+                                                        forKeys: [NSArray arrayWithObjects:@"sequenceDescription", nil] ];
+    [resultDataEl setProps:dic];
+        
+    
+    //Now compare the resampling result to expected result
+    dispatch_queue_t processingQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+    dispatch_async(processingQueue, ^{
+    
+        BARTImageSize *sizeData = [resultCompareDataEl getImageSize];
+    
+        for (size_t sliceNum = 1; sliceNum < sizeData.slices; sliceNum++){
+             for (size_t rowNum = 1; rowNum < sizeData.rows; rowNum++){
+                for (size_t colNum = 1; colNum < sizeData.columns; colNum++){
+                    float valComp  = [resultCompareDataEl getFloatVoxelValueAtRow: rowNum col: colNum slice: sliceNum timestep:0];
+                    float valRes   = [resultDataEl getFloatVoxelValueAtRow: rowNum col: colNum slice: sliceNum timestep:0];
+                    STAssertEqualsWithAccuracy(valComp, valRes, 0.001, @"Resampling gives incorrect voxel values!");
+                }
+            }
+        }
+        
+    });// end dispatch_async
+
+
 }
 
 
