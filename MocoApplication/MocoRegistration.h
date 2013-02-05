@@ -179,7 +179,7 @@ protected:
 /**
  * Set the image for the reference (stationary image) by given ITKImage.
  *
- * \param itkImage The referene image as EDDataElement.
+ * \param itkImage The referene image as ITKImage.
  *
  */
 -(void)setReferenceImageWithITKImage:(FixedImageType3D::Pointer)itkImage;
@@ -217,10 +217,10 @@ protected:
  * Be sure your registrationProperty and reference image are set before calling this function.
  * The returned transformation can be used to resample an itk-image or an EDDataelement using resampleMovingEDDataElement.
  *
- * \param movingITKImage  EDDataElement that is registered to reference
+ * \param movingITKImage     ITKImage that is registered to reference
  *
  * \return                   A MocoTransformType describing the transformation of input
- *                           to reference image. transformation: [rotX rotY rotZ transX transY transZ]
+ *                           to reference image. Transformation: [rotX rotY rotZ transX transY transZ]
  *
  */
 -(MocoTransformType::Pointer)alignITKImageToReference:(MovingImageType3D::Pointer)movingITKImage;
@@ -244,8 +244,11 @@ protected:
 
 
 /**
- * Class method that retrieves a EDDataElement from a given image data file.
+ * Class method that retrieves an EDDataElement from a given image data file (file types supported depend on EDDataElement).
  *
+ * \param filePath  Complete path to an image file.
+ *
+ * \return          EDDataElement (4D) holding the image data
  */
 +(EDDataElement*)getEDDataElementFromFile:(NSString*)filePath;
 

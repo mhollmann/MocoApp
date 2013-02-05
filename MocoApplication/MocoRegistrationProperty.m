@@ -12,9 +12,6 @@
 
 @implementation MocoRegistrationProperty
 
-@synthesize ParameterOutputFileOffset;//MHFIXME: not used
-@synthesize FinalMovementParameters;  //MHFIXME: not used
-
 @synthesize RegistrationParameters;
 @synthesize RegistrationInterpolationMode;
 @synthesize ResamplingInterpolationMode;
@@ -36,10 +33,7 @@
         RegistrationParameters[0] = 1000;
         RegistrationParameters[1] = 0.019;
         RegistrationParameters[2] = 0.00001;
-        
-        
-        FinalMovementParameters = (double *) malloc( 6 * sizeof(double) );
-        
+                
         RegistrationInterpolationMode = LINEAR;
         ResamplingInterpolationMode   = BSPLINE4;
         NumberOfIterations            = 6;
@@ -78,7 +72,6 @@
 - (void) dealloc {
     
     free(RegistrationParameters);
-    free(FinalMovementParameters);    
     
     [super dealloc];
 }

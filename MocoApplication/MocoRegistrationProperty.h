@@ -21,7 +21,6 @@
 #define LINEAR 10
 #define INTERPOLATOR_NN 11 
 
-
 #define METRIC_FAILURE 100
 #define IMAGEREAD_FAILURE 101
 #define EVOL_SUCCESS 0
@@ -30,12 +29,12 @@
 
 @private 
     
-    NSString *ParameterOutputFileOffset;//MH FIXME: not used
-    short Threshold;                    //MH FIXME: not used
-    double *FinalMovementParameters;    //MH FIXME: not used
+    //NSString *ParameterOutputFileOffset;//MH FIXME: not used
+    //short Threshold;                    //MH FIXME: not used
+    //double *FinalMovementParameters;    //MH FIXME: not used
     
-    /* array with: translationScale, maxStepLength, minStepLength, numIterations*/
-    double *RegistrationParameters;     //MH FIXME: remove fourth parameter (numIterations)
+    /* array with: translationScale, maxStepLength, minStepLength */
+    double *RegistrationParameters;
     
     /* interpolation type used for registration*/
     int RegistrationInterpolationMode;
@@ -46,7 +45,7 @@
     /* number of iterations used in finding transform*/
     int NumberOfIterations;
     
-    /* do smoothing for registration */
+    /* do smoothing for registration? */
     bool Smoothing;
     
     /* gaussian variance */
@@ -58,12 +57,11 @@
     /* number of threads used for all processing */
     int NumberOfThreads;
     
-    /* use the transformation with the best metric value the observer sees during iteration*/
+    /* use the transformation with the best metric value the observer sees during iteration */
     bool UseBestFoundParameters;
     
-    /* mask the images before registration, this improves performance of the algorithms*/
+    /* mask the images before registration, this improves performance of the algorithms */
     bool MaskImagesForRegistration;
-    
     
     /*logging level: 0 no logging, 1, low logging ... 3, all logging messages */
     int LoggingLevel;

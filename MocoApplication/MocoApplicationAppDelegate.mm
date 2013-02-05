@@ -277,6 +277,7 @@
     }
     else
     {
+        mRegistrationProperty.Smoothing = YES;
         mRegistrationProperty.SmoothingSigma = [valSelected intValue];
     }
 }
@@ -321,6 +322,13 @@
         //dump log infos, because these may be lost otherwise
         mMocoDataLogger->dumpMocoAppLogsToLogfile();
         
+        //set all other gui compononts to active again
+        [mNumIterationsPullDown setEnabled: YES];
+        [mSmoothKernelPullDown setEnabled: YES];
+        //[mMaskImagesPullDown setEnabled: YES];
+        [mReferenceImagePullDown setEnabled: YES];
+        [mInputSourcePullDown setEnabled: YES];
+        
         [sender setTitle: @"Start"];
         return;
     }
@@ -328,6 +336,15 @@
     {
         mMocoIsRunning = YES;
         [sender setTitle: @"Stop"];
+        
+        
+        //set all other gui compononts to inactive
+        [mNumIterationsPullDown setEnabled: NO];
+        [mSmoothKernelPullDown setEnabled: NO];
+        //[mMaskImagesPullDown setEnabled: NO];
+        [mReferenceImagePullDown setEnabled: NO];
+        [mInputSourcePullDown setEnabled: NO];
+        
         
         //+++++ (Re)Initialize the registrator, because regProperties may have changed +++++
         if(mRegistrator == nil)
