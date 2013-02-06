@@ -123,10 +123,9 @@ protected:
 
 
 /**
- * MocoRegistration provides functionality for the Motion-Correction of 
- * 3D and 4D fMRI images. The interface works with image data encapsulated 
- * by EDDataElement or with 3D float itkImages . 
+ * MocoRegistration provides functionality for the Motion-Correction of 3D and 4D fMRI images. 
  *
+ * The interface works with image data encapsulated by EDDataElement or with 3D float itkImages .
  * Initialization sets default registration properties.
  *
  */
@@ -198,7 +197,7 @@ protected:
 
 
 /**
- * Align a EDDataElement to the reference image that was set for this registration.
+ * Align an EDDataElement to the reference image that was set for registration.
  * Be sure your registrationProperty and reference image are set before calling this function.
  * The returned transformation can be used to resample an EDDataelement using resampleMovingEDDataElement.
  *
@@ -213,7 +212,7 @@ protected:
 
 
 /**
- * Align an itk-image to the reference image that was set for this registration.
+ * Align an itk-image to the reference image that was set for registration.
  * Be sure your registrationProperty and reference image are set before calling this function.
  * The returned transformation can be used to resample an itk-image or an EDDataelement using resampleMovingEDDataElement.
  *

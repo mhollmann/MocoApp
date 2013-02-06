@@ -109,7 +109,6 @@ void MocoDataLogger::dumpMocoParamsToLogfile(void)
         this->mMocoParamsLogfileName = STANDARD_MOCOPARAMS_LOGFILENAME;
     }
     
-    //check existance of the file and remove it if needed
     struct stat buf;
     if (stat(this->mMocoParamsLogfileName.c_str(), &buf) != -1)
     {

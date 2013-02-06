@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -213,11 +213,11 @@ MaskType3D::Pointer&#160;</td><td class="memItemRight" valign="bottom"><b>m_movi
 <p>Align an itk-image to the reference image that was set for this registration. Be sure your registrationProperty and reference image are set before calling this function. The returned transformation can be used to resample an itk-image or an EDDataelement using resampleMovingEDDataElement.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">movingITKImage</td><td>EDDataElement that is registered to reference</td></tr>
+    <tr><td class="paramname">movingITKImage</td><td>ITKImage that is registered to reference</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A MocoTransformType describing the transformation of input to reference image. transformation: [rotX rotY rotZ transX transY transZ] </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A MocoTransformType describing the transformation of input to reference image. Transformation: [rotX rotY rotZ transX transY transZ] </dd></dl>
 
 </div>
 </div>
@@ -234,7 +234,14 @@ MaskType3D::Pointer&#160;</td><td class="memItemRight" valign="bottom"><b>m_movi
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Class method that retrieves a EDDataElement from a given image data file. </p>
+<p>Class method that retrieves an EDDataElement from a given image data file (file types supported depend on EDDataElement).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePath</td><td>Complete path to an image file.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>EDDataElement (4D) holding the image data </dd></dl>
 
 </div>
 </div>
@@ -358,7 +365,7 @@ MaskType3D::Pointer&#160;</td><td class="memItemRight" valign="bottom"><b>m_movi
 <p>Set the image for the reference (stationary image) by given ITKImage.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">itkImage</td><td>The referene image as EDDataElement. </td></tr>
+    <tr><td class="paramname">itkImage</td><td>The referene image as ITKImage. </td></tr>
   </table>
   </dd>
 </dl>
@@ -366,13 +373,13 @@ MaskType3D::Pointer&#160;</td><td class="memItemRight" valign="bottom"><b>m_movi
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>MocoApplication/<a class="el" href="../../d6/d5d/_moco_registration_8h_source.html">MocoRegistration.h</a></li>
-<li>MocoApplication/MocoRegistration.mm</li>
+<li>/Users/mhollmann/Projekte/Project_MOCOApplication/MocoApplication/MocoApplication/<a class="el" href="../../d6/d5d/_moco_registration_8h_source.html">MocoRegistration.h</a></li>
+<li>/Users/mhollmann/Projekte/Project_MOCOApplication/MocoApplication/MocoApplication/MocoRegistration.mm</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 17 2012 13:53:55 for MocoApp by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Feb 5 2013 11:37:48 for MocoApp by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.2
 </small></address>

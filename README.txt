@@ -1,4 +1,4 @@
-MocoApplication v 1.0
+MocoApplication v 1.1
 
 This software is doing parallelized motion correction of (real-time) fMRI data. 
 In offline mode nifti-4D images can be loaded. The input for online correction is

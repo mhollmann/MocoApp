@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,15 +89,18 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 
 <p>This is the complete list of members for <a class="el" href="../../de/dff/class_moco_data_logger.html">MocoDataLogger</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html#a1a43e37f46dd7ae09e4bd65d2cd609c9">addMocoParams</a>(float tX, float tY, float tZ, float rX, float rY, float rZ)</td><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html">MocoDataLogger</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html#ad4c19f566432a96c3c7b34d0ad504475">appendLineToFile</a>(string fileName, string lineToWrite)</td><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html">MocoDataLogger</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html#af79405f86e3b33c98d8fe767be3c54b8">addMocoAppLogentry</a>(string logEntry)</td><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html">MocoDataLogger</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html#a1a43e37f46dd7ae09e4bd65d2cd609c9">addMocoParams</a>(float tX, float tY, float tZ, float rX, float rY, float rZ)</td><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html">MocoDataLogger</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html#ad4c19f566432a96c3c7b34d0ad504475">appendLineToFile</a>(string fileName, string lineToWrite)</td><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html">MocoDataLogger</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html#a4e61a49ec546eee45b0f94125cb615bf">dumpMocoAppLogsToLogfile</a>(void)</td><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html">MocoDataLogger</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html#a11f473c038468693aebf69d32ab8d210">dumpMocoParamsToLogfile</a>(void)</td><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html">MocoDataLogger</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html#af037cb30f25ae1cd80b210e56cba70f6">MocoDataLogger</a>(string mocoParamsLogfile, string appLogfile)</td><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html">MocoDataLogger</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html#a667090743e4c9c030f64d384117c301e">~MocoDataLogger</a>()</td><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html">MocoDataLogger</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html#a0a5462fd2211b48238e96927dc49a2e7">getInstance</a>()</td><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html">MocoDataLogger</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html#a9ed6066230354f0d6de315ef4fb8145e">setAppLogFileName</a>(string appLogfile)</td><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html">MocoDataLogger</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html#af8e7e054c5b9c8d20fe2de953907844c">setParamsLogFileName</a>(string mocoParamsLogfile)</td><td class="entry"><a class="el" href="../../de/dff/class_moco_data_logger.html">MocoDataLogger</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 17 2012 13:53:55 for MocoApp by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Feb 5 2013 11:37:48 for MocoApp by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.2
 </small></address>

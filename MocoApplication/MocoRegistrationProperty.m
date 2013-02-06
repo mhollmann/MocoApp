@@ -22,7 +22,6 @@
 @synthesize NumberOfThreads;
 @synthesize MaskImagesForRegistration;
 @synthesize UseBestFoundParameters;   
-@synthesize Threshold;                
 @synthesize LoggingLevel;
               
 
@@ -45,7 +44,6 @@
         MaskImagesForRegistration = YES;
         
         UseBestFoundParameters  = NO;
-        Threshold               = 0;
         LoggingLevel            = 0;
     }
                                          

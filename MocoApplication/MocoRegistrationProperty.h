@@ -28,65 +28,92 @@
 @interface MocoRegistrationProperty : NSObject {
 
 @private 
-    
-    //NSString *ParameterOutputFileOffset;//MH FIXME: not used
-    //short Threshold;                    //MH FIXME: not used
-    //double *FinalMovementParameters;    //MH FIXME: not used
-    
-    /* array with: translationScale, maxStepLength, minStepLength */
+
     double *RegistrationParameters;
-    
-    /* interpolation type used for registration*/
-    int RegistrationInterpolationMode;
-    
-    /* interpolation type used for resampling*/
-    int ResamplingInterpolationMode;
-    
-    /* number of iterations used in finding transform*/
-    int NumberOfIterations;
-    
-    /* do smoothing for registration? */
-    bool Smoothing;
-    
-    /* gaussian variance */
-    int SmoothingSigma;
-    
-    /* kernel size in mm (e.g. 8 for 3mm voxel size) */
-    int SmoothingKernelWidth;
-    
-    /* number of threads used for all processing */
-    int NumberOfThreads;
-    
-    /* use the transformation with the best metric value the observer sees during iteration */
-    bool UseBestFoundParameters;
-    
-    /* mask the images before registration, this improves performance of the algorithms */
-    bool MaskImagesForRegistration;
-    
-    /*logging level: 0 no logging, 1, low logging ... 3, all logging messages */
-    int LoggingLevel;
+    int     RegistrationInterpolationMode;
+    int     ResamplingInterpolationMode;
+    int     NumberOfIterations;
+    bool    Smoothing;
+    int     SmoothingSigma;
+    int     SmoothingKernelWidth;
+    int     NumberOfThreads;
+    bool    UseBestFoundParameters;
+    bool    MaskImagesForRegistration;
+    int     LoggingLevel;
 
 }
 
-@property(copy) NSString *ParameterOutputFileOffset;
-
+/** @property  RegistrationParameters
+ *  @brief     Three algo parameters: translationScale, maxStepLength, minStepLength
+ *             Always set property using: setRegistrationParameters.
+ */
 @property(readonly) double *RegistrationParameters;
-@property(readonly) double *FinalMovementParameters;
 
+/** @property  RegistrationInterpolationMode
+ *  @brief     Interpolation during alignment: LINEAR, BSPLINE(2-5) , SINC(2-6), INTERPOLATOR_NN
+ *             Defines which interpolation is done during alignment. LINEAR is usually fast and good!
+ */
 @property int   RegistrationInterpolationMode;
+
+/** @property  ResamplingInterpolationMode
+ *  @brief     Interpolation during resampling: LINEAR, BSPLINE(2-5) , SINC(2-6), INTERPOLATOR_NN
+ *             Defines which interpolation is done for resampling.
+ *             This should be high quality (usually BSPLINE4 or better).
+ */
 @property int   ResamplingInterpolationMode;
+
+/** @property  NumberOfIterations
+ *  @brief     Number of iterations used to find transformation
+ *             Basic rule: as more movement is in the data, as more iterations are needed
+ */
 @property int   NumberOfIterations;
+
+/** @property  Smoothing
+ *  @brief     Boolean that depicts if smoothing should be done
+ */
 @property bool  Smoothing;
+
+/** @property  SmoothingSigma
+ *  @brief     The gaussian variance for smoothing in mm (e.g. 5)
+ */
 @property int   SmoothingSigma;
+
+/** @property  SmoothingKernelWidth
+ *  @brief     Kernel width for smoothing in mm (e.g. 32) 
+ */
 @property int   SmoothingKernelWidth;
+
+/** @property  NumberOfThreads
+ *  @brief     The number of threads that should be used to parallelize alignment and resampling (e.g. 16).
+ *             The more threads are used the faster is the processing.
+ */
 @property int   NumberOfThreads;
+
+
+/** @property  MaskImagesForRegistration
+ *  @brief     Boolean that depicts if the images should be masked for alignment.
+ *             Masking makes the alignment more stable and faster, because the metric is not
+ *             computed over background voxels.
+ */
 @property bool  MaskImagesForRegistration;
+
+/** @property  UseBestFoundParameters
+ *  @brief     Boolean that depicts if the best parameters from all iteration should be used.
+ *             The best parameters are often reprsenting local minima in metric, so usually this
+ *             value should be false.
+ */
 @property bool  UseBestFoundParameters;
-@property short Threshold;
+
+
+
+/** @property  LoggingLevel
+ *  @brief     logging level (0-3): 0: no logging, 1: low logging ... 3: all logging messages 
+ */
 @property int   LoggingLevel;
 
 - (id) init;
-- (void) setRegistrationParameters:(double)translationScale 
+
+- (void) setRegistrationParameters:(double)translationScale
                            MaxStep:(double)maxSteplength 
                            MinStep:(double)minSteplength;
 

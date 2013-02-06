@@ -750,14 +750,14 @@
     
     //MH FIXME: Remove...
     //Write mask image
-    if (self->m_registrationProperty.LoggingLevel>2){
+    /*if (self->m_registrationProperty.LoggingLevel>2){
         typedef itk::ImageFileWriter< MaskImageType3D >  WriterType;
         WriterType::Pointer  writer =  WriterType::New();
         writer->SetFileName( [@"/Users/mhollmann/Projekte/Project_MOCOApplication/data/test3D_mask_dilate.nii" UTF8String] );
         writer->SetInput( mask );
         writer->Update();
         NSLog(@"Mask image written to: %@", @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/test3D_mask_dilate.nii");
-    }
+    }*/
     
     return mask;
     
