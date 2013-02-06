@@ -1,0 +1,959 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00AD50271665101B008EC9C2 /* MocoRegistration.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05515D50A17001FDFCB /* MocoRegistration.mm */; };
+		3E1B091516BA55E1008ED504 /* res_0004.nii in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E1B091416BA55E1008ED504 /* res_0004.nii */; };
+		3E221E9516BAC3BC0072DA13 /* EDNA.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 3E98904616149E4300086C21 /* EDNA.dylib */; };
+		3E221E9916BAC4580072DA13 /* EDNA.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98904616149E4300086C21 /* EDNA.dylib */; };
+		3E41C05815D50A17001FDFCB /* MocoRegistration.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05515D50A17001FDFCB /* MocoRegistration.mm */; };
+		3E41C05915D50A17001FDFCB /* MocoRegistrationProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05715D50A17001FDFCB /* MocoRegistrationProperty.m */; };
+		3E56B30815C7C12800493310 /* MocoDrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E56B30715C7C12700493310 /* MocoDrawView.xib */; };
+		3E56B30C15C7C47D00493310 /* MocoDrawRotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E56B30B15C7C47D00493310 /* MocoDrawRotationView.m */; };
+		3E57015615A44D7000845683 /* defaultRegParams.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E57015515A44D7000845683 /* defaultRegParams.plist */; };
+		3E5A30B81647F651004E01F5 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4682A915E4ED7900813C98 /* SenTestingKit.framework */; };
+		3E5A30B91647F651004E01F5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EDA32C415513A7900787007 /* Cocoa.framework */; };
+		3E5A30BF1647F652004E01F5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E5A30BD1647F652004E01F5 /* InfoPlist.strings */; };
+		3E5A30C21647F652004E01F5 /* MocoRegistrationTest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E5A30C11647F652004E01F5 /* MocoRegistrationTest.mm */; };
+		3E5A310D164808FB004E01F5 /* EDNA.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98904616149E4300086C21 /* EDNA.dylib */; };
+		3E5A310E16480A6A004E01F5 /* MocoRegistrationProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05715D50A17001FDFCB /* MocoRegistrationProperty.m */; };
+		3E5A311116480C81004E01F5 /* testData.nii in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E5A30FA164802F5004E01F5 /* testData.nii */; };
+		3E5A312716490B88004E01F5 /* testData_mocoParams_linear_smoothed5_it12.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3E5A312616490B88004E01F5 /* testData_mocoParams_linear_smoothed5_it12.txt */; };
+		3E666451165A2BBB00855C46 /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EEE66CD1553E97300AA0F7F /* CorePlot.framework */; };
+		3E98904716149E4300086C21 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EDA32C415513A7900787007 /* Cocoa.framework */; };
+		3E98905D16149EA100086C21 /* EDDataElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E98905116149EA100086C21 /* EDDataElement.h */; };
+		3E98905E16149EA100086C21 /* EDDataElement.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E98905216149EA100086C21 /* EDDataElement.mm */; };
+		3E98905F16149EA100086C21 /* EDDataElementIsis.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E98905316149EA100086C21 /* EDDataElementIsis.h */; };
+		3E98906016149EA100086C21 /* EDDataElementIsis.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E98905416149EA100086C21 /* EDDataElementIsis.mm */; };
+		3E98906116149EA100086C21 /* EDDataElementIsisRealTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E98905516149EA100086C21 /* EDDataElementIsisRealTime.h */; };
+		3E98906216149EA100086C21 /* EDDataElementIsisRealTime.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E98905616149EA100086C21 /* EDDataElementIsisRealTime.mm */; };
+		3E98906316149EA100086C21 /* EDDataElementRealTimeLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E98905716149EA100086C21 /* EDDataElementRealTimeLoader.h */; };
+		3E98906416149EA100086C21 /* EDDataElementRealTimeLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E98905816149EA100086C21 /* EDDataElementRealTimeLoader.mm */; };
+		3E98906716149EA100086C21 /* EDIsisImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E98905B16149EA100086C21 /* EDIsisImage.cpp */; };
+		3E98906816149EA100086C21 /* EDIsisImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E98905C16149EA100086C21 /* EDIsisImage.h */; };
+		3EA6E32E1622DCA7001F3C6E /* MocoDataLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EA6E32C1622DCA7001F3C6E /* MocoDataLogger.cpp */; };
+		3ED2BAB6165F8FA900DA257D /* appIcon.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 3ED2BAB5165F8FA900DA257D /* appIcon.iconset */; };
+		3EDA32C515513A7900787007 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EDA32C415513A7900787007 /* Cocoa.framework */; };
+		3EDA32CF15513A7900787007 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA32CD15513A7900787007 /* InfoPlist.strings */; };
+		3EDA32D215513A7900787007 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA32D115513A7900787007 /* main.m */; };
+		3EDA32D515513A7900787007 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA32D315513A7900787007 /* Credits.rtf */; };
+		3EDA32D815513A7900787007 /* MocoApplicationAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA32D715513A7900787007 /* MocoApplicationAppDelegate.mm */; };
+		3EDA32DB15513A7900787007 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA32D915513A7900787007 /* MainMenu.xib */; };
+		3EDA32EB15513BFE00787007 /* MocoDrawTranslationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA32EA15513BFE00787007 /* MocoDrawTranslationView.m */; };
+		3EEE66CE1553E97300AA0F7F /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EEE66CD1553E97300AA0F7F /* CorePlot.framework */; };
+		3EEE66D415566DCB00AA0F7F /* MocoDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEE66D215566DCB00AA0F7F /* MocoDrawViewController.m */; };
+		3EF416341615A2E200443485 /* BARTNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EF416321615A2E200443485 /* BARTNotifications.h */; };
+		3EF416351615A2E200443485 /* BARTNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF416331615A2E200443485 /* BARTNotifications.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		003AC66F165E865000E0BEE1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EDA32B715513A7900787007 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E98904516149E4300086C21;
+			remoteInfo = EDNA;
+		};
+		003AC6711664F3D000E0BEE1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EDA32B715513A7900787007 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E98904516149E4300086C21;
+			remoteInfo = EDNA;
+		};
+		00D3AFE3165E558E0034A86D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = CorePlot;
+		};
+		00D3AFE5165E558E0034A86D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0730F600109492D800E95162;
+			remoteInfo = UnitTests;
+		};
+		3E5A30D2164801E4004E01F5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EDA32B715513A7900787007 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3EDA32BF15513A7900787007;
+			remoteInfo = MocoApplication;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3E5A311016480C54004E01F5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				3E1B091516BA55E1008ED504 /* res_0004.nii in CopyFiles */,
+				3E5A311116480C81004E01F5 /* testData.nii in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E7DB66D15A45AEF002966AE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3E666451165A2BBB00855C46 /* CorePlot.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3EF4164C1615A9AB00443485 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CorePlot.xcodeproj; path = CorePlot_1.1/Source/framework/CorePlot.xcodeproj; sourceTree = "<group>"; };
+		3E1B091416BA55E1008ED504 /* res_0004.nii */ = {isa = PBXFileReference; lastKnownFileType = file; name = res_0004.nii; path = ../testfiles/res_0004.nii; sourceTree = "<group>"; };
+		3E221E9616BAC4200072DA13 /* MocoApplication.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = MocoApplication.app; path = "../../../Programming/Library/Developer/Xcode/DerivedData/MocoApplication-bnbxeedqyvjztnbxbsdvkrmcaddt/Build/Products/Debug/MocoApplication.app"; sourceTree = "<group>"; };
+		3E3B07E815EE358D00198665 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3E41C05415D50A17001FDFCB /* MocoRegistration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoRegistration.h; sourceTree = "<group>"; };
+		3E41C05515D50A17001FDFCB /* MocoRegistration.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MocoRegistration.mm; sourceTree = "<group>"; };
+		3E41C05615D50A17001FDFCB /* MocoRegistrationProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoRegistrationProperty.h; sourceTree = "<group>"; };
+		3E41C05715D50A17001FDFCB /* MocoRegistrationProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MocoRegistrationProperty.m; sourceTree = "<group>"; };
+		3E4682A915E4ED7900813C98 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		3E56B30715C7C12700493310 /* MocoDrawView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MocoDrawView.xib; sourceTree = "<group>"; };
+		3E56B30915C7C3C600493310 /* MocoDrawTranslationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoDrawTranslationView.h; sourceTree = "<group>"; };
+		3E56B30A15C7C47C00493310 /* MocoDrawRotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoDrawRotationView.h; sourceTree = "<group>"; };
+		3E56B30B15C7C47D00493310 /* MocoDrawRotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MocoDrawRotationView.m; sourceTree = "<group>"; };
+		3E57015515A44D7000845683 /* defaultRegParams.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultRegParams.plist; sourceTree = "<group>"; };
+		3E5A30B71647F651004E01F5 /* MocoRegistrationTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MocoRegistrationTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E5A30BC1647F651004E01F5 /* MocoRegistrationTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MocoRegistrationTest-Info.plist"; sourceTree = "<group>"; };
+		3E5A30BE1647F652004E01F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3E5A30C01647F652004E01F5 /* MocoRegistrationTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MocoRegistrationTest.h; sourceTree = "<group>"; };
+		3E5A30C11647F652004E01F5 /* MocoRegistrationTest.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MocoRegistrationTest.mm; sourceTree = "<group>"; };
+		3E5A30C31647F652004E01F5 /* MocoRegistrationTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MocoRegistrationTest-Prefix.pch"; sourceTree = "<group>"; };
+		3E5A30FA164802F5004E01F5 /* testData.nii */ = {isa = PBXFileReference; lastKnownFileType = file; name = testData.nii; path = testfiles/testData.nii; sourceTree = SOURCE_ROOT; };
+		3E5A312616490B88004E01F5 /* testData_mocoParams_linear_smoothed5_it12.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = testData_mocoParams_linear_smoothed5_it12.txt; path = testfiles/testData_mocoParams_linear_smoothed5_it12.txt; sourceTree = SOURCE_ROOT; };
+		3E98904616149E4300086C21 /* EDNA.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = EDNA.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E98904A16149E4300086C21 /* EDNA-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EDNA-Prefix.pch"; sourceTree = "<group>"; };
+		3E98905116149EA100086C21 /* EDDataElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDDataElement.h; sourceTree = "<group>"; };
+		3E98905216149EA100086C21 /* EDDataElement.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EDDataElement.mm; sourceTree = "<group>"; };
+		3E98905316149EA100086C21 /* EDDataElementIsis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDDataElementIsis.h; sourceTree = "<group>"; };
+		3E98905416149EA100086C21 /* EDDataElementIsis.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EDDataElementIsis.mm; sourceTree = "<group>"; };
+		3E98905516149EA100086C21 /* EDDataElementIsisRealTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDDataElementIsisRealTime.h; sourceTree = "<group>"; };
+		3E98905616149EA100086C21 /* EDDataElementIsisRealTime.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EDDataElementIsisRealTime.mm; sourceTree = "<group>"; };
+		3E98905716149EA100086C21 /* EDDataElementRealTimeLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDDataElementRealTimeLoader.h; sourceTree = "<group>"; };
+		3E98905816149EA100086C21 /* EDDataElementRealTimeLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EDDataElementRealTimeLoader.mm; sourceTree = "<group>"; };
+		3E98905B16149EA100086C21 /* EDIsisImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EDIsisImage.cpp; sourceTree = "<group>"; };
+		3E98905C16149EA100086C21 /* EDIsisImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDIsisImage.h; sourceTree = "<group>"; };
+		3EA6E32C1622DCA7001F3C6E /* MocoDataLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MocoDataLogger.cpp; sourceTree = "<group>"; };
+		3EA6E32D1622DCA7001F3C6E /* MocoDataLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoDataLogger.h; sourceTree = "<group>"; };
+		3ED2BAB5165F8FA900DA257D /* appIcon.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; name = appIcon.iconset; path = ../appIcon.iconset; sourceTree = "<group>"; };
+		3EDA32C015513A7900787007 /* MocoApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MocoApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EDA32C415513A7900787007 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		3EDA32C715513A7900787007 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		3EDA32C815513A7900787007 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		3EDA32C915513A7900787007 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3EDA32CC15513A7900787007 /* MocoApplication-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MocoApplication-Info.plist"; sourceTree = "<group>"; };
+		3EDA32CE15513A7900787007 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3EDA32D015513A7900787007 /* MocoApplication-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MocoApplication-Prefix.pch"; sourceTree = "<group>"; };
+		3EDA32D115513A7900787007 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3EDA32D415513A7900787007 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		3EDA32D615513A7900787007 /* MocoApplicationAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MocoApplicationAppDelegate.h; sourceTree = "<group>"; };
+		3EDA32D715513A7900787007 /* MocoApplicationAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MocoApplicationAppDelegate.mm; sourceTree = "<group>"; };
+		3EDA32DA15513A7900787007 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		3EDA32EA15513BFE00787007 /* MocoDrawTranslationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MocoDrawTranslationView.m; sourceTree = "<group>"; };
+		3EEE66CD1553E97300AA0F7F /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EEE66D115566DCB00AA0F7F /* MocoDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MocoDrawViewController.h; sourceTree = "<group>"; };
+		3EEE66D215566DCB00AA0F7F /* MocoDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MocoDrawViewController.m; sourceTree = "<group>"; };
+		3EF416321615A2E200443485 /* BARTNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BARTNotifications.h; sourceTree = "<group>"; };
+		3EF416331615A2E200443485 /* BARTNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BARTNotifications.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3E5A30B31647F651004E01F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E5A310D164808FB004E01F5 /* EDNA.dylib in Frameworks */,
+				3E5A30B81647F651004E01F5 /* SenTestingKit.framework in Frameworks */,
+				3E5A30B91647F651004E01F5 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E98904316149E4300086C21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E98904716149E4300086C21 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3EDA32BD15513A7900787007 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E221E9916BAC4580072DA13 /* EDNA.dylib in Frameworks */,
+				3EEE66CE1553E97300AA0F7F /* CorePlot.framework in Frameworks */,
+				3EDA32C515513A7900787007 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00D3AFDB165E558D0034A86D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				00D3AFE4165E558E0034A86D /* CorePlot.framework */,
+				00D3AFE6165E558E0034A86D /* UnitTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3E5A30BA1647F651004E01F5 /* MocoRegistrationTest */ = {
+			isa = PBXGroup;
+			children = (
+				3E5A30C01647F652004E01F5 /* MocoRegistrationTest.h */,
+				3E5A30C11647F652004E01F5 /* MocoRegistrationTest.mm */,
+				3E5A30FA164802F5004E01F5 /* testData.nii */,
+				3E1B091416BA55E1008ED504 /* res_0004.nii */,
+				3E5A312616490B88004E01F5 /* testData_mocoParams_linear_smoothed5_it12.txt */,
+				3E5A30BB1647F651004E01F5 /* Supporting Files */,
+			);
+			path = MocoRegistrationTest;
+			sourceTree = "<group>";
+		};
+		3E5A30BB1647F651004E01F5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3E5A30BC1647F651004E01F5 /* MocoRegistrationTest-Info.plist */,
+				3E5A30BD1647F652004E01F5 /* InfoPlist.strings */,
+				3E5A30C31647F652004E01F5 /* MocoRegistrationTest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3E66644F1657BBD100855C46 /* docs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = docs;
+			sourceTree = "<group>";
+		};
+		3E98904816149E4300086C21 /* EDNA */ = {
+			isa = PBXGroup;
+			children = (
+				3E98905116149EA100086C21 /* EDDataElement.h */,
+				3E98905216149EA100086C21 /* EDDataElement.mm */,
+				3EF416321615A2E200443485 /* BARTNotifications.h */,
+				3EF416331615A2E200443485 /* BARTNotifications.m */,
+				3E98905316149EA100086C21 /* EDDataElementIsis.h */,
+				3E98905416149EA100086C21 /* EDDataElementIsis.mm */,
+				3E98905516149EA100086C21 /* EDDataElementIsisRealTime.h */,
+				3E98905616149EA100086C21 /* EDDataElementIsisRealTime.mm */,
+				3E98905716149EA100086C21 /* EDDataElementRealTimeLoader.h */,
+				3E98905816149EA100086C21 /* EDDataElementRealTimeLoader.mm */,
+				3E98905B16149EA100086C21 /* EDIsisImage.cpp */,
+				3E98905C16149EA100086C21 /* EDIsisImage.h */,
+				3E98904916149E4300086C21 /* Supporting Files */,
+			);
+			path = EDNA;
+			sourceTree = "<group>";
+		};
+		3E98904916149E4300086C21 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3E98904A16149E4300086C21 /* EDNA-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3EDA32B515513A7900787007 = {
+			isa = PBXGroup;
+			children = (
+				3E221E9616BAC4200072DA13 /* MocoApplication.app */,
+				00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */,
+				3E66644F1657BBD100855C46 /* docs */,
+				3EDA32CA15513A7900787007 /* MocoApplication */,
+				3E98904816149E4300086C21 /* EDNA */,
+				3E5A30BA1647F651004E01F5 /* MocoRegistrationTest */,
+				3EDA32C115513A7900787007 /* Products */,
+				3EDA32C315513A7900787007 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3EDA32C115513A7900787007 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3EDA32C015513A7900787007 /* MocoApplication.app */,
+				3E98904616149E4300086C21 /* EDNA.dylib */,
+				3E5A30B71647F651004E01F5 /* MocoRegistrationTest.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3EDA32C315513A7900787007 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3EEE66CD1553E97300AA0F7F /* CorePlot.framework */,
+				3EDA32C415513A7900787007 /* Cocoa.framework */,
+				3E4682A915E4ED7900813C98 /* SenTestingKit.framework */,
+				3E3B07E815EE358D00198665 /* Foundation.framework */,
+				3EDA32C615513A7900787007 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3EDA32C615513A7900787007 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3EDA32C715513A7900787007 /* AppKit.framework */,
+				3EDA32C815513A7900787007 /* CoreData.framework */,
+				3EDA32C915513A7900787007 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		3EDA32CA15513A7900787007 /* MocoApplication */ = {
+			isa = PBXGroup;
+			children = (
+				3ED2BAB5165F8FA900DA257D /* appIcon.iconset */,
+				3EDA32D615513A7900787007 /* MocoApplicationAppDelegate.h */,
+				3EDA32D715513A7900787007 /* MocoApplicationAppDelegate.mm */,
+				3E56B30915C7C3C600493310 /* MocoDrawTranslationView.h */,
+				3EDA32EA15513BFE00787007 /* MocoDrawTranslationView.m */,
+				3E56B30A15C7C47C00493310 /* MocoDrawRotationView.h */,
+				3E56B30B15C7C47D00493310 /* MocoDrawRotationView.m */,
+				3EEE66D115566DCB00AA0F7F /* MocoDrawViewController.h */,
+				3EEE66D215566DCB00AA0F7F /* MocoDrawViewController.m */,
+				3EA6E32D1622DCA7001F3C6E /* MocoDataLogger.h */,
+				3EA6E32C1622DCA7001F3C6E /* MocoDataLogger.cpp */,
+				3E41C05615D50A17001FDFCB /* MocoRegistrationProperty.h */,
+				3E41C05715D50A17001FDFCB /* MocoRegistrationProperty.m */,
+				3E41C05415D50A17001FDFCB /* MocoRegistration.h */,
+				3E41C05515D50A17001FDFCB /* MocoRegistration.mm */,
+				3E56B30715C7C12700493310 /* MocoDrawView.xib */,
+				3EDA32D915513A7900787007 /* MainMenu.xib */,
+				3EDA32CB15513A7900787007 /* Supporting Files */,
+			);
+			path = MocoApplication;
+			sourceTree = "<group>";
+		};
+		3EDA32CB15513A7900787007 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3E57015515A44D7000845683 /* defaultRegParams.plist */,
+				3EDA32CC15513A7900787007 /* MocoApplication-Info.plist */,
+				3EDA32CD15513A7900787007 /* InfoPlist.strings */,
+				3EDA32D015513A7900787007 /* MocoApplication-Prefix.pch */,
+				3EDA32D115513A7900787007 /* main.m */,
+				3EDA32D315513A7900787007 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3E98904416149E4300086C21 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E98905D16149EA100086C21 /* EDDataElement.h in Headers */,
+				3E98905F16149EA100086C21 /* EDDataElementIsis.h in Headers */,
+				3E98906116149EA100086C21 /* EDDataElementIsisRealTime.h in Headers */,
+				3E98906316149EA100086C21 /* EDDataElementRealTimeLoader.h in Headers */,
+				3E98906816149EA100086C21 /* EDIsisImage.h in Headers */,
+				3EF416341615A2E200443485 /* BARTNotifications.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3E5A30B61647F651004E01F5 /* MocoRegistrationTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E5A30C41647F652004E01F5 /* Build configuration list for PBXNativeTarget "MocoRegistrationTest" */;
+			buildPhases = (
+				3E5A30B21647F651004E01F5 /* Sources */,
+				3E5A30B31647F651004E01F5 /* Frameworks */,
+				3E5A30B41647F651004E01F5 /* Resources */,
+				3E5A30B51647F651004E01F5 /* ShellScript */,
+				3E5A311016480C54004E01F5 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				003AC6721664F3D000E0BEE1 /* PBXTargetDependency */,
+				3E5A30D3164801E4004E01F5 /* PBXTargetDependency */,
+			);
+			name = MocoRegistrationTest;
+			productName = MocoRegistrationTest;
+			productReference = 3E5A30B71647F651004E01F5 /* MocoRegistrationTest.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+		3E98904516149E4300086C21 /* EDNA */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E98904E16149E4300086C21 /* Build configuration list for PBXNativeTarget "EDNA" */;
+			buildPhases = (
+				3E98904216149E4300086C21 /* Sources */,
+				3E98904316149E4300086C21 /* Frameworks */,
+				3E98904416149E4300086C21 /* Headers */,
+				3EF4164C1615A9AB00443485 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EDNA;
+			productName = EDNA;
+			productReference = 3E98904616149E4300086C21 /* EDNA.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		3EDA32BF15513A7900787007 /* MocoApplication */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3EDA32DE15513A7900787007 /* Build configuration list for PBXNativeTarget "MocoApplication" */;
+			buildPhases = (
+				3EDA32BC15513A7900787007 /* Sources */,
+				3EDA32BD15513A7900787007 /* Frameworks */,
+				3EDA32BE15513A7900787007 /* Resources */,
+				3E7DB66D15A45AEF002966AE /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				003AC670165E865000E0BEE1 /* PBXTargetDependency */,
+			);
+			name = MocoApplication;
+			productName = MocoApplication;
+			productReference = 3EDA32C015513A7900787007 /* MocoApplication.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3EDA32B715513A7900787007 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+			};
+			buildConfigurationList = 3EDA32BA15513A7900787007 /* Build configuration list for PBXProject "MocoApplication" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3EDA32B515513A7900787007;
+			productRefGroup = 3EDA32C115513A7900787007 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 00D3AFDB165E558D0034A86D /* Products */;
+					ProjectRef = 00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				3EDA32BF15513A7900787007 /* MocoApplication */,
+				3E98904516149E4300086C21 /* EDNA */,
+				3E5A30B61647F651004E01F5 /* MocoRegistrationTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		00D3AFE4165E558E0034A86D /* CorePlot.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CorePlot.framework;
+			remoteRef = 00D3AFE3165E558E0034A86D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		00D3AFE6165E558E0034A86D /* UnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UnitTests.octest;
+			remoteRef = 00D3AFE5165E558E0034A86D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3E5A30B41647F651004E01F5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E5A30BF1647F652004E01F5 /* InfoPlist.strings in Resources */,
+				3E5A312716490B88004E01F5 /* testData_mocoParams_linear_smoothed5_it12.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3EDA32BE15513A7900787007 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E221E9516BAC3BC0072DA13 /* EDNA.dylib in Resources */,
+				3EDA32CF15513A7900787007 /* InfoPlist.strings in Resources */,
+				3EDA32D515513A7900787007 /* Credits.rtf in Resources */,
+				3EDA32DB15513A7900787007 /* MainMenu.xib in Resources */,
+				3E57015615A44D7000845683 /* defaultRegParams.plist in Resources */,
+				3E56B30815C7C12800493310 /* MocoDrawView.xib in Resources */,
+				3ED2BAB6165F8FA900DA257D /* appIcon.iconset in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3E5A30B51647F651004E01F5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3E5A30B21647F651004E01F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E5A30C21647F652004E01F5 /* MocoRegistrationTest.mm in Sources */,
+				3E5A310E16480A6A004E01F5 /* MocoRegistrationProperty.m in Sources */,
+				00AD50271665101B008EC9C2 /* MocoRegistration.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E98904216149E4300086C21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E98905E16149EA100086C21 /* EDDataElement.mm in Sources */,
+				3E98906016149EA100086C21 /* EDDataElementIsis.mm in Sources */,
+				3E98906216149EA100086C21 /* EDDataElementIsisRealTime.mm in Sources */,
+				3E98906416149EA100086C21 /* EDDataElementRealTimeLoader.mm in Sources */,
+				3E98906716149EA100086C21 /* EDIsisImage.cpp in Sources */,
+				3EF416351615A2E200443485 /* BARTNotifications.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3EDA32BC15513A7900787007 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EDA32D215513A7900787007 /* main.m in Sources */,
+				3EDA32D815513A7900787007 /* MocoApplicationAppDelegate.mm in Sources */,
+				3EDA32EB15513BFE00787007 /* MocoDrawTranslationView.m in Sources */,
+				3EEE66D415566DCB00AA0F7F /* MocoDrawViewController.m in Sources */,
+				3E56B30C15C7C47D00493310 /* MocoDrawRotationView.m in Sources */,
+				3E41C05815D50A17001FDFCB /* MocoRegistration.mm in Sources */,
+				3E41C05915D50A17001FDFCB /* MocoRegistrationProperty.m in Sources */,
+				3EA6E32E1622DCA7001F3C6E /* MocoDataLogger.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		003AC670165E865000E0BEE1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3E98904516149E4300086C21 /* EDNA */;
+			targetProxy = 003AC66F165E865000E0BEE1 /* PBXContainerItemProxy */;
+		};
+		003AC6721664F3D000E0BEE1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3E98904516149E4300086C21 /* EDNA */;
+			targetProxy = 003AC6711664F3D000E0BEE1 /* PBXContainerItemProxy */;
+		};
+		3E5A30D3164801E4004E01F5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3EDA32BF15513A7900787007 /* MocoApplication */;
+			targetProxy = 3E5A30D2164801E4004E01F5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3E5A30BD1647F652004E01F5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3E5A30BE1647F652004E01F5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3EDA32CD15513A7900787007 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3EDA32CE15513A7900787007 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3EDA32D315513A7900787007 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3EDA32D415513A7900787007 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		3EDA32D915513A7900787007 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3EDA32DA15513A7900787007 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3E5A30C51647F652004E01F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "MocoRegistrationTest/MocoRegistrationTest-Info.plist";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_AFTER_BUILD = YES;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		3E5A30C61647F652004E01F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "MocoRegistrationTest/MocoRegistrationTest-Info.plist";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_AFTER_BUILD = YES;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		3E98904F16149E4300086C21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EDNA/EDNA-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/X11/include/,
+				);
+				LD_DYLIB_INSTALL_NAME = "$(EXECUTABLE_PATH)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/lib/InsightToolkit,
+				);
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3E98905016149E4300086C21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EDNA/EDNA-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/X11/include/,
+				);
+				LD_DYLIB_INSTALL_NAME = "$(EXECUTABLE_PATH)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/lib/InsightToolkit,
+				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					/usr/local/lib/InsightToolkit,
+				);
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		3EDA32DC15513A7900787007 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_ENABLE_DEBUG=1",
+					"_ENABLE_LOG=1",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					"/usr/local/include/ITK-4.2",
+					/usr/local/include/isis,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/usr/local/lib/isis/,
+					"$(BUILT_PRODUCTS_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-litkvnl_algo-4.2",
+					"-litkvnl-4.2",
+					"-lITKCommon-4.2",
+					"-litkv3p_netlib-4.2",
+					"-litksys-4.2",
+					"-lITKStatistics-4.2",
+					"-lITKOptimizers-4.2",
+					"-lITKSpatialObjects-4.2",
+					"-litkvcl-4.2",
+					"-lITKIOImageBase-4.2",
+					"-lisis_core",
+					"-lboost_regex-mt",
+					"-lboost_filesystem-mt",
+					"-lboost_date_time-mt",
+					"-lboost_system-mt",
+				);
+				SDKROOT = "";
+			};
+			name = Debug;
+		};
+		3EDA32DD15513A7900787007 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_ENABLE_DEBUG=0",
+					"_ENABLE_LOG=1",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					"/usr/local/include/ITK-4.2",
+					/usr/local/include/isis,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/usr/local/lib/isis/,
+					"$(BUILT_PRODUCTS_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-litkvnl_algo-4.2",
+					"-litkvnl-4.2",
+					"-lITKCommon-4.2",
+					"-litkv3p_netlib-4.2",
+					"-litksys-4.2",
+					"-lITKStatistics-4.2",
+					"-lITKOptimizers-4.2",
+					"-lITKSpatialObjects-4.2",
+					"-litkvcl-4.2",
+					"-lITKIOImageBase-4.2",
+					"-lisis_core",
+					"-lboost_regex-mt",
+					"-lboost_filesystem-mt",
+					"-lboost_date_time-mt",
+					"-lboost_system-mt",
+				);
+				SDKROOT = "";
+				"VALID_ARCHS[sdk=*]" = "i386 x86_64";
+			};
+			name = Release;
+		};
+		3EDA32DF15513A7900787007 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MocoApplication/MocoApplication-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "MocoApplication/MocoApplication-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/lib/InsightToolkit,
+				);
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3EDA32E015513A7900787007 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MocoApplication/MocoApplication-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_ENABLE_DEBUG=0",
+					"_ENABLE_LOG=1",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "MocoApplication/MocoApplication-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/lib/InsightToolkit,
+				);
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3E5A30C41647F652004E01F5 /* Build configuration list for PBXNativeTarget "MocoRegistrationTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E5A30C51647F652004E01F5 /* Debug */,
+				3E5A30C61647F652004E01F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3E98904E16149E4300086C21 /* Build configuration list for PBXNativeTarget "EDNA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E98904F16149E4300086C21 /* Debug */,
+				3E98905016149E4300086C21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3EDA32BA15513A7900787007 /* Build configuration list for PBXProject "MocoApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3EDA32DC15513A7900787007 /* Debug */,
+				3EDA32DD15513A7900787007 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3EDA32DE15513A7900787007 /* Build configuration list for PBXNativeTarget "MocoApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3EDA32DF15513A7900787007 /* Debug */,
+				3EDA32E015513A7900787007 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3EDA32B715513A7900787007 /* Project object */;
+}

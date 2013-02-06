@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>LoggingLevel</key>
+	<integer>3</integer>
+	<key>NumberOfThreads</key>
+	<integer>16</integer>
+	<key>Smoothing</key>
+	<true/>
+	<key>SmoothingSigma</key>
+	<integer>5</integer>
+	<key>MaskImagesForRegistration</key>
+	<false/>
+	<key>UseBestFoundParameters</key>
+	<false/>
+	<key>NumberOfIterations</key>
+	<integer>10</integer>
+	<key>ResampleOutputBase</key>
+	<string>/Users/realtime/MRINCOMING/image_mocoAppExport_MOCO_</string>
+	<key>MocoParamsOutputBase</key>
+	<string>/Users/mhollmann/Projekte/Project_MOCOApplication/data/compare/mocoApp/mocoAppParams</string>
+	<key>MocoAppLogfileName</key>
+	<string>/tmp/mocoAppLog.log</string>
+</dict>
+</plist>
