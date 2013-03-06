@@ -11,9 +11,6 @@
 //itk registration
 #include "itkImageRegistrationMethod.h"
 
-//metric include
-#include "itkMeanSquaresImageToImageMetric.h"
-
 //threshold filter include for masking
 #include "itkOtsuThresholdImageFilter.h"
 
@@ -42,6 +39,7 @@
 @interface MocoRegistration (PrivateMethods)
 
 /**
+ * ! Under construction: Do not use !
  * Mask the given itk image file according to a segmentation of background and image contentent, i.e. brain.
  * Here the itk::OtsuThresholdImageFilter is used, which does a histogram based search for the threshold.
  *
@@ -88,6 +86,7 @@
         
         //will set properties and initialize member vars
         [self initRegistrationWithRegistrationProperty: rProperty];
+        [rProperty release];
     }
     
     return self;
@@ -217,7 +216,7 @@
     }// end switch
     
     
-    //*** Initialize optimizer ***
+    //+++ Initialize optimizer +++
     typedef MocoOptimizerType::ScalesType MocoOptimizerScalesType;
     MocoOptimizerScalesType optimizerScales( m_transform->GetNumberOfParameters() );
     
@@ -345,7 +344,7 @@
 
 - (void)setReferenceImageWithFile:(NSString *)filePath
 {
-    EDDataElement *refImg = [MocoRegistration getEDDataElementFromFile: filePath];
+    EDDataElement *refImg = [[MocoRegistration newEDDataElementFromFile: filePath] autorelease];
     
     [self setReferenceImageWithEDDataElement: refImg];
     
@@ -357,14 +356,14 @@
 
 - (void)setReferenceImageWithEDDataElement:(EDDataElement *)dataElement
 {
-    //@try{
+    @try{
         [self setReferenceImageWithITKImage: [dataElement asITKImage]];
-    //}
-    /*@catch(NSException *e){
+    }
+    @catch(NSException *e){
     
         NSException* except = [NSException exceptionWithName:@"SetReferenceImageException" reason:@"Error setting the reference image for registration" userInfo:nil];
         @throw except;
-    }*/
+    }
     
 }// end setReferenceImageWithEDDataElement 
 
@@ -372,16 +371,10 @@
 
 - (void)setReferenceImageWithITKImage:(FixedImageType3D::Pointer)itkImage
 {
+    //MH FIXME: Check if the input is 3D or use first!
     
     //reference is always 3D
     self->m_referenceImgITK3D = itkImage;
-    
-    if( self->m_registrationProperty.LoggingLevel > 1 ){
-        
-        ITKImage::SizeType iSize = self->m_referenceImgITK3D->GetLargestPossibleRegion().GetSize();
-        std::cout << " Loaded image with size:    = " << iSize << std::endl;
-        
-    }
     
     //++++ Smoothing ++++
     if( self->m_registrationProperty.Smoothing ){
@@ -394,13 +387,13 @@
         dgImageFilter->SetMaximumError(0.05);
         dgImageFilter->Update();
         self->m_referenceImgITK3DSmoothed = dgImageFilter->GetOutput();
-        
     }
     
     
     //MH FIXME: Check if metric exists in this call before mask is set
     //++++ Masking if needed ++++
     if( self->m_registrationProperty.MaskImagesForRegistration ){
+        
         self->m_referenceImgMask = [self getMaskImageWithITKImage:self->m_referenceImgITK3D];
         
         self->m_referenceMask = MaskType3D::New();
@@ -431,7 +424,10 @@
 -(MocoTransformType::Pointer)alignITKImageToReference:(MovingImageType3D::Pointer)movingITKImage
 {
 
+    //MH FIXME: Check if the dimensions of input fits to reference
+    
     @try{
+        
         MocoRegistrationType::Pointer   registration  = MocoRegistrationType::New();
 
         registration->SetMetric(    self->m_metric );
@@ -444,8 +440,9 @@
         
         
         MocoTransformInitializerType::Pointer initializer = MocoTransformInitializerType::New();
-        initializer->SetTransform(   transform );
+        initializer->SetTransform( transform );
         
+        //+++ check if smoothed images should be used +++
         if (self->m_registrationProperty.Smoothing) {
             
             if( self->m_referenceImgITK3DSmoothed.IsNull() )
@@ -505,22 +502,17 @@
         try {
             registration->Update();
             if (self->m_registrationProperty.LoggingLevel > 2) {
-                std::cout << "Optimizer stop condition: "
-                << registration->GetOptimizer()->GetStopConditionDescription()
-                << std::endl;
+                std::cout << "Optimizer stop condition: "<< registration->GetOptimizer()->GetStopConditionDescription()<< std::endl;
             }
         }
         catch( itk::ExceptionObject & err ) {
-            std::cerr << "ExceptionObject caught !" << std::endl;
+            std::cerr << "Exception raised during alignment!" << std::endl;
             std::cerr << err << std::endl;
-            //return EXIT_FAILURE;
             
             NSException* except = [NSException exceptionWithName:@"ITKRegistrationException" reason:@"Error during ITK registration" userInfo:nil];
-            @throw except;
-            
+            @throw except;   
         }
      
-        //Take best parameters saved from observer?
         MocoOptimizerType::ParametersType finalParameters;
         
         //MH FIXME  "< 1" ?
@@ -529,8 +521,7 @@
         } else {
             finalParameters = self->m_observer->bestParameters;
         }
-       
-        
+     
         
         if( self->m_registrationProperty.LoggingLevel > 2 ) {
             
@@ -558,14 +549,14 @@
             std::cout << " Iterations    = " << numberOfIterations << std::endl;
             
             std::cout << " Metric value  = " << bestValue          << std::endl;
-            std::cout << " Observer value  = " << m_observer->bestValue << " " << std::endl;
-            
+            std::cout << " Observer value  = " << m_observer->bestValue << " " << std::endl;           
         }
         
       
         //finally set the transform parameters
         transform->SetParameters( finalParameters );
         return transform;
+        
     }
     @catch(NSException *e){
         
@@ -654,7 +645,7 @@
 
 
 
-+(EDDataElement*)getEDDataElementFromFile:(NSString*)filePath
++(EDDataElement*)newEDDataElementFromFile:(NSString*)filePath
 {
     
     //check whether file exist
@@ -673,11 +664,13 @@
 
 
 
-
+//MH FIXME: This is under construction ... do not use
 - (MaskImageType3D::Pointer)getMaskImageWithITKImage:(FixedImageType3D::Pointer)itkImage
 {
-    
  
+    
+    NSLog(@"Masking image ...");
+    
     //define the threshold using otsu
     typedef itk::OtsuThresholdImageFilter<FixedImageType3D, MaskImageType3D > OtsuThresholdFilterType;
     OtsuThresholdFilterType::Pointer otsuFilter = OtsuThresholdFilterType::New();
@@ -686,78 +679,124 @@
     otsuFilter->SetInsideValue( 0 );
     otsuFilter->SetNumberOfHistogramBins( 200 );
     
-    MaskImageType3D::Pointer mask = MaskImageType3D::New();
     
+    MaskImageType3D::Pointer mask = MaskImageType3D::New();
+
     mask = otsuFilter->GetOutput();
     
-    /*
-    typedef itk::BinaryBallStructuringElement< MaskImageType3D::PixelType, 3 > StructuringElementType;
-    StructuringElementType structuringElement;
-    structuringElement.SetRadius(40);
-    structuringElement.CreateStructuringElement();
-    
-    typedef itk::BinaryDilateImageFilter <MaskImageType3D, MaskImageType3D, StructuringElementType>
-    BinaryDilateImageFilterType;
-    
-    BinaryDilateImageFilterType::Pointer dilateFilter = BinaryDilateImageFilterType::New();
-    dilateFilter->SetInput(otsuFilter->GetOutput());
-    dilateFilter->SetKernel(structuringElement);
-
-    
-    mask = dilateFilter->GetOutput();
-	*/
-    
-  /*  
-    
-    // ImageType::Pointer image, MaskImageType::Pointer mask, short threshold
-    MaskImageType3D::RegionType region = itkImage->GetLargestPossibleRegion();
-    MaskImageType3D::Pointer mask = MaskImageType3D::New();
-    
-    mask = 
     
     
-    mask->SetRegions(region);
-    mask->SetSpacing(itkImage->GetSpacing());
-    mask->SetOrigin(itkImage->GetOrigin());
-    mask->SetDirection(itkImage->GetDirection());
-    mask->Allocate();
-    
-    
-    MaskImageType3D::SizeType regionSize = region.GetSize();
-  
-    typedef itk::ImageRegionIterator<MaskImageType3D> IteratorType;
-    
-    
-    itk::ImageRegionIterator<FixedImageType3D> imageIterator(itkImage, region);
-    itk::ImageRegionIterator<MaskImageType3D> maskIterator(mask, region);
-
-        
-    while(!imageIterator.IsAtEnd())
-    {
-        if(imageIterator.Get() < 500)
-        {
-            maskIterator.Set(0);
-        }
-        else
-        {
-            maskIterator.Set(1);
-        }
-        ++imageIterator;
-        ++maskIterator;
-    }*/
-    
-    
-    
-    //MH FIXME: Remove...
     //Write mask image
-    /*if (self->m_registrationProperty.LoggingLevel>2){
-        typedef itk::ImageFileWriter< MaskImageType3D >  WriterType;
+   if (self->m_registrationProperty.LoggingLevel>2){
+       /* 
+       typedef itk::ImageFileWriter< MaskImageType3D >  WriterType;
+        
         WriterType::Pointer  writer =  WriterType::New();
-        writer->SetFileName( [@"/Users/mhollmann/Projekte/Project_MOCOApplication/data/test3D_mask_dilate.nii" UTF8String] );
-        writer->SetInput( mask );
+        writer->SetInput( mask ); 
+        writer->SetFileName( [@"/tmp/test3D_mask_dilate.nii" UTF8String] );
         writer->Update();
-        NSLog(@"Mask image written to: %@", @"/Users/mhollmann/Projekte/Project_MOCOApplication/data/test3D_mask_dilate.nii");
-    }*/
+        NSLog(@"Mask image written to: %@", @"/tmp/test3D_mask_dilate.nii");
+       */
+      
+       
+       FixedImageType3D::RegionType region = itkImage->GetLargestPossibleRegion();
+       FixedImageType3D::SizeType regionSize = region.GetSize();
+
+       
+       
+       BARTImageSize *iSize = [[BARTImageSize alloc] init];
+
+       iSize.rows    = regionSize[0];
+       iSize.columns = regionSize[1];
+       iSize.slices  = regionSize[2];
+       iSize.timesteps = 0;
+       
+       NSLog(@"Size data: %li %li %li", iSize.rows, iSize.columns, iSize.slices);
+       
+       //EDDataElement *datael = [[EDDataElement alloc] initEmptyWithSize:iSize ofImageType:IMAGE_FCTDATA];
+       
+       /*
+       //convert mask to float 3
+       typedef itk::ImageAdaptor< MaskImageType3D, CastPixelAccessor > ImageAdaptorType;
+       ImageAdaptorType::Pointer adaptor = ImageAdaptorType::New();
+       adaptor->SetImage( mask );
+       adaptor->Update();*/
+       
+       typedef itk::CastImageFilter< MaskImageType3D, FixedImageType3D > CastingFilterType;
+       CastingFilterType::Pointer caster = CastingFilterType::New();
+       
+       caster->SetInput(mask);
+      
+       //[datael convertFromITKImage:caster->GetOutput()];
+       
+       //[datael WriteDataElementToFile:@"/tmp/test3D_mask_dilate.nii"];
+       
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
+     
+     typedef itk::BinaryBallStructuringElement< MaskImageType3D::PixelType, 3 > StructuringElementType;
+     StructuringElementType structuringElement;
+     structuringElement.SetRadius(40);
+     structuringElement.CreateStructuringElement();
+     
+     typedef itk::BinaryDilateImageFilter <MaskImageType3D, MaskImageType3D, StructuringElementType>
+     BinaryDilateImageFilterType;
+     
+     BinaryDilateImageFilterType::Pointer dilateFilter = BinaryDilateImageFilterType::New();
+     dilateFilter->SetInput(otsuFilter->GetOutput());
+     dilateFilter->SetKernel(structuringElement);
+     
+     
+     mask = dilateFilter->GetOutput();
+     */
+    
+    
+    /*
+     // ImageType::Pointer image, MaskImageType::Pointer mask, short threshold
+     MaskImageType3D::RegionType region = itkImage->GetLargestPossibleRegion();
+     MaskImageType3D::Pointer mask = MaskImageType3D::New();
+     
+     mask->SetRegions(region);
+     mask->SetSpacing(itkImage->GetSpacing());
+     mask->SetOrigin(itkImage->GetOrigin());
+     mask->SetDirection(itkImage->GetDirection());
+     mask->Allocate();
+     
+     
+     MaskImageType3D::SizeType regionSize = region.GetSize();
+     
+     typedef itk::ImageRegionIterator<MaskImageType3D> IteratorType;
+     
+     
+     itk::ImageRegionIterator<FixedImageType3D> imageIterator(itkImage, region);
+     itk::ImageRegionIterator<MaskImageType3D> maskIterator(mask, region);
+     
+     
+     while(!imageIterator.IsAtEnd())
+     {
+     if(imageIterator.Get() < 500)
+     {
+     maskIterator.Set(0);
+     }
+     else
+     {
+     maskIterator.Set(1);
+     }
+     ++imageIterator;
+     ++maskIterator;
+     }*/
+    
+    
+    
     
     return mask;
     

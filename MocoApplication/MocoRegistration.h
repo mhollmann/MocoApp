@@ -7,8 +7,6 @@
 //
 //
 //
-
-
 #import <Foundation/Foundation.h>
 
 //moco properties
@@ -23,15 +21,11 @@
 #import "itkDiscreteGaussianImageFilter.h"
 #import "itkImageRegistrationMethod.h"
 #import "itkMeanSquaresImageToImageMetric.h"
-#import "itkMeanSquaresHistogramImageToImageMetric.h"
-#import "itkMeanReciprocalSquareDifferenceImageToImageMetric.h"
-
-#include "itkVersorRigid3DTransform.h"
-#include "itkCenteredTransformInitializer.h"
-#include "itkVersorRigid3DTransformOptimizer.h"
-
-#include "itkResampleImageFilter.h"
-#include "itkImageMaskSpatialObject.h"
+#import "itkVersorRigid3DTransform.h"
+#import "itkCenteredTransformInitializer.h"
+#import "itkVersorRigid3DTransformOptimizer.h"
+#import "itkResampleImageFilter.h"
+#import "itkImageMaskSpatialObject.h"
 
 
 const unsigned int Dimension3D = 3;
@@ -81,7 +75,7 @@ public:
     typedef   const OptimizerType *              OptimizerPointer;
     
     double bestValue;
-    bool logging;
+    bool   logging;
     OptimizerType::ParametersType bestParameters;
     
     
@@ -119,6 +113,23 @@ protected:
             std::cout << std::endl;
         }
 	}
+};
+
+
+class CastPixelAccessor
+{
+public:
+    typedef unsigned char InternalType;
+    typedef float ExternalType;
+    
+    static void Set(InternalType & output, const ExternalType & input)
+    {
+        output = static_cast<InternalType>( input );
+    }
+    static ExternalType Get( const InternalType & input )
+    {
+        return static_cast<ExternalType>( input );
+    }
 };
 
 
@@ -249,7 +260,7 @@ protected:
  *
  * \return          EDDataElement (4D) holding the image data
  */
-+(EDDataElement*)getEDDataElementFromFile:(NSString*)filePath;
++(EDDataElement*)newEDDataElementFromFile:(NSString*)filePath;
 
 
 -(void)dealloc;

@@ -485,7 +485,7 @@
                 alignToExternalReference  = NO;
             }else{
                 NSLog(@"Reference image: %@", valSelected);
-                EDDataElement *refDataEl3D = [MocoRegistration getEDDataElementFromFile:valSelected];
+                EDDataElement *refDataEl3D = [MocoRegistration newEDDataElementFromFile:valSelected];
                 [mRegistrator setReferenceImageWithEDDataElement:refDataEl3D];
                 alignToExternalReference = YES;
             }
@@ -711,7 +711,7 @@
         bool alignToExternalReference;
         
         //load the 4D image
-        EDDataElement *dataEl4D = [MocoRegistration getEDDataElementFromFile:file4D];
+        EDDataElement *dataEl4D = [MocoRegistration newEDDataElementFromFile:file4D];
         
         //set reference image 
         NSString *valSelected = [mReferenceImagePullDown title];
@@ -725,9 +725,11 @@
         }else{
             
             NSLog(@"Reference image: %@", valSelected);
-            EDDataElement *refDataEl3D = [MocoRegistration getEDDataElementFromFile:valSelected];
+            EDDataElement *refDataEl3D = [MocoRegistration newEDDataElementFromFile:valSelected];
             [mRegistrator setReferenceImageWithEDDataElement:refDataEl3D];
             alignToExternalReference = YES;
+            [refDataEl3D release];
+            
         }
         
         if (mRegistrationProperty.LoggingLevel > 1){
@@ -859,6 +861,11 @@
             }
             
         }//endfor
+        
+        //release the 4D element
+        [dataEl4D release];
+        
+        
         
         //+++++++++++++++++++++++++++++++++++++++++
         //++++++ Write params to log file +++++++++

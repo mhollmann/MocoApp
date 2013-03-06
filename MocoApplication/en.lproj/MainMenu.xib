@@ -1669,7 +1669,7 @@
 								<object class="NSMenuItem" key="NSMenuItem" id="483275880">
 									<reference key="NSMenu" ref="327107242"/>
 									<bool key="NSIsHidden">YES</bool>
-									<string key="NSTitle">Yes</string>
+									<string key="NSTitle">No</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>

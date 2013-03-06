@@ -57,7 +57,7 @@
     //*************************************************
     //****** Initialize Translation Graph Stuff *******
     //*************************************************    
-	self.transGraph = [ (CPTXYGraph *)[CPTXYGraph alloc] initWithFrame:NSRectToCGRect([mMocoDrawTranslationView bounds]) ];
+	self.transGraph = [[ (CPTXYGraph *)[CPTXYGraph alloc] initWithFrame:NSRectToCGRect([mMocoDrawTranslationView bounds]) ] autorelease];
     mMocoDrawTranslationView.hostedGraph = transGraph;
     
     // Graph title
@@ -228,14 +228,12 @@
     
     
     
-    
-    
     //*************************************************
     //******* Initialize Rotation Graph Stuff *********
     //*************************************************
 
     //*** Create the graph holding translations *** 
-	self.rotGraph = [ (CPTXYGraph *)[CPTXYGraph alloc] initWithFrame:NSRectToCGRect([mMocoDrawRotationView bounds]) ];
+	self.rotGraph = [[ (CPTXYGraph *)[CPTXYGraph alloc] initWithFrame:NSRectToCGRect([mMocoDrawRotationView bounds]) ] autorelease];
     mMocoDrawRotationView.hostedGraph = rotGraph;
     
     // Graph title
@@ -361,8 +359,6 @@
     [rotGraph.legend addPlot:YPlotLegend];
     [rotGraph.legend addPlot:ZPlotLegend];
     
-    
-    
 }
 
 
@@ -477,7 +473,6 @@
 
 - (void)dealloc
 {
-    
     [super dealloc];
 }
 

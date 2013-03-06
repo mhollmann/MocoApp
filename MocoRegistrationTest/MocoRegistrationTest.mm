@@ -134,7 +134,7 @@ NSString* mFileNameTestMocoParams = @"testData_mocoParams_linear_smoothed5_it12.
     
     
     //load data
-    EDDataElement *dataEl4D = [MocoRegistration getEDDataElementFromFile: mFileNameTestData];
+    EDDataElement *dataEl4D = [MocoRegistration newEDDataElementFromFile: mFileNameTestData];
     EDDataElement *refDataEl3D = [dataEl4D getDataAtTimeStep:0];
     
     STAssertNotNil(dataEl4D, @"load valid nifti returns nil");
@@ -260,13 +260,13 @@ NSString* mFileNameTestMocoParams = @"testData_mocoParams_linear_smoothed5_it12.
     transform->SetParameters(params);
     
     //set up images
-    EDDataElement *dataEl4D    = [MocoRegistration getEDDataElementFromFile: mFileNameTestData];
+    EDDataElement *dataEl4D    = [MocoRegistration newEDDataElementFromFile: mFileNameTestData];
     EDDataElement *movDataEl3D;
     movDataEl3D = [dataEl4D getDataAtTimeStep:3];
     EDDataElement *resultDataEl;
     
     //MH FIXME: Is there an ISIS debug warning if loading a 3D image??? (EDDatalElement initWithDataFile)
-    EDDataElement *resultCompareDataEl = [MocoRegistration getEDDataElementFromFile: mFileNameTestDataResult3];
+    EDDataElement *resultCompareDataEl = [MocoRegistration newEDDataElementFromFile: mFileNameTestDataResult3];
     
     //Check call with MISSING reference image
     STAssertThrows(resultDataEl = [registrator resampleMovingEDDataElement:movDataEl3D withTransform:transform], @"Calling resampling without having set the reference image must throw an exception!");
