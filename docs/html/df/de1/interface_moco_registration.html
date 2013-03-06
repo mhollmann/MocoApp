@@ -124,8 +124,8 @@ Instance Methods</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Class Methods</h2></td></tr>
-<tr class="memitem:a66d7a532da3635b53693048ce6def05b"><td class="memItemLeft" align="right" valign="top">(EDDataElement *)&#160;</td><td class="memItemRight" valign="bottom">+ <a class="el" href="../../df/de1/interface_moco_registration.html#a66d7a532da3635b53693048ce6def05b">getEDDataElementFromFile:</a></td></tr>
-<tr class="separator:a66d7a532da3635b53693048ce6def05b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a677416a052d27c48157c11d694917c1e"><td class="memItemLeft" align="right" valign="top">(EDDataElement *)&#160;</td><td class="memItemRight" valign="bottom">+ <a class="el" href="../../df/de1/interface_moco_registration.html#a677416a052d27c48157c11d694917c1e">newEDDataElementFromFile:</a></td></tr>
+<tr class="separator:a677416a052d27c48157c11d694917c1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -170,8 +170,8 @@ MaskType3D::Pointer&#160;</td><td class="memItemRight" valign="bottom"><b>m_movi
 <tr class="separator:a20497614d42fb2675eb42ac594e634bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="../../df/de1/interface_moco_registration.html">MocoRegistration</a> provides functionality for the Motion-Correction of 3D and 4D fMRI images. The interface works with image data encapsulated by EDDataElement or with 3D float itkImages .</p>
-<p>Initialization sets default registration properties. </p>
+<div class="textblock"><p><a class="el" href="../../df/de1/interface_moco_registration.html">MocoRegistration</a> provides functionality for the Motion-Correction of 3D and 4D fMRI images.</p>
+<p>The interface works with image data encapsulated by EDDataElement or with 3D float itkImages . Initialization sets default registration properties. </p>
 </div><h2 class="groupheader">Method Documentation</h2>
 <a class="anchor" id="aba376928088dc856dfe4be77fcbe5226"></a>
 <div class="memitem">
@@ -186,7 +186,7 @@ MaskType3D::Pointer&#160;</td><td class="memItemRight" valign="bottom"><b>m_movi
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Align a EDDataElement to the reference image that was set for this registration. Be sure your registrationProperty and reference image are set before calling this function. The returned transformation can be used to resample an EDDataelement using resampleMovingEDDataElement.</p>
+<p>Align an EDDataElement to the reference image that was set for registration. Be sure your registrationProperty and reference image are set before calling this function. The returned transformation can be used to resample an EDDataelement using resampleMovingEDDataElement.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">movingDataElement</td><td>EDDataElement that is registered to reference</td></tr>
@@ -210,7 +210,7 @@ MaskType3D::Pointer&#160;</td><td class="memItemRight" valign="bottom"><b>m_movi
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Align an itk-image to the reference image that was set for this registration. Be sure your registrationProperty and reference image are set before calling this function. The returned transformation can be used to resample an itk-image or an EDDataelement using resampleMovingEDDataElement.</p>
+<p>Align an itk-image to the reference image that was set for registration. Be sure your registrationProperty and reference image are set before calling this function. The returned transformation can be used to resample an itk-image or an EDDataelement using resampleMovingEDDataElement.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">movingITKImage</td><td>ITKImage that is registered to reference</td></tr>
@@ -218,30 +218,6 @@ MaskType3D::Pointer&#160;</td><td class="memItemRight" valign="bottom"><b>m_movi
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A MocoTransformType describing the transformation of input to reference image. Transformation: [rotX rotY rotZ transX transY transZ] </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a66d7a532da3635b53693048ce6def05b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">+ (EDDataElement *) getEDDataElementFromFile: </td>
-          <td></td>
-          <td class="paramtype">(NSString*)&#160;</td>
-          <td class="paramname"><em>filePath</em></td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Class method that retrieves an EDDataElement from a given image data file (file types supported depend on EDDataElement).</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filePath</td><td>Complete path to an image file.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>EDDataElement (4D) holding the image data </dd></dl>
 
 </div>
 </div>
@@ -265,6 +241,30 @@ MaskType3D::Pointer&#160;</td><td class="memItemRight" valign="bottom"><b>m_movi
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a class="anchor" id="a677416a052d27c48157c11d694917c1e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">+ (EDDataElement *) newEDDataElementFromFile: </td>
+          <td></td>
+          <td class="paramtype">(NSString*)&#160;</td>
+          <td class="paramname"><em>filePath</em></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Class method that retrieves an EDDataElement from a given image data file (file types supported depend on EDDataElement).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePath</td><td>Complete path to an image file.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>EDDataElement (4D) holding the image data </dd></dl>
 
 </div>
 </div>
@@ -379,7 +379,7 @@ MaskType3D::Pointer&#160;</td><td class="memItemRight" valign="bottom"><b>m_movi
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 5 2013 11:37:48 for MocoApp by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 6 2013 16:37:15 for MocoApp by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.2
 </small></address>
