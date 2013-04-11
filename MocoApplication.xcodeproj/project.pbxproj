@@ -24,7 +24,7 @@
 		3E5A310E16480A6A004E01F5 /* MocoRegistrationProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E41C05715D50A17001FDFCB /* MocoRegistrationProperty.m */; };
 		3E5A311116480C81004E01F5 /* testData.nii in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E5A30FA164802F5004E01F5 /* testData.nii */; };
 		3E5A312716490B88004E01F5 /* testData_mocoParams_linear_smoothed5_it12.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3E5A312616490B88004E01F5 /* testData_mocoParams_linear_smoothed5_it12.txt */; };
-		3E666451165A2BBB00855C46 /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EEE66CD1553E97300AA0F7F /* CorePlot.framework */; };
+		3E610CC717169D3700229F50 /* EDNA.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E98904616149E4300086C21 /* EDNA.dylib */; };
 		3E98904716149E4300086C21 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EDA32C415513A7900787007 /* Cocoa.framework */; };
 		3E98905D16149EA100086C21 /* EDDataElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E98905116149EA100086C21 /* EDDataElement.h */; };
 		3E98905E16149EA100086C21 /* EDDataElement.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E98905216149EA100086C21 /* EDDataElement.mm */; };
@@ -37,6 +37,7 @@
 		3E98906716149EA100086C21 /* EDIsisImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E98905B16149EA100086C21 /* EDIsisImage.cpp */; };
 		3E98906816149EA100086C21 /* EDIsisImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E98905C16149EA100086C21 /* EDIsisImage.h */; };
 		3EA6E32E1622DCA7001F3C6E /* MocoDataLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EA6E32C1622DCA7001F3C6E /* MocoDataLogger.cpp */; };
+		3EA7BB9817169F4000254CDF /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EA7BB9317169E8900254CDF /* CorePlot.framework */; };
 		3ED2BAB6165F8FA900DA257D /* appIcon.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 3ED2BAB5165F8FA900DA257D /* appIcon.iconset */; };
 		3EDA32C515513A7900787007 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EDA32C415513A7900787007 /* Cocoa.framework */; };
 		3EDA32CF15513A7900787007 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA32CD15513A7900787007 /* InfoPlist.strings */; };
@@ -66,26 +67,33 @@
 			remoteGlobalIDString = 3E98904516149E4300086C21;
 			remoteInfo = EDNA;
 		};
-		00D3AFE3165E558E0034A86D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = CorePlot;
-		};
-		00D3AFE5165E558E0034A86D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0730F600109492D800E95162;
-			remoteInfo = UnitTests;
-		};
 		3E5A30D2164801E4004E01F5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3EDA32B715513A7900787007 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 3EDA32BF15513A7900787007;
 			remoteInfo = MocoApplication;
+		};
+		3EA7BB9217169E8900254CDF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = CorePlot;
+		};
+		3EA7BB9417169E8900254CDF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0730F600109492D800E95162;
+			remoteInfo = UnitTests;
+		};
+		3EA7BB9617169F2400254CDF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = CorePlot;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -101,13 +109,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3E610CC617169D2300229F50 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				3E610CC717169D3700229F50 /* EDNA.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3E7DB66D15A45AEF002966AE /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3E666451165A2BBB00855C46 /* CorePlot.framework in CopyFiles */,
+				3EA7BB9817169F4000254CDF /* CorePlot.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,7 +141,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CorePlot.xcodeproj; path = CorePlot_1.1/Source/framework/CorePlot.xcodeproj; sourceTree = "<group>"; };
+		00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CorePlot.xcodeproj; path = ../../../programs/CorePlot_1.0/Source/framework/CorePlot.xcodeproj; sourceTree = "<group>"; };
 		3E1B091416BA55E1008ED504 /* res_0004.nii */ = {isa = PBXFileReference; lastKnownFileType = file; name = res_0004.nii; path = ../testfiles/res_0004.nii; sourceTree = "<group>"; };
 		3E221E9616BAC4200072DA13 /* MocoApplication.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = MocoApplication.app; path = "../../../Programming/Library/Developer/Xcode/DerivedData/MocoApplication-bnbxeedqyvjztnbxbsdvkrmcaddt/Build/Products/Debug/MocoApplication.app"; sourceTree = "<group>"; };
 		3E3B07E815EE358D00198665 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -213,15 +231,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00D3AFDB165E558D0034A86D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				00D3AFE4165E558E0034A86D /* CorePlot.framework */,
-				00D3AFE6165E558E0034A86D /* UnitTests.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		3E5A30BA1647F651004E01F5 /* MocoRegistrationTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,11 +289,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		3EA7BB8D17169E8900254CDF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3EA7BB9317169E8900254CDF /* CorePlot.framework */,
+				3EA7BB9517169E8900254CDF /* UnitTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3EDA32B515513A7900787007 = {
 			isa = PBXGroup;
 			children = (
-				3E221E9616BAC4200072DA13 /* MocoApplication.app */,
 				00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */,
+				3E221E9616BAC4200072DA13 /* MocoApplication.app */,
 				3E66644F1657BBD100855C46 /* docs */,
 				3EDA32CA15513A7900787007 /* MocoApplication */,
 				3E98904816149E4300086C21 /* EDNA */,
@@ -430,10 +448,12 @@
 				3EDA32BD15513A7900787007 /* Frameworks */,
 				3EDA32BE15513A7900787007 /* Resources */,
 				3E7DB66D15A45AEF002966AE /* CopyFiles */,
+				3E610CC617169D2300229F50 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3EA7BB9717169F2400254CDF /* PBXTargetDependency */,
 				003AC670165E865000E0BEE1 /* PBXTargetDependency */,
 			);
 			name = MocoApplication;
@@ -461,7 +481,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 00D3AFDB165E558D0034A86D /* Products */;
+					ProductGroup = 3EA7BB8D17169E8900254CDF /* Products */;
 					ProjectRef = 00D3AFDA165E558D0034A86D /* CorePlot.xcodeproj */;
 				},
 			);
@@ -475,18 +495,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		00D3AFE4165E558E0034A86D /* CorePlot.framework */ = {
+		3EA7BB9317169E8900254CDF /* CorePlot.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = CorePlot.framework;
-			remoteRef = 00D3AFE3165E558E0034A86D /* PBXContainerItemProxy */;
+			remoteRef = 3EA7BB9217169E8900254CDF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		00D3AFE6165E558E0034A86D /* UnitTests.octest */ = {
+		3EA7BB9517169E8900254CDF /* UnitTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = UnitTests.octest;
-			remoteRef = 00D3AFE5165E558E0034A86D /* PBXContainerItemProxy */;
+			remoteRef = 3EA7BB9417169E8900254CDF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -589,6 +609,11 @@
 			isa = PBXTargetDependency;
 			target = 3EDA32BF15513A7900787007 /* MocoApplication */;
 			targetProxy = 3E5A30D2164801E4004E01F5 /* PBXContainerItemProxy */;
+		};
+		3EA7BB9717169F2400254CDF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CorePlot;
+			targetProxy = 3EA7BB9617169F2400254CDF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -709,7 +734,7 @@
 					"$(inherited)",
 					/opt/X11/include/,
 				);
-				LD_DYLIB_INSTALL_NAME = "$(EXECUTABLE_PATH)";
+				LD_DYLIB_INSTALL_NAME = "@executable_path/EDNA.dylib";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/lib/InsightToolkit,
@@ -737,7 +762,7 @@
 					"$(inherited)",
 					/opt/X11/include/,
 				);
-				LD_DYLIB_INSTALL_NAME = "$(EXECUTABLE_PATH)";
+				LD_DYLIB_INSTALL_NAME = "@executable_path/EDNA.dylib";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/lib/InsightToolkit,
